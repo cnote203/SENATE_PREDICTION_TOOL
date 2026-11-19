@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+from typing import Callable
 from urllib.parse import urlencode
 
 import requests
@@ -45,15 +46,25 @@ def cached_get(
     cache_dir: Path = config.RAW_DIR,
     refresh: bool = False,
     timeout: int = 60,
+    is_usable: Callable[[bytes], bool] | None = None,
 ) -> bytes:
-    """Return the response body for a GET request, using the disk cache when present."""
+    """Return the response body for a GET request, using the disk cache when present.
+
+    `is_usable` decides whether a body is worth caching. A cached body that
+    fails the check is ignored and re-fetched, and an unusable fresh body is
+    returned but not written, so an empty answer never sticks in the cache.
+    """
     params = dict(params or {})
     cache_dir.mkdir(parents=True, exist_ok=True)
     path = _cache_path(url, params, cache_dir)
     if path.exists() and not refresh:
-        return path.read_bytes()
+        body = path.read_bytes()
+        if is_usable is None or is_usable(body):
+            return body
+        path.unlink()
 
     response = _session().get(url, params=params, timeout=timeout)
     response.raise_for_status()
-    path.write_bytes(response.content)
+    if is_usable is None or is_usable(response.content):
+        path.write_bytes(response.content)
     return response.content

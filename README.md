@@ -13,6 +13,7 @@ src/senate_sim/
   ingest/congress_gov.py Congress.gov v3 member roster for a Congress
   ingest/voteview.py     Voteview DW-NOMINATE scores (bulk CSV)
   roster.py              merge, caucus labels, validation gate
+  seat_changes.py        projects the 120th roster from the 119th plus seat changes
 scripts/build_roster.py  end-to-end baseline build
 tests/test_roster.py     offline unit tests (no network or keys)
 data/raw/                cached API and bulk responses
@@ -21,13 +22,36 @@ data/processed/          validated outputs
 
 ## Setup
 
-```bash
-pip install pandas requests
-export CONGRESS_API_KEY=...          # api.data.gov key
-export SENATE_SIM_CONTACT=you@example.com
+Windows (PowerShell):
+
+```powershell
+pip install -r requirements.txt
+$env:CONGRESS_API_KEY = "..."            # api.data.gov key
+$env:SENATE_SIM_CONTACT = "you@example.com"
 python -m unittest discover -s tests -v
-python scripts/build_roster.py       # add --refresh to ignore the cache
+python scripts\build_roster.py           # add --refresh to ignore the cache
 ```
+
+macOS/Linux: same, but `export CONGRESS_API_KEY=...` and forward slashes.
+
+## Before January 3, 2027: projected roster
+
+Congress.gov returns an empty member list for a Congress that has not convened.
+When that happens, `build_roster.py` takes the sitting 119th Congress and applies
+`data/manual/seat_changes_2026.csv`, one row per seat that changes hands or gets a
+new senator:
+
+| column | meaning |
+|---|---|
+| state | postal code, e.g. `MI` |
+| outgoing_bioguide | Bioguide ID of the senator leaving (find it in the 119th output) |
+| incoming_name | the incoming senator |
+| incoming_party | `Democratic`, `Republican`, or `Independent` |
+| incoming_bioguide | their Bioguide ID if they have one (ex-House members do), else blank |
+| caucus_with_d | `yes` for an independent who caucuses with Democrats |
+
+Incoming senators without a Bioguide ID get a placeholder like `NEW-MI-1`. The output
+CSV is written before validation, so a wrong split can be inspected.
 
 ## Notes
 

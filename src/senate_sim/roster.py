@@ -17,6 +17,8 @@ def assign_caucus(df: pd.DataFrame) -> pd.DataFrame:
     def caucus(row) -> str:
         if row["bioguide_id"] in config.CAUCUS_WITH_DEMOCRATS:
             return "D"
+        if bool(row.get("caucus_with_d", False)) is True:
+            return "D"
         party = str(row.get("api_party") or "")
         if party.startswith("Democrat"):
             return "D"
@@ -34,8 +36,11 @@ def build_baseline(roster: pd.DataFrame, voteview: pd.DataFrame) -> pd.DataFrame
         dupes = roster.loc[roster["bioguide_id"].duplicated(), "bioguide_id"].tolist()
         raise ValueError(f"Duplicate Bioguide IDs in roster: {dupes}")
 
+    roster = roster.copy()
+    roster["state"] = roster["state"].map(config.state_code)
     merged = roster.merge(voteview, on="bioguide_id", how="left", validate="one_to_one")
     merged = assign_caucus(merged)
+    merged["freshman"] = merged["bioguide_id"].str.startswith("NEW-") | merged["nominate_dim1"].isna()
     return merged.sort_values(["state", "name"]).reset_index(drop=True)
 
 
