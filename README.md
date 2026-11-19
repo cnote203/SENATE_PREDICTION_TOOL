@@ -172,6 +172,19 @@ P(+2 side) = Phi(item cutpoint + b1*d1 + b2*d1^2 + b3*d2 + gamma*[in President's
   Senate, and tariff-emergency votes measure deference to the President. It keeps its
   prior formula with an SD of at least 0.6.
 
+The mapping and each senator's deviation are estimated together (alternating rounds), so
+a few idiosyncratic senators are explained by their own deviation instead of bending the
+curve for everyone. Thin dimensions (fewer than 8 items or a single family, such as the
+FY26 NDAA votes for `defense_budget`) hold the curve-shape terms to a tighter prior.
+
+**Reading calibrated scores.** When the President's-party effect (gamma) is estimated, a
+score is the senator's position *outside* the President's party; the simulation adds gamma
+for members of the President's party. On `nato_interventionism` gamma is large and
+positive (senators rally behind their own President's use of force and aid requests), so
+mainstream Democrats score toward restraint in 2025-26 terms while still voting hawkish
+under a Democratic White House. On `arms_sales_oversight` gamma is negative (co-partisans
+defend the President's sales).
+
 Outputs: `data/calibration/foreign_policy.json` (used automatically by scoring and
 simulation) and `foreign_policy_deviations.csv` (how far each senator sits from the fit).
 The script lists senators who sit clearly off the fit and have no override yet.

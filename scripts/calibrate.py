@@ -99,8 +99,10 @@ def main() -> int:
         print(f"\n{dim}: {len(fit.items)} items, {int(fit.items['n'].sum())} votes"
               + (f", {len(dropped)} lopsided dropped" if len(dropped) else ""))
         print(f"  mapping: {b['d1']:+.2f}*d1 {b['d1_sq']:+.2f}*d1^2 {b['d2']:+.2f}*d2")
-        if b["d1_sq"] < 0:
+        if b["d1_sq"] < -0.3 and -1 <= -b["d1"] / (2 * b["d1_sq"]) <= 1:
             print(f"  peaks at d1 = {-b['d1'] / (2 * b['d1_sq']):+.2f}")
+        if fit.thin:
+            print("  thin dimension: curve-shape terms held to a tighter prior")
         print(f"  president's-party effect: {fit.gamma:+.2f}"
               + ("" if fit.gamma_identified else " (not identified: items from one White House only)"))
         print(f"  senator spread sigma: {fit.sigma_score:.2f} score units; CV: {fit.cv}")

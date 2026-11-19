@@ -44,6 +44,11 @@ PRIOR_SD_GAMMA = 1.5
 # AUDIT: a scale convention, not an estimate.
 SCORE_K = 0.9
 SUGGEST_OVERRIDE_MIN = 0.75  # score units
+# Thin dimensions (few items or a single family) get a tighter prior on the curve
+# shape terms, so two outlying senators cannot bend the mapping for everyone.
+THIN_MIN_ITEMS, THIN_MIN_FAMILIES = 8, 2
+PRIOR_SD_SHAPE_THIN = 0.5
+EM_ROUNDS = 5
 
 FEATURES = ["d1", "d1_sq", "d2"]
 
@@ -60,6 +65,7 @@ class DimensionFit:
     scale_sd: float
     deviations: pd.DataFrame
     cv: dict
+    thin: bool = False
 
     @property
     def sigma_score(self) -> float:
@@ -75,6 +81,7 @@ class DimensionFit:
             "sigma_score": self.sigma_score,
             "scale": {"mean": self.scale_mean, "sd": self.scale_sd, "k": SCORE_K},
             "cv": self.cv,
+            "thin_prior": self.thin,
             "items": self.items.to_dict(orient="records"),
         }
 
@@ -105,9 +112,9 @@ def drop_lopsided(df: pd.DataFrame, cutoff: float = LOPSIDED_CUTOFF) -> tuple[pd
     return df[df["item_id"].isin(kept)].copy(), share.rename("minority_share").reset_index()
 
 
-def _negloglik(params, y, w, item_idx, X, n_items, prior_sd):
+def _negloglik(params, y, w, item_idx, X, n_items, prior_sd, offset):
     alpha, beta = params[:n_items], params[n_items:]
-    eta = alpha[item_idx] + X @ beta
+    eta = alpha[item_idx] + X @ beta + offset
     q = 2 * y - 1
     z = q * eta
     ll = log_ndtr(z)
@@ -122,16 +129,18 @@ def _negloglik(params, y, w, item_idx, X, n_items, prior_sd):
     return f, grad
 
 
-def _fit_pooled(df: pd.DataFrame, use_gamma: bool):
+def _fit_pooled(df: pd.DataFrame, use_gamma: bool, thin: bool = False, offset=None):
     item_ids = sorted(df["item_id"].unique())
     idx = df["item_id"].map({k: i for i, k in enumerate(item_ids)}).to_numpy()
     cols = FEATURES + (["cp"] if use_gamma else [])
     X = df[cols].to_numpy(float)
-    prior_sd = np.array([PRIOR_SD_BETA] * len(FEATURES) + ([PRIOR_SD_GAMMA] if use_gamma else []))
+    shape_sd = PRIOR_SD_SHAPE_THIN if thin else PRIOR_SD_BETA
+    prior_sd = np.array([PRIOR_SD_BETA, shape_sd, shape_sd] + ([PRIOR_SD_GAMMA] if use_gamma else []))
+    off = np.zeros(len(df)) if offset is None else np.asarray(offset, float)
     x0 = np.zeros(len(item_ids) + len(cols))
     res = minimize(
         _negloglik, x0, jac=True, method="L-BFGS-B",
-        args=(df["y"].to_numpy(float), df["w"].to_numpy(float), idx, X, len(item_ids), prior_sd),
+        args=(df["y"].to_numpy(float), df["w"].to_numpy(float), idx, X, len(item_ids), prior_sd, off),
     )
     alpha = dict(zip(item_ids, res.x[: len(item_ids)]))
     beta = dict(zip(cols, res.x[len(item_ids):]))
@@ -193,7 +202,7 @@ def _senator_deviations(df: pd.DataFrame, eta0: np.ndarray, iters: int = 30):
     return out, float(np.sqrt(sigma2))
 
 
-def _cv_by_family(df: pd.DataFrame, use_gamma: bool) -> dict:
+def _cv_by_family(df: pd.DataFrame, use_gamma: bool, thin: bool = False) -> dict:
     """Leave-one-family-out: refit the mapping without a family, then fit only the
     held-out items' cutpoints and score log-loss and within-party accuracy."""
     families = df["family"].unique()
@@ -202,7 +211,7 @@ def _cv_by_family(df: pd.DataFrame, use_gamma: bool) -> dict:
     losses, correct, total = [], 0, 0
     for fam in families:
         train, test = df[df["family"] != fam], df[df["family"] == fam].copy()
-        _, beta = _fit_pooled(train, use_gamma and train["cp"].nunique() > 1)
+        _, beta = _fit_pooled(train, use_gamma and train["cp"].nunique() > 1, thin)
         test["lin"] = _linear(test, beta)
         for _, g in test.groupby("item_id"):
             y, lin, w = g["y"].to_numpy(), g["lin"].to_numpy(), g["w"].to_numpy()
@@ -230,11 +239,18 @@ def fit_dimension(df: pd.DataFrame, dimension: str, roster_ideology: pd.DataFram
     df["w"] = 1 / np.sqrt(fam_size)
 
     use_gamma = df.groupby("item_id")["president_party"].first().nunique() > 1
-    alpha, beta = _fit_pooled(df, use_gamma)
-    gamma = float(beta.pop("cp", 0.0))
+    thin = df["item_id"].nunique() < THIN_MIN_ITEMS or df["family"].nunique() < THIN_MIN_FAMILIES
 
-    eta0 = df["item_id"].map(alpha).to_numpy() + _linear(df, {**beta, "cp": gamma})
-    deviations, sigma = _senator_deviations(df, eta0)
+    # Alternate: fit the mapping given each senator's deviation, then the deviations
+    # given the mapping. Outlying senators are then explained by their own deviation
+    # instead of bending the shared curve.
+    offset = None
+    for _ in range(EM_ROUNDS):
+        alpha, beta = _fit_pooled(df, use_gamma, thin, offset)
+        gamma = float(beta.pop("cp", 0.0))
+        eta0 = df["item_id"].map(alpha).to_numpy() + _linear(df, {**beta, "cp": gamma})
+        deviations, sigma = _senator_deviations(df, eta0)
+        offset = df["bioguide_id"].map(deviations.set_index("bioguide_id")["u_latent"]).to_numpy()
 
     # Scale: mean and SD of the ideology-only latent value across the roster.
     r = roster_ideology.dropna(subset=["d1"]).copy()
@@ -268,7 +284,8 @@ def fit_dimension(df: pd.DataFrame, dimension: str, roster_ideology: pd.DataFram
         scale_mean=mean,
         scale_sd=sd,
         deviations=deviations.assign(dimension=dimension),
-        cv=_cv_by_family(df, use_gamma),
+        cv=_cv_by_family(df, use_gamma, thin),
+        thin=thin,
     )
 
 

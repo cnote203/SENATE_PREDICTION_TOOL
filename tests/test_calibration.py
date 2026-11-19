@@ -128,6 +128,24 @@ class Fitter(unittest.TestCase):
         self.assertTrue(row["suggest_override"])
         self.assertGreater(fit.cv["within_party_accuracy"], 0.5)
 
+    def test_two_outliers_do_not_bend_a_thin_dimension(self):
+        # Defense-like: support rises with d1; six near-replicate items from one bill.
+        # The two most conservative senators always vote Nay (like Paul and Lee).
+        items, votes, ideo = synthetic(beta=(3.0, 0.0, 0.0), n_items=6, families=1, seed=7)
+        right = ideo.sort_values("nominate_dim1")["bioguide_id"].iloc[-2:].tolist()
+        votes.loc[votes["bioguide_id"].isin(right), "yea"] = 0.0
+        data = calibration.build_dataset(items, votes, ideo)
+        fit = calibration.fit_dimension(data, "dim", self.roster(ideo))
+        self.assertTrue(fit.thin)
+        self.assertGreater(fit.beta["d1_sq"], -1.0)
+        dev = fit.deviations.set_index("bioguide_id")
+        self.assertTrue((dev.loc[right, "u_raw_score"] < 0).all())
+        # A conservative who voted with the mapping still scores well above the median.
+        r = self.roster(ideo).assign(d1_sq=lambda d: d["d1"] ** 2)
+        third = ideo.sort_values("nominate_dim1").iloc[-3]
+        score = calibration.latent_to_score(third["nominate_dim1"], third["nominate_dim2"], fit.to_dict())
+        self.assertGreater(score, 0.5)
+
     def test_engine_uses_fit_and_round_trips(self):
         items, votes, ideo = synthetic(beta=(2.0, 0.0, 0.0), seed=6)
         items["dimension"] = "defense_budget"

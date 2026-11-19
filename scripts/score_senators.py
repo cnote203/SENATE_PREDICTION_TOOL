@@ -19,6 +19,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 import pandas as pd  # noqa: E402
 
 from senate_sim import config  # noqa: E402
+from senate_sim.policy import calibration  # noqa: E402
 from senate_sim.policy.base import score  # noqa: E402
 
 N = config.ROSTER_CONGRESS
@@ -36,7 +37,10 @@ def main() -> int:
         return 1
     baseline = pd.read_csv(baseline_path, dtype={"bioguide_id": str})
 
-    scores = score(baseline, module)
+    cal = calibration.load(module.calibration_path) if module.calibration_path else None
+    fitted = sorted(cal) if cal else []
+    print(f"Calibrated dimensions: {', '.join(fitted) if fitted else 'none (using prior formulas)'}")
+    scores = score(baseline, module, cal)
     out = config.PROCESSED_DIR / f"scores_{module.name}_{N}.csv"
     scores.to_csv(out, index=False)
 
