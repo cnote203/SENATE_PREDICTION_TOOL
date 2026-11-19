@@ -96,7 +96,7 @@ def impute_ideology(baseline: pd.DataFrame) -> pd.DataFrame:
     return df[["bioguide_id", "dim1", "dim2", "ideology_source"]]
 
 
-def load_overrides(module: PolicyModule, valid_ids: set[str]) -> pd.DataFrame:
+def load_overrides(module: PolicyModule, valid_ids: set[str], strict: bool = True) -> pd.DataFrame:
     if not module.override_path.exists():
         return pd.DataFrame(columns=OVERRIDE_COLUMNS)
     ov = pd.read_csv(module.override_path, dtype={"bioguide_id": str})
@@ -107,8 +107,9 @@ def load_overrides(module: PolicyModule, valid_ids: set[str]) -> pd.DataFrame:
     if bad_dim:
         raise ValueError(f"Unknown dimensions in overrides: {sorted(bad_dim)}")
     bad_id = set(ov["bioguide_id"]) - valid_ids
-    if bad_id:
+    if bad_id and strict:
         raise ValueError(f"Override Bioguide IDs not in the baseline: {sorted(bad_id)}")
+    ov = ov[ov["bioguide_id"].isin(valid_ids)]
     if ov.duplicated(["bioguide_id", "dimension"]).any():
         raise ValueError("A senator has two overrides for the same dimension.")
     out_of_range = ov[(ov["score"] < SCALE_MIN) | (ov["score"] > SCALE_MAX)]
@@ -118,7 +119,8 @@ def load_overrides(module: PolicyModule, valid_ids: set[str]) -> pd.DataFrame:
 
 
 def score(
-    baseline: pd.DataFrame, module: PolicyModule, calibration: dict | None = None
+    baseline: pd.DataFrame, module: PolicyModule, calibration: dict | None = None,
+    strict_overrides: bool = True,
 ) -> pd.DataFrame:
     """Return one row per senator: <dim>, <dim>_sd and <dim>_source for each dimension.
 
@@ -156,7 +158,7 @@ def score(
         out[f"{dim.name}_sd"] = np.round(sd, 3)
         out[f"{dim.name}_source"] = label
 
-    overrides = load_overrides(module, set(out["bioguide_id"]))
+    overrides = load_overrides(module, set(out["bioguide_id"]), strict=strict_overrides)
     pos = {bid: i for i, bid in enumerate(out["bioguide_id"])}
     for _, o in overrides.iterrows():
         i = pos[o["bioguide_id"]]

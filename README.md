@@ -22,12 +22,15 @@ src/senate_sim/
   ingest/senate_votes.py senate.gov roll-call XML, keyed to Bioguide IDs
   ingest/vote_sources.py Voteview (default) or senate.gov as the source of individual votes
   simulation.py          vote model, procedural gates, Monte Carlo
+  elections.py           state lean, 2026 environment estimate, Senate and presidential draws
+  multicycle.py          120th-122nd Congress simulation loop
 scripts/build_roster.py  end-to-end baseline build
 scripts/score_senators.py  scores the baseline on a policy module
 scripts/calibrate.py     fits the dimension formulas to Senate roll calls
 scripts/verify_overrides.py  prints each override senator's vote on the cited roll calls
 scripts/simulate_measure.py  Monte Carlo for one measure under R and D White Houses
 scripts/fetch_donors.py  OpenFEC PAC contributions per senator, and a test of whether they explain votes
+scripts/run_multicycle.py  2027-2032 simulation: elections, committees, measures per Congress
 tests/test_roster.py     offline unit tests (no network or keys)
 data/raw/                cached API and bulk responses
 data/processed/          validated outputs
@@ -251,6 +254,40 @@ senators who already agree with them.
 
 The same api.data.gov key works for Congress.gov and OpenFEC.
 
+## Multi-cycle simulation (2027-2032)
+
+```powershell
+python scripts\run_multicycle.py                       # 2028 President simulated
+python scripts\run_multicycle.py --president-2028 D    # Democratic White House branch
+python scripts\run_multicycle.py --president-2028 R    # Republican White House branch
+python scripts\run_multicycle.py --env-2028 0          # neutral 2028 environment
+```
+
+Each run carries the 120th Congress forward through the 2028 (Class 3) and 2030
+(Class 1) elections:
+
+- **State lean:** 2024 presidential two-party margin relative to the nation (county
+  results from tonmcg/US_County_Level_Election_Results_08-24, aggregated to states).
+- **2026 environment:** estimated by maximum likelihood from which party won each seat
+  up in 2026 (your seat-change file). The 2028 environment starts at half of it
+  (`ENV_RETENTION`) unless `--env-2028` is given; 2030 penalises the President's party.
+- **Races:** lean + environment + incumbency (3 points) + race noise (6 points).
+  Incumbents may retire first, with a probability that rises with age.
+- **President 2028:** state margins = lean + national + state noise; Electoral College
+  winner-take-all. A fixed branch is drawn by rejection sampling, so the environment
+  stays consistent with the result.
+- **Control:** 51 seats, or 50 plus the Vice President.
+- **New senators:** scored with the no-record rule; overrides follow the senators who stay.
+- **Committees:** re-projected each Congress from the previous one; vacancies filled
+  with unassigned senators (at most 3 committees, 1 Super A each).
+- **Measures:** every preset simulated in every Congress under that run's White House.
+
+Outputs `data/processed/multicycle_<branch>_*.csv`: Senate and White House odds by
+Congress, measure pass and enactment probabilities (overall and by White House), and
+the most likely chair and ranking member of each foreign policy committee.
+
+All election constants are in `elections.py`, marked AUDIT.
+
 ## Status
 
 - [x] Project layout, config, HTTP cache
@@ -272,4 +309,6 @@ The same api.data.gov key works for Congress.gov and OpenFEC.
 - [ ] Add 2019-2020 Saudi/Gulf votes so Republican arms-sale positions are identified
 - [x] OpenFEC PAC contributions and donor-effect test
 - [ ] Electoral-vulnerability and leadership terms in the vote model
-- [ ] Multi-cycle simulation (2028 and 2030 seat turnover, seniority, White House scenarios)
+- [x] Multi-cycle simulation (2028 and 2030 elections, committees, White House branches)
+- [ ] Calibrate election constants against past Senate results
+- [ ] Electoral vulnerability in the vote model (senators up next cycle)
