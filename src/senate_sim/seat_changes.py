@@ -72,10 +72,12 @@ def apply_seat_changes(current: pd.DataFrame, changes: pd.DataFrame) -> pd.DataF
                 "state": row["state"].strip(),
                 "api_party": row["incoming_party"].strip(),
                 "caucus_with_d": row["caucus_with_d"].strip().lower() == "yes",
+                "incoming": True,
             }
         )
 
     projected = pd.concat([kept, pd.DataFrame(incoming)], ignore_index=True)
-    if "caucus_with_d" in projected:
-        projected["caucus_with_d"] = projected["caucus_with_d"].fillna(False).astype(bool)
+    for col in ("caucus_with_d", "incoming"):
+        if col in projected:
+            projected[col] = projected[col].astype("boolean").fillna(False).astype(bool)
     return projected

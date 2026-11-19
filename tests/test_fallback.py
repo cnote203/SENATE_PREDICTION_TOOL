@@ -85,7 +85,23 @@ class SeatChanges(unittest.TestCase):
                                   pd.DataFrame(columns=["bioguide_id", "nominate_dim1"]))
         new = baseline[baseline["bioguide_id"] == "NEW-MI-1"].iloc[0]
         self.assertEqual(new["caucus"], "D")
-        self.assertTrue(new["freshman"])
+        self.assertTrue(new["new_to_senate"])
+        self.assertFalse(new["has_voting_record"])
+
+    def test_returning_senator_is_incoming_but_not_new(self):
+        changes = self._changes(incoming_name="Returning", incoming_bioguide="B000944")
+        history = pd.DataFrame([{"bioguide_id": "B000944", "nominate_dim1": -0.45,
+                                 "senate_congresses_served": 9}])
+        baseline = build_baseline(apply_seat_changes(self.current, changes), history)
+        row = baseline[baseline["bioguide_id"] == "B000944"].iloc[0]
+        self.assertTrue(row["incoming"])
+        self.assertFalse(row["new_to_senate"])
+        self.assertTrue(row["has_voting_record"])
+
+    def test_sitting_senators_not_incoming(self):
+        baseline = build_baseline(apply_seat_changes(self.current, self._changes()),
+                                  pd.DataFrame(columns=["bioguide_id", "nominate_dim1"]))
+        self.assertFalse(baseline.loc[baseline["bioguide_id"] == "D1", "incoming"].iloc[0])
 
     def test_states_normalized_to_codes(self):
         baseline = build_baseline(apply_seat_changes(self.current, self._changes()),

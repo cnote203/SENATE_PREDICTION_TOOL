@@ -14,12 +14,12 @@ PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
 
 # The 120th Congress convenes January 3, 2027.
 ROSTER_CONGRESS = 120
-# Most recent complete Congress with Voteview roll-call data (DW-NOMINATE).
-# AUDIT: switch to 120 once Voteview publishes that Congress.
+# Latest Congress whose Voteview data the baseline may use (DW-NOMINATE).
+# AUDIT: raise to 120 once Voteview publishes that Congress.
 VOTEVIEW_CONGRESS = 119
 
 CONGRESS_API_BASE = "https://api.congress.gov/v3"
-VOTEVIEW_MEMBERS_URL = "https://voteview.com/static/data/out/members/S{congress}_members.csv"
+VOTEVIEW_ALL_MEMBERS_URL = "https://voteview.com/static/data/out/members/HSall_members.csv"
 
 # API keys come from the environment and are never written to disk or logged.
 CONGRESS_API_KEY_ENV = "CONGRESS_API_KEY"

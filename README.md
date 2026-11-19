@@ -11,7 +11,7 @@ src/senate_sim/
   config.py              constants, expected split, API key lookup
   ingest/http.py         GET with retries and disk cache (API keys never cached to disk)
   ingest/congress_gov.py Congress.gov v3 member roster for a Congress
-  ingest/voteview.py     Voteview DW-NOMINATE scores (bulk CSV)
+  ingest/voteview.py     Voteview DW-NOMINATE history, all Congresses, House + Senate
   roster.py              merge, caucus labels, validation gate
   seat_changes.py        projects the 120th roster from the 119th plus seat changes
 scripts/build_roster.py  end-to-end baseline build
@@ -53,6 +53,16 @@ new senator:
 Incoming senators without a Bioguide ID get a placeholder like `NEW-MI-1`. The output
 CSV is written before validation, so a wrong split can be inspected.
 
+## Service and record columns
+
+| column | meaning |
+|---|---|
+| incoming | taking a seat in the 120th Congress |
+| new_to_senate | incoming with no prior Senate service (a returning ex-senator is `False`) |
+| has_voting_record | has any DW-NOMINATE score, House or Senate |
+| score_chamber / score_congress | where the latest score came from; House-derived scores deserve wider uncertainty |
+| senate_congresses_served / first_senate_congress | prior Senate service, for seniority |
+
 ## Notes
 
 - **Caucus, not party.** Angus King (I-ME) and Bernie Sanders (I-VT) caucus with the
@@ -76,6 +86,8 @@ CSV is written before validation, so a wrong split can be inspected.
 - [x] Voteview parser (tested offline)
 - [x] Congress.gov roster parser (tested offline; field names need one live check)
 - [x] Caucus labels and 100-seat validation gate
+- [x] Projected roster from seat changes before Jan 3
+- [x] House and prior-Senate scores for incoming senators; service history
 - [ ] Committee rosters and leadership roles
 - [ ] Co-sponsorship data
 - [ ] OpenFEC contributions

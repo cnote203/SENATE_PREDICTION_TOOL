@@ -64,8 +64,8 @@ def main() -> int:
 
     roster, source = get_roster(args.refresh)
 
-    print(f"Fetching Voteview scores for the {config.VOTEVIEW_CONGRESS}th Congress...")
-    scores = voteview.fetch_senate_members(refresh=args.refresh)
+    print(f"Fetching Voteview member history through the {config.VOTEVIEW_CONGRESS}th Congress...")
+    scores = voteview.fetch_member_history(refresh=args.refresh)
 
     baseline = build_baseline(roster, scores)
     baseline["roster_source"] = source
@@ -78,6 +78,11 @@ def main() -> int:
 
     validate_baseline(baseline)
     print("Validation passed.")
+
+    no_record = baseline[~baseline["has_voting_record"]]
+    if not no_record.empty:
+        print("No voting record (need another way to set starting positions):")
+        print("  " + ", ".join(f"{n} ({s})" for n, s in zip(no_record["name"], no_record["state"])))
     return 0
 
 

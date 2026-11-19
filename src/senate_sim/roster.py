@@ -31,7 +31,14 @@ def assign_caucus(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def build_baseline(roster: pd.DataFrame, voteview: pd.DataFrame) -> pd.DataFrame:
-    """Left-join Voteview ideology scores onto the roster and add caucus labels."""
+    """Left-join Voteview history onto the roster and add caucus and service labels.
+
+    Adds:
+      incoming            True for senators taking a seat in the new Congress
+      has_voting_record   True if any DW-NOMINATE score exists (House or Senate)
+      new_to_senate       True for incoming senators with no prior Senate service;
+                          a returning former senator is incoming but not new
+    """
     if roster["bioguide_id"].duplicated().any():
         dupes = roster.loc[roster["bioguide_id"].duplicated(), "bioguide_id"].tolist()
         raise ValueError(f"Duplicate Bioguide IDs in roster: {dupes}")
@@ -40,7 +47,15 @@ def build_baseline(roster: pd.DataFrame, voteview: pd.DataFrame) -> pd.DataFrame
     roster["state"] = roster["state"].map(config.state_code)
     merged = roster.merge(voteview, on="bioguide_id", how="left", validate="one_to_one")
     merged = assign_caucus(merged)
-    merged["freshman"] = merged["bioguide_id"].str.startswith("NEW-") | merged["nominate_dim1"].isna()
+
+    if "incoming" not in merged:
+        merged["incoming"] = False
+    merged["incoming"] = merged["incoming"].astype("boolean").fillna(False).astype(bool)
+    if "senate_congresses_served" not in merged:
+        merged["senate_congresses_served"] = 0
+    merged["senate_congresses_served"] = merged["senate_congresses_served"].fillna(0).astype(int)
+    merged["has_voting_record"] = merged["nominate_dim1"].notna()
+    merged["new_to_senate"] = merged["incoming"] & (merged["senate_congresses_served"] == 0)
     return merged.sort_values(["state", "name"]).reset_index(drop=True)
 
 
@@ -58,10 +73,17 @@ def validate_baseline(df: pd.DataFrame) -> None:
                 f"Full counts: {counts}"
             )
 
-    missing_scores = df["nominate_dim1"].isna().sum()
-    if missing_scores:
-        # Freshmen have no DW-NOMINATE score until they have cast votes in the Congress.
+    sitting_without_score = df[~df["incoming"] & ~df["has_voting_record"]]
+    if not sitting_without_score.empty:
+        # A sitting senator should always have a score; a gap usually means an ID mismatch.
         print(
-            f"note: {missing_scores} senators have no Voteview score "
-            "(expected for incoming freshmen)."
+            "warning: sitting senators with no Voteview score (check Bioguide IDs): "
+            f"{sitting_without_score['bioguide_id'].tolist()}"
+        )
+
+    incoming = df[df["incoming"]]
+    if len(incoming):
+        print(
+            f"incoming: {len(incoming)} senators, {int(incoming['new_to_senate'].sum())} new to "
+            f"the Senate, {int((~incoming['has_voting_record']).sum())} with no voting record."
         )

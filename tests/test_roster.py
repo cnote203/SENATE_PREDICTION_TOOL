@@ -50,34 +50,53 @@ def _synthetic_voteview(ids: list[str]) -> pd.DataFrame:
 VOTEVIEW_CSV = (
     "congress,chamber,icpsr,state_abbrev,party_code,bioname,bioguide_id,"
     "nominate_dim1,nominate_dim2,nominate_number_of_votes\n"
-    "119,Sen,1,VT,328,SANDERS,S000033,-0.4,0.1,500\n"
-    "119,Sen,2,XX,200,OLD SEAT,X000001,0.5,0.0,10\n"
-    "119,Sen,3,XX,200,OLD SEAT REPLACEMENT,X000001,0.5,0.0,300\n"
-    "119,House,4,XX,200,HOUSE MEMBER,H000001,0.2,0.2,400\n"
-    "118,Sen,5,XX,100,PRIOR CONGRESS,P000001,0.0,0.0,900\n"
+    # Sitting senator with a long Senate record.
+    "118,Senate,1,VT,328,SANDERS,S000033,-0.50,0.1,600\n"
+    "119,Senate,1,VT,328,SANDERS,S000033,-0.52,0.1,500\n"
+    # House member moving to the Senate: latest score is from the House.
+    "118,House,2,AL,200,MOORE,M001212,0.70,0.2,900\n"
+    "119,House,2,AL,200,MOORE,M001212,0.72,0.2,800\n"
+    # Former senator returning after a gap, with earlier House service.
+    "109,House,3,OH,100,BROWN,B000944,-0.40,0.0,900\n"
+    "110,Senate,3,OH,100,BROWN,B000944,-0.44,0.0,600\n"
+    "118,Senate,3,OH,100,BROWN,B000944,-0.45,0.0,550\n"
+    # Data after the cutoff must be ignored.
+    "120,Senate,1,VT,328,SANDERS,S000033,0.99,0.9,10\n"
+    # Rows to skip: presidents and missing IDs.
+    "119,President,9,USA,200,PRESIDENT,P999999,0.50,0.0,0\n"
+    "119,Senate,8,XX,200,NO ID,,0.30,0.0,100\n"
 )
 
 
-class VoteviewParsing(unittest.TestCase):
-    def test_keeps_senate_members_for_requested_congress_only(self):
-        df = voteview.parse_members_csv(VOTEVIEW_CSV.encode(), congress=119)
-        self.assertNotIn("H000001", df["bioguide_id"].tolist())
-        self.assertNotIn("P000001", df["bioguide_id"].tolist())
+class VoteviewHistory(unittest.TestCase):
+    def setUp(self):
+        self.df = voteview.parse_all_members(VOTEVIEW_CSV.encode(), through_congress=119)
+        self.by_id = self.df.set_index("bioguide_id")
 
-    def test_dedupes_replacement_seat_keeping_most_votes(self):
-        df = voteview.parse_members_csv(VOTEVIEW_CSV.encode(), congress=119)
-        row = df[df["bioguide_id"] == "X000001"].iloc[0]
-        self.assertEqual(row["nominate_votes"], 300)
-        self.assertEqual(df["bioguide_id"].duplicated().sum(), 0)
+    def test_one_row_per_member_and_presidents_dropped(self):
+        self.assertEqual(self.df["bioguide_id"].duplicated().sum(), 0)
+        self.assertNotIn("P999999", self.by_id.index)
 
-    def test_maps_party_codes(self):
-        df = voteview.parse_members_csv(VOTEVIEW_CSV.encode(), congress=119)
-        self.assertEqual(df.set_index("bioguide_id").loc["S000033", "vv_party"], "Independent")
+    def test_latest_score_respects_cutoff(self):
+        self.assertAlmostEqual(self.by_id.loc["S000033", "nominate_dim1"], -0.52)
+        self.assertEqual(self.by_id.loc["S000033", "score_congress"], 119)
+
+    def test_house_member_keeps_house_score(self):
+        row = self.by_id.loc["M001212"]
+        self.assertAlmostEqual(row["nominate_dim1"], 0.72)
+        self.assertEqual(row["score_chamber"], "House")
+        self.assertEqual(row["senate_congresses_served"], 0)
+
+    def test_returning_senator_service_counted(self):
+        row = self.by_id.loc["B000944"]
+        self.assertEqual(row["senate_congresses_served"], 2)
+        self.assertEqual(row["first_senate_congress"], 110)
+        self.assertEqual(row["score_chamber"], "Senate")
 
     def test_missing_column_raises(self):
         bad = VOTEVIEW_CSV.replace("nominate_dim2", "nope").encode()
         with self.assertRaises(ValueError):
-            voteview.parse_members_csv(bad, congress=119)
+            voteview.parse_all_members(bad)
 
 
 class CongressGovParsing(unittest.TestCase):
