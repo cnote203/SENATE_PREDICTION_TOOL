@@ -40,7 +40,7 @@ def module_with(overrides: str | None):
     return replace(FP, override_path=tmp)
 
 
-HEADER = "bioguide_id,name,dimension,score,sd,evidence,verified\n"
+HEADER = "bioguide_id,name,dimension,score,sd,evidence,roll_calls,verified\n"
 
 
 class Imputation(unittest.TestCase):
@@ -103,7 +103,7 @@ class Engine(unittest.TestCase):
         self.assertEqual(df.loc["D1", "defense_budget"], -2.0)
 
     def test_override_replaces_score_and_sd(self):
-        mod = module_with(HEADER + "R1,Con,nato_interventionism,-2,0.2,test,no\n")
+        mod = module_with(HEADER + "R1,Con,nato_interventionism,-2,0.2,test,,no\n")
         df = base.score(baseline(), mod).set_index("bioguide_id")
         self.assertEqual(df.loc["R1", "nato_interventionism"], -2.0)
         self.assertEqual(df.loc["R1", "nato_interventionism_sd"], 0.2)
@@ -112,10 +112,10 @@ class Engine(unittest.TestCase):
 
     def test_override_validation(self):
         bad = {
-            "unknown id": "ZZZ,X,defense_budget,1,0.2,e,no\n",
-            "unknown dimension": "R1,X,healthcare,1,0.2,e,no\n",
-            "out of range": "R1,X,defense_budget,3,0.2,e,no\n",
-            "duplicate": "R1,X,defense_budget,1,0.2,e,no\nR1,X,defense_budget,0,0.2,e,no\n",
+            "unknown id": "ZZZ,X,defense_budget,1,0.2,e,,no\n",
+            "unknown dimension": "R1,X,healthcare,1,0.2,e,,no\n",
+            "out of range": "R1,X,defense_budget,3,0.2,e,,no\n",
+            "duplicate": "R1,X,defense_budget,1,0.2,e,,no\nR1,X,defense_budget,0,0.2,e,,no\n",
         }
         for label, rows in bad.items():
             with self.subTest(label), self.assertRaises(ValueError):

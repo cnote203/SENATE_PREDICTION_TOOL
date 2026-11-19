@@ -27,12 +27,16 @@ SCALE_MIN, SCALE_MAX = -2.0, 2.0
 # AUDIT: these are judgment calls; widen them if back-tests show overconfidence.
 SD_BY_SOURCE = {"Senate": 0.25, "House": 0.45, "imputed": 0.80}
 
+# Extra SD for a House-derived ideology point under a fitted mapping (House to
+# Senate translation). AUDIT: judgment until House-Senate switchers are studied.
+HOUSE_EXTRA_SD = 0.30
+
 # Share of the distance to the centre (dim1 = 0) an imputed senator is moved
 # when the state's other senator belongs to the opposite caucus.
 # AUDIT: a crude proxy for state partisanship until real state lean data is added.
 CROSS_PRESSURE_SHIFT = 0.35
 
-OVERRIDE_COLUMNS = ["bioguide_id", "name", "dimension", "score", "sd", "evidence", "verified"]
+OVERRIDE_COLUMNS = ["bioguide_id", "name", "dimension", "score", "sd", "evidence", "roll_calls", "verified"]
 
 
 @dataclass(frozen=True)
@@ -40,7 +44,9 @@ class Dimension:
     name: str
     low: str   # what -2 means
     high: str  # what +2 means
-    formula: Callable[[np.ndarray, np.ndarray], np.ndarray]
+    formula: Callable[[np.ndarray, np.ndarray], np.ndarray]  # prior, used until calibrated
+    calibrate: bool = True          # False: no informative roll calls; keep the prior formula
+    prior_sd: float | None = None   # SD floor when the prior formula is used
 
 
 @dataclass(frozen=True)
@@ -48,6 +54,7 @@ class PolicyModule:
     name: str
     dimensions: list[Dimension]
     override_path: Path
+    calibration_path: Path | None = None
     notes: str = ""
     extra: dict = field(default_factory=dict)
 
@@ -110,18 +117,44 @@ def load_overrides(module: PolicyModule, valid_ids: set[str]) -> pd.DataFrame:
     return ov
 
 
-def score(baseline: pd.DataFrame, module: PolicyModule) -> pd.DataFrame:
-    """Return one row per senator: <dim>, <dim>_sd and <dim>_source for each dimension."""
+def score(
+    baseline: pd.DataFrame, module: PolicyModule, calibration: dict | None = None
+) -> pd.DataFrame:
+    """Return one row per senator: <dim>, <dim>_sd and <dim>_source for each dimension.
+
+    Sources: fitted (calibrated mapping), formula (prior), imputed (no record),
+    override (hand-set with evidence).
+    """
+    from senate_sim.policy.calibration import latent_to_score
+
+    calibration = calibration or {}
     ideo = impute_ideology(baseline)
     out = baseline[["bioguide_id", "name", "state", "caucus"]].merge(ideo, on="bioguide_id")
-    sd = out["ideology_source"].map(SD_BY_SOURCE).astype(float)
-    source = np.where(out["ideology_source"] == "imputed", "imputed", "formula")
+    src = out["ideology_source"]
+    d1, d2 = out["dim1"].to_numpy(), out["dim2"].to_numpy()
 
     for dim in module.dimensions:
-        raw = dim.formula(out["dim1"].to_numpy(), out["dim2"].to_numpy())
+        fit = calibration.get(dim.name) if dim.calibrate else None
+        if fit:
+            raw = latent_to_score(d1, d2, fit)
+            sigma = float(fit["sigma_score"])
+            scored = pd.Series(np.clip(raw, SCALE_MIN, SCALE_MAX), index=out.index)
+            caucus_var = scored[src != "imputed"].groupby(out["caucus"]).var()
+            sd = np.select(
+                [src == "Senate", src == "House"],
+                [sigma, np.sqrt(sigma ** 2 + HOUSE_EXTRA_SD ** 2)],
+                default=np.sqrt(sigma ** 2 + out["caucus"].map(caucus_var).fillna(0.5)),
+            )
+            label = np.where(src == "imputed", "imputed", "fitted")
+        else:
+            raw = dim.formula(d1, d2)
+            sd = src.map(SD_BY_SOURCE).astype(float).to_numpy()
+            if dim.prior_sd:
+                sd = np.maximum(sd, dim.prior_sd)
+            label = np.where(src == "imputed", "imputed", "formula")
         out[dim.name] = np.clip(raw, SCALE_MIN, SCALE_MAX).round(2)
-        out[f"{dim.name}_sd"] = sd
-        out[f"{dim.name}_source"] = source
+        out[f"{dim.name}_sd"] = np.round(sd, 3)
+        out[f"{dim.name}_source"] = label
 
     overrides = load_overrides(module, set(out["bioguide_id"]))
     pos = {bid: i for i, bid in enumerate(out["bioguide_id"])}

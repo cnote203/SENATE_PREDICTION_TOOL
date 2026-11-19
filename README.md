@@ -18,8 +18,14 @@ src/senate_sim/
   committees.py          committee rosters and the 120th Congress projection
   policy/base.py         shared scoring engine: formulas, imputation, overrides, uncertainty
   policy/foreign_policy.py  four foreign policy dimensions
+  policy/calibration.py  pooled probit fit of each dimension to roll calls
+  ingest/senate_votes.py senate.gov roll-call XML, keyed to Bioguide IDs
+  simulation.py          vote model, procedural gates, Monte Carlo
 scripts/build_roster.py  end-to-end baseline build
 scripts/score_senators.py  scores the baseline on a policy module
+scripts/calibrate.py     fits the dimension formulas to senate.gov roll calls
+scripts/verify_overrides.py  prints each override senator's vote on the cited roll calls
+scripts/simulate_measure.py  Monte Carlo for one measure under R and D White Houses
 tests/test_roster.py     offline unit tests (no network or keys)
 data/raw/                cached API and bulk responses
 data/processed/          validated outputs
@@ -141,6 +147,56 @@ set it to `yes`. Formula coefficients and uncertainty settings are marked AUDIT.
 A new policy area is one file in `policy/` defining a `MODULE` with its dimensions,
 plus an overrides CSV; run it with `--module <name>`.
 
+## Calibration
+
+```powershell
+python scripts\calibrate.py          # needs senate.gov access; caches XML in data\raw
+git add data\calibration
+git commit -m "Calibrate foreign policy dimensions"
+```
+
+`data/manual/calibration_votes.csv` lists the roll calls used for each dimension, which
+side is the +2 side, a family (near-replicate votes share one), and the President's party
+at the time. The fit is a pooled probit per dimension:
+
+P(+2 side) = Phi(item cutpoint + b1*d1 + b2*d1^2 + b3*d2 + gamma*[in President's party] + senator deviation)
+
+- Items whose losing side is under 2.5% are dropped (W-NOMINATE's default).
+- Families are down-weighted by 1/sqrt(size), so the Iran war powers series can't dominate.
+- Present and Not Voting are treated as missing.
+- gamma is only estimated when a dimension has votes from both a Democratic and a
+  Republican White House (the 2024 Biden-era Ukraine and Israel votes provide this for
+  `nato_interventionism` and `arms_sales_oversight`).
+- `china_decoupling` is not calibrated. There are no clean China roll calls in the 119th
+  Senate, and tariff-emergency votes measure deference to the President. It keeps its
+  prior formula with an SD of at least 0.6.
+
+Outputs: `data/calibration/foreign_policy.json` (used automatically by scoring and
+simulation) and `foreign_policy_deviations.csv` (how far each senator sits from the fit).
+The script lists senators who sit clearly off the fit and have no override yet.
+
+Each override cites roll calls (`congress-session-roll`). To check them against senate.gov:
+
+```powershell
+python scripts\verify_overrides.py
+```
+
+## Simulating a measure
+
+```powershell
+python scripts\simulate_measure.py --list
+python scripts\simulate_measure.py israel_arms_disapproval --runs 20000
+```
+
+Each run draws every senator's position error once (shared across measures on that
+dimension), a shock per caucus per measure, the measure's cutpoint from its family's fitted
+votes, and attendance (97%). Gates: simple majority (ties go the White House's way via the
+Vice President), cloture (60), two-thirds of those voting (treaties, overrides). Disapproval
+and war powers resolutions go discharge, then passage, then veto (97% if the President
+opposes), then a two-thirds override in both chambers. The House is an input probability,
+not modelled member by member. Output: pass probabilities by stage, yea-count ranges,
+P(enacted), and the senators most often pivotal, under an R and a D White House.
+
 ## Status
 
 - [x] Project layout, config, HTTP cache
@@ -155,5 +211,10 @@ plus an overrides CSV; run it with `--module <name>`.
 - [ ] Co-sponsorship data
 - [ ] OpenFEC contributions
 - [x] Shared scoring engine; foreign policy module with seeded overrides
-- [ ] Calibrate formulas against 119th Congress roll calls
-- [ ] Procedural gates and Monte Carlo cycles
+- [x] Calibration pipeline (senate.gov roll calls, pooled probit, deviations)
+- [x] Overrides revised against the roll-call record, with citations
+- [x] Single-measure vote model, procedural gates, Monte Carlo
+- [ ] Run calibration and commit `data/calibration/`
+- [ ] Add 2019-2020 Saudi/Gulf votes so Republican arms-sale positions are identified
+- [ ] Electoral-vulnerability and leadership terms in the vote model
+- [ ] Multi-cycle simulation (2028 and 2030 seat turnover, seniority, White House scenarios)

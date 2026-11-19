@@ -26,6 +26,8 @@ def _nato(d1, d2):
 
 
 def _defense(d1, d2):
+    # Prior only. FY26 NDAA votes show Nays at both ends (progressives and Paul/Lee),
+    # so the calibrated fit is expected to bend down at the far right.
     return 0.4 + 1.6 * d1
 
 
@@ -63,7 +65,13 @@ MODULE = PolicyModule(
             low="favours engagement and trade, opposes export controls and investment limits",
             high="backs tariffs, export controls, investment screening, Taiwan arms sales",
             formula=_china,
+            # No clean China roll calls in the 119th Senate: the outbound-investment and
+            # biotech provisions passed by voice vote, and tariff-emergency votes measure
+            # deference to the President, not China policy. Keep the prior, widen its SD.
+            calibrate=False,
+            prior_sd=0.6,
         ),
     ],
     override_path=config.PROJECT_ROOT / "data" / "manual" / "overrides_foreign_policy.csv",
+    calibration_path=config.PROJECT_ROOT / "data" / "calibration" / "foreign_policy.json",
 )
