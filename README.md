@@ -16,7 +16,10 @@ src/senate_sim/
   roster.py              merge, caucus labels, validation gate
   seat_changes.py        projects the 120th roster from the 119th plus seat changes
   committees.py          committee rosters and the 120th Congress projection
+  policy/base.py         shared scoring engine: formulas, imputation, overrides, uncertainty
+  policy/foreign_policy.py  four foreign policy dimensions
 scripts/build_roster.py  end-to-end baseline build
+scripts/score_senators.py  scores the baseline on a policy module
 tests/test_roster.py     offline unit tests (no network or keys)
 data/raw/                cached API and bulk responses
 data/processed/          validated outputs
@@ -108,6 +111,36 @@ CSV is written before validation, so a wrong split can be inspected.
 - **OpenFEC** (PAC and industry contributions) is not wired in yet. It comes after the
   roster and committee data are validated.
 
+## Policy scores
+
+```powershell
+python scripts\score_senators.py            # foreign policy by default
+```
+
+Writes `data/processed/scores_foreign_policy_120.csv`: for each senator and dimension,
+a score from -2 to +2, a standard deviation, and its source.
+
+| Source | How the score is set | SD |
+|---|---|---|
+| `formula` | DW-NOMINATE point through the dimension's formula | 0.25 (Senate score), 0.45 (House score) |
+| `imputed` | no record: caucus median, pulled 35% toward centre if the state's other senator is from the other caucus | 0.80 |
+| `override` | `data/manual/overrides_<module>.csv`, one row per senator and dimension with evidence | from the file |
+
+Foreign policy dimensions:
+
+| Dimension | -2 | +2 |
+|---|---|---|
+| nato_interventionism | restraint: limits war powers and commitments, cuts aid | backs alliance commitments, military aid, use of force |
+| defense_budget | cuts or flat budgets | increases above the President's request |
+| arms_sales_oversight | defers to the executive | supports disapproval resolutions and conditions |
+| china_decoupling | engagement and trade | tariffs, export controls, investment screening |
+
+The seeded overrides are marked `verified = no`: check each against the roll call and
+set it to `yes`. Formula coefficients and uncertainty settings are marked AUDIT.
+
+A new policy area is one file in `policy/` defining a `MODULE` with its dimensions,
+plus an overrides CSV; run it with `--module <name>`.
+
 ## Status
 
 - [x] Project layout, config, HTTP cache
@@ -121,4 +154,6 @@ CSV is written before validation, so a wrong split can be inspected.
 - [x] Committee rosters and projected leadership for the 120th Congress
 - [ ] Co-sponsorship data
 - [ ] OpenFEC contributions
-- [ ] Scoring engine and Monte Carlo cycles
+- [x] Shared scoring engine; foreign policy module with seeded overrides
+- [ ] Calibrate formulas against 119th Congress roll calls
+- [ ] Procedural gates and Monte Carlo cycles

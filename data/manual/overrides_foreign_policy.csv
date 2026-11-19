@@ -1,0 +1,21 @@
+bioguide_id,name,dimension,score,sd,evidence,verified
+P000603,Rand Paul,nato_interventionism,-2.0,0.2,Opposed Ukraine supplemental aid packages; long record of war powers and restraint votes,no
+P000603,Rand Paul,defense_budget,-1.5,0.3,Frequent votes against NDAA final passage; pushes spending offsets,no
+P000603,Rand Paul,arms_sales_oversight,2.0,0.2,Lead sponsor of joint resolutions of disapproval on arms sales to Saudi Arabia and Gulf states,no
+L000577,Mike Lee,nato_interventionism,-1.5,0.3,Opposed Ukraine aid; NATO skeptic; war powers restraint votes,no
+J000293,Ron Johnson,nato_interventionism,-1.0,0.3,Opposed Ukraine supplemental aid packages,no
+H001089,Josh Hawley,nato_interventionism,-1.0,0.3,Lone vote against Finland and Sweden NATO accession (2022); opposed Ukraine aid,no
+H001089,Josh Hawley,china_decoupling,2.0,0.2,Sponsor of bills to restrict trade and investment with China,no
+C001095,Tom Cotton,nato_interventionism,1.5,0.3,Consistent hawk on use of force and alliance commitments,no
+C001095,Tom Cotton,china_decoupling,2.0,0.2,Sponsor of China export-control and investment-screening measures,no
+W000437,Roger Wicker,defense_budget,2.0,0.2,Armed Services leader pushing defence spending toward 5 percent of GDP,no
+S000033,Bernie Sanders,defense_budget,-2.0,0.2,Votes against NDAA final passage; calls for Pentagon budget cuts,no
+S000033,Bernie Sanders,arms_sales_oversight,2.0,0.2,Lead sponsor of the November 2024 joint resolutions of disapproval on arms sales to Israel,no
+W000817,Elizabeth Warren,defense_budget,-1.5,0.3,Opposes NDAA topline increases,no
+W000817,Elizabeth Warren,arms_sales_oversight,1.5,0.3,Supports conditions on arms transfers,no
+M001169,Chris Murphy,arms_sales_oversight,1.5,0.3,Opposed arms sales to Saudi Arabia; co-led Yemen war powers resolutions,no
+W000800,Peter Welch,arms_sales_oversight,1.5,0.3,Voted for the November 2024 joint resolutions of disapproval on arms sales to Israel,no
+V000128,Chris Van Hollen,arms_sales_oversight,1.5,0.3,Voted for the November 2024 joint resolutions of disapproval on arms sales to Israel; pushed conditions on military aid,no
+M001176,Jeff Merkley,arms_sales_oversight,1.5,0.3,Voted for the November 2024 joint resolutions of disapproval on arms sales to Israel,no
+P000603,Rand Paul,china_decoupling,0.0,0.4,Opposes broad tariffs and trade restrictions; formula overstates his China hawkishness,no
+F000479,John Fetterman,arms_sales_oversight,-1.5,0.3,Voted against the November 2024 joint resolutions of disapproval on arms sales to Israel; opposes conditions on military aid,no
