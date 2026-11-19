@@ -1,0 +1,396 @@
+{
+  "meta": {
+    "module": "foreign_policy",
+    "fitted_on": "2026-11-19",
+    "items_file": "calibration_votes.csv",
+    "lopsided_cutoff": 0.025
+  },
+  "dimensions": {
+    "nato_interventionism": {
+      "fitted": true,
+      "beta": {
+        "d1": 1.8798971554571253,
+        "d1_sq": -3.245876816753938,
+        "d2": 1.6346513167098857
+      },
+      "gamma": 3.1180547547877904,
+      "gamma_identified": true,
+      "sigma_latent": 0.4929994096109942,
+      "sigma_score": 0.43200862150405095,
+      "scale": {
+        "mean": -0.5999300484629454,
+        "sd": 1.0270616060974473,
+        "k": 0.9
+      },
+      "cv": {
+        "logloss": 0.2332,
+        "within_party_accuracy": 0.9129,
+        "within_party_votes": 1895
+      },
+      "thin_prior": false,
+      "items": [
+        {
+          "item_id": "118-2-154",
+          "family": "ukraine_aid",
+          "president_party": "D",
+          "n": 97,
+          "weight": 0.7071067811865475,
+          "alpha": 0.39872901141697353,
+          "minority_share": 0.18556701030927836
+        },
+        {
+          "item_id": "118-2-48",
+          "family": "ukraine_aid",
+          "president_party": "D",
+          "n": 99,
+          "weight": 0.7071067811865475,
+          "alpha": -0.08030498443013208,
+          "minority_share": 0.29292929292929293
+        },
+        {
+          "item_id": "119-1-328",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 100,
+          "weight": 0.2581988897471611,
+          "alpha": -0.7736235321879534,
+          "minority_share": 0.47
+        },
+        {
+          "item_id": "119-1-608",
+          "family": "war_powers_venezuela",
+          "president_party": "R",
+          "n": 100,
+          "weight": 0.5773502691896258,
+          "alpha": -1.1324378104988155,
+          "minority_share": 0.49
+        },
+        {
+          "item_id": "119-2-113",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.2581988897471611,
+          "alpha": -0.9547258787420775,
+          "minority_share": 0.4845360824742268
+        },
+        {
+          "item_id": "119-2-118",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 99,
+          "weight": 0.2581988897471611,
+          "alpha": -1.0862368353886234,
+          "minority_share": 0.494949494949495
+        },
+        {
+          "item_id": "119-2-129",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.2581988897471611,
+          "alpha": -1.310813854102759,
+          "minority_share": 0.48453608247422686
+        },
+        {
+          "item_id": "119-2-174",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 95,
+          "weight": 0.2581988897471611,
+          "alpha": -1.2992465627574261,
+          "minority_share": 0.49473684210526314
+        },
+        {
+          "item_id": "119-2-184",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 98,
+          "weight": 0.2581988897471611,
+          "alpha": -1.2716816053239177,
+          "minority_share": 0.4897959183673469
+        },
+        {
+          "item_id": "119-2-192",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.2581988897471611,
+          "alpha": -1.0503099545246641,
+          "minority_share": 0.4845360824742268
+        },
+        {
+          "item_id": "119-2-207",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 96,
+          "weight": 0.2581988897471611,
+          "alpha": -0.9122624191610423,
+          "minority_share": 0.4895833333333333
+        },
+        {
+          "item_id": "119-2-216",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 99,
+          "weight": 0.2581988897471611,
+          "alpha": -1.0921995519610648,
+          "minority_share": 0.494949494949495
+        },
+        {
+          "item_id": "119-2-224",
+          "family": "russia_sanctions",
+          "president_party": "R",
+          "n": 97,
+          "weight": 1.0,
+          "alpha": 2.1554498089413734,
+          "minority_share": 0.11340206185567014
+        },
+        {
+          "item_id": "119-2-244",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 99,
+          "weight": 0.2581988897471611,
+          "alpha": -1.2843809077922081,
+          "minority_share": 0.494949494949495
+        },
+        {
+          "item_id": "119-2-46",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 100,
+          "weight": 0.2581988897471611,
+          "alpha": -0.7736235321879534,
+          "minority_share": 0.47
+        },
+        {
+          "item_id": "119-2-5",
+          "family": "war_powers_venezuela",
+          "president_party": "R",
+          "n": 99,
+          "weight": 0.5773502691896258,
+          "alpha": -1.5953385985056059,
+          "minority_share": 0.4747474747474747
+        },
+        {
+          "item_id": "119-2-58",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 100,
+          "weight": 0.2581988897471611,
+          "alpha": -0.7736235321879534,
+          "minority_share": 0.47
+        },
+        {
+          "item_id": "119-2-69",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 100,
+          "weight": 0.2581988897471611,
+          "alpha": -0.7689046651868306,
+          "minority_share": 0.47
+        },
+        {
+          "item_id": "119-2-79",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 99,
+          "weight": 0.2581988897471611,
+          "alpha": -0.7694297762572848,
+          "minority_share": 0.47474747474747475
+        },
+        {
+          "item_id": "119-2-88",
+          "family": "war_powers_iran",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.2581988897471611,
+          "alpha": -0.7564883587422306,
+          "minority_share": 0.4742268041237113
+        },
+        {
+          "item_id": "119-2-9",
+          "family": "war_powers_venezuela",
+          "president_party": "R",
+          "n": 100,
+          "weight": 0.5773502691896258,
+          "alpha": -1.2823065954257868,
+          "minority_share": 0.5
+        }
+      ]
+    },
+    "defense_budget": {
+      "fitted": true,
+      "beta": {
+        "d1": 1.4512599439557274,
+        "d1_sq": -0.7518369894589173,
+        "d2": 1.2810174368147733
+      },
+      "gamma": 0.0,
+      "gamma_identified": false,
+      "sigma_latent": 0.6471186234596102,
+      "sigma_score": 0.6922318302802917,
+      "scale": {
+        "mean": -0.037718244198187104,
+        "sd": 0.8413464039609776,
+        "k": 0.9
+      },
+      "cv": {},
+      "thin_prior": true,
+      "items": [
+        {
+          "item_id": "119-1-500",
+          "family": "ndaa_fy26",
+          "president_party": "R",
+          "n": 98,
+          "weight": 0.4082482904638631,
+          "alpha": 1.5092784196385398,
+          "minority_share": 0.1428571428571429
+        },
+        {
+          "item_id": "119-1-503",
+          "family": "ndaa_fy26",
+          "president_party": "R",
+          "n": 96,
+          "weight": 0.4082482904638631,
+          "alpha": 1.5989020409381096,
+          "minority_share": 0.13541666666666663
+        },
+        {
+          "item_id": "119-1-570",
+          "family": "ndaa_fy26",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.4082482904638631,
+          "alpha": 1.1647218512610298,
+          "minority_share": 0.20618556701030932
+        },
+        {
+          "item_id": "119-1-646",
+          "family": "ndaa_fy26",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.4082482904638631,
+          "alpha": 1.0456343165681217,
+          "minority_share": 0.22680412371134018
+        },
+        {
+          "item_id": "119-1-647",
+          "family": "ndaa_fy26",
+          "president_party": "R",
+          "n": 96,
+          "weight": 0.4082482904638631,
+          "alpha": 1.1330191161083645,
+          "minority_share": 0.20833333333333337
+        },
+        {
+          "item_id": "119-1-648",
+          "family": "ndaa_fy26",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.4082482904638631,
+          "alpha": 1.1617476781924272,
+          "minority_share": 0.20618556701030932
+        }
+      ]
+    },
+    "arms_sales_oversight": {
+      "fitted": true,
+      "beta": {
+        "d1": -3.361387374088188,
+        "d1_sq": 0.054842382018822466,
+        "d2": -1.3608079958315538
+      },
+      "gamma": -1.2467106663212792,
+      "gamma_identified": true,
+      "sigma_latent": 0.6885454698186806,
+      "sigma_score": 0.34766616263180483,
+      "scale": {
+        "mean": -0.293144839157052,
+        "sd": 1.782430933588136,
+        "k": 0.9
+      },
+      "cv": {
+        "logloss": 0.2715,
+        "within_party_accuracy": 0.7188,
+        "within_party_votes": 352
+      },
+      "thin_prior": false,
+      "items": [
+        {
+          "item_id": "118-2-292",
+          "family": "israel_fms",
+          "president_party": "D",
+          "n": 97,
+          "weight": 0.4082482904638631,
+          "alpha": -0.6045523678492848,
+          "minority_share": 0.18556701030927836
+        },
+        {
+          "item_id": "119-1-165",
+          "family": "israel_fms",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.4082482904638631,
+          "alpha": -1.8699567576104221,
+          "minority_share": 0.15463917525773196
+        },
+        {
+          "item_id": "119-1-166",
+          "family": "israel_fms",
+          "president_party": "R",
+          "n": 98,
+          "weight": 0.4082482904638631,
+          "alpha": -1.8743840354197885,
+          "minority_share": 0.15306122448979592
+        },
+        {
+          "item_id": "119-1-306",
+          "family": "gulf_fms",
+          "president_party": "R",
+          "n": 95,
+          "weight": 0.7071067811865475,
+          "alpha": 0.11371537298425681,
+          "minority_share": 0.4105263157894737
+        },
+        {
+          "item_id": "119-1-307",
+          "family": "gulf_fms",
+          "president_party": "R",
+          "n": 95,
+          "weight": 0.7071067811865475,
+          "alpha": 0.11371537298425681,
+          "minority_share": 0.4105263157894737
+        },
+        {
+          "item_id": "119-1-454",
+          "family": "israel_fms",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.4082482904638631,
+          "alpha": -1.0540959449195666,
+          "minority_share": 0.27835051546391754
+        },
+        {
+          "item_id": "119-1-455",
+          "family": "israel_fms",
+          "president_party": "R",
+          "n": 97,
+          "weight": 0.4082482904638631,
+          "alpha": -1.2690409053896081,
+          "minority_share": 0.24742268041237114
+        },
+        {
+          "item_id": "119-2-80",
+          "family": "israel_fms",
+          "president_party": "R",
+          "n": 99,
+          "weight": 0.4082482904638631,
+          "alpha": -0.0904240599493924,
+          "minority_share": 0.40404040404040403
+        }
+      ]
+    }
+  }
+}

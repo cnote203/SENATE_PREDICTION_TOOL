@@ -1,0 +1,330 @@
+bioguide_id,n_votes,u_latent,se_latent,u_raw_latent,se_raw_latent,u_score,se_score,u_raw_score,se_raw_score,suggest_override,dimension,name
+A000382,18,0.066,0.455,0.37,1.032,0.058,0.399,0.324,0.904,False,nato_interventionism,Angela D. Alsobrooks
+A000383,13,0.084,0.461,0.779,1.798,0.074,0.404,0.683,1.575,False,nato_interventionism,Alan Armstrong
+B000944,2,0.032,0.479,0.488,2.095,0.028,0.42,0.428,1.836,False,nato_interventionism,Sherrod Brown
+B001230,21,0.163,0.443,0.783,0.962,0.143,0.388,0.686,0.843,False,nato_interventionism,Tammy Baldwin
+B001236,21,0.108,0.459,0.97,1.772,0.095,0.402,0.85,1.553,False,nato_interventionism,John Boozman
+B001243,20,-0.201,0.416,-0.613,0.682,-0.176,0.365,-0.538,0.598,False,nato_interventionism,Marsha Blackburn
+B001261,21,-0.274,0.421,-0.865,0.684,-0.24,0.369,-0.758,0.6,False,nato_interventionism,John Barrasso
+B001267,19,-0.002,0.443,-0.01,0.962,-0.002,0.389,-0.009,0.843,False,nato_interventionism,Michael F. Bennet
+B001277,21,0.126,0.445,0.606,0.959,0.11,0.39,0.531,0.84,False,nato_interventionism,Richard Blumenthal
+B001288,20,0.283,0.435,1.315,0.975,0.248,0.381,1.152,0.855,False,nato_interventionism,Cory A. Booker
+B001299,19,0.085,0.457,0.741,1.777,0.075,0.4,0.65,1.558,False,nato_interventionism,Jim Banks
+B001303,19,-0.278,0.448,-1.926,1.547,-0.243,0.393,-1.688,1.355,False,nato_interventionism,Lisa Blunt Rochester
+B001305,21,-0.092,0.409,-0.268,0.679,-0.08,0.358,-0.235,0.595,False,nato_interventionism,Ted Budd
+B001310,2,-0.33,0.444,-2.016,1.48,-0.289,0.389,-1.767,1.297,False,nato_interventionism,Mike Braun
+B001319,20,-0.179,0.447,-0.797,0.854,-0.157,0.392,-0.698,0.748,False,nato_interventionism,Katie Boyd Britt
+B001320,2,0.036,0.478,0.522,2.066,0.031,0.419,0.457,1.81,False,nato_interventionism,Laphonza R. Butler
+C000127,21,0.102,0.445,0.491,0.956,0.089,0.39,0.43,0.838,False,nato_interventionism,Maria Cantwell
+C000141,2,0.021,0.483,0.37,2.214,0.018,0.423,0.324,1.94,False,nato_interventionism,Benjamin L. Cardin
+C000174,2,0.007,0.489,0.18,2.487,0.006,0.428,0.158,2.179,False,nato_interventionism,Thomas R. Carper
+C000880,21,0.132,0.454,1.081,1.722,0.116,0.398,0.947,1.509,False,nato_interventionism,Mike Crapo
+C001035,21,-0.481,0.341,-0.894,0.461,-0.421,0.298,-0.783,0.404,False,nato_interventionism,Susan M. Collins
+C001047,21,0.146,0.451,1.142,1.697,0.128,0.396,1.001,1.487,False,nato_interventionism,Shelley Moore Capito
+C001056,20,0.227,0.437,1.448,1.591,0.199,0.383,1.269,1.394,False,nato_interventionism,John Cornyn
+C001070,2,0.005,0.49,0.13,2.587,0.004,0.429,0.114,2.267,False,nato_interventionism,"Robert P. Casey, Jr."
+C001075,21,-0.099,0.402,-0.272,0.646,-0.087,0.352,-0.238,0.566,False,nato_interventionism,Bill Cassidy
+C001088,21,-0.007,0.441,-0.03,0.946,-0.006,0.387,-0.026,0.829,False,nato_interventionism,Christopher A. Coons
+C001095,21,-0.045,0.433,-0.175,0.837,-0.039,0.38,-0.154,0.733,False,nato_interventionism,Tom Cotton
+C001096,21,0.1,0.461,0.929,1.792,0.088,0.404,0.814,1.57,False,nato_interventionism,Kevin Cramer
+C001098,21,0.098,0.395,0.269,0.674,0.086,0.346,0.235,0.591,False,nato_interventionism,Ted Cruz
+C001113,21,-0.112,0.43,-0.469,0.936,-0.098,0.377,-0.411,0.821,False,nato_interventionism,Catherine Cortez Masto
+C001114,19,0.033,0.475,0.441,2.032,0.029,0.416,0.386,1.781,False,nato_interventionism,John R. Curtis
+D000563,21,0.097,0.446,0.468,0.956,0.085,0.39,0.41,0.838,False,nato_interventionism,Richard J. Durbin
+D000618,20,0.033,0.428,0.128,0.85,0.029,0.375,0.112,0.745,False,nato_interventionism,Steve Daines
+D000622,21,-0.009,0.441,-0.042,0.946,-0.008,0.387,-0.037,0.829,False,nato_interventionism,Tammy Duckworth
+E000295,21,0.237,0.435,1.475,1.581,0.207,0.381,1.293,1.385,False,nato_interventionism,Joni Ernst
+F000463,21,-0.126,0.442,-0.53,0.844,-0.11,0.387,-0.465,0.74,False,nato_interventionism,Deb Fischer
+F000479,21,0.727,0.362,1.573,0.56,0.637,0.317,1.378,0.491,True,nato_interventionism,John Fetterman
+G000359,17,0.075,0.423,0.276,0.841,0.066,0.37,0.242,0.737,False,nato_interventionism,Lindsey Graham
+G000386,20,0.201,0.441,1.356,1.619,0.176,0.387,1.188,1.419,False,nato_interventionism,Chuck Grassley
+G000555,21,0.182,0.442,0.872,0.963,0.159,0.388,0.764,0.844,False,nato_interventionism,Kirsten E. Gillibrand
+G000574,19,-0.037,0.443,-0.182,1.005,-0.033,0.388,-0.159,0.881,False,nato_interventionism,Ruben Gallego
+G000608,4,0.001,0.493,0.021,2.907,0.001,0.432,0.018,2.548,False,nato_interventionism,Darline Graham
+H000273,21,-0.034,0.439,-0.15,0.943,-0.029,0.385,-0.132,0.827,False,nato_interventionism,John W. Hickenlooper
+H000601,21,-0.075,0.407,-0.22,0.678,-0.066,0.357,-0.192,0.594,False,nato_interventionism,Bill Hagerty
+H001042,21,-0.133,0.436,-0.55,0.878,-0.117,0.382,-0.482,0.77,False,nato_interventionism,Mazie K. Hirono
+H001046,21,-0.005,0.442,-0.024,0.946,-0.005,0.387,-0.021,0.829,False,nato_interventionism,Martin Heinrich
+H001061,21,0.085,0.465,0.846,1.835,0.074,0.407,0.741,1.608,False,nato_interventionism,John Hoeven
+H001076,21,-0.448,0.423,-1.793,0.882,-0.392,0.371,-1.571,0.773,True,nato_interventionism,Margaret Wood Hassan
+H001079,21,-0.128,0.442,-0.54,0.845,-0.112,0.388,-0.473,0.74,False,nato_interventionism,Cindy Hyde-Smith
+H001089,20,0.099,0.381,0.239,0.603,0.086,0.334,0.209,0.528,False,nato_interventionism,Josh Hawley
+H001104,19,0.003,0.491,0.084,2.664,0.003,0.43,0.074,2.334,False,nato_interventionism,Jon Husted
+J000293,21,-0.037,0.405,-0.108,0.677,-0.033,0.355,-0.094,0.594,False,nato_interventionism,Ron Johnson
+J000312,18,0.024,0.479,0.37,2.118,0.021,0.42,0.324,1.856,False,nato_interventionism,James C. Justice
+K000367,21,0.056,0.445,0.267,0.952,0.049,0.39,0.234,0.834,False,nato_interventionism,Amy Klobuchar
+K000377,21,-0.156,0.425,-0.627,0.933,-0.136,0.372,-0.549,0.817,False,nato_interventionism,Mark Kelly
+K000383,21,-0.062,0.436,-0.271,0.941,-0.054,0.382,-0.237,0.824,False,nato_interventionism,"Angus S. King, Jr."
+K000384,21,-0.027,0.44,-0.122,0.944,-0.024,0.385,-0.107,0.827,False,nato_interventionism,Tim Kaine
+K000393,21,0.289,0.427,1.637,1.534,0.253,0.374,1.434,1.345,False,nato_interventionism,John Kennedy
+K000394,19,-0.017,0.446,-0.083,1.009,-0.015,0.391,-0.073,0.884,False,nato_interventionism,Andy Kim
+L000570,21,0.026,0.444,0.122,0.949,0.023,0.389,0.107,0.832,False,nato_interventionism,Ben Ray Luján
+L000571,19,0.119,0.409,0.386,0.783,0.105,0.359,0.338,0.686,False,nato_interventionism,Cynthia M. Lummis
+L000575,21,-0.02,0.431,-0.076,0.834,-0.017,0.377,-0.066,0.731,False,nato_interventionism,James Lankford
+L000577,21,0.422,0.378,1.065,0.667,0.37,0.331,0.933,0.584,False,nato_interventionism,Mike Lee
+M000133,21,0.016,0.434,0.065,0.876,0.014,0.38,0.057,0.768,False,nato_interventionism,Edward J. Markey
+M000355,15,0.185,0.446,1.311,1.639,0.162,0.391,1.149,1.436,False,nato_interventionism,Mitch McConnell
+M000639,2,0.022,0.483,0.383,2.199,0.019,0.423,0.336,1.927,False,nato_interventionism,Robert Menendez
+M000934,20,0.134,0.454,1.09,1.719,0.117,0.398,0.955,1.506,False,nato_interventionism,Jerry Moran
+M001111,20,0.112,0.446,0.548,0.968,0.098,0.391,0.48,0.848,False,nato_interventionism,Patty Murray
+M001153,20,-0.701,0.344,-1.322,0.469,-0.614,0.301,-1.158,0.411,True,nato_interventionism,Lisa Murkowski
+M001169,21,0.046,0.445,0.218,0.951,0.04,0.39,0.191,0.833,False,nato_interventionism,Christopher Murphy
+M001176,21,-0.095,0.412,-0.296,0.73,-0.083,0.361,-0.259,0.64,False,nato_interventionism,Jeff Merkley
+M001183,2,0.0,0.493,0.005,2.974,0.0,0.432,0.004,2.606,False,nato_interventionism,"Joe Manchin, III"
+M001190,8,-0.092,0.444,-0.415,0.906,-0.081,0.389,-0.364,0.794,False,nato_interventionism,Markwayne Mullin
+M001198,21,-0.218,0.418,-0.67,0.682,-0.191,0.366,-0.587,0.598,False,nato_interventionism,Roger Marshall
+M001242,19,0.046,0.47,0.532,1.941,0.04,0.412,0.466,1.701,False,nato_interventionism,Bernie Moreno
+M001243,17,0.009,0.487,0.199,2.388,0.008,0.427,0.175,2.092,False,nato_interventionism,David McCormick
+M001244,19,0.085,0.457,0.739,1.779,0.074,0.4,0.647,1.559,False,nato_interventionism,Ashley Moody
+O000174,21,-0.399,0.427,-1.621,0.882,-0.35,0.374,-1.421,0.773,False,nato_interventionism,Jon Ossoff
+P000145,21,-0.148,0.436,-0.613,0.879,-0.13,0.382,-0.537,0.77,False,nato_interventionism,Alex Padilla
+P000595,21,-0.007,0.441,-0.032,0.946,-0.006,0.387,-0.028,0.829,False,nato_interventionism,Gary C. Peters
+P000603,18,-1.158,0.372,-4.222,1.281,-1.015,0.326,-3.7,1.123,True,nato_interventionism,Rand Paul
+R000122,21,0.065,0.445,0.309,0.953,0.057,0.39,0.27,0.835,False,nato_interventionism,Jack Reed
+R000584,21,0.12,0.457,1.028,1.745,0.106,0.4,0.901,1.529,False,nato_interventionism,James E. Risch
+R000595,2,-0.194,0.453,-1.442,1.617,-0.17,0.397,-1.263,1.417,False,nato_interventionism,Marco Rubio
+R000605,21,0.168,0.447,1.229,1.664,0.147,0.392,1.077,1.458,False,nato_interventionism,Mike Rounds
+R000608,21,-0.16,0.424,-0.641,0.932,-0.14,0.372,-0.562,0.817,False,nato_interventionism,Jacky Rosen
+R000615,2,0.1,0.465,0.969,1.79,0.088,0.407,0.849,1.569,False,nato_interventionism,Mitt Romney
+R000618,20,-0.176,0.447,-0.783,0.854,-0.155,0.392,-0.686,0.749,False,nato_interventionism,Pete Ricketts
+S000033,20,-0.395,0.428,-2.058,1.44,-0.346,0.375,-1.803,1.262,False,nato_interventionism,Bernard Sanders
+S000148,21,0.138,0.444,0.667,0.96,0.121,0.389,0.585,0.841,False,nato_interventionism,Charles E. Schumer
+S000770,2,0.013,0.486,0.268,2.344,0.011,0.426,0.234,2.054,False,nato_interventionism,Debbie Stabenow
+S001150,19,0.034,0.452,0.183,1.019,0.03,0.396,0.16,0.893,False,nato_interventionism,Adam B. Schiff
+S001181,21,-0.04,0.438,-0.177,0.943,-0.035,0.384,-0.156,0.826,False,nato_interventionism,Jeanne Shaheen
+S001184,20,-0.027,0.436,-0.108,0.862,-0.023,0.382,-0.095,0.756,False,nato_interventionism,Tim Scott
+S001191,2,0.0,0.493,0.017,2.921,0.0,0.432,0.015,2.559,False,nato_interventionism,Kyrsten Sinema
+S001194,21,0.125,0.445,0.601,0.958,0.109,0.39,0.527,0.84,False,nato_interventionism,Brian Schatz
+S001198,21,0.15,0.451,1.157,1.691,0.131,0.395,1.014,1.482,False,nato_interventionism,Dan Sullivan
+S001203,21,0.095,0.446,0.455,0.956,0.083,0.39,0.398,0.837,False,nato_interventionism,Tina Smith
+S001208,19,-0.273,0.412,-1.037,0.972,-0.239,0.361,-0.909,0.852,False,nato_interventionism,Elissa Slotkin
+S001217,21,0.01,0.401,0.027,0.676,0.008,0.352,0.024,0.592,False,nato_interventionism,Rick Scott
+S001227,21,0.034,0.4,0.094,0.675,0.03,0.35,0.083,0.592,False,nato_interventionism,Eric Schmitt
+S001232,19,0.006,0.489,0.145,2.5,0.005,0.428,0.127,2.191,False,nato_interventionism,Tim Sheehy
+T000250,21,0.133,0.454,1.086,1.72,0.117,0.398,0.952,1.507,False,nato_interventionism,John Thune
+T000278,18,0.436,0.393,1.337,0.839,0.382,0.344,1.171,0.735,False,nato_interventionism,Tommy Tuberville
+T000464,2,0.002,0.492,0.062,2.762,0.002,0.431,0.054,2.421,False,nato_interventionism,Jon Tester
+T000476,20,0.114,0.424,0.437,0.892,0.1,0.371,0.383,0.782,False,nato_interventionism,Thom Tillis
+V000128,21,0.119,0.445,0.575,0.958,0.105,0.39,0.504,0.839,False,nato_interventionism,Chris Van Hollen
+V000137,2,-0.05,0.475,-0.642,1.974,-0.044,0.416,-0.562,1.73,False,nato_interventionism,J.D. Vance
+W000437,21,0.104,0.46,0.947,1.783,0.091,0.403,0.83,1.563,False,nato_interventionism,Roger F. Wicker
+W000779,21,-0.167,0.436,-0.69,0.879,-0.146,0.382,-0.605,0.77,False,nato_interventionism,Ron Wyden
+W000790,21,-0.052,0.437,-0.227,0.942,-0.045,0.383,-0.199,0.825,False,nato_interventionism,Raphael G. Warnock
+W000800,21,-0.599,0.417,-2.66,1.337,-0.525,0.365,-2.33,1.171,False,nato_interventionism,Peter Welch
+W000802,21,0.042,0.445,0.196,0.951,0.036,0.39,0.171,0.833,False,nato_interventionism,Sheldon Whitehouse
+W000805,20,-0.077,0.436,-0.338,0.953,-0.067,0.382,-0.296,0.835,False,nato_interventionism,Mark R. Warner
+W000817,21,0.287,0.433,1.15,0.873,0.252,0.379,1.008,0.765,False,nato_interventionism,Elizabeth Warren
+Y000064,21,-0.018,0.413,-0.056,0.727,-0.016,0.362,-0.049,0.637,False,nato_interventionism,Todd Young
+A000382,6,0.358,0.543,1.445,1.536,0.383,0.581,1.546,1.643,False,defense_budget,Angela D. Alsobrooks
+B001230,6,-0.095,0.499,-0.219,0.756,-0.102,0.533,-0.234,0.809,False,defense_budget,Tammy Baldwin
+B001236,6,0.038,0.622,0.373,2.16,0.041,0.665,0.399,2.311,False,defense_budget,John Boozman
+B001243,5,0.045,0.619,0.418,2.12,0.048,0.662,0.447,2.268,False,defense_budget,Marsha Blackburn
+B001261,6,0.046,0.618,0.423,2.104,0.05,0.661,0.453,2.251,False,defense_budget,John Barrasso
+B001267,6,-0.236,0.51,-0.576,0.795,-0.252,0.546,-0.616,0.851,False,defense_budget,Michael F. Bennet
+B001277,6,0.419,0.535,1.593,1.494,0.448,0.572,1.704,1.598,False,defense_budget,Richard Blumenthal
+B001288,6,-0.487,0.528,-1.754,1.455,-0.521,0.565,-1.876,1.556,False,defense_budget,Cory A. Booker
+B001299,6,0.063,0.61,0.509,2.019,0.067,0.653,0.545,2.16,False,defense_budget,Jim Banks
+B001303,6,0.38,0.54,1.5,1.52,0.407,0.577,1.605,1.626,False,defense_budget,Lisa Blunt Rochester
+B001305,6,0.079,0.604,0.585,1.955,0.084,0.646,0.625,2.091,False,defense_budget,Ted Budd
+B001319,6,0.013,0.636,0.181,2.451,0.014,0.681,0.194,2.621,False,defense_budget,Katie Boyd Britt
+C000127,6,-0.257,0.511,-0.642,0.825,-0.275,0.546,-0.687,0.883,False,defense_budget,Maria Cantwell
+C000880,6,0.038,0.622,0.374,2.159,0.041,0.665,0.4,2.309,False,defense_budget,Mike Crapo
+C001035,6,0.278,0.555,1.238,1.605,0.297,0.593,1.325,1.717,False,defense_budget,Susan M. Collins
+C001047,5,0.071,0.608,0.557,1.99,0.076,0.651,0.596,2.129,False,defense_budget,Shelley Moore Capito
+C001056,6,0.089,0.6,0.629,1.92,0.095,0.642,0.673,2.054,False,defense_budget,John Cornyn
+C001075,6,0.09,0.6,0.632,1.918,0.096,0.642,0.676,2.052,False,defense_budget,Bill Cassidy
+C001088,5,0.279,0.56,1.28,1.615,0.298,0.599,1.369,1.728,False,defense_budget,Christopher A. Coons
+C001095,6,0.044,0.619,0.408,2.12,0.047,0.662,0.436,2.268,False,defense_budget,Tom Cotton
+C001096,6,0.037,0.622,0.367,2.167,0.04,0.666,0.393,2.318,False,defense_budget,Kevin Cramer
+C001098,5,-0.458,0.546,-1.336,0.884,-0.49,0.584,-1.429,0.945,False,defense_budget,Ted Cruz
+C001113,5,0.168,0.58,0.941,1.754,0.179,0.621,1.007,1.877,False,defense_budget,Catherine Cortez Masto
+C001114,6,0.061,0.611,0.503,2.025,0.066,0.654,0.538,2.166,False,defense_budget,John R. Curtis
+D000563,6,0.236,0.52,0.643,0.908,0.252,0.556,0.687,0.971,False,defense_budget,Richard J. Durbin
+D000618,5,0.056,0.614,0.485,2.058,0.06,0.657,0.519,2.201,False,defense_budget,Steve Daines
+D000622,6,-0.452,0.508,-1.115,0.822,-0.483,0.543,-1.193,0.88,False,defense_budget,Tammy Duckworth
+E000295,4,0.049,0.619,0.456,2.11,0.053,0.662,0.488,2.257,False,defense_budget,Joni Ernst
+F000463,6,0.037,0.623,0.364,2.17,0.039,0.666,0.39,2.322,False,defense_budget,Deb Fischer
+F000479,6,0.152,0.581,0.866,1.77,0.163,0.621,0.926,1.894,False,defense_budget,John Fetterman
+G000359,6,0.146,0.582,0.846,1.781,0.157,0.623,0.905,1.905,False,defense_budget,Lindsey Graham
+G000386,5,0.081,0.605,0.607,1.957,0.086,0.647,0.649,2.094,False,defense_budget,Chuck Grassley
+G000555,6,0.489,0.528,1.756,1.452,0.523,0.564,1.878,1.553,False,defense_budget,Kirsten E. Gillibrand
+G000574,6,0.265,0.557,1.203,1.618,0.283,0.596,1.287,1.731,False,defense_budget,Ruben Gallego
+H000273,6,0.279,0.554,1.242,1.604,0.298,0.593,1.328,1.716,False,defense_budget,John W. Hickenlooper
+H000601,5,0.068,0.609,0.542,2.003,0.073,0.652,0.58,2.142,False,defense_budget,Bill Hagerty
+H001042,6,0.444,0.532,1.652,1.478,0.475,0.569,1.768,1.581,False,defense_budget,Mazie K. Hirono
+H001046,6,0.299,0.551,1.294,1.585,0.32,0.59,1.384,1.696,False,defense_budget,Martin Heinrich
+H001061,6,0.03,0.626,0.318,2.229,0.032,0.67,0.341,2.384,False,defense_budget,John Hoeven
+H001076,6,0.246,0.56,1.152,1.638,0.263,0.599,1.232,1.752,False,defense_budget,Margaret Wood Hassan
+H001079,6,0.037,0.622,0.368,2.166,0.04,0.666,0.394,2.317,False,defense_budget,Cindy Hyde-Smith
+H001089,5,0.097,0.6,0.675,1.905,0.103,0.641,0.723,2.038,False,defense_budget,Josh Hawley
+H001104,6,0.007,0.641,0.11,2.609,0.007,0.686,0.118,2.791,False,defense_budget,Jon Husted
+J000293,6,0.092,0.599,0.644,1.91,0.099,0.641,0.689,2.043,False,defense_budget,Ron Johnson
+J000312,6,0.035,0.624,0.352,2.186,0.037,0.667,0.376,2.338,False,defense_budget,James C. Justice
+K000367,6,0.39,0.539,1.523,1.513,0.417,0.576,1.63,1.619,False,defense_budget,Amy Klobuchar
+K000377,6,0.185,0.573,0.972,1.717,0.198,0.613,1.04,1.836,False,defense_budget,Mark Kelly
+K000383,6,0.281,0.554,1.246,1.602,0.3,0.593,1.333,1.714,False,defense_budget,"Angus S. King, Jr."
+K000384,6,0.303,0.551,1.306,1.581,0.324,0.589,1.397,1.692,False,defense_budget,Tim Kaine
+K000393,6,-0.216,0.553,-0.661,0.901,-0.231,0.592,-0.707,0.964,False,defense_budget,John Kennedy
+K000394,6,-0.494,0.507,-1.216,0.822,-0.528,0.543,-1.301,0.879,False,defense_budget,Andy Kim
+L000570,6,0.316,0.549,1.339,1.57,0.338,0.587,1.432,1.68,False,defense_budget,Ben Ray Luján
+L000571,6,0.12,0.59,0.751,1.837,0.128,0.631,0.803,1.965,False,defense_budget,Cynthia M. Lummis
+L000575,6,0.049,0.616,0.438,2.088,0.052,0.659,0.469,2.234,False,defense_budget,James Lankford
+L000577,6,-0.519,0.515,-1.283,0.795,-0.555,0.551,-1.373,0.851,False,defense_budget,Mike Lee
+M000133,6,-0.423,0.535,-1.606,1.493,-0.453,0.572,-1.718,1.597,False,defense_budget,Edward J. Markey
+M000355,6,0.083,0.602,0.605,1.939,0.089,0.644,0.647,2.074,False,defense_budget,Mitch McConnell
+M000934,5,-0.279,0.579,-1.034,1.003,-0.299,0.62,-1.106,1.073,False,defense_budget,Jerry Moran
+M001111,6,-0.265,0.51,-0.662,0.825,-0.283,0.546,-0.708,0.883,False,defense_budget,Patty Murray
+M001153,6,0.191,0.572,0.99,1.708,0.204,0.611,1.059,1.827,False,defense_budget,Lisa Murkowski
+M001169,6,-0.34,0.509,-0.845,0.824,-0.363,0.545,-0.903,0.882,False,defense_budget,Christopher Murphy
+M001176,6,-0.371,0.541,-1.481,1.528,-0.397,0.579,-1.584,1.635,False,defense_budget,Jeff Merkley
+M001190,6,0.041,0.62,0.39,2.14,0.044,0.664,0.417,2.289,False,defense_budget,Markwayne Mullin
+M001198,6,0.049,0.616,0.438,2.088,0.052,0.659,0.469,2.234,False,defense_budget,Roger Marshall
+M001242,6,0.027,0.628,0.3,2.254,0.029,0.671,0.321,2.411,False,defense_budget,Bernie Moreno
+M001243,6,0.015,0.635,0.198,2.419,0.016,0.679,0.212,2.587,False,defense_budget,David McCormick
+M001244,5,0.041,0.621,0.398,2.146,0.044,0.664,0.426,2.295,False,defense_budget,Ashley Moody
+O000174,6,0.21,0.567,1.047,1.682,0.224,0.607,1.12,1.799,False,defense_budget,Jon Ossoff
+P000145,6,-0.576,0.52,-1.952,1.41,-0.616,0.556,-2.089,1.508,False,defense_budget,Alex Padilla
+P000595,6,0.32,0.548,1.35,1.566,0.343,0.586,1.444,1.676,False,defense_budget,Gary C. Peters
+P000603,6,-1.037,0.494,-2.907,1.252,-1.109,0.529,-3.11,1.339,True,defense_budget,Rand Paul
+R000122,6,0.372,0.541,1.479,1.526,0.398,0.579,1.582,1.632,False,defense_budget,Jack Reed
+R000584,6,0.028,0.627,0.306,2.246,0.03,0.671,0.327,2.402,False,defense_budget,James E. Risch
+R000605,6,0.079,0.604,0.586,1.954,0.084,0.646,0.626,2.09,False,defense_budget,Mike Rounds
+R000608,6,0.18,0.574,0.957,1.724,0.193,0.614,1.024,1.844,False,defense_budget,Jacky Rosen
+R000618,6,0.025,0.629,0.281,2.282,0.026,0.673,0.301,2.441,False,defense_budget,Pete Ricketts
+S000033,6,-0.421,0.535,-1.599,1.495,-0.45,0.572,-1.711,1.599,False,defense_budget,Bernard Sanders
+S000148,6,0.473,0.529,1.719,1.461,0.506,0.566,1.839,1.563,False,defense_budget,Charles E. Schumer
+S001150,5,-0.271,0.527,-0.74,0.88,-0.29,0.563,-0.792,0.942,False,defense_budget,Adam B. Schiff
+S001181,6,0.294,0.552,1.281,1.59,0.314,0.591,1.37,1.701,False,defense_budget,Jeanne Shaheen
+S001184,4,0.053,0.617,0.473,2.081,0.057,0.66,0.506,2.226,False,defense_budget,Tim Scott
+S001194,6,-0.631,0.516,-2.072,1.385,-0.675,0.552,-2.217,1.481,False,defense_budget,Brian Schatz
+S001198,6,0.052,0.615,0.456,2.07,0.056,0.658,0.488,2.214,False,defense_budget,Dan Sullivan
+S001203,6,-0.659,0.514,-2.134,1.373,-0.705,0.549,-2.283,1.469,False,defense_budget,Tina Smith
+S001208,6,0.105,0.595,0.693,1.875,0.112,0.636,0.742,2.005,False,defense_budget,Elissa Slotkin
+S001217,6,0.077,0.605,0.576,1.962,0.082,0.647,0.616,2.098,False,defense_budget,Rick Scott
+S001227,6,0.042,0.62,0.395,2.135,0.044,0.663,0.423,2.283,False,defense_budget,Eric Schmitt
+S001232,6,0.009,0.64,0.13,2.561,0.009,0.684,0.139,2.739,False,defense_budget,Tim Sheehy
+T000250,6,0.049,0.616,0.438,2.088,0.052,0.659,0.469,2.233,False,defense_budget,John Thune
+T000278,6,0.118,0.591,0.746,1.84,0.127,0.632,0.798,1.968,False,defense_budget,Tommy Tuberville
+T000476,4,0.082,0.607,0.627,1.964,0.088,0.649,0.67,2.1,False,defense_budget,Thom Tillis
+V000128,6,-0.616,0.517,-2.041,1.391,-0.659,0.553,-2.183,1.488,False,defense_budget,Chris Van Hollen
+W000437,6,0.041,0.62,0.393,2.137,0.044,0.663,0.421,2.286,False,defense_budget,Roger F. Wicker
+W000779,6,-0.545,0.523,-1.884,1.424,-0.583,0.559,-2.015,1.524,False,defense_budget,Ron Wyden
+W000790,5,0.181,0.577,0.985,1.733,0.193,0.618,1.053,1.854,False,defense_budget,Raphael G. Warnock
+W000800,6,-0.536,0.523,-1.864,1.429,-0.573,0.56,-1.994,1.529,False,defense_budget,Peter Welch
+W000802,6,0.35,0.544,1.425,1.542,0.374,0.582,1.525,1.65,False,defense_budget,Sheldon Whitehouse
+W000805,6,0.252,0.559,1.168,1.632,0.27,0.598,1.249,1.746,False,defense_budget,Mark R. Warner
+W000817,6,-0.302,0.551,-1.304,1.585,-0.323,0.589,-1.394,1.696,False,defense_budget,Elizabeth Warren
+Y000064,6,0.089,0.6,0.628,1.921,0.095,0.642,0.672,2.055,False,defense_budget,Todd Young
+A000382,7,0.076,0.545,0.19,0.873,0.038,0.275,0.096,0.441,False,arms_sales_oversight,Angela D. Alsobrooks
+A000383,1,-0.0,0.688,-0.009,2.957,-0.0,0.347,-0.005,1.493,False,arms_sales_oversight,Alan Armstrong
+B000944,1,-0.11,0.655,-0.867,2.022,-0.055,0.331,-0.438,1.021,False,arms_sales_oversight,Sherrod Brown
+B001230,5,0.181,0.615,0.968,1.795,0.091,0.311,0.489,0.907,False,arms_sales_oversight,Tammy Baldwin
+B001236,8,-0.007,0.682,-0.097,2.653,-0.003,0.345,-0.049,1.34,False,arms_sales_oversight,John Boozman
+B001243,6,-0.001,0.687,-0.022,2.904,-0.001,0.347,-0.011,1.466,False,arms_sales_oversight,Marsha Blackburn
+B001261,8,-0.004,0.685,-0.064,2.75,-0.002,0.346,-0.032,1.389,False,arms_sales_oversight,John Barrasso
+B001267,8,-0.174,0.517,-0.374,0.76,-0.088,0.261,-0.189,0.384,False,arms_sales_oversight,Michael F. Bennet
+B001277,8,-0.626,0.506,-1.306,0.754,-0.316,0.255,-0.66,0.381,False,arms_sales_oversight,Richard Blumenthal
+B001288,8,-0.671,0.517,-1.441,0.759,-0.339,0.261,-0.728,0.383,False,arms_sales_oversight,Cory A. Booker
+B001299,7,-0.001,0.687,-0.022,2.895,-0.001,0.347,-0.011,1.462,False,arms_sales_oversight,Jim Banks
+B001303,7,0.072,0.546,0.18,0.873,0.036,0.275,0.091,0.441,False,arms_sales_oversight,Lisa Blunt Rochester
+B001305,8,-0.005,0.684,-0.074,2.718,-0.002,0.345,-0.037,1.372,False,arms_sales_oversight,Ted Budd
+B001319,8,-0.0,0.688,-0.007,2.962,-0.0,0.347,-0.004,1.496,False,arms_sales_oversight,Katie Boyd Britt
+B001320,1,-0.114,0.654,-0.89,2.013,-0.057,0.33,-0.45,1.016,False,arms_sales_oversight,Laphonza R. Butler
+C000127,8,-0.393,0.517,-0.844,0.76,-0.198,0.261,-0.426,0.384,False,arms_sales_oversight,Maria Cantwell
+C000141,1,-0.093,0.658,-0.768,2.066,-0.047,0.332,-0.388,1.043,False,arms_sales_oversight,Benjamin L. Cardin
+C000174,1,-0.056,0.665,-0.532,2.199,-0.028,0.336,-0.269,1.11,False,arms_sales_oversight,Thomas R. Carper
+C000880,8,-0.004,0.685,-0.061,2.757,-0.002,0.346,-0.031,1.392,False,arms_sales_oversight,Mike Crapo
+C001035,8,-0.289,0.584,-1.211,1.63,-0.146,0.295,-0.611,0.823,False,arms_sales_oversight,Susan M. Collins
+C001047,8,-0.038,0.662,-0.35,2.204,-0.019,0.334,-0.177,1.113,False,arms_sales_oversight,Shelley Moore Capito
+C001056,8,-0.018,0.674,-0.211,2.41,-0.009,0.34,-0.106,1.217,False,arms_sales_oversight,John Cornyn
+C001070,1,-0.051,0.666,-0.497,2.224,-0.026,0.336,-0.251,1.123,False,arms_sales_oversight,"Robert P. Casey, Jr."
+C001075,8,-0.019,0.673,-0.22,2.394,-0.01,0.34,-0.111,1.209,False,arms_sales_oversight,Bill Cassidy
+C001088,7,-0.95,0.514,-2.598,1.311,-0.48,0.26,-1.312,0.662,False,arms_sales_oversight,Christopher A. Coons
+C001095,8,-0.003,0.686,-0.045,2.81,-0.001,0.346,-0.023,1.419,False,arms_sales_oversight,Tom Cotton
+C001096,8,-0.008,0.682,-0.109,2.624,-0.004,0.344,-0.055,1.325,False,arms_sales_oversight,Kevin Cramer
+C001098,8,-0.002,0.687,-0.03,2.867,-0.001,0.347,-0.015,1.448,False,arms_sales_oversight,Ted Cruz
+C001113,8,-0.794,0.523,-2.294,1.359,-0.401,0.264,-1.158,0.686,False,arms_sales_oversight,Catherine Cortez Masto
+C001114,7,-0.006,0.683,-0.087,2.676,-0.003,0.345,-0.044,1.351,False,arms_sales_oversight,John R. Curtis
+D000563,8,0.533,0.551,1.8,1.474,0.269,0.278,0.909,0.744,False,arms_sales_oversight,Richard J. Durbin
+D000618,8,-0.006,0.683,-0.087,2.681,-0.003,0.345,-0.044,1.354,False,arms_sales_oversight,Steve Daines
+D000622,8,0.171,0.52,0.375,0.783,0.086,0.262,0.19,0.396,False,arms_sales_oversight,Tammy Duckworth
+E000295,8,-0.01,0.68,-0.13,2.572,-0.005,0.343,-0.066,1.299,False,arms_sales_oversight,Joni Ernst
+F000463,8,-0.005,0.684,-0.077,2.711,-0.003,0.345,-0.039,1.369,False,arms_sales_oversight,Deb Fischer
+F000479,8,0.021,0.518,0.045,0.759,0.01,0.262,0.023,0.383,False,arms_sales_oversight,John Fetterman
+G000359,8,-0.064,0.649,-0.491,2.052,-0.033,0.328,-0.248,1.036,False,arms_sales_oversight,Lindsey Graham
+G000386,8,-0.037,0.663,-0.342,2.214,-0.018,0.335,-0.173,1.118,False,arms_sales_oversight,Chuck Grassley
+G000555,8,-0.737,0.504,-1.531,0.753,-0.372,0.255,-0.773,0.38,True,arms_sales_oversight,Kirsten E. Gillibrand
+G000574,3,-0.058,0.62,-0.253,1.317,-0.029,0.313,-0.128,0.665,False,arms_sales_oversight,Ruben Gallego
+H000273,8,-0.133,0.517,-0.287,0.76,-0.067,0.261,-0.145,0.384,False,arms_sales_oversight,John W. Hickenlooper
+H000601,8,-0.003,0.685,-0.051,2.792,-0.002,0.346,-0.026,1.41,False,arms_sales_oversight,Bill Hagerty
+H001042,8,0.439,0.563,1.595,1.526,0.221,0.284,0.805,0.771,False,arms_sales_oversight,Mazie K. Hirono
+H001046,8,0.706,0.532,2.151,1.399,0.357,0.269,1.086,0.707,False,arms_sales_oversight,Martin Heinrich
+H001061,8,-0.006,0.683,-0.084,2.691,-0.003,0.345,-0.042,1.359,False,arms_sales_oversight,John Hoeven
+H001076,8,-0.029,0.518,-0.062,0.76,-0.015,0.261,-0.031,0.384,False,arms_sales_oversight,Margaret Wood Hassan
+H001079,8,-0.005,0.683,-0.083,2.693,-0.003,0.345,-0.042,1.36,False,arms_sales_oversight,Cindy Hyde-Smith
+H001089,8,-0.002,0.686,-0.039,2.831,-0.001,0.346,-0.02,1.43,False,arms_sales_oversight,Josh Hawley
+H001097,1,-0.112,0.655,-0.879,2.018,-0.056,0.331,-0.444,1.019,False,arms_sales_oversight,George S. Helmy
+H001104,7,-0.0,0.688,-0.001,2.994,-0.0,0.348,-0.0,1.512,False,arms_sales_oversight,Jon Husted
+J000293,8,-0.006,0.683,-0.087,2.681,-0.003,0.345,-0.044,1.354,False,arms_sales_oversight,Ron Johnson
+J000312,7,-0.001,0.687,-0.016,2.919,-0.0,0.347,-0.008,1.474,False,arms_sales_oversight,James C. Justice
+K000367,8,0.053,0.524,0.118,0.785,0.027,0.264,0.06,0.396,False,arms_sales_oversight,Amy Klobuchar
+K000377,6,0.18,0.551,0.463,0.895,0.091,0.278,0.234,0.452,False,arms_sales_oversight,Mark Kelly
+K000383,8,0.478,0.513,1.06,0.819,0.241,0.259,0.535,0.414,False,arms_sales_oversight,"Angus S. King, Jr."
+K000384,8,0.755,0.528,2.245,1.382,0.381,0.266,1.134,0.698,False,arms_sales_oversight,Tim Kaine
+K000393,8,-0.012,0.678,-0.153,2.522,-0.006,0.343,-0.077,1.274,False,arms_sales_oversight,John Kennedy
+K000394,7,-0.101,0.466,-0.178,0.616,-0.051,0.235,-0.09,0.311,False,arms_sales_oversight,Andy Kim
+L000570,8,0.655,0.537,2.049,1.419,0.331,0.271,1.035,0.717,False,arms_sales_oversight,Ben Ray Luján
+L000571,7,-0.007,0.682,-0.102,2.647,-0.004,0.344,-0.051,1.337,False,arms_sales_oversight,Cynthia M. Lummis
+L000575,8,-0.003,0.685,-0.049,2.796,-0.002,0.346,-0.025,1.412,False,arms_sales_oversight,James Lankford
+L000577,8,-0.002,0.687,-0.031,2.863,-0.001,0.347,-0.016,1.445,False,arms_sales_oversight,Mike Lee
+M000133,8,0.274,0.591,1.197,1.654,0.138,0.298,0.604,0.835,False,arms_sales_oversight,Edward J. Markey
+M000355,8,-0.024,0.67,-0.258,2.332,-0.012,0.338,-0.13,1.178,False,arms_sales_oversight,Mitch McConnell
+M000934,8,-0.011,0.679,-0.15,2.529,-0.006,0.343,-0.076,1.277,False,arms_sales_oversight,Jerry Moran
+M001111,6,0.11,0.574,0.335,1.039,0.056,0.29,0.169,0.525,False,arms_sales_oversight,Patty Murray
+M001153,8,-0.158,0.615,-0.844,1.799,-0.08,0.311,-0.426,0.908,False,arms_sales_oversight,Lisa Murkowski
+M001169,8,0.621,0.541,1.982,1.433,0.314,0.273,1.001,0.724,False,arms_sales_oversight,Christopher Murphy
+M001176,8,0.246,0.596,1.123,1.683,0.124,0.301,0.567,0.85,False,arms_sales_oversight,Jeff Merkley
+M001183,1,-0.007,0.683,-0.103,2.692,-0.003,0.345,-0.052,1.359,False,arms_sales_oversight,"Joe Manchin, III"
+M001190,7,-0.003,0.685,-0.054,2.784,-0.002,0.346,-0.027,1.406,False,arms_sales_oversight,Markwayne Mullin
+M001198,8,-0.003,0.686,-0.044,2.815,-0.001,0.346,-0.022,1.421,False,arms_sales_oversight,Roger Marshall
+M001242,7,-0.0,0.688,-0.002,2.986,-0.0,0.348,-0.001,1.508,False,arms_sales_oversight,Bernie Moreno
+M001243,7,-0.0,0.688,-0.003,2.985,-0.0,0.348,-0.001,1.507,False,arms_sales_oversight,David McCormick
+M001244,7,-0.001,0.688,-0.011,2.941,-0.0,0.347,-0.006,1.485,False,arms_sales_oversight,Ashley Moody
+O000174,6,0.186,0.54,0.444,0.832,0.094,0.273,0.224,0.42,False,arms_sales_oversight,Jon Ossoff
+P000145,6,-0.562,0.544,-1.524,1.026,-0.284,0.275,-0.769,0.518,False,arms_sales_oversight,Alex Padilla
+P000595,8,-0.174,0.517,-0.374,0.76,-0.088,0.261,-0.189,0.384,False,arms_sales_oversight,Gary C. Peters
+P000603,6,-0.001,0.687,-0.025,2.895,-0.001,0.347,-0.013,1.462,False,arms_sales_oversight,Rand Paul
+R000122,8,-0.144,0.52,-0.312,0.76,-0.073,0.262,-0.158,0.384,False,arms_sales_oversight,Jack Reed
+R000584,8,-0.002,0.687,-0.029,2.87,-0.001,0.347,-0.014,1.449,False,arms_sales_oversight,James E. Risch
+R000595,1,-0.004,0.685,-0.069,2.77,-0.002,0.346,-0.035,1.399,False,arms_sales_oversight,Marco Rubio
+R000605,8,-0.028,0.667,-0.289,2.285,-0.014,0.337,-0.146,1.154,False,arms_sales_oversight,Mike Rounds
+R000608,8,-0.724,0.529,-2.163,1.383,-0.366,0.267,-1.092,0.698,False,arms_sales_oversight,Jacky Rosen
+R000615,1,-0.011,0.681,-0.158,2.59,-0.006,0.344,-0.08,1.308,False,arms_sales_oversight,Mitt Romney
+R000618,8,-0.003,0.685,-0.051,2.79,-0.002,0.346,-0.026,1.409,False,arms_sales_oversight,Pete Ricketts
+S000033,8,0.264,0.593,1.17,1.664,0.133,0.299,0.591,0.84,False,arms_sales_oversight,Bernard Sanders
+S000148,8,-0.663,0.505,-1.381,0.754,-0.335,0.255,-0.697,0.381,False,arms_sales_oversight,Charles E. Schumer
+S000770,1,-0.076,0.661,-0.665,2.118,-0.038,0.334,-0.336,1.07,False,arms_sales_oversight,Debbie Stabenow
+S001150,7,-0.247,0.53,-0.561,0.793,-0.125,0.268,-0.283,0.4,False,arms_sales_oversight,Adam B. Schiff
+S001181,8,0.424,0.516,0.947,0.821,0.214,0.26,0.478,0.414,False,arms_sales_oversight,Jeanne Shaheen
+S001184,8,-0.003,0.685,-0.055,2.779,-0.002,0.346,-0.028,1.403,False,arms_sales_oversight,Tim Scott
+S001191,1,-0.017,0.678,-0.217,2.5,-0.009,0.342,-0.109,1.263,False,arms_sales_oversight,Kyrsten Sinema
+S001194,8,0.499,0.555,1.727,1.492,0.252,0.28,0.872,0.753,False,arms_sales_oversight,Brian Schatz
+S001198,8,-0.008,0.681,-0.118,2.601,-0.004,0.344,-0.059,1.314,False,arms_sales_oversight,Dan Sullivan
+S001203,8,0.542,0.55,1.818,1.47,0.274,0.278,0.918,0.742,False,arms_sales_oversight,Tina Smith
+S001208,5,-0.358,0.545,-0.925,0.934,-0.181,0.275,-0.467,0.472,False,arms_sales_oversight,Elissa Slotkin
+S001217,8,-0.002,0.687,-0.032,2.858,-0.001,0.347,-0.016,1.443,False,arms_sales_oversight,Rick Scott
+S001227,8,-0.0,0.688,-0.002,2.987,-0.0,0.348,-0.001,1.508,False,arms_sales_oversight,Eric Schmitt
+S001232,7,-0.0,0.688,-0.001,2.995,-0.0,0.348,-0.0,1.513,False,arms_sales_oversight,Tim Sheehy
+T000250,8,-0.009,0.68,-0.128,2.576,-0.005,0.343,-0.065,1.301,False,arms_sales_oversight,John Thune
+T000278,8,-0.001,0.688,-0.013,2.937,-0.0,0.347,-0.006,1.483,False,arms_sales_oversight,Tommy Tuberville
+T000464,1,-0.033,0.672,-0.361,2.336,-0.017,0.339,-0.182,1.18,False,arms_sales_oversight,Jon Tester
+T000476,8,-0.039,0.661,-0.357,2.195,-0.02,0.334,-0.18,1.108,False,arms_sales_oversight,Thom Tillis
+V000128,8,0.501,0.555,1.731,1.49,0.253,0.28,0.874,0.753,False,arms_sales_oversight,Chris Van Hollen
+W000437,8,-0.01,0.679,-0.137,2.556,-0.005,0.343,-0.069,1.291,False,arms_sales_oversight,Roger F. Wicker
+W000779,8,-0.481,0.517,-1.034,0.759,-0.243,0.261,-0.522,0.383,False,arms_sales_oversight,Ron Wyden
+W000790,8,0.439,0.515,0.978,0.82,0.221,0.26,0.494,0.414,False,arms_sales_oversight,Raphael G. Warnock
+W000800,8,0.42,0.566,1.552,1.538,0.212,0.286,0.784,0.777,False,arms_sales_oversight,Peter Welch
+W000802,8,-0.1,0.519,-0.215,0.76,-0.05,0.262,-0.109,0.384,False,arms_sales_oversight,Sheldon Whitehouse
+W000805,8,-0.033,0.518,-0.072,0.76,-0.017,0.261,-0.036,0.384,False,arms_sales_oversight,Mark R. Warner
+W000817,8,0.134,0.625,0.777,1.852,0.067,0.316,0.392,0.935,False,arms_sales_oversight,Elizabeth Warren
+Y000064,8,-0.021,0.672,-0.234,2.369,-0.011,0.339,-0.118,1.196,False,arms_sales_oversight,Todd Young
