@@ -25,11 +25,17 @@ VOTEVIEW_ALL_MEMBERS_URL = "https://voteview.com/static/data/out/members/HSall_m
 CONGRESS_API_KEY_ENV = "CONGRESS_API_KEY"
 OPENFEC_API_KEY_ENV = "OPENFEC_API_KEY"
 
+# unitedstates/congress-legislators (public domain), JSON files on the gh-pages branch.
+LEGISLATORS_BASE = "https://raw.githubusercontent.com/unitedstates/congress-legislators/gh-pages"
+
+# First day of the 120th Congress; used for seniority and service-length math.
+ROSTER_START = "2027-01-03"
+
 # Contact string sent in the User-Agent header, as good API etiquette.
 CONTACT_ENV = "SENATE_SIM_CONTACT"
 
-# Independents who caucus with the Democrats, keyed by Bioguide ID.
-# AUDIT: verify these IDs against Congress.gov before relying on them.
+# Fallback list of independents who caucus with the Democrats, keyed by Bioguide ID.
+# The congress-legislators `caucus` field is used first; this covers gaps.
 CAUCUS_WITH_DEMOCRATS = {
     "K000383": "King (I-ME)",
     "S000033": "Sanders (I-VT)",
@@ -79,3 +85,43 @@ def state_code(value: str) -> str:
     if value.upper() in STATE_CODES.values():
         return value.upper()
     return STATE_CODES.get(value, value)
+
+
+# Senate committee tiers used for assignment limits and the Institutional Power
+# Weight. Full committees only (four-letter thomas_id).
+# AUDIT: tiers follow the party conference "Super A / A / B" convention as
+# best understood; check against the current Senate Democratic and Republican
+# conference rules before relying on tier-specific results.
+COMMITTEE_TIERS = {
+    "SSAP": "Super A",  # Appropriations
+    "SSAS": "Super A",  # Armed Services
+    "SSFI": "Super A",  # Finance
+    "SSFR": "Super A",  # Foreign Relations
+    "SSAF": "A",        # Agriculture, Nutrition, and Forestry
+    "SSBK": "A",        # Banking, Housing, and Urban Affairs
+    "SSCM": "A",        # Commerce, Science, and Transportation
+    "SSEG": "A",        # Energy and Natural Resources
+    "SSEV": "A",        # Environment and Public Works
+    "SSGA": "A",        # Homeland Security and Governmental Affairs
+    "SSHR": "A",        # Health, Education, Labor, and Pensions
+    "SSJU": "A",        # Judiciary
+    "SSBU": "B",        # Budget
+    "SLIN": "B",        # Select Committee on Intelligence
+    "SSRA": "B",        # Rules and Administration
+    "SSSB": "B",        # Small Business and Entrepreneurship
+    "SSVA": "B",        # Veterans' Affairs
+    "SLIA": "B",        # Indian Affairs
+    "SPAG": "B",        # Special Committee on Aging
+    "SLET": "B",        # Select Committee on Ethics
+}
+TIER_ORDER = {"Super A": 0, "A": 1, "B": 2}
+
+# Committees the foreign policy module treats as gatekeepers.
+FOREIGN_POLICY_COMMITTEES = ["SSFR", "SSAS", "SSAP", "SLIN"]
+
+# Committees whose top minority member is titled Vice Chairman.
+MINORITY_TOP_TITLE = {"SLIN": "Vice Chairman", "SLET": "Vice Chairman"}
+
+# A senator holds at most this many chair (or ranking) posts in the projection.
+# AUDIT: conference rules allow exceptions; one is the conservative default.
+MAX_LEADERSHIP_POSTS = 1

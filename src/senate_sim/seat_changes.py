@@ -46,25 +46,39 @@ def load_seat_changes(path: Path = SEAT_CHANGES_PATH) -> pd.DataFrame:
 def apply_seat_changes(current: pd.DataFrame, changes: pd.DataFrame) -> pd.DataFrame:
     """Swap outgoing senators for incoming ones and return the projected roster.
 
-    Incoming senators without a Bioguide ID get a placeholder like NEW-MI-1,
-    which marks them as having no voting record to join against.
+    A change is skipped when the swap has already happened in the source data
+    (outgoing senator gone, incoming senator present), which covers special-election
+    winners sworn in before January 3 and every row once the new Congress convenes.
+    Incoming senators without a Bioguide ID get a placeholder like NEW-MI-1.
+    The incoming senator inherits the seat's Senate class from the outgoing one.
     """
-    unknown = set(changes["outgoing_bioguide"]) - set(current["bioguide_id"])
-    if unknown:
-        raise ValueError(f"Outgoing Bioguide IDs not in the current roster: {sorted(unknown)}")
     if changes["outgoing_bioguide"].duplicated().any():
         raise ValueError("A senator appears more than once as outgoing.")
 
-    kept = current[~current["bioguide_id"].isin(changes["outgoing_bioguide"])]
+    ids = set(current["bioguide_id"])
+    pending = changes["outgoing_bioguide"].isin(ids)
+    done = ~pending & changes["incoming_bioguide"].str.strip().isin(ids) & (changes["incoming_bioguide"].str.strip() != "")
+    broken = ~pending & ~done
+    if broken.any():
+        raise ValueError(
+            "Outgoing Bioguide IDs not in the current roster (and the incoming senator "
+            f"is not there either): {sorted(changes.loc[broken, 'outgoing_bioguide'])}"
+        )
+
+    current = current.copy()
+    current["incoming"] = current["bioguide_id"].isin(changes.loc[done, "incoming_bioguide"].str.strip())
+    outgoing = current.set_index("bioguide_id")
+    kept = current[~current["bioguide_id"].isin(changes.loc[pending, "outgoing_bioguide"])]
 
     incoming = []
     placeholder_count: dict[str, int] = {}
-    for _, row in changes.iterrows():
+    for _, row in changes[pending].iterrows():
         bid = row["incoming_bioguide"].strip()
+        state = row["state"].strip().upper()
         if not bid:
-            state = row["state"].strip().upper()
             placeholder_count[state] = placeholder_count.get(state, 0) + 1
             bid = f"NEW-{state}-{placeholder_count[state]}"
+        out_row = outgoing.loc[row["outgoing_bioguide"]]
         incoming.append(
             {
                 "bioguide_id": bid,
@@ -72,6 +86,7 @@ def apply_seat_changes(current: pd.DataFrame, changes: pd.DataFrame) -> pd.DataF
                 "state": row["state"].strip(),
                 "api_party": row["incoming_party"].strip(),
                 "caucus_with_d": row["caucus_with_d"].strip().lower() == "yes",
+                "senate_class": out_row["senate_class"] if "senate_class" in outgoing else None,
                 "incoming": True,
             }
         )

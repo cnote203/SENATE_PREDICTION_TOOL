@@ -19,6 +19,10 @@ def assign_caucus(df: pd.DataFrame) -> pd.DataFrame:
             return "D"
         if bool(row.get("caucus_with_d", False)) is True:
             return "D"
+        caucus_field = row.get("caucus_field")
+        if isinstance(caucus_field, str) and caucus_field:
+            return "D" if caucus_field.startswith("Democrat") else (
+                "R" if caucus_field.startswith("Republican") else "I")
         party = str(row.get("api_party") or "")
         if party.startswith("Democrat"):
             return "D"
@@ -55,7 +59,11 @@ def build_baseline(roster: pd.DataFrame, voteview: pd.DataFrame) -> pd.DataFrame
         merged["senate_congresses_served"] = 0
     merged["senate_congresses_served"] = merged["senate_congresses_served"].fillna(0).astype(int)
     merged["has_voting_record"] = merged["nominate_dim1"].notna()
-    merged["new_to_senate"] = merged["incoming"] & (merged["senate_congresses_served"] == 0)
+    # Either source showing prior Senate service is enough to rule out "new".
+    prior_days = merged["prior_senate_days"].fillna(0) if "prior_senate_days" in merged else 0
+    merged["new_to_senate"] = (
+        merged["incoming"] & (merged["senate_congresses_served"] == 0) & (prior_days == 0)
+    )
     return merged.sort_values(["state", "name"]).reset_index(drop=True)
 
 
