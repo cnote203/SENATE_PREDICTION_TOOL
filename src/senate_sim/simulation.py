@@ -61,6 +61,11 @@ class Measure:
     alpha_shift: float = 0.0        # manual cutpoint shift (e.g. for salience), latent units
     house_pass_prob: float = 1.0    # P(House passes) given Senate passage; 1.0 = not modelled
     house_override_prob: float = 0.05
+    # "family": cutpoint drawn from all of the family's fitted votes (stable issues).
+    # "latest": cutpoint starts at the family's most recent vote and drifts as a random
+    #           walk to `as_of` (issues whose support is moving, e.g. Israel arms sales).
+    alpha_mode: str = "family"
+    as_of: str = "2027-03-01"
     notes: str = ""
 
 
@@ -69,7 +74,9 @@ PRESETS = {
         "Joint resolution of disapproval: arms sale to Israel", "arms_sales_oversight",
         "israel_fms", "Yea", [Stage("discharge", "majority"), Stage("passage", "majority")],
         president_position="oppose", veto_possible=True, tau=0.5, house_pass_prob=0.3,
-        notes="Salience has moved fast (15 to 40 yeas in a year), so tau is wide.",
+        alpha_mode="latest",
+        notes="Support moved from 15 to 40 yeas in a year: the cutpoint starts at the latest "
+              "vote and drifts from there, and tau is wide.",
     ),
     "gulf_arms_disapproval": Measure(
         "Joint resolution of disapproval: arms sale to a Gulf state", "arms_sales_oversight",
@@ -111,6 +118,17 @@ def measure_parameters(measure: Measure, calibration: dict | None) -> dict:
         fam = items
     scale = fit["scale"]
     alphas = fam["alpha"].to_numpy(float)
+    drift = latest_cutpoint(fam, measure.as_of) if measure.alpha_mode == "latest" else None
+    if drift is not None:
+        return {
+            "alpha_mean": float(drift["alpha"] + scale["mean"] + measure.alpha_shift),
+            "alpha_sd": drift["sd"],
+            "b": float(scale["sd"] / scale["k"]),
+            "gamma": float(fit["gamma"]),
+            "calibrated": True,
+            "gamma_identified": bool(fit["gamma_identified"]),
+            "alpha_mode": f"latest ({drift['latest_date']}, {drift['months']:.0f} months of drift)",
+        }
     # Latent = alpha + lin + gamma*CP, with lin = score * sd / k + mean. Gamma was
     # estimated jointly with the cutpoints, so it enters separately through CP.
     return {
@@ -120,6 +138,37 @@ def measure_parameters(measure: Measure, calibration: dict | None) -> dict:
         "gamma": float(fit["gamma"]),
         "calibrated": True,
         "gamma_identified": bool(fit["gamma_identified"]),
+    }
+
+
+MIN_DRIFT_SD = 0.2
+
+
+def latest_cutpoint(fam: pd.DataFrame, as_of: str) -> dict | None:
+    """Random-walk cutpoint: start at the most recent vote, widen with time.
+
+    Drift per month is estimated from changes between successive votes in the
+    family. Needs at least three dated votes; otherwise returns None and the
+    caller falls back to the family average.
+    """
+    if "date" not in fam:
+        return None
+    f = fam.assign(_d=pd.to_datetime(fam["date"], errors="coerce")).dropna(subset=["_d"])
+    f = f.sort_values("_d")
+    if len(f) < 3:
+        return None
+    gaps = f["_d"].diff().dt.days.iloc[1:].to_numpy() / 30.44
+    steps = np.diff(f["alpha"].to_numpy(float))
+    keep = gaps > 0.25
+    if keep.sum() < 2:
+        return None
+    per_month = float(np.sqrt(np.mean(steps[keep] ** 2 / gaps[keep])))
+    months = max((pd.Timestamp(as_of) - f["_d"].iloc[-1]).days / 30.44, 0.0)
+    return {
+        "alpha": float(f["alpha"].iloc[-1]),
+        "sd": float(max(per_month * np.sqrt(max(months, 1.0)), MIN_DRIFT_SD)),
+        "latest_date": f["_d"].iloc[-1].date().isoformat(),
+        "months": months,
     }
 
 

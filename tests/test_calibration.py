@@ -128,6 +128,18 @@ class Fitter(unittest.TestCase):
         self.assertTrue(row["suggest_override"])
         self.assertGreater(fit.cv["within_party_accuracy"], 0.5)
 
+    def test_consistency_flags_contradiction_and_override_resolves_it(self):
+        items, votes, ideo = synthetic(beta=(-2.5, 0.0, 0.0), n_items=20, seed=8)
+        liberal = ideo.sort_values("nominate_dim1")["bioguide_id"].iloc[0]
+        votes.loc[votes["bioguide_id"] == liberal, "yea"] = 0.0
+        data = calibration.build_dataset(items, votes, ideo)
+        fit = calibration.fit_dimension(data, "dim", self.roster(ideo))
+        none = calibration.consistency(data, fit, {}).set_index("bioguide_id")
+        self.assertTrue(none.loc[liberal, "contradiction"])
+        fixed = calibration.consistency(data, fit, {liberal: -2.0}).set_index("bioguide_id")
+        self.assertFalse(fixed.loc[liberal, "contradiction"])
+        self.assertTrue(fixed.loc[liberal, "has_override"])
+
     def test_two_outliers_do_not_bend_a_thin_dimension(self):
         # Defense-like: support rises with d1; six near-replicate items from one bill.
         # The two most conservative senators always vote Nay (like Paul and Lee).

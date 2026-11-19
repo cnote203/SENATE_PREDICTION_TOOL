@@ -60,7 +60,7 @@ def main() -> int:
 
     source = vote_sources.make_source(args.source, lis_map, refresh=args.refresh)
     print(f"Reading {len(items)} roll calls from {source.name}...")
-    frames, failed = [], 0
+    frames, failed, dates = [], 0, {}
     for _, it in items.iterrows():
         try:
             meta, coded = source.get(int(it["congress"]), int(it["session"]), int(it["roll"]))
@@ -71,6 +71,7 @@ def main() -> int:
                 print("Three failures before any success; stopping. Try the other --source.")
                 return 1
             continue
+        dates[it["item_id"]] = str(meta.get("date", ""))[:10]
         unmapped = coded["bioguide_id"].isna().sum()
         print(f"  {it['item_id']:>11} {meta['yeas']:>3}-{meta['nays']:<3} {it['dimension']:<22} "
               f"{meta['question'][:38]:<38} {meta['document'][:30]}"
@@ -83,8 +84,9 @@ def main() -> int:
 
     print("Loading Voteview ideology...")
     history = voteview.fetch_member_history(refresh=args.refresh)
+    items["date"] = items["item_id"].map(dates).where(lambda d: d.str.len() == 10, items["date"])
     data = calibration.build_dataset(
-        items[["item_id", "dimension", "plus_side", "family", "president_party"]], votes,
+        items[["item_id", "dimension", "plus_side", "family", "president_party", "date"]], votes,
         history[["bioguide_id", "nominate_dim1", "nominate_dim2"]],
     )
     roster = baseline.rename(columns={"nominate_dim1": "d1", "nominate_dim2": "d2"})[["d1", "d2"]]
@@ -121,7 +123,22 @@ def main() -> int:
     print(f"\nWrote {out} and {dev_path}")
 
     existing = pd.read_csv(module.override_path) if module.override_path.exists() else pd.DataFrame(
-        columns=["bioguide_id", "dimension"])
+        columns=["bioguide_id", "dimension", "score"])
+    checks = []
+    for fit in fits:
+        ov = existing[existing["dimension"] == fit.dimension].set_index("bioguide_id")["score"].to_dict()
+        checks.append(calibration.consistency(data, fit, ov))
+    checks = pd.concat(checks).merge(names, on="bioguide_id", how="left")
+    checks.round(3).to_csv(out.with_name(f"{module.name}_consistency.csv"), index=False)
+    bad = checks[checks["contradiction"] & checks["bioguide_id"].isin(set(baseline["bioguide_id"]))]
+    if not bad.empty:
+        print("\nScores that contradict actual votes (observed vs predicted share of +2-side votes):")
+        for _, r in bad.sort_values(["dimension", "gap"]).iterrows():
+            tag = "override" if r["has_override"] else "fitted"
+            print(f"  {r['dimension']:<22} {r['name']:<28} observed {r['observed']:.2f} vs "
+                  f"predicted {r['predicted']:.2f} ({int(r['n_votes'])} votes, {tag})")
+    else:
+        print("\nNo sitting senator's score contradicts their votes by 0.4 or more.")
     have = set(zip(existing["bioguide_id"], existing["dimension"]))
     sitting = set(baseline["bioguide_id"])
     flags = dev[dev["suggest_override"] & dev["bioguide_id"].isin(sitting)]

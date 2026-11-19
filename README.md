@@ -175,7 +175,12 @@ P(+2 side) = Phi(item cutpoint + b1*d1 + b2*d1^2 + b3*d2 + gamma*[in President's
 The mapping and each senator's deviation are estimated together (alternating rounds), so
 a few idiosyncratic senators are explained by their own deviation instead of bending the
 curve for everyone. Thin dimensions (fewer than 8 items or a single family, such as the
-FY26 NDAA votes for `defense_budget`) hold the curve-shape terms to a tighter prior.
+FY26 NDAA votes for `defense_budget`) hold the curve-shape terms to a tighter prior, and
+DW-NOMINATE dim2 to a tighter one still (it is noisy in recent Congresses).
+
+`calibrate.py` also checks every senator's final score (override or fitted) against their
+votes and lists anyone whose observed share of +2-side votes differs from the predicted
+share by 0.4 or more over at least 3 votes (`<module>_consistency.csv`).
 
 **Reading calibrated scores.** When the President's-party effect (gamma) is estimated, a
 score is the senator's position *outside* the President's party; the simulation adds gamma
@@ -206,6 +211,11 @@ python scripts\verify_overrides.py
 python scripts\simulate_measure.py --list
 python scripts\simulate_measure.py israel_arms_disapproval --runs 20000
 ```
+
+Issues whose support is moving use `alpha_mode="latest"`: the cutpoint starts at the
+family's most recent vote and drifts as a random walk to the simulation date, with the
+drift rate estimated from the family's own vote-to-vote changes (Israel arms sales: 15 to
+40 yeas in a year). Stable issues draw from the whole family.
 
 Each run draws every senator's position error once (shared across measures on that
 dimension), a shock per caucus per measure, the measure's cutpoint from its family's fitted

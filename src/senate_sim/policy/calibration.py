@@ -48,6 +48,9 @@ SUGGEST_OVERRIDE_MIN = 0.75  # score units
 # shape terms, so two outlying senators cannot bend the mapping for everyone.
 THIN_MIN_ITEMS, THIN_MIN_FAMILIES = 8, 2
 PRIOR_SD_SHAPE_THIN = 0.5
+# DW-NOMINATE dim2 is noisy in recent Congresses; on thin dimensions it gets an
+# even tighter prior so it cannot drive individual scores (e.g. Schumer on defense).
+PRIOR_SD_D2_THIN = 0.25
 EM_ROUNDS = 5
 
 FEATURES = ["d1", "d1_sq", "d2"]
@@ -135,7 +138,8 @@ def _fit_pooled(df: pd.DataFrame, use_gamma: bool, thin: bool = False, offset=No
     cols = FEATURES + (["cp"] if use_gamma else [])
     X = df[cols].to_numpy(float)
     shape_sd = PRIOR_SD_SHAPE_THIN if thin else PRIOR_SD_BETA
-    prior_sd = np.array([PRIOR_SD_BETA, shape_sd, shape_sd] + ([PRIOR_SD_GAMMA] if use_gamma else []))
+    d2_sd = PRIOR_SD_D2_THIN if thin else PRIOR_SD_BETA
+    prior_sd = np.array([PRIOR_SD_BETA, shape_sd, d2_sd] + ([PRIOR_SD_GAMMA] if use_gamma else []))
     off = np.zeros(len(df)) if offset is None else np.asarray(offset, float)
     x0 = np.zeros(len(item_ids) + len(cols))
     res = minimize(
@@ -268,9 +272,12 @@ def fit_dimension(df: pd.DataFrame, dimension: str, roster_ideology: pd.DataFram
     item_meta = (
         df.groupby("item_id")
         .agg(family=("family", "first"), president_party=("president_party", "first"),
-             n=("y", "size"), weight=("w", "first"))
+             n=("y", "size"), weight=("w", "first"),
+             date=("date", "first") if "date" in df else ("family", "first"))
         .reset_index()
     )
+    if "date" not in df:
+        item_meta["date"] = None
     item_meta["alpha"] = item_meta["item_id"].map(alpha)
     item_meta = item_meta.merge(shares, on="item_id", how="left")
 
@@ -287,6 +294,31 @@ def fit_dimension(df: pd.DataFrame, dimension: str, roster_ideology: pd.DataFram
         cv=_cv_by_family(df, use_gamma, thin),
         thin=thin,
     )
+
+
+CONSISTENCY_MIN_VOTES = 3
+CONSISTENCY_GAP = 0.4
+
+
+def consistency(data: pd.DataFrame, fit: "DimensionFit", override_scores: dict[str, float]) -> pd.DataFrame:
+    """Compare each senator's observed share of +2-side votes with what their final
+    score predicts (override if present, fitted mapping otherwise).
+
+    A large gap means the score contradicts how the senator actually voted.
+    """
+    df = data[(data["dimension"] == fit.dimension) & data["item_id"].isin(fit.items["item_id"])].copy()
+    alpha = fit.items.set_index("item_id")["alpha"]
+    lin = _linear(df, fit.beta)
+    ov = df["bioguide_id"].map(override_scores)
+    lin_override = ov * fit.scale_sd / SCORE_K + fit.scale_mean
+    lin = np.where(ov.notna(), lin_override, lin)
+    eta = df["item_id"].map(alpha).to_numpy() + lin + fit.gamma * df["cp"].to_numpy()
+    df["p"] = norm.cdf(eta)
+    g = df.groupby("bioguide_id").agg(n_votes=("y", "size"), observed=("y", "mean"), predicted=("p", "mean"))
+    g["gap"] = g["observed"] - g["predicted"]
+    g["has_override"] = g.index.isin(list(override_scores))
+    g["contradiction"] = (g["n_votes"] >= CONSISTENCY_MIN_VOTES) & (g["gap"].abs() >= CONSISTENCY_GAP)
+    return g.reset_index().assign(dimension=fit.dimension)
 
 
 def latent_to_score(d1, d2, fit: dict) -> np.ndarray:

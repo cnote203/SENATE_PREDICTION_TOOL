@@ -90,3 +90,35 @@ class VoteModel(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Drift(unittest.TestCase):
+    def fam(self):
+        return pd.DataFrame({
+            "date": ["2025-04-03", "2025-04-03", "2025-07-30", "2025-07-30", "2026-04-15"],
+            "alpha": [-2.0, -2.0, -1.4, -1.5, -0.6],
+            "family": "israel_fms",
+        })
+
+    def test_latest_starts_at_most_recent_vote_and_widens(self):
+        near = sim.latest_cutpoint(self.fam(), "2026-05-15")
+        far = sim.latest_cutpoint(self.fam(), "2028-04-15")
+        self.assertAlmostEqual(near["alpha"], -0.6)
+        self.assertEqual(near["latest_date"], "2026-04-15")
+        self.assertGreater(far["sd"], near["sd"])
+
+    def test_too_few_dated_votes_falls_back(self):
+        self.assertIsNone(sim.latest_cutpoint(self.fam().iloc[:2], "2027-01-01"))
+        self.assertIsNone(sim.latest_cutpoint(self.fam().drop(columns="date"), "2027-01-01"))
+
+    def test_latest_mode_moves_the_measure(self):
+        cal = calib()
+        cal["arms_sales_oversight"]["items"] = [
+            {"item_id": str(i), "family": "israel_fms", "alpha": a, "date": d}
+            for i, (d, a) in enumerate(zip(self.fam()["date"], self.fam()["alpha"]))
+        ]
+        s = scores(d_score=0.6, r_score=-1.5)
+        latest = sim.simulate(s, MEASURE, "R", cal, runs=2000)
+        family = sim.simulate(s, replace(MEASURE, alpha_mode="family"), "R", cal, runs=2000)
+        self.assertGreater(latest["stages"]["passage"]["yeas_median"],
+                           family["stages"]["passage"]["yeas_median"])

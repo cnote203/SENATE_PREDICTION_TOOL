@@ -53,6 +53,8 @@ def main() -> int:
         r = simulate(scores, measure, president, cal, runs=args.runs)
         p = r["parameters"]
         tag = "calibrated" if p["calibrated"] else "uncalibrated defaults"
+        if p.get("alpha_mode"):
+            tag += f"; cutpoint from {p['alpha_mode']}"
         if p["calibrated"] and not p["gamma_identified"]:
             tag += "; president's-party effect not identified, so D White House is an extrapolation"
         seats = int((scores["caucus"] == president).sum())
