@@ -1,0 +1,24 @@
+category,search,pattern,note
+defense_contractor,lockheed martin,LOCKHEED MARTIN,
+defense_contractor,raytheon,RAYTHEON|\bRTX\b,RTX (formerly Raytheon Technologies)
+defense_contractor,northrop grumman,NORTHROP GRUMMAN,
+defense_contractor,general dynamics,GENERAL DYNAMICS,
+defense_contractor,boeing,BOEING,Commercial and defense; kept because defense is a large share
+defense_contractor,l3harris,L3HARRIS|L3 HARRIS|HARRIS CORP,
+defense_contractor,huntington ingalls,HUNTINGTON INGALLS,
+defense_contractor,bae systems,BAE SYSTEMS,
+defense_contractor,leidos,LEIDOS,
+defense_contractor,booz allen,BOOZ ALLEN,
+defense_contractor,science applications,SCIENCE APPLICATIONS|\bSAIC\b,
+defense_contractor,textron,TEXTRON,
+defense_contractor,general atomics,GENERAL ATOMICS,
+defense_contractor,caci,\bCACI\b,
+defense_contractor,anduril,ANDURIL,
+defense_contractor,palantir,PALANTIR,
+defense_contractor,oshkosh,OSHKOSH,
+defense_contractor,parsons,PARSONS CORP,
+israel_policy,american israel public affairs,AMERICAN ISRAEL PUBLIC AFFAIRS|\bAIPAC\b,AIPAC PAC (since 2021)
+israel_policy,j street,J STREET,
+israel_policy,norpac,NORPAC,
+israel_policy,pro-israel america,PRO-ISRAEL AMERICA,
+israel_policy,democratic majority for israel,DEMOCRATIC MAJORITY FOR ISRAEL,

@@ -27,6 +27,7 @@ scripts/score_senators.py  scores the baseline on a policy module
 scripts/calibrate.py     fits the dimension formulas to Senate roll calls
 scripts/verify_overrides.py  prints each override senator's vote on the cited roll calls
 scripts/simulate_measure.py  Monte Carlo for one measure under R and D White Houses
+scripts/fetch_donors.py  OpenFEC PAC contributions per senator, and a test of whether they explain votes
 tests/test_roster.py     offline unit tests (no network or keys)
 data/raw/                cached API and bulk responses
 data/processed/          validated outputs
@@ -226,6 +227,30 @@ opposes), then a two-thirds override in both chambers. The House is an input pro
 not modelled member by member. Output: pass probabilities by stage, yea-count ranges,
 P(enacted), and the senators most often pivotal, under an R and a D White House.
 
+## Donor data (OpenFEC)
+
+```powershell
+python scripts\fetch_donors.py --resolve   # find the PACs' FEC committee IDs
+# review data\manual\donor_pacs.csv: set include to yes/no
+python scripts\fetch_donors.py             # pull contributions, test against votes
+```
+
+FEC data has no industry codes (and the OpenSecrets API was shut down in 2025), so
+categories come from PAC name patterns in `data/manual/donor_categories.csv`: defense
+contractors and Israel-policy PACs. Contributions are totalled per senator over the
+2022, 2024 and 2026 cycles, across all of each senator's FEC candidate IDs (House IDs
+included). Only direct PAC-to-campaign money is counted; super PAC spending and
+conduit-bundled individual contributions are not.
+
+The script then regresses each senator's calibrated deviation on log PAC dollars,
+within caucus, for defense money against `defense_budget` and `nato_interventionism`
+and Israel-policy money against `arms_sales_oversight`. A significant slope in the
+expected direction means donor data carries information the ideology mapping misses;
+only then is it worth adding to the vote model. It is a correlation: PACs give to
+senators who already agree with them.
+
+The same api.data.gov key works for Congress.gov and OpenFEC.
+
 ## Status
 
 - [x] Project layout, config, HTTP cache
@@ -245,5 +270,6 @@ P(enacted), and the senators most often pivotal, under an R and a D White House.
 - [x] Single-measure vote model, procedural gates, Monte Carlo
 - [ ] Run calibration and commit `data/calibration/`
 - [ ] Add 2019-2020 Saudi/Gulf votes so Republican arms-sale positions are identified
+- [x] OpenFEC PAC contributions and donor-effect test
 - [ ] Electoral-vulnerability and leadership terms in the vote model
 - [ ] Multi-cycle simulation (2028 and 2030 seat turnover, seniority, White House scenarios)
