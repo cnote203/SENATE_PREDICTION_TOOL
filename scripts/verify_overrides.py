@@ -1,4 +1,4 @@
-"""Check each override against the senate.gov roll calls listed in its roll_calls column.
+"""Check each override against the roll calls listed in its roll_calls column (Voteview by default).
 
 Usage (PowerShell):
     python scripts\\verify_overrides.py [--module foreign_policy]
@@ -18,12 +18,13 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 import pandas as pd  # noqa: E402
 
-from senate_sim.ingest import legislators, senate_votes  # noqa: E402
+from senate_sim.ingest import legislators, senate_votes, vote_sources  # noqa: E402
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--module", default="foreign_policy")
+    parser.add_argument("--source", choices=["voteview", "senate"], default="voteview")
     args = parser.parse_args()
     module = importlib.import_module(f"senate_sim.policy.{args.module}").MODULE
 
@@ -32,9 +33,9 @@ def main() -> int:
         legislators.fetch_json("legislators-historical.json"),
         legislators.fetch_json("legislators-current.json"),
     )
+    source = vote_sources.make_source(args.source, senate_votes.lis_to_bioguide(people))
     cache: dict[str, pd.DataFrame] = {}
     for _, o in ov.iterrows():
-        lis = people.get(o["bioguide_id"], {}).get("id", {}).get("lis")
         cited = [r for r in o["roll_calls"].split(";") if r]
         print(f"\n{o['name']} | {o['dimension']} = {o['score']} | verified: {o['verified']}")
         if not cited:
@@ -44,14 +45,14 @@ def main() -> int:
             if rc not in cache:
                 c, s, n = (int(x) for x in rc.split("-"))
                 try:
-                    meta, members = senate_votes.fetch_vote(c, s, n)
+                    meta, members = source.get(c, s, n)
                     cache[rc] = members.assign(_q=f"{meta['question'][:30]} {meta['document'][:25]}",
                                                _t=f"{meta['yeas']}-{meta['nays']}")
                 except Exception as exc:
                     print(f"  {rc}: could not fetch ({exc})")
                     continue
             m = cache[rc]
-            row = m[m["lis_id"] == lis]
+            row = m[m["bioguide_id"] == o["bioguide_id"]]
             cast = row["vote_cast"].iloc[0] if len(row) else "not a member"
             print(f"  {rc:>10}  {cast:<12} ({m['_t'].iloc[0]}) {m['_q'].iloc[0]}")
     return 0

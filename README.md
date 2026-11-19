@@ -20,10 +20,11 @@ src/senate_sim/
   policy/foreign_policy.py  four foreign policy dimensions
   policy/calibration.py  pooled probit fit of each dimension to roll calls
   ingest/senate_votes.py senate.gov roll-call XML, keyed to Bioguide IDs
+  ingest/vote_sources.py Voteview (default) or senate.gov as the source of individual votes
   simulation.py          vote model, procedural gates, Monte Carlo
 scripts/build_roster.py  end-to-end baseline build
 scripts/score_senators.py  scores the baseline on a policy module
-scripts/calibrate.py     fits the dimension formulas to senate.gov roll calls
+scripts/calibrate.py     fits the dimension formulas to Senate roll calls
 scripts/verify_overrides.py  prints each override senator's vote on the cited roll calls
 scripts/simulate_measure.py  Monte Carlo for one measure under R and D White Houses
 tests/test_roster.py     offline unit tests (no network or keys)
@@ -150,7 +151,7 @@ plus an overrides CSV; run it with `--module <name>`.
 ## Calibration
 
 ```powershell
-python scripts\calibrate.py          # needs senate.gov access; caches XML in data\raw
+python scripts\calibrate.py          # reads votes from Voteview; add --source senate for senate.gov
 git add data\calibration
 git commit -m "Calibrate foreign policy dimensions"
 ```
@@ -175,7 +176,12 @@ Outputs: `data/calibration/foreign_policy.json` (used automatically by scoring a
 simulation) and `foreign_policy_deviations.csv` (how far each senator sits from the fit).
 The script lists senators who sit clearly off the fit and have no override yet.
 
-Each override cites roll calls (`congress-session-roll`). To check them against senate.gov:
+Votes come from Voteview's bulk files by default. senate.gov is authoritative and same-day
+but refuses automated requests from many networks (HTTP 403); `--source senate` tries it.
+Roll calls are always cited by their senate.gov number within a session; Voteview's
+`clerk_rollnumber` maps them.
+
+Each override cites roll calls (`congress-session-roll`). To check them:
 
 ```powershell
 python scripts\verify_overrides.py

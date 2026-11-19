@@ -24,7 +24,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 import pandas as pd  # noqa: E402
 
 from senate_sim import config  # noqa: E402
-from senate_sim.ingest import legislators, senate_votes, voteview  # noqa: E402
+from senate_sim.ingest import legislators, senate_votes, vote_sources, voteview  # noqa: E402
 from senate_sim.policy import calibration  # noqa: E402
 
 ITEMS_PATH = config.PROJECT_ROOT / "data" / "manual" / "calibration_votes.csv"
@@ -34,6 +34,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--module", default="foreign_policy")
     parser.add_argument("--refresh", action="store_true")
+    parser.add_argument("--source", choices=["voteview", "senate"], default="voteview",
+                        help="where to read individual votes (senate.gov often refuses scripts)")
     args = parser.parse_args()
 
     module = importlib.import_module(f"senate_sim.policy.{args.module}").MODULE
@@ -56,16 +58,19 @@ def main() -> int:
     )
     lis_map = senate_votes.lis_to_bioguide(people)
 
-    print(f"Fetching {len(items)} roll calls from senate.gov...")
-    frames = []
+    source = vote_sources.make_source(args.source, lis_map, refresh=args.refresh)
+    print(f"Reading {len(items)} roll calls from {source.name}...")
+    frames, failed = [], 0
     for _, it in items.iterrows():
         try:
-            meta, members = senate_votes.fetch_vote(it["congress"], it["session"], it["roll"],
-                                                    refresh=args.refresh)
+            meta, coded = source.get(int(it["congress"]), int(it["session"]), int(it["roll"]))
         except Exception as exc:
             print(f"  {it['item_id']}: FAILED ({exc}); skipped")
+            failed += 1
+            if failed >= 3 and not frames:
+                print("Three failures before any success; stopping. Try the other --source.")
+                return 1
             continue
-        coded = senate_votes.code_votes(members, lis_map)
         unmapped = coded["bioguide_id"].isna().sum()
         print(f"  {it['item_id']:>11} {meta['yeas']:>3}-{meta['nays']:<3} {it['dimension']:<22} "
               f"{meta['question'][:38]:<38} {meta['document'][:30]}"
