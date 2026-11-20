@@ -158,6 +158,30 @@ class Fitter(unittest.TestCase):
         score = calibration.latent_to_score(third["nominate_dim1"], third["nominate_dim2"], fit.to_dict())
         self.assertGreater(score, 0.5)
 
+    def test_own_votes_enter_scores_and_resolve_contradictions(self):
+        # Defense-like U-shape on a thin dimension: the restrained mapping cannot
+        # explain the left-wing Nays, so each senator's own deviation must carry it.
+        items, votes, ideo = synthetic(beta=(2.0, -4.0, 0.0), n_items=6, families=1, seed=9)
+        items["dimension"] = "defense_budget"
+        data = calibration.build_dataset(items, votes, ideo)
+        fit = calibration.fit_dimension(data, "defense_budget", self.roster(ideo))
+        check = calibration.consistency(data, fit, {})
+        self.assertLessEqual(int(check["contradiction"].sum()), 3)
+        loaded = {"defense_budget": fit.to_dict()}
+        bl = ideo.rename(columns={}).assign(
+            name=ideo["bioguide_id"], state="MA", caucus=np.where(ideo["nominate_dim1"] < 0, "D", "R"),
+            score_chamber="Senate")
+        from dataclasses import replace
+        mod = replace(foreign_policy.MODULE, override_path=Path(self._tmp()) / "none.csv")
+        out = base.score(bl, mod, loaded).set_index("bioguide_id")
+        self.assertTrue((out["defense_budget_source"] == "votes").all())
+        # Most liberal senators vote Nay most often and should score lowest.
+        obs = data.groupby("bioguide_id")["y"].mean()
+        left = ideo.nsmallest(10, "nominate_dim1")["bioguide_id"]
+        centre = ideo.iloc[(ideo["nominate_dim1"] - 0.25).abs().argsort()[:10]]["bioguide_id"]
+        self.assertLess(obs[left].mean(), obs[centre].mean())
+        self.assertLess(out.loc[left, "defense_budget"].mean(), out.loc[centre, "defense_budget"].mean())
+
     def test_engine_uses_fit_and_round_trips(self):
         items, votes, ideo = synthetic(beta=(2.0, 0.0, 0.0), seed=6)
         items["dimension"] = "defense_budget"
@@ -173,7 +197,7 @@ class Fitter(unittest.TestCase):
         from dataclasses import replace
         mod = replace(mod, override_path=Path(self._tmp()) / "none.csv")
         out = base.score(bl, mod, loaded).set_index("bioguide_id")
-        self.assertEqual(out.loc["A", "defense_budget_source"], "fitted")
+        self.assertIn(out.loc["A", "defense_budget_source"], ("fitted", "votes"))
         self.assertEqual(out.loc["C", "defense_budget_source"], "imputed")
         self.assertLess(out.loc["A", "defense_budget"], out.loc["B", "defense_budget"])
         self.assertGreater(out.loc["B", "defense_budget_sd"], out.loc["A", "defense_budget_sd"])

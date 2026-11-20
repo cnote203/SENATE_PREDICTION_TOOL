@@ -27,6 +27,9 @@ SCALE_MIN, SCALE_MAX = -2.0, 2.0
 # AUDIT: these are judgment calls; widen them if back-tests show overconfidence.
 SD_BY_SOURCE = {"Senate": 0.25, "House": 0.45, "imputed": 0.80}
 
+# Floor on the SD of a score estimated from the senator's own votes.
+MIN_VOTES_SD = 0.15
+
 # Extra SD for a House-derived ideology point under a fitted mapping (House to
 # Senate translation). AUDIT: judgment until House-Senate switchers are studied.
 HOUSE_EXTRA_SD = 0.30
@@ -124,8 +127,9 @@ def score(
 ) -> pd.DataFrame:
     """Return one row per senator: <dim>, <dim>_sd and <dim>_source for each dimension.
 
-    Sources: fitted (calibrated mapping), formula (prior), imputed (no record),
-    override (hand-set with evidence).
+    Sources: votes (calibrated mapping plus the senator's own deviation, estimated
+    from their votes), fitted (calibrated mapping only: no votes on the dimension,
+    e.g. House-only records), formula (prior), imputed (no record), override.
     """
     from senate_sim.policy.calibration import latent_to_score
 
@@ -140,6 +144,7 @@ def score(
         if fit:
             raw = latent_to_score(d1, d2, fit)
             sigma = float(fit["sigma_score"])
+            own = fit.get("senators", {})
             scored = pd.Series(np.clip(raw, SCALE_MIN, SCALE_MAX), index=out.index)
             caucus_var = scored[src != "imputed"].groupby(out["caucus"]).var()
             sd = np.select(
@@ -148,6 +153,13 @@ def score(
                 default=np.sqrt(sigma ** 2 + out["caucus"].map(caucus_var).fillna(0.5)),
             )
             label = np.where(src == "imputed", "imputed", "fitted")
+            # Senators with their own votes on this dimension: mapping + their deviation.
+            u = out["bioguide_id"].map(lambda b: own.get(b, {}).get("u")).astype(float)
+            se = out["bioguide_id"].map(lambda b: own.get(b, {}).get("se")).astype(float)
+            has = u.notna().to_numpy() & (src != "imputed").to_numpy()
+            raw = np.where(has, raw + u.fillna(0).to_numpy(), raw)
+            sd = np.where(has, np.maximum(se.fillna(0).to_numpy(), MIN_VOTES_SD), sd).astype(float)
+            label = np.where(has, "votes", label)
         else:
             raw = dim.formula(d1, d2)
             sd = src.map(SD_BY_SOURCE).astype(float).to_numpy()

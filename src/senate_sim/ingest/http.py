@@ -6,6 +6,7 @@ parameters (api_key) removed, so keys never end up in file names.
 from __future__ import annotations
 
 import hashlib
+import re
 from pathlib import Path
 from typing import Callable
 from urllib.parse import urlencode
@@ -64,7 +65,11 @@ def cached_get(
         path.unlink()
 
     response = _session().get(url, params=params, timeout=timeout)
-    response.raise_for_status()
+    if not response.ok:
+        # Never echo API keys: requests puts them in the URL of its error message.
+        safe = re.sub(r"(api_key|key)=[^&]+", r"\1=REDACTED", response.url)
+        raise requests.HTTPError(f"{response.status_code} {response.reason} for url: {safe}",
+                                 response=response)
     if is_usable is None or is_usable(response.content):
         path.write_bytes(response.content)
     return response.content

@@ -186,6 +186,14 @@ DW-NOMINATE dim2 to a tighter one still (it is noisy in recent Congresses).
 votes and lists anyone whose observed share of +2-side votes differs from the predicted
 share by 0.4 or more over at least 3 votes (`<module>_consistency.csv`).
 
+**Senators' own votes count.** For every senator who voted on a dimension's roll calls,
+the score is the ideology mapping plus that senator's own estimated deviation (shrunk
+toward the mapping, with its standard error as the score's SD; source `votes`). The
+mapping alone is used only for senators without such votes (House-only records, source
+`fitted`) and new senators (`imputed`). The score scale is set by the spread of these
+full positions, so overrides keep their intended strength even where ideology explains
+little (defense).
+
 **Reading calibrated scores.** When the President's-party effect (gamma) is estimated, a
 score is the senator's position *outside* the President's party; the simulation adds gamma
 for members of the President's party. On `nato_interventionism` gamma is large and
@@ -217,8 +225,9 @@ python scripts\simulate_measure.py israel_arms_disapproval --runs 20000
 ```
 
 Issues whose support is moving use `alpha_mode="latest"`: the cutpoint starts at the
-family's most recent vote and drifts as a random walk to the simulation date, with the
-drift rate estimated from the family's own vote-to-vote changes (Israel arms sales: 15 to
+family's most recent vote and reverts toward the family average with an 18-month
+half-life (mean-reverting drift, so uncertainty levels off instead of growing without
+limit), with volatility estimated from the family's own vote-to-vote changes (Israel arms sales: 15 to
 40 yeas in a year). Stable issues draw from the whole family.
 
 Each run draws every senator's position error once (shared across measures on that

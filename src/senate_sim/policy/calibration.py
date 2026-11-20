@@ -86,6 +86,12 @@ class DimensionFit:
             "cv": self.cv,
             "thin_prior": self.thin,
             "items": self.items.to_dict(orient="records"),
+            # Each voting senator's own deviation from the mapping, in score units,
+            # and its standard error: their score is mapping + u (empirical Bayes).
+            "senators": {
+                r["bioguide_id"]: {"u": float(r["u_score"]), "se": float(r["se_score"])}
+                for _, r in self.deviations.iterrows()
+            },
         }
 
 
@@ -256,11 +262,13 @@ def fit_dimension(df: pd.DataFrame, dimension: str, roster_ideology: pd.DataFram
         deviations, sigma = _senator_deviations(df, eta0)
         offset = df["bioguide_id"].map(deviations.set_index("bioguide_id")["u_latent"]).to_numpy()
 
-    # Scale: mean and SD of the ideology-only latent value across the roster.
-    r = roster_ideology.dropna(subset=["d1"]).copy()
-    r["d1_sq"] = r["d1"] ** 2
-    lin = _linear(r, beta)
-    mean, sd = float(lin.mean()), float(lin.std()) or 1.0
+    # Scale: mean and SD of each voting senator's full position (ideology prediction
+    # plus their own deviation). Using the prediction alone would shrink the scale
+    # whenever ideology explains little (defense), and make every score, overrides
+    # included, too weak to matter.
+    per = df.groupby("bioguide_id")[FEATURES].first()
+    total = _linear(per, beta) + per.index.map(deviations.set_index("bioguide_id")["u_latent"]).to_numpy()
+    mean, sd = float(np.mean(total)), float(np.std(total)) or 1.0
 
     for col in ("u", "se", "u_raw", "se_raw"):
         deviations[f"{col}_score"] = SCORE_K * deviations[f"{col}_latent"] / sd
@@ -302,13 +310,14 @@ CONSISTENCY_GAP = 0.4
 
 def consistency(data: pd.DataFrame, fit: "DimensionFit", override_scores: dict[str, float]) -> pd.DataFrame:
     """Compare each senator's observed share of +2-side votes with what their final
-    score predicts (override if present, fitted mapping otherwise).
+    score predicts (override if present, otherwise mapping plus their own deviation).
 
     A large gap means the score contradicts how the senator actually voted.
     """
     df = data[(data["dimension"] == fit.dimension) & data["item_id"].isin(fit.items["item_id"])].copy()
     alpha = fit.items.set_index("item_id")["alpha"]
-    lin = _linear(df, fit.beta)
+    u = df["bioguide_id"].map(fit.deviations.set_index("bioguide_id")["u_latent"]).fillna(0.0)
+    lin = _linear(df, fit.beta) + u.to_numpy()
     ov = df["bioguide_id"].map(override_scores)
     lin_override = ov * fit.scale_sd / SCORE_K + fit.scale_mean
     lin = np.where(ov.notna(), lin_override, lin)

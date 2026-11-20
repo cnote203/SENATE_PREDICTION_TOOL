@@ -100,7 +100,9 @@ def senator_committees(get: JsonGetter, roster: pd.DataFrame) -> pd.DataFrame:
     """
     rows = []
     for _, s in roster.iterrows():
-        ids = [i for i in str(s.get("fec_ids") or "").split(",") if i]
+        raw = s.get("fec_ids")
+        raw = "" if raw is None or (isinstance(raw, float) and pd.isna(raw)) else str(raw)
+        ids = [i.strip() for i in raw.split(",") if i.strip() and i.strip().lower() != "nan"]
         how = "fec_ids"
         if not ids:
             hits = list(_pages(get, "/candidates/search/",

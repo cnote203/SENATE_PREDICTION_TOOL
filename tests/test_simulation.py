@@ -103,9 +103,16 @@ class Drift(unittest.TestCase):
     def test_latest_starts_at_most_recent_vote_and_widens(self):
         near = sim.latest_cutpoint(self.fam(), "2026-05-15")
         far = sim.latest_cutpoint(self.fam(), "2028-04-15")
-        self.assertAlmostEqual(near["alpha"], -0.6)
+        self.assertAlmostEqual(near["alpha"], -0.6, delta=0.1)
         self.assertEqual(near["latest_date"], "2026-04-15")
         self.assertGreater(far["sd"], near["sd"])
+
+    def test_reverts_toward_family_mean_and_stays_bounded(self):
+        mu = self.fam()["alpha"].mean()
+        far = sim.latest_cutpoint(self.fam(), "2031-06-01")
+        very_far = sim.latest_cutpoint(self.fam(), "2040-01-01")
+        self.assertLess(abs(far["alpha"] - mu), abs(-0.6 - mu))
+        self.assertAlmostEqual(far["sd"], very_far["sd"], delta=0.1)
 
     def test_too_few_dated_votes_falls_back(self):
         self.assertIsNone(sim.latest_cutpoint(self.fam().iloc[:2], "2027-01-01"))

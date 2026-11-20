@@ -142,14 +142,19 @@ def measure_parameters(measure: Measure, calibration: dict | None) -> dict:
 
 
 MIN_DRIFT_SD = 0.2
+# AUDIT: support on a moving issue reverts toward its long-run (family) average
+# with this half-life, so uncertainty stops growing instead of exploding.
+DRIFT_HALF_LIFE_MONTHS = 18.0
 
 
 def latest_cutpoint(fam: pd.DataFrame, as_of: str) -> dict | None:
-    """Random-walk cutpoint: start at the most recent vote, widen with time.
+    """Mean-reverting cutpoint: start at the most recent vote, revert toward the family mean.
 
-    Drift per month is estimated from changes between successive votes in the
-    family. Needs at least three dated votes; otherwise returns None and the
-    caller falls back to the family average.
+    Ornstein-Uhlenbeck: after t months the mean is mu + (latest - mu) * exp(-k t)
+    and the variance is s^2 (1 - exp(-2 k t)) / (2 k), with k = ln 2 / half-life and
+    s the per-month volatility estimated from changes between successive votes.
+    Needs at least three dated votes; otherwise returns None and the caller falls
+    back to the family average.
     """
     if "date" not in fam:
         return None
@@ -163,10 +168,14 @@ def latest_cutpoint(fam: pd.DataFrame, as_of: str) -> dict | None:
     if keep.sum() < 2:
         return None
     per_month = float(np.sqrt(np.mean(steps[keep] ** 2 / gaps[keep])))
-    months = max((pd.Timestamp(as_of) - f["_d"].iloc[-1]).days / 30.44, 0.0)
+    months = max((pd.Timestamp(as_of) - f["_d"].iloc[-1]).days / 30.44, 1.0)
+    k = np.log(2) / DRIFT_HALF_LIFE_MONTHS
+    mu, latest = float(f["alpha"].mean()), float(f["alpha"].iloc[-1])
+    mean = mu + (latest - mu) * np.exp(-k * months)
+    var = per_month ** 2 * (1 - np.exp(-2 * k * months)) / (2 * k)
     return {
-        "alpha": float(f["alpha"].iloc[-1]),
-        "sd": float(max(per_month * np.sqrt(max(months, 1.0)), MIN_DRIFT_SD)),
+        "alpha": float(mean),
+        "sd": float(max(np.sqrt(var), MIN_DRIFT_SD)),
         "latest_date": f["_d"].iloc[-1].date().isoformat(),
         "months": months,
     }
