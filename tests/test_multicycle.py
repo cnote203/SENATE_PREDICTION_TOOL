@@ -125,13 +125,14 @@ class EndToEnd(unittest.TestCase):
         mod = replace(foreign_policy.MODULE, override_path=Path("/nonexistent.csv"))
         l = {s: 0.0 for s in r["state"]}
         scen = multicycle.Scenario(president_2028="R", runs=3, inner_runs=50, seed=5)
-        res = multicycle.run(r, {}, l, assignments, mod, None,
-                             {"ndaa_passage": PRESETS["ndaa_passage"]}, scen)
+        res = multicycle.run(r, {}, l, assignments, [(mod, None, {"ndaa_passage": PRESETS["ndaa_passage"]})], scen)
         s = multicycle.summarize(res)
         self.assertEqual(sorted(s["congress"]["congress"]), [120, 121, 122])
         self.assertTrue((res["congress"].query("congress > 120")["president"] == "R").all())
         self.assertEqual(len(res["measures"]), 3 * 3)
         self.assertIn("SSFR_chair", res["leadership"].columns)
+        self.assertEqual(set(res["measures"]["measure"]), {"foreign_policy:ndaa_passage"})
+        self.assertEqual(set(s["measures_by_white_house"]["module"]), {"foreign_policy"})
 
 
 if __name__ == "__main__":

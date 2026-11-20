@@ -1,19 +1,18 @@
-"""Export model results as JSON for the web app (web/public/data).
+"""Export model results for every sector as JSON for the web app (web/public/data).
 
 Usage (PowerShell), after the pipeline has run:
     python scripts\\build_roster.py
-    python scripts\\calibrate.py
-    python scripts\\score_senators.py
+    python scripts\\calibrate.py --module all
+    python scripts\\score_senators.py --module all
     python scripts\\run_multicycle.py --president-2028 D
     python scripts\\run_multicycle.py --president-2028 R
     python scripts\\export_web.py [--runs 20000]
 
 Writes:
-    senators.json   roster, scores with uncertainty and source, committees, donors
-    measures.json   every preset simulated in the 120th Senate under each White House:
-                    stage odds, yea distribution, per-senator Yea probability, pivots
+    senators.json   roster, committees, donors, and scores per sector and dimension
+    measures.json   every sector's measures in the 120th Senate under each White House
     timeline.json   120th-122nd Congress summaries for the D and R 2028 branches
-    meta.json       dimensions, calibration summary, roll calls, data sources
+    meta.json       sectors, dimensions, calibration summaries, data sources
 """
 from __future__ import annotations
 
@@ -30,14 +29,13 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 import pandas as pd  # noqa: E402
 
-from senate_sim import config  # noqa: E402
-from senate_sim.policy import calibration, foreign_policy  # noqa: E402
-from senate_sim.simulation import PRESETS, required_defectors, simulate  # noqa: E402
+from senate_sim import config, policy  # noqa: E402
+from senate_sim.policy import calibration  # noqa: E402
+from senate_sim.simulation import position_for, required_defectors, simulate  # noqa: E402
 
 P = config.PROCESSED_DIR
 N = config.ROSTER_CONGRESS
 OUT = PROJECT_ROOT / "web" / "public" / "data"
-MODULE = foreign_policy.MODULE
 
 
 def clean(v):
@@ -51,33 +49,34 @@ def clean(v):
     return v
 
 
-def senators(baseline: pd.DataFrame, scores: pd.DataFrame, seats: pd.DataFrame,
-             donors: pd.DataFrame | None) -> list[dict]:
-    dims = MODULE.dimension_names
-    s = scores.set_index("bioguide_id")
+def load_scores(module) -> pd.DataFrame | None:
+    path = P / f"scores_{module.name}_{N}.csv"
+    return pd.read_csv(path, dtype={"bioguide_id": str}) if path.exists() else None
+
+
+def senators(baseline, scores_by_module, seats, donors) -> list[dict]:
     held = seats[seats["status"] == "member"].copy()
     held["title"] = held["title"].fillna("")
     d = donors.set_index("bioguide_id") if donors is not None else None
+    indexed = {name: s.set_index("bioguide_id") for name, s in scores_by_module.items()}
     out = []
     for _, b in baseline.iterrows():
         bid = b["bioguide_id"]
-        row = s.loc[bid]
         mine = held[held["bioguide_id"] == bid]
+        scores = {}
+        for name, s in indexed.items():
+            row = s.loc[bid]
+            dims = [c[:-3] for c in s.columns if c.endswith("_sd")]
+            scores[name] = {dim: {"score": clean(row[dim]), "sd": clean(row[f"{dim}_sd"]),
+                                  "source": clean(row[f"{dim}_source"])} for dim in dims}
         out.append({
-            "id": bid,
-            "name": b["name"],
-            "state": b["state"],
-            "caucus": b["caucus"],
-            "party": clean(b.get("api_party")),
-            "class": clean(b.get("senate_class")),
-            "seniority": clean(b.get("seniority_rank")),
-            "years": clean(b.get("senate_years")),
-            "incoming": bool(b.get("incoming", False)),
-            "newToSenate": bool(b.get("new_to_senate", False)),
+            "id": bid, "name": b["name"], "state": b["state"], "caucus": b["caucus"],
+            "party": clean(b.get("api_party")), "class": clean(b.get("senate_class")),
+            "seniority": clean(b.get("seniority_rank")), "years": clean(b.get("senate_years")),
+            "incoming": bool(b.get("incoming", False)), "newToSenate": bool(b.get("new_to_senate", False)),
             "ideology": {"d1": clean(b.get("nominate_dim1")), "d2": clean(b.get("nominate_dim2")),
                          "from": clean(b.get("score_chamber"))},
-            "scores": {dim: {"score": clean(row[dim]), "sd": clean(row[f"{dim}_sd"]),
-                             "source": clean(row[f"{dim}_source"])} for dim in dims},
+            "scores": scores,
             "committees": [{"id": r["committee_id"], "name": r["committee_name"], "tier": r["tier"],
                             "title": r["title"]} for _, r in mine.iterrows()],
             "donors": None if d is None or bid not in d.index else {
@@ -86,29 +85,35 @@ def senators(baseline: pd.DataFrame, scores: pd.DataFrame, seats: pd.DataFrame,
     return out
 
 
-def measures(scores: pd.DataFrame, cal: dict | None, runs: int) -> list[dict]:
+def measures(scores_by_module, runs: int) -> list[dict]:
     out = []
-    seats = {c: int((scores["caucus"] == c).sum()) for c in ("D", "R")}
-    for key, m in PRESETS.items():
-        entry = {"id": key, "name": m.name, "dimension": m.dimension, "plusSide": m.plus_side,
-                 "stages": [{"name": s.name, "threshold": s.threshold} for s in m.stages],
-                 "presidentPosition": m.president_position, "vetoPossible": m.veto_possible,
-                 "notes": m.notes, "byPresident": {}}
-        for pres in ("R", "D"):
-            r = simulate(scores, m, pres, cal, runs=runs, seed=11)
-            entry["byPresident"][pres] = {
-                "pPassSenate": r["p_passes_senate"],
-                "pEnacted": r["p_enacted"],
-                "pBothChambers": r.get("p_passes_both_chambers"),
-                "pOverride": r.get("p_senate_override_if_passed"),
-                "defectorsNeeded": required_defectors(seats[pres]) if m.veto_possible else None,
-                "stages": r["stages"],
-                "senatorYea": dict(zip(scores["bioguide_id"], r["senator_yea_prob"])),
-                "pivotal": r["pivotal_senators"],
-                "calibrated": r["parameters"]["calibrated"],
-                "gammaIdentified": r["parameters"]["gamma_identified"],
-            }
-        out.append(entry)
+    for module in policy.all_modules():
+        scores = scores_by_module.get(module.name)
+        if scores is None:
+            continue
+        cal = calibration.load(module.calibration_path)
+        seats = {c: int((scores["caucus"] == c).sum()) for c in ("D", "R")}
+        for key, m in module.measures.items():
+            entry = {"id": f"{module.name}:{key}", "module": module.name, "name": m.name,
+                     "dimension": m.dimension, "plusSide": m.plus_side,
+                     "stages": [{"name": s.name, "threshold": s.threshold} for s in m.stages],
+                     "vetoPossible": m.veto_possible, "notes": m.notes, "byPresident": {}}
+            for pres in ("R", "D"):
+                r = simulate(scores, m, pres, cal, runs=runs, seed=11)
+                entry["byPresident"][pres] = {
+                    "position": position_for(m, pres),
+                    "pPassSenate": r["p_passes_senate"], "pEnacted": r["p_enacted"],
+                    "pBothChambers": r.get("p_passes_both_chambers"),
+                    "pOverride": r.get("p_senate_override_if_passed"),
+                    "defectorsNeeded": required_defectors(seats[pres]) if "p_senate_override_if_passed" in r else None,
+                    "stages": r["stages"],
+                    "senatorYea": dict(zip(scores["bioguide_id"], r["senator_yea_prob"])),
+                    "pivotal": r["pivotal_senators"],
+                    "calibrated": r["parameters"]["calibrated"],
+                    "gammaIdentified": r["parameters"]["gamma_identified"],
+                }
+            out.append(entry)
+            print(f"  simulated {entry['id']}")
     return out
 
 
@@ -120,6 +125,11 @@ def timeline() -> dict:
             continue
         c = pd.read_csv(files["congress"])
         m = pd.read_csv(files["measures_by_white_house"])
+        if "module" not in m:
+            has_prefix = m["measure"].astype(str).str.contains(":")
+            # Results from before sectors were added carry bare foreign policy measure names.
+            m.loc[~has_prefix, "measure"] = "foreign_policy:" + m.loc[~has_prefix, "measure"].astype(str)
+            m["module"] = m["measure"].astype(str).str.split(":").str[0]
         l = pd.read_csv(files["leadership"])
         l["top_holders"] = l["top_holders"].map(ast.literal_eval)
         out[branch] = {
@@ -132,31 +142,32 @@ def timeline() -> dict:
     return out
 
 
-def meta(cal: dict | None) -> dict:
-    items_file = pd.read_csv(PROJECT_ROOT / "data" / "manual" / "calibration_votes.csv")
-    items_file["item_id"] = (items_file["congress"].astype(str) + "-" + items_file["session"].astype(str)
-                             + "-" + items_file["roll"].astype(str))
-    dims = []
-    for d in MODULE.dimensions:
-        fit = (cal or {}).get(d.name)
-        dims.append({
-            "id": d.name, "low": d.low, "high": d.high, "calibrated": bool(fit),
-            "gamma": clean(fit["gamma"]) if fit else None,
-            "gammaIdentified": bool(fit["gamma_identified"]) if fit else False,
-            "sigma": clean(fit["sigma_score"]) if fit else None,
-            "cv": fit.get("cv") if fit else None,
-            "rollCalls": [] if not fit else [
-                {"id": it["item_id"], "date": clean(it.get("date")), "family": it["family"],
-                 "minorityShare": clean(it.get("minority_share")),
-                 "measure": items_file.set_index("item_id")["measure"].get(it["item_id"]),
-                 "note": items_file.set_index("item_id")["note"].get(it["item_id"])}
-                for it in fit["items"]],
-        })
+def meta(committee_names: dict) -> dict:
+    items_file = pd.read_csv(PROJECT_ROOT / "data" / "manual" / "calibration_votes.csv", dtype=str)
+    modules = []
+    for module in policy.all_modules():
+        cal = calibration.load(module.calibration_path) or {}
+        dims = []
+        for d in module.dimensions:
+            fit = cal.get(d.name)
+            dims.append({
+                "id": d.name, "label": d.label, "short": d.short, "lowTag": d.low_tag, "highTag": d.high_tag,
+                "low": d.low, "high": d.high, "calibrated": bool(fit),
+                "gamma": clean(fit["gamma"]) if fit else None,
+                "gammaIdentified": bool(fit["gamma_identified"]) if fit else False,
+                "sigma": clean(fit["sigma_score"]) if fit else None,
+                "cv": fit.get("cv") if fit else None,
+                "rollCalls": [] if not fit else [
+                    {"id": it["item_id"], "date": clean(it.get("date")), "family": it["family"],
+                     "minorityShare": clean(it.get("minority_share"))} for it in fit["items"]],
+                "plannedRollCalls": int((items_file["dimension"] == d.name).sum()),
+            })
+        modules.append({"id": module.name, "label": module.label, "dimensions": dims,
+                        "committees": [{"id": c, "name": committee_names.get(c, c)} for c in module.committees]})
     return {
         "generated": date.today().isoformat(),
         "congress": N,
-        "module": MODULE.name,
-        "dimensions": dims,
+        "modules": modules,
         "sources": [
             {"name": "unitedstates/congress-legislators", "use": "roster, IDs, committees, service"},
             {"name": "Voteview", "use": "DW-NOMINATE and roll-call votes"},
@@ -172,18 +183,24 @@ def main() -> int:
     args = ap.parse_args()
 
     baseline = pd.read_csv(P / f"senate_baseline_{N}.csv", dtype={"bioguide_id": str})
-    scores = pd.read_csv(P / f"scores_{MODULE.name}_{N}.csv", dtype={"bioguide_id": str})
     seats = pd.read_csv(P / f"committee_assignments_{N}.csv", dtype={"bioguide_id": str})
     donors_path = P / f"donors_{N}.csv"
     donors = pd.read_csv(donors_path, dtype={"bioguide_id": str}) if donors_path.exists() else None
-    cal = calibration.load(MODULE.calibration_path)
+    scores_by_module = {}
+    for module in policy.all_modules():
+        s = load_scores(module)
+        if s is None:
+            print(f"note: no scores for {module.name}; run score_senators.py --module all")
+        else:
+            scores_by_module[module.name] = s
+    committee_names = seats.drop_duplicates("committee_id").set_index("committee_id")["committee_name"].to_dict()
 
     OUT.mkdir(parents=True, exist_ok=True)
     payloads = {
-        "senators.json": senators(baseline, scores, seats, donors),
-        "measures.json": measures(scores, cal, args.runs),
+        "senators.json": senators(baseline, scores_by_module, seats, donors),
+        "measures.json": measures(scores_by_module, args.runs),
         "timeline.json": timeline(),
-        "meta.json": meta(cal),
+        "meta.json": meta(committee_names),
     }
     for name, data in payloads.items():
         (OUT / name).write_text(json.dumps(data, separators=(",", ":"), default=clean))

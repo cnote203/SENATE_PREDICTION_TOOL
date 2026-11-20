@@ -334,6 +334,36 @@ Deploying: in the GitHub repository, Settings -> Pages -> Source: **GitHub Actio
 Every push to `main` that touches `web/` then rebuilds and publishes the site at
 `https://cnote203.github.io/SENATE_PREDICTION_TOOL/`.
 
+## Sectors
+
+| Sector | Module | Dimensions | Calibrated from roll calls |
+|---|---|---|---|
+| Foreign policy | `foreign_policy` | interventionism, defense budget, arms-sale oversight, China decoupling | 3 of 4 (35 votes) |
+| Healthcare | `healthcare` | coverage expansion, drug price controls, public health funding | coverage: S.3385, S.3386 (Dec 2025 ACA credit votes), H.R.1 |
+| Energy | `energy` | clean energy, fossil production, permitting reform | clean energy: H.J.Res. 35 (methane fee), H.J.Res. 87/88/89 (California waivers) |
+| Banking | `banking` | consumer finance rules, crypto support, bank regulation | consumer finance: S.J.Res. 18, 28 (CFPB CRAs); crypto: S.1582 (GENIUS), H.R. 3633 (CLARITY) |
+| AI & tech | `tech` | AI regulation, platform accountability, tech antitrust | none: the one AI roll call was 99-1; sponsorship-based overrides only |
+
+Each module (`src/senate_sim/policy/<module>.py`) defines its dimensions with labelled
+endpoints and a starting formula, its preset measures (with the White House's position
+under each party), its gatekeeping committees, an overrides CSV and a calibration file.
+
+New-sector roll calls are listed in `calibration_votes.csv` by **bill and question**
+(e.g. `S1582`, `Cloture|Passage`) instead of roll number; `calibrate.py` finds the
+matching Senate votes in Voteview and refuses any whose bill doesn't match.
+
+```powershell
+python scripts\calibrate.py --module all
+python scripts\score_senators.py --module all
+python scripts\simulate_measure.py --list
+python scripts\simulate_measure.py aca_credit_extension --module healthcare
+python scripts\run_multicycle.py --president-2028 D     # all sectors, same elections
+python scripts\export_web.py
+```
+
+Dimensions without usable roll calls keep their starting formula with wide uncertainty,
+and measures on them are labelled ILLUSTRATIVE in the web app.
+
 ## Status
 
 - [x] Project layout, config, HTTP cache
@@ -356,5 +386,7 @@ Every push to `main` that touches `web/` then rebuilds and publishes the site at
 - [x] OpenFEC PAC contributions and donor-effect test
 - [ ] Electoral-vulnerability and leadership terms in the vote model
 - [x] Multi-cycle simulation (2028 and 2030 elections, committees, White House branches)
+- [x] Healthcare, energy, banking and AI/tech sectors on the same engine
+- [ ] Run sector calibration on Voteview and commit data/calibration
 - [ ] Calibrate election constants against past Senate results
 - [ ] Electoral vulnerability in the vote model (senators up next cycle)

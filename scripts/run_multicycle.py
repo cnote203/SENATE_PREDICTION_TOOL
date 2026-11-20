@@ -22,8 +22,8 @@ import pandas as pd  # noqa: E402
 from senate_sim import config, donors, elections, multicycle  # noqa: E402
 from senate_sim.ingest import legislators  # noqa: E402
 from senate_sim.ingest.http import cached_get  # noqa: E402
-from senate_sim.policy import calibration, foreign_policy  # noqa: E402
-from senate_sim.simulation import PRESETS  # noqa: E402
+from senate_sim import policy  # noqa: E402
+from senate_sim.policy import calibration  # noqa: E402
 
 P = config.PROCESSED_DIR
 
@@ -36,6 +36,8 @@ def main() -> int:
     ap.add_argument("--runs", type=int, default=300)
     ap.add_argument("--inner-runs", type=int, default=200)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--modules", default=",".join(policy.MODULE_NAMES),
+                    help="comma-separated sectors to simulate (default: all)")
     args = ap.parse_args()
 
     baseline = pd.read_csv(P / f"senate_baseline_{config.ROSTER_CONGRESS}.csv", dtype={"bioguide_id": str})
@@ -46,14 +48,17 @@ def main() -> int:
                    if p.get("bio", {}).get("birthday")}
     lean_df = elections.state_lean(cached_get(elections.PRES_2024_URL))
     lean = lean_df.set_index("state")["lean"].to_dict()
-    cal = calibration.load(foreign_policy.MODULE.calibration_path)
+    sectors = []
+    for name in [m.strip() for m in args.modules.split(",") if m.strip()]:
+        mod = policy.get(name)
+        sectors.append((mod, calibration.load(mod.calibration_path), mod.measures))
 
     scenario = multicycle.Scenario(args.president_2028, args.env_2028, args.runs, args.inner_runs, args.seed)
     print(f"Running {args.runs} simulations (2028 President: {args.president_2028})...")
     adj = donors.load_adjustment(P, config.ROSTER_CONGRESS)
     print(f"Donor adjustment for House-only scores: {'on' if adj is not None else 'off'}")
-    result = multicycle.run(baseline, birth_years, lean, assignments, foreign_policy.MODULE, cal, PRESETS,
-                            scenario, donor_adjustment=adj)
+    print(f"Sectors: {', '.join(m.name for m, _, _ in sectors)}")
+    result = multicycle.run(baseline, birth_years, lean, assignments, sectors, scenario, donor_adjustment=adj)
     s = multicycle.summarize(result)
 
     e = result["environment_2026"]

@@ -1,8 +1,12 @@
-export const DIMENSIONS = {
-  nato_interventionism: { label: 'Interventionism', short: 'INTV', lowTag: 'RESTRAINT', highTag: 'HAWKISH' },
-  defense_budget: { label: 'Defense budget', short: 'DEF$', lowTag: 'CUT', highTag: 'INCREASE' },
-  arms_sales_oversight: { label: 'Arms-sale oversight', short: 'ARMS', lowTag: 'DEFER', highTag: 'BLOCK' },
-  china_decoupling: { label: 'China decoupling', short: 'PRC', lowTag: 'ENGAGE', highTag: 'DECOUPLE' },
+// Dimension metadata comes from meta.json (one entry per sector), keyed by dimension id.
+export function dimensionIndex(meta) {
+  const out = {}
+  for (const m of meta.modules) for (const d of m.dimensions) out[d.id] = { ...d, module: m.id }
+  return out
+}
+
+export const SECTOR_SHORT = {
+  foreign_policy: 'FOREIGN', healthcare: 'HEALTH', energy: 'ENERGY', banking: 'BANKING', tech: 'AI & TECH',
 }
 
 export const CAUCUS = {

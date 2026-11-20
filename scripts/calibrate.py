@@ -30,20 +30,19 @@ from senate_sim.policy import calibration  # noqa: E402
 ITEMS_PATH = config.PROJECT_ROOT / "data" / "manual" / "calibration_votes.csv"
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", default="foreign_policy")
-    parser.add_argument("--refresh", action="store_true")
-    parser.add_argument("--source", choices=["voteview", "senate"], default="voteview",
-                        help="where to read individual votes (senate.gov often refuses scripts)")
-    args = parser.parse_args()
+def _run(args) -> int:
 
     module = importlib.import_module(f"senate_sim.policy.{args.module}").MODULE
     targets = [d.name for d in module.dimensions if d.calibrate]
-    items = pd.read_csv(ITEMS_PATH)
+    if not targets:
+        print(f"{module.name}: no dimensions are calibrated (no usable roll calls); nothing to fit.")
+        return 0
+    items = pd.read_csv(ITEMS_PATH, dtype={"bill": str, "question": str})
     items = items[items["dimension"].isin(targets)].copy()
-    items["item_id"] = (items["congress"].astype(str) + "-" + items["session"].astype(str)
-                        + "-" + items["roll"].astype(str))
+    for col in ("bill", "question"):
+        if col not in items:
+            items[col] = ""
+        items[col] = items[col].fillna("")
 
     baseline_path = config.PROCESSED_DIR / f"senate_baseline_{config.ROSTER_CONGRESS}.csv"
     if not baseline_path.exists():
@@ -59,6 +58,30 @@ def main() -> int:
     lis_map = senate_votes.lis_to_bioguide(people)
 
     source = vote_sources.make_source(args.source, lis_map, refresh=args.refresh)
+
+    # Rows without a roll number are looked up by bill and question (Voteview only),
+    # so a citation can never point at the wrong vote.
+    rows = []
+    for _, it in items.iterrows():
+        if pd.notna(it["roll"]) and str(it["roll"]).strip() != "":
+            rows.append({**it.to_dict(), "session": int(it["session"]), "roll": int(it["roll"])})
+            continue
+        try:
+            hits = source.find(int(it["congress"]), it["bill"], it["question"] or None)
+        except Exception as exc:
+            print(f"  {it['bill']}: lookup failed ({exc}); skipped")
+            continue
+        if not hits:
+            print(f"  {it['bill']} /{it['question']}/: no matching Senate roll call (Voteview may lag); skipped")
+        for h in hits:
+            rows.append({**it.to_dict(), "session": h["session"], "roll": h["roll"]})
+    items = pd.DataFrame(rows)
+    if items.empty:
+        print("No roll calls to fit.")
+        return 1
+    items["item_id"] = (items["congress"].astype(int).astype(str) + "-" + items["session"].astype(str)
+                        + "-" + items["roll"].astype(str))
+    items = items.drop_duplicates("item_id")
     print(f"Reading {len(items)} roll calls from {source.name}...")
     frames, failed, dates = [], 0, {}
     for _, it in items.iterrows():
@@ -70,6 +93,10 @@ def main() -> int:
             if failed >= 3 and not frames:
                 print("Three failures before any success; stopping. Try the other --source.")
                 return 1
+            continue
+        if it["bill"] and source.name == "voteview" and \
+                vote_sources.normalize_bill(meta["document"]) != vote_sources.normalize_bill(it["bill"]):
+            print(f"  {it['item_id']}: Voteview lists bill {meta['document']!r}, expected {it['bill']!r}; skipped")
             continue
         dates[it["item_id"]] = str(meta.get("date", ""))[:10]
         unmapped = coded["bioguide_id"].isna().sum()
@@ -146,6 +173,25 @@ def main() -> int:
         for _, r in redundant.sort_values(["dimension", "name"]).iterrows():
             print(f"  {r['dimension']:<22} {r['name']}")
     return 0
+
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--module", default="foreign_policy", help="sector to fit, or 'all'")
+    parser.add_argument("--refresh", action="store_true")
+    parser.add_argument("--source", choices=["voteview", "senate"], default="voteview",
+                        help="where to read individual votes (senate.gov often refuses scripts)")
+    args = parser.parse_args()
+    if args.module != "all":
+        return _run(args)
+    from senate_sim import policy
+    status = 0
+    for name in policy.MODULE_NAMES:
+        print(f"\n===== {name} =====")
+        args.module = name
+        status = _run(args) or status
+    return status
 
 
 if __name__ == "__main__":

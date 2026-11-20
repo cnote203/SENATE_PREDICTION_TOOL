@@ -50,6 +50,10 @@ class Dimension:
     formula: Callable[[np.ndarray, np.ndarray], np.ndarray]  # prior, used until calibrated
     calibrate: bool = True          # False: no informative roll calls; keep the prior formula
     prior_sd: float | None = None   # SD floor when the prior formula is used
+    label: str = ""                 # display name, e.g. "Arms-sale oversight"
+    short: str = ""                 # 4-character tag for the web app
+    low_tag: str = ""               # one word for -2, e.g. "DEFER"
+    high_tag: str = ""              # one word for +2, e.g. "BLOCK"
 
 
 @dataclass(frozen=True)
@@ -60,6 +64,9 @@ class PolicyModule:
     calibration_path: Path | None = None
     notes: str = ""
     extra: dict = field(default_factory=dict)
+    label: str = ""
+    measures: dict = field(default_factory=dict)       # preset measures (simulation.Measure)
+    committees: list = field(default_factory=list)     # gatekeeping committees (thomas IDs)
 
     @property
     def dimension_names(self) -> list[str]:

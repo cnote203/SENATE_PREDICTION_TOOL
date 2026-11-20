@@ -1,36 +1,47 @@
-congress,session,roll,dimension,plus_side,family,president_party,date,measure,note
-119,1,165,arms_sales_oversight,Yea,israel_fms,R,2025-04-03,Motion to discharge S.J.Res. 33,Israel FMS; 15-82
-119,1,166,arms_sales_oversight,Yea,israel_fms,R,2025-04-03,Motion to discharge S.J.Res. 26,Israel FMS; 15-83
-119,1,306,arms_sales_oversight,Yea,gulf_fms,R,2025-06-11,Motion to discharge S.J.Res. 53,Qatar; 39-56; Paul Present
-119,1,307,arms_sales_oversight,Yea,gulf_fms,R,2025-06-11,Motion to discharge S.J.Res. 54,UAE; 39-56; Paul Present
-119,1,454,arms_sales_oversight,Yea,israel_fms,R,2025-07-30,Motion to discharge S.J.Res. 41,Israel rifles; 27-70
-119,1,455,arms_sales_oversight,Yea,israel_fms,R,2025-07-30,Motion to discharge S.J.Res. 34,Israel bombs; 24-73
-119,2,80,arms_sales_oversight,Yea,israel_fms,R,2026-04-15,Motion to discharge S.J.Res. 32,Israel bulldozers; 40-59
-118,2,292,arms_sales_oversight,Yea,israel_fms,D,2024-11-20,Motion to discharge S.J.Res. 111,Israel tank rounds under Biden; 18-79
-119,1,328,nato_interventionism,Nay,war_powers_iran,R,2025-06-27,Motion to discharge S.J.Res. 59,Iran war powers; 47-53
-119,1,608,nato_interventionism,Nay,war_powers_venezuela,R,2025-11-06,Motion to discharge S.J.Res. 90,Venezuela; 49-51
-119,2,5,nato_interventionism,Nay,war_powers_venezuela,R,2026-01-08,Motion to discharge S.J.Res. 98,Venezuela; 52-47
-119,2,9,nato_interventionism,Yea,war_powers_venezuela,R,2026-01-14,Point of order S.J.Res. 98 not privileged,Sustained 50-50 with VP; Yea is the hawkish side
-119,2,46,nato_interventionism,Nay,war_powers_iran,R,2026-03-04,Motion to discharge Iran war powers,Iran series
-119,2,58,nato_interventionism,Nay,war_powers_iran,R,2026-03,Motion to discharge Iran war powers,Iran series
-119,2,69,nato_interventionism,Nay,war_powers_iran,R,2026-03,Motion to discharge Iran war powers,Iran series
-119,2,79,nato_interventionism,Nay,war_powers_iran,R,2026-04,Motion to discharge Iran war powers,Iran series
-119,2,88,nato_interventionism,Nay,war_powers_iran,R,2026-04,Motion to discharge Iran war powers,Iran series
-119,2,113,nato_interventionism,Nay,war_powers_iran,R,2026-05,Motion to discharge Iran war powers,Iran series
-119,2,118,nato_interventionism,Nay,war_powers_iran,R,2026-05,Motion to discharge Iran war powers,Iran series
-119,2,129,nato_interventionism,Nay,war_powers_iran,R,2026-05-19,Motion to discharge S.J.Res. 185,Agreed 50-47
-119,2,174,nato_interventionism,Nay,war_powers_iran,R,2026-06,Motion to discharge Iran war powers,Iran series
-119,2,184,nato_interventionism,Nay,war_powers_iran,R,2026-06-23,H.Con.Res. 86,Agreed 50-48
-119,2,192,nato_interventionism,Nay,war_powers_iran,R,2026-06-24,Motion to proceed S.J.Res. 185,Rejected 47-50
-119,2,207,nato_interventionism,Nay,war_powers_iran,R,2026-07,Motion to discharge Iran war powers,Iran series
-119,2,216,nato_interventionism,Nay,war_powers_iran,R,2026-07-30,Motion to discharge Iran war powers,Iran series
-119,2,244,nato_interventionism,Nay,war_powers_iran,R,2026-09-24,H.Con.Res. 89,Rejected 49-50
-119,2,224,nato_interventionism,Yea,russia_sanctions,R,2026-08-07,Passage H.R. 5334,Sanctioning Russia Act; 86-11
-118,2,48,nato_interventionism,Yea,ukraine_aid,D,2024-02-13,Passage H.R. 815,Supplemental under Biden; 70-29
-118,2,154,nato_interventionism,Yea,ukraine_aid,D,2024-04-23,Motion to concur H.R. 815,Supplemental under Biden; 79-18
-119,1,500,defense_budget,Yea,ndaa_fy26,R,2025-09-02,Cloture on motion to proceed S.2296,84-14
-119,1,503,defense_budget,Yea,ndaa_fy26,R,2025-09-04,Motion to proceed S.2296,83-13
-119,1,570,defense_budget,Yea,ndaa_fy26,R,2025-10-09,Passage S.2296,77-20
-119,1,646,defense_budget,Yea,ndaa_fy26,R,2025-12-11,Motion to proceed House message S.1071,75-22
-119,1,647,defense_budget,Yea,ndaa_fy26,R,2025-12-15,Cloture motion to concur S.1071,76-20
-119,1,648,defense_budget,Yea,ndaa_fy26,R,2025-12-17,Motion to concur S.1071,Final FY26 NDAA; 77-20
+congress,session,roll,dimension,plus_side,family,president_party,date,measure,note,bill,question
+119,1,165,arms_sales_oversight,Yea,israel_fms,R,2025-04-03,Motion to discharge S.J.Res. 33,Israel FMS; 15-82,,
+119,1,166,arms_sales_oversight,Yea,israel_fms,R,2025-04-03,Motion to discharge S.J.Res. 26,Israel FMS; 15-83,,
+119,1,306,arms_sales_oversight,Yea,gulf_fms,R,2025-06-11,Motion to discharge S.J.Res. 53,Qatar; 39-56; Paul Present,,
+119,1,307,arms_sales_oversight,Yea,gulf_fms,R,2025-06-11,Motion to discharge S.J.Res. 54,UAE; 39-56; Paul Present,,
+119,1,454,arms_sales_oversight,Yea,israel_fms,R,2025-07-30,Motion to discharge S.J.Res. 41,Israel rifles; 27-70,,
+119,1,455,arms_sales_oversight,Yea,israel_fms,R,2025-07-30,Motion to discharge S.J.Res. 34,Israel bombs; 24-73,,
+119,2,80,arms_sales_oversight,Yea,israel_fms,R,2026-04-15,Motion to discharge S.J.Res. 32,Israel bulldozers; 40-59,,
+118,2,292,arms_sales_oversight,Yea,israel_fms,D,2024-11-20,Motion to discharge S.J.Res. 111,Israel tank rounds under Biden; 18-79,,
+119,1,328,nato_interventionism,Nay,war_powers_iran,R,2025-06-27,Motion to discharge S.J.Res. 59,Iran war powers; 47-53,,
+119,1,608,nato_interventionism,Nay,war_powers_venezuela,R,2025-11-06,Motion to discharge S.J.Res. 90,Venezuela; 49-51,,
+119,2,5,nato_interventionism,Nay,war_powers_venezuela,R,2026-01-08,Motion to discharge S.J.Res. 98,Venezuela; 52-47,,
+119,2,9,nato_interventionism,Yea,war_powers_venezuela,R,2026-01-14,Point of order S.J.Res. 98 not privileged,Sustained 50-50 with VP; Yea is the hawkish side,,
+119,2,46,nato_interventionism,Nay,war_powers_iran,R,2026-03-04,Motion to discharge Iran war powers,Iran series,,
+119,2,58,nato_interventionism,Nay,war_powers_iran,R,2026-03,Motion to discharge Iran war powers,Iran series,,
+119,2,69,nato_interventionism,Nay,war_powers_iran,R,2026-03,Motion to discharge Iran war powers,Iran series,,
+119,2,79,nato_interventionism,Nay,war_powers_iran,R,2026-04,Motion to discharge Iran war powers,Iran series,,
+119,2,88,nato_interventionism,Nay,war_powers_iran,R,2026-04,Motion to discharge Iran war powers,Iran series,,
+119,2,113,nato_interventionism,Nay,war_powers_iran,R,2026-05,Motion to discharge Iran war powers,Iran series,,
+119,2,118,nato_interventionism,Nay,war_powers_iran,R,2026-05,Motion to discharge Iran war powers,Iran series,,
+119,2,129,nato_interventionism,Nay,war_powers_iran,R,2026-05-19,Motion to discharge S.J.Res. 185,Agreed 50-47,,
+119,2,174,nato_interventionism,Nay,war_powers_iran,R,2026-06,Motion to discharge Iran war powers,Iran series,,
+119,2,184,nato_interventionism,Nay,war_powers_iran,R,2026-06-23,H.Con.Res. 86,Agreed 50-48,,
+119,2,192,nato_interventionism,Nay,war_powers_iran,R,2026-06-24,Motion to proceed S.J.Res. 185,Rejected 47-50,,
+119,2,207,nato_interventionism,Nay,war_powers_iran,R,2026-07,Motion to discharge Iran war powers,Iran series,,
+119,2,216,nato_interventionism,Nay,war_powers_iran,R,2026-07-30,Motion to discharge Iran war powers,Iran series,,
+119,2,244,nato_interventionism,Nay,war_powers_iran,R,2026-09-24,H.Con.Res. 89,Rejected 49-50,,
+119,2,224,nato_interventionism,Yea,russia_sanctions,R,2026-08-07,Passage H.R. 5334,Sanctioning Russia Act; 86-11,,
+118,2,48,nato_interventionism,Yea,ukraine_aid,D,2024-02-13,Passage H.R. 815,Supplemental under Biden; 70-29,,
+118,2,154,nato_interventionism,Yea,ukraine_aid,D,2024-04-23,Motion to concur H.R. 815,Supplemental under Biden; 79-18,,
+119,1,500,defense_budget,Yea,ndaa_fy26,R,2025-09-02,Cloture on motion to proceed S.2296,84-14,,
+119,1,503,defense_budget,Yea,ndaa_fy26,R,2025-09-04,Motion to proceed S.2296,83-13,,
+119,1,570,defense_budget,Yea,ndaa_fy26,R,2025-10-09,Passage S.2296,77-20,,
+119,1,646,defense_budget,Yea,ndaa_fy26,R,2025-12-11,Motion to proceed House message S.1071,75-22,,
+119,1,647,defense_budget,Yea,ndaa_fy26,R,2025-12-15,Cloture motion to concur S.1071,76-20,,
+119,1,648,defense_budget,Yea,ndaa_fy26,R,2025-12-17,Motion to concur S.1071,Final FY26 NDAA; 77-20,,
+119,,,coverage_expansion,Yea,aca_credits,R,2025-12-11,Cloture on motion to proceed S.3385 (Lower Health Care Costs Act),"Democrats' 3-year enhanced ACA credit extension; 51-48, failed",S3385,Cloture
+119,,,coverage_expansion,Nay,aca_credits,R,2025-12-11,Cloture on motion to proceed S.3386 (Health Care Freedom for Patients Act),"Crapo-Cassidy HSA alternative replacing the credits; 51-48, failed",S3386,Cloture
+119,,,coverage_expansion,Nay,reconciliation,R,2025-07-01,H.R.1 motion to proceed and passage,One Big Beautiful Bill Act incl. Medicaid cuts; passed 51-50,HR1,^On (Passage|the Motion to Proceed)
+119,,,clean_energy,Nay,methane_fee,R,2025-02-27,H.J.Res. 35 passage,CRA repeal of EPA methane waste emissions charge; 52-47,HJRES35,^On (Passage|the Joint Resolution|the Motion to Proceed)
+119,,,clean_energy,Nay,california_waivers,R,2025-05-22,H.J.Res. 87 passage,CRA: California Advanced Clean Trucks waiver,HJRES87,^On (Passage|the Joint Resolution|the Motion to Proceed)
+119,,,clean_energy,Nay,california_waivers,R,2025-05-22,H.J.Res. 88 passage,CRA: California Advanced Clean Cars II waiver; 51-44,HJRES88,^On (Passage|the Joint Resolution|the Motion to Proceed)
+119,,,clean_energy,Nay,california_waivers,R,2025-05-22,H.J.Res. 89 passage,CRA: California Low NOx (Omnibus) waiver,HJRES89,^On (Passage|the Joint Resolution|the Motion to Proceed)
+119,,,consumer_finance_regulation,Nay,cfpb_cra,R,2025-03-27,S.J.Res. 18 passage,CRA repeal of CFPB overdraft fee rule; 52-48,SJRES18,^On (Passage|the Joint Resolution|the Motion to Proceed)
+119,,,consumer_finance_regulation,Nay,cfpb_cra,R,2025-03-05,S.J.Res. 28 passage,CRA repeal of CFPB payment-apps supervision rule; 51-47,SJRES28,^On (Passage|the Joint Resolution|the Motion to Proceed)
+119,,,crypto_support,Yea,genius,R,2025-05-08,S.1582 GENIUS Act cloture and passage votes,"Stablecoin framework: cloture 48-49 (May 8), 66-32 (May 19), passage 68-30 (Jun 17)",S1582,Cloture|Passage|Motion to Proceed
+119,,,crypto_support,Yea,clarity,R,2026-09-15,H.R. 3633 CLARITY Act cloture on motion to proceed,"Crypto market structure; 49-50, failed",HR3633,Cloture

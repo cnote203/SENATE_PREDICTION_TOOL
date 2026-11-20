@@ -1,0 +1,9 @@
+bioguide_id,name,dimension,score,sd,evidence,roll_calls,verified
+H001089,Josh Hawley,ai_regulation,1.5,0.5,Co-authored a bipartisan AI oversight and liability framework with Blumenthal (2023),,no
+H001089,Josh Hawley,tech_antitrust,1.5,0.5,Long-running Big Tech antitrust advocate; author of The Tyranny of Big Tech (2021),,no
+B001277,Richard Blumenthal,ai_regulation,1.5,0.5,Co-authored the bipartisan AI oversight framework with Hawley (2023),,no
+B001277,Richard Blumenthal,platform_accountability,2.0,0.4,Lead sponsor of the Kids Online Safety Act,,no
+B001243,Marsha Blackburn,platform_accountability,2.0,0.4,Republican co-lead of the Kids Online Safety Act,,no
+W000817,Elizabeth Warren,tech_antitrust,2.0,0.4,Proposed breaking up large technology platforms (2019),,no
+K000367,Amy Klobuchar,tech_antitrust,1.5,0.4,Lead sponsor of the American Innovation and Choice Online Act,,no
+C001098,Ted Cruz,ai_regulation,-1.5,0.5,Championed the federal moratorium on state AI laws and a light-touch AI sandbox,,no

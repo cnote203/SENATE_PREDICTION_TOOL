@@ -25,10 +25,7 @@ from senate_sim.policy.base import score  # noqa: E402
 N = config.ROSTER_CONGRESS
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--module", default="foreign_policy")
-    args = parser.parse_args()
+def _run(args) -> int:
 
     module = importlib.import_module(f"senate_sim.policy.{args.module}").MODULE
     baseline_path = config.PROCESSED_DIR / f"senate_baseline_{N}.csv"
@@ -69,6 +66,23 @@ def main() -> int:
         print(f"\n{d}\n  highest: " + ", ".join(f"{n} {v:+.2f}" for n, v in zip(top["name"], top[d]))
               + "\n  lowest:  " + ", ".join(f"{n} {v:+.2f}" for n, v in zip(low["name"], low[d])))
     return 0
+
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--module", default="foreign_policy",
+                        help="sector to score, or 'all'")
+    args = parser.parse_args()
+    if args.module != "all":
+        return _run(args)
+    from senate_sim import policy
+    status = 0
+    for name in policy.MODULE_NAMES:
+        print(f"\n===== {name} =====")
+        args.module = name
+        status = _run(args) or status
+    return status
 
 
 if __name__ == "__main__":

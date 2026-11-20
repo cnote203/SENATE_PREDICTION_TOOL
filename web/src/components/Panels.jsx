@@ -1,4 +1,4 @@
-import { CAUCUS, DIMENSIONS, SOURCE, fmtScore, money, scoreColor } from '../util.js'
+import { CAUCUS, SOURCE, fmtScore, money, scoreColor } from '../util.js'
 
 export function ScoreBar({ score, sd, source, compact }) {
   const x = (v) => ((Math.max(-2, Math.min(2, v)) + 2) / 4) * 100
@@ -26,12 +26,13 @@ export function ScoreBar({ score, sd, source, compact }) {
   )
 }
 
-export function Dossier({ s, dimension, onClose, meta }) {
-  const dims = Object.keys(DIMENSIONS)
+export function Dossier({ s, sector, dimension, onClose, meta, onSector }) {
   const cauc = CAUCUS[s.caucus]
   const tags = []
   if (s.incoming) tags.push(s.newToSenate ? 'INCOMING · FRESHMAN' : 'INCOMING · RETURNING')
   if (s.party && s.party.startsWith('Indep')) tags.push('INDEPENDENT')
+  const mod = meta.modules.find((m) => m.id === sector)
+  const others = meta.modules.filter((m) => m.id !== sector)
   return (
     <aside className="panel dossier">
       <header>
@@ -50,19 +51,38 @@ export function Dossier({ s, dimension, onClose, meta }) {
         <div><b>{s.ideology.d1 == null ? '—' : s.ideology.d1.toFixed(2)}</b><span>DW-NOMINATE</span></div>
       </div>
 
-      <h3>Positions <small>−2 … +2 · band = ±1 SD</small></h3>
-      {dims.map((d) => {
-        const v = s.scores[d]
+      <h3>{mod.label} <small>−2 … +2 · band = ±1 SD</small></h3>
+      {mod.dimensions.map((d) => {
+        const v = s.scores[sector]?.[d.id]
+        if (!v) return null
         return (
-          <div key={d} className={`dimrow ${d === dimension ? 'active' : ''}`}>
+          <div key={d.id} className={`dimrow ${d.id === dimension ? 'active' : ''}`}>
             <div className="dimname">
-              {DIMENSIONS[d].label}
-              <span className="ends">{DIMENSIONS[d].lowTag} ↔ {DIMENSIONS[d].highTag}</span>
+              {d.label}
+              <span className="ends">{d.lowTag} ↔ {d.highTag}</span>
             </div>
             <ScoreBar score={v.score} sd={v.sd} source={v.source} />
           </div>
         )
       })}
+
+      <h3>Other sectors <small>click to switch</small></h3>
+      <div className="profile-grid">
+        {others.map((m) => (
+          <div key={m.id} className="profile-sector" onClick={() => onSector(m.id)}>
+            <div className="ps-name">{m.label}</div>
+            {m.dimensions.map((d) => {
+              const v = s.scores[m.id]?.[d.id]
+              return (
+                <div key={d.id} className="ps-row" title={`${d.label}: ${fmtScore(v?.score)} (${SOURCE[v?.source]?.label ?? '—'})`}>
+                  <span className="ps-dim">{d.short}</span>
+                  <ScoreBar score={v?.score} sd={v?.sd} compact />
+                </div>
+              )
+            })}
+          </div>
+        ))}
+      </div>
 
       <h3>Committees <small>projected, 120th Congress</small></h3>
       {s.committees.length === 0 ? (
@@ -73,9 +93,9 @@ export function Dossier({ s, dimension, onClose, meta }) {
             .slice()
             .sort((a, b) => (a.title ? -1 : 1) - (b.title ? -1 : 1) || a.tier.localeCompare(b.tier))
             .map((c) => (
-              <li key={c.id}>
+              <li key={c.id} className={mod.committees.some((x) => x.id === c.id) ? 'relevant' : ''}>
                 <span className={`tier t-${c.tier.replace(' ', '')}`}>{c.tier}</span>
-                <span className="cname">{c.name.replace('Senate Committee on ', '').replace('Senate Select Committee on ', '')}</span>
+                <span className="cname">{c.name.replace('Senate Committee on ', '').replace('Senate Select Committee on ', '').replace('Special Committee on ', '')}</span>
                 {c.title && <span className="ctitle">{c.title}</span>}
               </li>
             ))}
@@ -95,22 +115,25 @@ export function Dossier({ s, dimension, onClose, meta }) {
   )
 }
 
-export function Briefing({ senators, dimension, meta, onSelect, colorMode }) {
-  const scored = senators.filter((s) => s.scores[dimension].score != null)
-  const sorted = scored.slice().sort((a, b) => a.scores[dimension].score - b.scores[dimension].score)
+export function Briefing({ senators, sector, dimension, meta, onSelect }) {
+  const mod = meta.modules.find((m) => m.id === sector)
+  const dimMeta = mod.dimensions.find((d) => d.id === dimension)
+  const val = (s) => s.scores[sector]?.[dimension]
+  const scored = senators.filter((s) => val(s)?.score != null)
+  const sorted = scored.slice().sort((a, b) => val(a).score - val(b).score)
   const mean = (c) => {
-    const v = scored.filter((s) => s.caucus === c).map((s) => s.scores[dimension].score)
+    const v = scored.filter((s) => s.caucus === c).map((s) => val(s).score)
     return v.reduce((a, b) => a + b, 0) / v.length
   }
-  const dimMeta = meta.dimensions.find((d) => d.id === dimension)
+  const committeeIds = mod.committees.map((c) => c.id)
   const leaders = senators
-    .flatMap((s) => s.committees.filter((c) => c.title && ['SSFR', 'SSAS', 'SSAP', 'SLIN'].includes(c.id)).map((c) => ({ s, c })))
-    .sort((a, b) => a.c.id.localeCompare(b.c.id) || (a.c.title === 'Chair' ? -1 : 1))
-  const sources = scored.reduce((m, s) => ((m[s.scores[dimension].source] = (m[s.scores[dimension].source] ?? 0) + 1), m), {})
+    .flatMap((s) => s.committees.filter((c) => c.title && committeeIds.includes(c.id)).map((c) => ({ s, c })))
+    .sort((a, b) => committeeIds.indexOf(a.c.id) - committeeIds.indexOf(b.c.id) || (a.c.title === 'Chair' ? -1 : 1))
+  const sources = scored.reduce((m, s) => ((m[val(s).source] = (m[val(s).source] ?? 0) + 1), m), {})
   return (
     <aside className="panel briefing">
-      <div className="kicker">DIMENSION BRIEF</div>
-      <h2>{DIMENSIONS[dimension].label}</h2>
+      <div className="kicker">{mod.label.toUpperCase()} · DIMENSION BRIEF</div>
+      <h2>{dimMeta.label}</h2>
       <p className="ends-desc">
         <span style={{ color: scoreColor(-2) }}>−2 · {dimMeta.low}</span>
         <span style={{ color: scoreColor(2) }}>+2 · {dimMeta.high}</span>
@@ -126,8 +149,10 @@ export function Briefing({ senators, dimension, meta, onSelect, colorMode }) {
           {dimMeta.gammaIdentified && ` President’s-party effect ${dimMeta.gamma > 0 ? '+' : ''}${dimMeta.gamma.toFixed(2)} (latent).`}
           {dimMeta.cv?.within_party_accuracy && ` Held-out within-party accuracy ${(dimMeta.cv.within_party_accuracy * 100).toFixed(0)}%.`}
         </p>
+      ) : dimMeta.plannedRollCalls > 0 ? (
+        <div className="warn">CALIBRATION PENDING · {dimMeta.plannedRollCalls} roll calls queued. Scores use the starting formula until calibrate.py runs.</div>
       ) : (
-        <p className="muted small">No clean roll calls in the 119th Senate: scores use the starting formula with wide uncertainty.</p>
+        <div className="warn">ILLUSTRATIVE · No usable roll calls in the 119th Senate. Scores use the starting formula with wide uncertainty.</div>
       )}
 
       <h3>Poles</h3>
@@ -138,7 +163,7 @@ export function Briefing({ senators, dimension, meta, onSelect, colorMode }) {
               <li key={s.id} onClick={() => onSelect(s.id)}>
                 <span className="dot" style={{ background: CAUCUS[s.caucus].color }} />
                 <span className="pname">{s.name}</span>
-                <span className="pval" style={{ color: scoreColor(s.scores[dimension].score) }}>{fmtScore(s.scores[dimension].score)}</span>
+                <span className="pval" style={{ color: scoreColor(val(s).score) }}>{fmtScore(val(s).score)}</span>
               </li>
             ))}
           </ul>

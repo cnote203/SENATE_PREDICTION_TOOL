@@ -298,3 +298,36 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .seat, .seat-in, .ticker-track, .sigil span { transition: none; animation: none; }
 }
+
+/* Sector switcher */
+.sectors {
+  display: flex; gap: 0; border-bottom: 1px solid var(--line); background: rgba(4, 7, 12, 0.6);
+  padding: 0 28px; overflow-x: auto; position: relative; z-index: 2;
+}
+.sectors button {
+  background: none; border: none; border-bottom: 2px solid transparent; padding: 11px 18px 9px;
+  display: grid; gap: 3px; text-align: left; color: var(--muted); transition: all 0.2s; min-width: 132px;
+}
+.sectors button:hover { color: var(--ink); background: rgba(25, 211, 255, 0.04); }
+.sectors button.on { color: var(--ink); border-bottom-color: var(--amber); background: linear-gradient(180deg, transparent, rgba(255, 176, 32, 0.07)); }
+.s-name { font-family: var(--mono); font-weight: 800; font-size: 12px; letter-spacing: 0.22em; }
+.sectors button.on .s-name { color: var(--amber); text-shadow: 0 0 14px rgba(255, 176, 32, 0.45); }
+.s-meta { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.16em; color: var(--dim); }
+.d-flag { color: var(--dim); font-size: 11px; margin-left: 2px; }
+
+.warn {
+  margin-top: 10px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; line-height: 1.6;
+  color: var(--amber); border: 1px dashed rgba(255, 176, 32, 0.5); background: rgba(255, 176, 32, 0.05);
+  padding: 8px 10px; border-radius: 3px;
+}
+
+/* Cross-sector profile */
+.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.profile-sector { border: 1px solid var(--line); border-radius: 3px; padding: 8px 9px; cursor: pointer; transition: border-color 0.2s; }
+.profile-sector:hover { border-color: var(--cyan); }
+.ps-name { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.16em; color: var(--amber); margin-bottom: 6px; text-transform: uppercase; }
+.ps-row { display: grid; grid-template-columns: 34px 1fr; gap: 6px; align-items: center; margin-bottom: 5px; }
+.ps-dim { font-family: var(--mono); font-size: 8.5px; color: var(--dim); letter-spacing: 0.08em; }
+.scorebar.compact .track { height: 5px; }
+.scorebar.compact .pin { height: 11px; top: -3px; width: 3px; }
+.committees li.relevant .cname { color: var(--cyan); }

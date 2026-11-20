@@ -145,9 +145,14 @@ def leadership_of(assignments: pd.DataFrame, committee_ids: list[str]) -> dict:
 
 
 def run(baseline: pd.DataFrame, birth_years: dict, lean: dict, assignments_120: pd.DataFrame,
-        module: base.PolicyModule, calibration: dict | None, measures: dict[str, Measure],
-        scenario: Scenario, donor_adjustment=None) -> dict:
+        sectors: list[tuple], scenario: Scenario, donor_adjustment=None) -> dict:
+    """Simulate every sector against the same elections and committees.
+
+    sectors: (module, calibration, measures) tuples. Measure keys in the output
+    are "<module>:<measure>".
+    """
     rng = np.random.default_rng(scenario.seed)
+    committee_ids = sorted({c for module, _, _ in sectors for c in (module.committees or [])})
     env26, env26_se, n26 = environment_2026(baseline, lean)
     env28_mean = scenario.env_2028_mean if scenario.env_2028_mean is not None else elections.ENV_RETENTION * env26
 
@@ -174,15 +179,12 @@ def run(baseline: pd.DataFrame, birth_years: dict, lean: dict, assignments_120: 
             n = c["congress"]
             roster, president = rosters[n], presidents[n]
             majority = control(roster, president)
-            scores = base.score(roster.assign(name=roster["name"].fillna(roster["bioguide_id"])),
-                                module, calibration, strict_overrides=False,
-                                donor_adjustment=donor_adjustment)
-            scores = scores.merge(roster[["bioguide_id"]], on="bioguide_id")
+            named = roster.assign(name=roster["name"].fillna(roster["bioguide_id"]))
 
             assign, _ = committees.project(membership, roster[["bioguide_id", "caucus"]], new_majority=majority)
             assign = fill_vacancies(rng, assign, roster, majority)
             membership = assignments_to_membership(assign)
-            leader_rows.append({"run": r, "congress": n, **leadership_of(assign, config.FOREIGN_POLICY_COMMITTEES)})
+            leader_rows.append({"run": r, "congress": n, **leadership_of(assign, committee_ids)})
 
             d_seats = int((roster["caucus"] == "D").sum())
             congress_rows.append({
@@ -190,13 +192,18 @@ def run(baseline: pd.DataFrame, birth_years: dict, lean: dict, assignments_120: 
                 "d_seats": d_seats, "new_senators": int(roster["incoming"].sum()) if n > 120 else 0,
                 "national_2028": national28, "d_electoral_votes": d_ev, "env_2030": env30,
             })
-            for key, m in measures.items():
-                res = simulate(scores, replace(m, as_of=c["as_of"]), president, calibration,
-                               runs=scenario.inner_runs, seed=int(rng.integers(1 << 31)))
-                last = list(res["stages"].values())[-1]
-                measure_rows.append({"run": r, "congress": n, "measure": key,
-                                     "p_passes_senate": res["p_passes_senate"], "p_enacted": res["p_enacted"],
-                                     "yeas_median": last["yeas_median"]})
+            for module, calibration, measures in sectors:
+                scores = base.score(named, module, calibration, strict_overrides=False,
+                                    donor_adjustment=donor_adjustment)
+                scores = scores.merge(roster[["bioguide_id"]], on="bioguide_id")
+                for key, m in measures.items():
+                    res = simulate(scores, replace(m, as_of=c["as_of"]), president, calibration,
+                                   runs=scenario.inner_runs, seed=int(rng.integers(1 << 31)))
+                    last = list(res["stages"].values())[-1]
+                    measure_rows.append({"run": r, "congress": n, "module": module.name,
+                                         "measure": f"{module.name}:{key}",
+                                         "p_passes_senate": res["p_passes_senate"], "p_enacted": res["p_enacted"],
+                                         "yeas_median": last["yeas_median"]})
 
     return {
         "environment_2026": {"estimate": env26, "se": env26_se, "seats": n26, "env_2028_mean": env28_mean},
@@ -217,10 +224,12 @@ def summarize(result: dict) -> dict[str, pd.DataFrame]:
         new_senators_mean=("new_senators", "mean"),
     ).reset_index()
     by_wh = m.merge(c[["run", "congress", "president"]], on=["run", "congress"])
-    measures = by_wh.groupby(["measure", "congress"]).agg(
+    if "module" not in by_wh:
+        by_wh["module"] = by_wh["measure"].str.split(":").str[0]
+    measures = by_wh.groupby(["module", "measure", "congress"]).agg(
         p_passes_senate=("p_passes_senate", "mean"), p_enacted=("p_enacted", "mean"),
         yeas_median=("yeas_median", "median")).reset_index()
-    measures_wh = by_wh.groupby(["measure", "congress", "president"]).agg(
+    measures_wh = by_wh.groupby(["module", "measure", "congress", "president"]).agg(
         p_passes_senate=("p_passes_senate", "mean"), p_enacted=("p_enacted", "mean"),
         yeas_median=("yeas_median", "median"), runs=("run", "nunique")).reset_index()
     leaders = []

@@ -55,7 +55,7 @@ class Measure:
     family: str | None
     plus_side: str                 # "Yea" if voting Yea is the +2 side of the dimension
     stages: list[Stage]
-    president_position: str | None  # "oppose" | "support" | None
+    president_position: str | dict | None  # "oppose" | "support" | None, or {"R": ..., "D": ...}
     veto_possible: bool = False
     tau: float = 0.15               # caucus shock SD; larger for issues whose salience is moving
     alpha_shift: float = 0.0        # manual cutpoint shift (e.g. for salience), latent units
@@ -69,31 +69,18 @@ class Measure:
     notes: str = ""
 
 
-PRESETS = {
-    "israel_arms_disapproval": Measure(
-        "Joint resolution of disapproval: arms sale to Israel", "arms_sales_oversight",
-        "israel_fms", "Yea", [Stage("discharge", "majority"), Stage("passage", "majority")],
-        president_position="oppose", veto_possible=True, tau=0.5, house_pass_prob=0.3,
-        alpha_mode="latest",
-        notes="Support moved from 15 to 40 yeas in a year: the cutpoint starts at the latest "
-              "vote and drifts from there, and tau is wide.",
-    ),
-    "gulf_arms_disapproval": Measure(
-        "Joint resolution of disapproval: arms sale to a Gulf state", "arms_sales_oversight",
-        "gulf_fms", "Yea", [Stage("discharge", "majority"), Stage("passage", "majority")],
-        president_position="oppose", veto_possible=True, tau=0.3, house_pass_prob=0.3,
-    ),
-    "iran_war_powers": Measure(
-        "War powers joint resolution (Iran)", "nato_interventionism", "war_powers_iran", "Nay",
-        [Stage("discharge", "majority"), Stage("passage", "majority")],
-        president_position="oppose", veto_possible=True, tau=0.15, house_pass_prob=0.5,
-    ),
-    "ndaa_passage": Measure(
-        "NDAA: cloture and passage", "defense_budget", "ndaa_fy26", "Yea",
-        [Stage("cloture", "cloture"), Stage("passage", "majority")],
-        president_position="support", veto_possible=False, tau=0.2,
-    ),
-}
+def position_for(measure: "Measure", president: str) -> str | None:
+    """The White House's position: a fixed string, or a dict keyed by President's party."""
+    pos = measure.president_position
+    return pos.get(president) if isinstance(pos, dict) else pos
+
+
+def __getattr__(name):
+    # Back-compatibility: foreign policy presets now live with their module.
+    if name == "PRESETS":
+        from senate_sim.policy.foreign_policy import MODULE
+        return MODULE.measures
+    raise AttributeError(name)
 
 
 def _passes(yeas: np.ndarray, nays: np.ndarray, threshold: str, tie_passes: bool) -> np.ndarray:
@@ -201,7 +188,8 @@ def simulate(
     yea_is_plus = measure.plus_side.lower() == "yea"
 
     # Ties go the White House's way (the Vice President votes).
-    tie_passes = measure.president_position == "support"
+    position = position_for(measure, president)
+    tie_passes = position == "support"
 
     eps = rng.normal(0, 1, (runs, n)) * sd                      # once per run
     alpha = rng.normal(p["alpha_mean"], p["alpha_sd"], runs)[:, None]
@@ -252,7 +240,7 @@ def simulate(
         "p_passes_senate": p_senate,
         **results,
     }
-    if measure.veto_possible and measure.president_position == "oppose":
+    if measure.veto_possible and position == "oppose":
         # Override vote: same senators, fresh noise, two-thirds of those voting.
         latent = base_latent + rng.normal(0, 1, (runs, n))
         plus = latent > 0

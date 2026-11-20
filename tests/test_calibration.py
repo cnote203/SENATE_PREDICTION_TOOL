@@ -213,12 +213,16 @@ class Fitter(unittest.TestCase):
 class CalibrationItemsFile(unittest.TestCase):
     def test_items_file_well_formed(self):
         path = Path(__file__).resolve().parents[1] / "data" / "manual" / "calibration_votes.csv"
-        items = pd.read_csv(path)
-        dims = {d.name for d in foreign_policy.MODULE.dimensions if d.calibrate}
+        items = pd.read_csv(path, dtype={"bill": str, "question": str})
+        from senate_sim import policy
+        dims = {d.name for m in policy.all_modules() for d in m.dimensions if d.calibrate}
         self.assertTrue(set(items["dimension"]) <= dims)
         self.assertTrue(items["plus_side"].isin(["Yea", "Nay"]).all())
         self.assertTrue(items["president_party"].isin(["D", "R"]).all())
-        self.assertFalse(items.duplicated(["congress", "session", "roll"]).any())
+        with_roll = items[items["roll"].notna()]
+        self.assertFalse(with_roll.duplicated(["congress", "session", "roll"]).any())
+        # Every row is identified by a roll number or by a bill to look up.
+        self.assertTrue((items["roll"].notna() | items["bill"].fillna("").ne("")).all())
         self.assertNotIn("china_decoupling", set(items["dimension"]))
 
 

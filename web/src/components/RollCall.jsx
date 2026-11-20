@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { CAUCUS, DIMENSIONS, THRESHOLD_LABEL, lastName, pct, thresholdNeed } from '../util.js'
+import { CAUCUS, THRESHOLD_LABEL, lastName, pct, thresholdNeed } from '../util.js'
 
 const ATTENDANCE = 0.97
 const STEP_MS = 55
@@ -62,7 +62,8 @@ function Histogram({ hist, need, mark }) {
   )
 }
 
-export function RollCallPanel({ measures, measureId, setMeasureId, president, setPresident, senators, roll, onSelect }) {
+export function RollCallPanel({ measures, measureId, setMeasureId, president, setPresident, senators, roll, onSelect, dims, sectorLabel }) {
+  const DIMENSIONS = dims
   const m = measures.find((x) => x.id === measureId)
   const r = m.byPresident[president]
   const final = m.stages[m.stages.length - 1]
@@ -78,7 +79,7 @@ export function RollCallPanel({ measures, measureId, setMeasureId, president, se
 
   return (
     <aside className="panel rollcall">
-      <div className="kicker">ROLL CALL SIMULATOR · 120TH CONGRESS</div>
+      <div className="kicker">ROLL CALL SIMULATOR · {sectorLabel.toUpperCase()} · 120TH CONGRESS</div>
       <div className="measure-list">
         {measures.map((x) => (
           <button key={x.id} className={`measure ${x.id === measureId ? 'on' : ''}`} onClick={() => { setMeasureId(x.id); roll.reset() }}>
@@ -97,6 +98,7 @@ export function RollCallPanel({ measures, measureId, setMeasureId, president, se
         ))}
       </div>
 
+      {!r.calibrated && <div className="warn">ILLUSTRATIVE · No fitted roll calls behind this measure yet: default cutpoint and slope.</div>}
       <div className="odds">
         {m.stages.map((s) => (
           <div key={s.name}>
@@ -125,7 +127,8 @@ export function RollCallPanel({ measures, measureId, setMeasureId, president, se
       <Histogram hist={st.yeas_hist} need={thresholdNeed(final.threshold, 97)} mark={done ? yeas : null} />
       <p className="muted small">
         Median {st.yeas_median} yeas (10–90%: {st.yeas_p10_p90[0]}–{st.yeas_p10_p90[1]}). A Yea is a vote to {yeaLabel.toLowerCase()}.
-        {m.vetoPossible && r.defectorsNeeded != null && ` Overriding a veto needs ${r.defectorsNeeded} senators from the President's party at full attendance.`}
+        {r.position && ` The White House ${r.position === 'support' ? 'supports' : 'opposes'} it.`}
+        {r.defectorsNeeded != null && ` Overriding a veto needs ${r.defectorsNeeded} senators from the President's party at full attendance.`}
         {!r.gammaIdentified && r.calibrated && president === 'D' && ' Only Trump-era votes exist for this dimension, so the Democratic White House case is an extrapolation.'}
       </p>
 

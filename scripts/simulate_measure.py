@@ -3,9 +3,10 @@
 Usage (PowerShell):
     python scripts\\score_senators.py
     python scripts\\simulate_measure.py israel_arms_disapproval [--runs 20000]
+    python scripts\\simulate_measure.py aca_credit_extension --module healthcare
     python scripts\\simulate_measure.py --list
 
-Presets live in senate_sim/simulation.py (PRESETS).
+Presets live in each sector's module (senate_sim/policy/<module>.py, MEASURES).
 """
 from __future__ import annotations
 
@@ -19,8 +20,9 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 import pandas as pd  # noqa: E402
 
 from senate_sim import config  # noqa: E402
-from senate_sim.policy import calibration, foreign_policy  # noqa: E402
-from senate_sim.simulation import PRESETS, required_defectors, simulate  # noqa: E402
+from senate_sim import policy  # noqa: E402
+from senate_sim.policy import calibration  # noqa: E402
+from senate_sim.simulation import required_defectors, simulate  # noqa: E402
 
 
 def main() -> int:
@@ -28,20 +30,27 @@ def main() -> int:
     parser.add_argument("preset", nargs="?")
     parser.add_argument("--runs", type=int, default=10000)
     parser.add_argument("--list", action="store_true")
+    parser.add_argument("--module", default="foreign_policy", choices=policy.MODULE_NAMES)
     args = parser.parse_args()
 
     if args.list or not args.preset:
-        for k, m in PRESETS.items():
-            print(f"{k:<26} {m.name}")
+        for mod in policy.all_modules():
+            for k, m in mod.measures.items():
+                print(f"{mod.name:<15} {k:<32} {m.name}")
         return 0
-    measure = PRESETS[args.preset]
+    module = policy.get(args.module)
+    if args.preset not in module.measures:
+        owner = [m.name for m in policy.all_modules() if args.preset in m.measures]
+        print(f"{args.preset!r} is not a {module.name} measure" + (f"; try --module {owner[0]}" if owner else ""))
+        return 1
+    measure = module.measures[args.preset]
 
-    path = config.PROCESSED_DIR / f"scores_foreign_policy_{config.ROSTER_CONGRESS}.csv"
+    path = config.PROCESSED_DIR / f"scores_{module.name}_{config.ROSTER_CONGRESS}.csv"
     if not path.exists():
-        print(f"Missing {path}. Run scripts\\score_senators.py first.")
+        print(f"Missing {path}. Run scripts\\score_senators.py --module {module.name} first.")
         return 1
     scores = pd.read_csv(path)
-    cal = calibration.load(foreign_policy.MODULE.calibration_path)
+    cal = calibration.load(module.calibration_path)
 
     print(f"{measure.name}\n{'-' * len(measure.name)}")
     if not cal:

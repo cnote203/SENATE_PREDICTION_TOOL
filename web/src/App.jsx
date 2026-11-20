@@ -3,7 +3,7 @@ import Hemicycle from './components/Hemicycle.jsx'
 import { Briefing, Dossier } from './components/Panels.jsx'
 import { RollCallPanel, useRollCall } from './components/RollCall.jsx'
 import Timeline from './components/Timeline.jsx'
-import { CAUCUS, DIMENSIONS, SOURCE, pct, probColor, scoreColor } from './util.js'
+import { CAUCUS, SECTOR_SHORT, SOURCE, dimensionIndex, pct, probColor, scoreColor } from './util.js'
 
 const BASE = import.meta.env.BASE_URL
 const load = (f) => fetch(`${BASE}data/${f}`).then((r) => {
@@ -19,10 +19,11 @@ export default function App() {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
   const [mode, setMode] = useState('chamber')
+  const [sector, setSector] = useState('foreign_policy')
   const [dimension, setDimension] = useState('arms_sales_oversight')
   const [colorMode, setColorMode] = useState('score')
   const [selected, setSelected] = useState(null)
-  const [measureId, setMeasureId] = useState('israel_arms_disapproval')
+  const [measureId, setMeasureId] = useState('foreign_policy:israel_arms_disapproval')
   const [president, setPresident] = useState('R')
   const [branch, setBranch] = useState('D')
 
@@ -32,7 +33,9 @@ export default function App() {
       .catch((e) => setError(String(e)))
   }, [])
 
-  const measure = data?.measures.find((m) => m.id === measureId)
+  const dims = useMemo(() => (data ? dimensionIndex(data.meta) : {}), [data])
+  const sectorMeasures = data ? data.measures.filter((m) => (m.module ?? 'foreign_policy') === sector) : []
+  const measure = sectorMeasures.find((m) => m.id === measureId) ?? sectorMeasures[0]
   const yeaProb = measure?.byPresident[president].senatorYea ?? {}
   const roll = useRollCall(data?.senators ?? [], yeaProb)
 
@@ -42,18 +45,31 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  const switchSector = (id) => {
+    if (!data || id === sector) return
+    const mod = data.meta.modules.find((m) => m.id === id)
+    setSector(id)
+    setDimension(mod.dimensions.find((d) => d.calibrated)?.id ?? mod.dimensions[0].id)
+    const first = data.measures.find((m) => m.module === id)
+    if (first) setMeasureId(first.id)
+    roll.reset()
+  }
+
+  const score = (s) => s.scores[sector]?.[dimension]
   const order = useMemo(() => {
     if (!data) return []
     const key = mode === 'rollcall'
       ? (s) => yeaProb[s.id] ?? 0.5
-      : (s) => s.scores[dimension].score ?? 0
+      : (s) => s.scores[sector]?.[dimension]?.score ?? 0
     return data.senators.slice().sort((a, b) => key(a) - key(b) || a.name.localeCompare(b.name)).map((s) => s.id)
-  }, [data, dimension, mode, yeaProb])
+  }, [data, dimension, mode, yeaProb, sector])
 
   if (error) return <div className="boot err">DATA LINK FAILED · {error}<br />Run scripts/export_web.py and rebuild.</div>
   if (!data) return <div className="boot">ESTABLISHING DATA LINK<span className="blink">_</span></div>
 
   const { senators, measures, timeline, meta } = data
+  const mod = meta.modules.find((m) => m.id === sector)
+  const dim = dims[dimension]
   const sel = senators.find((s) => s.id === selected)
   const dCount = senators.filter((s) => s.caucus === 'D').length
   const rCount = senators.length - dCount
@@ -72,19 +88,19 @@ export default function App() {
     colorOf = (s) => CAUCUS[s.caucus].color
   } else if (colorMode === 'uncertainty') {
     colorOf = (s) => {
-      const sd = s.scores[dimension].sd ?? 1
+      const sd = score(s)?.sd ?? 1
       const a = Math.max(0.12, Math.min(1, 1 - (sd - 0.15) / 0.85))
       return `rgba(232,246,255,${a.toFixed(2)})`
     }
   } else if (colorMode === 'evidence') {
-    colorOf = (s) => SOURCE_COLOR[s.scores[dimension].source] ?? '#3a4250'
+    colorOf = (s) => SOURCE_COLOR[score(s)?.source] ?? '#3a4250'
   } else {
-    colorOf = (s) => scoreColor(s.scores[dimension].score)
+    colorOf = (s) => scoreColor(score(s)?.score)
   }
 
-  const r = measure.byPresident[president]
+  const r = measure?.byPresident[president]
   const ticker = measures.flatMap((m) => ['R', 'D'].map((p) =>
-    `${m.name.replace('Joint resolution of disapproval: ', '').toUpperCase()} · ${p === 'R' ? 'GOP' : 'DEM'} WHITE HOUSE · SENATE ${pct(m.byPresident[p].pPassSenate)} · LAW ${pct(m.byPresident[p].pEnacted, 1)}`))
+    `${SECTOR_SHORT[m.module] ?? ''} · ${m.name.replace('Joint resolution of disapproval: ', '').toUpperCase()} · ${p === 'R' ? 'GOP' : 'DEM'} WH · SENATE ${pct(m.byPresident[p].pPassSenate)} · LAW ${pct(m.byPresident[p].pEnacted, 1)}${m.byPresident[p].calibrated ? '' : ' · ILLUSTRATIVE'}`))
 
   const tally = Object.values(roll.votes)
   const center = mode === 'rollcall' ? (
@@ -94,7 +110,7 @@ export default function App() {
         <tspan dx="18" className="c-sep">—</tspan>
         <tspan dx="18" className="c-n">{tally.filter((v) => v === 'N').length}</tspan>
       </text>
-      <text x="450" y="412" className="c-small">{tally.length ? 'YEA — NAY' : `P(PASS SENATE) ${pct(r.pPassSenate, 1)}`}</text>
+      <text x="450" y="412" className="c-small">{tally.length ? 'YEA — NAY' : `P(PASS SENATE) ${pct(r?.pPassSenate, 1)}`}</text>
       <text x="450" y="432" className="c-tiny">← NAY · ORDERED BY YEA ODDS · YEA →</text>
     </>
   ) : (
@@ -104,8 +120,8 @@ export default function App() {
         <tspan dx="18" className="c-sep">|</tspan>
         <tspan dx="18" className="c-r">{rCount}</tspan>
       </text>
-      <text x="450" y="412" className="c-small">{DIMENSIONS[dimension].label.toUpperCase()}</text>
-      <text x="450" y="432" className="c-tiny">← {DIMENSIONS[dimension].lowTag} · ORDERED BY SCORE · {DIMENSIONS[dimension].highTag} →</text>
+      <text x="450" y="412" className="c-small">{dim.label.toUpperCase()}</text>
+      <text x="450" y="432" className="c-tiny">← {dim.lowTag} · ORDERED BY SCORE · {dim.highTag} →</text>
     </>
   )
 
@@ -117,7 +133,7 @@ export default function App() {
           <div className="sigil" aria-hidden="true"><span /><span /><span /></div>
           <div>
             <h1>SENATE SITUATION BOARD</h1>
-            <div className="sub">FOREIGN POLICY · 120TH CONGRESS PROJECTION · MODEL OUTPUT {meta.generated}</div>
+            <div className="sub">120TH CONGRESS PROJECTION · {meta.modules.length} POLICY SECTORS · MODEL OUTPUT {meta.generated}</div>
           </div>
         </div>
         <nav className="modes">
@@ -127,21 +143,34 @@ export default function App() {
         </nav>
       </header>
 
+      <nav className="sectors" aria-label="Policy sector">
+        {meta.modules.map((m) => {
+          const fitted = m.dimensions.filter((d) => d.calibrated).length
+          return (
+            <button key={m.id} className={sector === m.id ? 'on' : ''} onClick={() => switchSector(m.id)}>
+              <span className="s-name">{SECTOR_SHORT[m.id] ?? m.label}</span>
+              <span className="s-meta">{fitted}/{m.dimensions.length} CALIBRATED</span>
+            </button>
+          )
+        })}
+      </nav>
+
       <div className="ticker" aria-hidden="true">
         <div className="ticker-track">{[...ticker, ...ticker].map((t, i) => <span key={i}>{t}</span>)}</div>
       </div>
 
       {mode === 'timeline' ? (
-        <Timeline timeline={timeline} measures={measures} branch={branch} setBranch={setBranch} />
+        <Timeline timeline={timeline} measures={measures} branch={branch} setBranch={setBranch} sector={sector} meta={meta} />
       ) : (
         <main className="grid">
           <section className="stage">
             {mode === 'chamber' && (
               <div className="controls">
                 <div className="dims">
-                  {Object.entries(DIMENSIONS).map(([k, d]) => (
-                    <button key={k} className={dimension === k ? 'on' : ''} onClick={() => setDimension(k)}>
+                  {mod.dimensions.map((d) => (
+                    <button key={d.id} className={dimension === d.id ? 'on' : ''} onClick={() => setDimension(d.id)}>
                       <span className="d-short">{d.short}</span>{d.label}
+                      {!d.calibrated && <span className="d-flag" title="Not calibrated to roll calls">◌</span>}
                     </button>
                   ))}
                 </div>
@@ -153,19 +182,12 @@ export default function App() {
                 </div>
               </div>
             )}
-            <Hemicycle
-              senators={senators}
-              order={order}
-              colorOf={colorOf}
-              selected={selected}
-              onSelect={setSelected}
-              center={center}
-            />
+            <Hemicycle senators={senators} order={order} colorOf={colorOf} selected={selected} onSelect={setSelected} center={center} />
             {mode === 'chamber' && colorMode === 'score' && (
               <div className="legend">
-                <span>−2 {DIMENSIONS[dimension].lowTag}</span>
+                <span>−2 {dim.lowTag}</span>
                 <div className="grad" />
-                <span>{DIMENSIONS[dimension].highTag} +2</span>
+                <span>{dim.highTag} +2</span>
               </div>
             )}
             {mode === 'chamber' && colorMode === 'evidence' && (
@@ -184,12 +206,13 @@ export default function App() {
           </section>
 
           {sel ? (
-            <Dossier s={sel} dimension={mode === 'rollcall' ? measure.dimension : dimension} onClose={() => setSelected(null)} meta={meta} />
-          ) : mode === 'rollcall' ? (
-            <RollCallPanel measures={measures} measureId={measureId} setMeasureId={setMeasureId} president={president}
-              setPresident={setPresident} senators={senators} roll={roll} onSelect={setSelected} />
+            <Dossier s={sel} sector={sector} dimension={mode === 'rollcall' ? measure?.dimension : dimension}
+              onClose={() => setSelected(null)} meta={meta} onSector={switchSector} />
+          ) : mode === 'rollcall' && measure ? (
+            <RollCallPanel measures={sectorMeasures} measureId={measure.id} setMeasureId={setMeasureId} president={president}
+              setPresident={setPresident} senators={senators} roll={roll} onSelect={setSelected} dims={dims} sectorLabel={mod.label} />
           ) : (
-            <Briefing senators={senators} dimension={dimension} meta={meta} onSelect={setSelected} colorMode={colorMode} />
+            <Briefing senators={senators} sector={sector} dimension={dimension} meta={meta} onSelect={setSelected} />
           )}
         </main>
       )}

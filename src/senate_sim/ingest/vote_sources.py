@@ -17,6 +17,7 @@ votes columns: bioguide_id, party (D/R/I), vote_cast, yea (1.0 / 0.0 / NaN)
 from __future__ import annotations
 
 import io
+import re
 from pathlib import Path
 
 import numpy as np
@@ -31,6 +32,23 @@ PARTY = {100: "D", 200: "R", 328: "I"}
 # Voteview cast codes: 1-3 yea (incl. paired/announced), 4-6 nay, 7-9 present or not voting.
 CAST = {1: "Yea", 2: "Yea", 3: "Yea", 4: "Nay", 5: "Nay", 6: "Nay",
         7: "Present", 8: "Not Voting", 9: "Not Voting"}
+
+
+def normalize_bill(text) -> str:
+    """'S.J.Res. 18' and 'SJRES18' both become 'SJRES18'."""
+    return re.sub(r"[^A-Z0-9]", "", str(text or "").upper())
+
+
+def find_voteview(rollcalls: pd.DataFrame, bill: str, question: str | None) -> list[dict]:
+    """Senate roll calls on a bill whose question matches a regular expression."""
+    rc = rollcalls.copy()
+    rc["_bill"] = rc["bill_number"].map(normalize_bill)
+    hit = rc[rc["_bill"] == normalize_bill(bill)]
+    if question:
+        hit = hit[hit["vote_question"].fillna("").str.contains(question, case=False, regex=True)]
+    return [{"session": int(r["session"]), "roll": int(r["clerk_rollnumber"]),
+             "date": str(r.get("date", ""))[:10], "question": str(r.get("vote_question", ""))}
+            for _, r in hit.sort_values(["session", "clerk_rollnumber"]).iterrows()]
 
 
 def first_year(congress: int) -> int:
@@ -61,6 +79,10 @@ class VoteviewSource:
     def get(self, congress: int, session: int, roll: int):
         rollcalls, votes, members = self.load(congress)
         return select_voteview(rollcalls, votes, members, congress, session, roll)
+
+    def find(self, congress: int, bill: str, question: str | None = None) -> list[dict]:
+        rollcalls, _, _ = self.load(congress)
+        return find_voteview(rollcalls, bill, question)
 
 
 def prepare_voteview(rollcalls, votes, members, congress):
@@ -109,6 +131,9 @@ class SenateSource:
 
     def __init__(self, lis_map: dict[str, str], cache_dir: Path = config.RAW_DIR, refresh: bool = False):
         self.lis_map, self.cache_dir, self.refresh = lis_map, cache_dir, refresh
+
+    def find(self, congress: int, bill: str, question: str | None = None) -> list[dict]:
+        raise LookupError("Looking roll calls up by bill needs --source voteview.")
 
     def get(self, congress: int, session: int, roll: int):
         meta, members = senate_votes.fetch_vote(congress, session, roll, self.cache_dir, self.refresh)

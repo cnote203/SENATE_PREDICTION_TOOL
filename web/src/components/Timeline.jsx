@@ -2,12 +2,6 @@ import { CAUCUS, lastName, pct } from '../util.js'
 
 const YEARS = { 120: '2027–28', 121: '2029–30', 122: '2031–32' }
 const EVENT = { 120: 'CURRENT SENATE', 121: 'AFTER 2028 · CLASS 3', 122: 'AFTER 2030 MIDTERM · CLASS 1' }
-const POSTS = [
-  ['SSFR_chair', 'Foreign Relations'],
-  ['SSAS_chair', 'Armed Services'],
-  ['SSAP_chair', 'Appropriations'],
-  ['SLIN_chair', 'Intelligence'],
-]
 
 const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1)
 
@@ -23,17 +17,20 @@ function SeatStrip({ mean, p10, p90 }) {
   return <div className="strip">{cells}</div>
 }
 
-export default function Timeline({ timeline, measures, branch, setBranch }) {
+export default function Timeline({ timeline, measures, branch, setBranch, sector, meta }) {
   const t = timeline[branch]
   if (!t) {
     return <div className="panel"><p className="muted">No multi-cycle results exported yet. Run run_multicycle.py for both branches, then export_web.py.</p></div>
   }
   const mname = Object.fromEntries(measures.map((m) => [m.id, m.name]))
+  const mod = meta.modules.find((m) => m.id === sector)
+  const POSTS = mod.committees.map((c) => [`${c.id}_chair`, c.name.replace('Senate Committee on ', '').replace('Senate Select Committee on ', '')])
+  const sectorMeasures = t.measures.filter((m) => (m.module ?? 'foreign_policy') === sector)
   return (
     <section className="timeline">
       <div className="tl-head">
         <div>
-          <div className="kicker">PROJECTION · {t.measures[0]?.runs ?? '—'} SIMULATED ELECTION PATHS PER BRANCH</div>
+          <div className="kicker">{mod.label.toUpperCase()} · {t.measures[0]?.runs ?? '—'} SIMULATED ELECTION PATHS PER BRANCH</div>
           <h2>2027 → 2032</h2>
         </div>
         <div className="wh">
@@ -63,7 +60,8 @@ export default function Timeline({ timeline, measures, branch, setBranch }) {
               <div className="tl-range">10–90% range: {c.d_seats_p10.toFixed(0)}–{c.d_seats_p90.toFixed(0)} D seats{n > 120 ? ` · ${c.new_senators_mean.toFixed(1)} new senators` : ''}</div>
 
               <h4>Measures</h4>
-              {t.measures.filter((m) => m.congress === n).map((m) => (
+              {sectorMeasures.length === 0 && <p className="muted small">No {mod.label.toLowerCase()} results in this export: rerun run_multicycle.py.</p>}
+              {sectorMeasures.filter((m) => m.congress === n).map((m) => (
                 <div key={m.measure} className="tl-measure">
                   <span className="tm-name">{cap(mname[m.measure]?.replace('Joint resolution of disapproval: ', '') ?? m.measure)}</span>
                   <span className="tm-bar"><span style={{ width: `${m.p_passes_senate * 100}%` }} /></span>
@@ -72,7 +70,7 @@ export default function Timeline({ timeline, measures, branch, setBranch }) {
                 </div>
               ))}
 
-              <h4>Chairs</h4>
+              <h4>{mod.label} chairs</h4>
               {POSTS.map(([post, label]) => {
                 const l = t.leadership.find((x) => x.congress === n && x.post === post)
                 const top = l ? Object.entries(l.holders) : []
