@@ -1,0 +1,1699 @@
+{
+ "generated": "2026-11-20T17:25Z",
+ "window": {
+  "from": "2026-11-06",
+  "to": "2026-12-18"
+ },
+ "source": "Congress.gov API committee-meeting endpoint",
+ "hearings": [
+  {
+   "id": "338806",
+   "congress": 119,
+   "start": "2026-11-10T15:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Nick Oberheiden, of Texas, to be Ambassador to the Arab Republic of Egypt, Peter Snyder, of Virginia, to be Ambassador to the Republic of Ecuador, Kimberly Greenwood, of Tennessee, to be Ambassador to Barbados, and to serve concurrently and without additional compensation as Ambassador to the Federation of Saint Kitts and Nevis, Saint Lucia, Antigua and Barbuda, the Commonwealth of Dominica, Grenada, and Saint Vincent and the Grenadines, Paul Kalmbach, of Ohio, to be Ambassador to the Republic of Paraguay, Jane Lynch, of North Carolina, to be Ambassador at Large for International Religious Freedom, Wesley Hunt, of Texas, to be Ambassador to the Kingdom of Saudi Arabia, Dino LaVerghetta, of Virginia, to be Ambassador to the State of Kuwait, Devin Kennington, of California, to be Ambassador to the Federal Republic of Somalia, Junaid Munir, of Michigan, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Djibouti, and Paul Watzlavick, of Texas, a Career Member of the Senior Foreign Service, Class of Counselor, to be Ambassador to the Republic of Suriname, all of the Department of State.",
+   "committees": [
+    {
+     "id": "SSFR",
+     "name": "Senate Committee on Foreign Relations",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Foreign Relations"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "419 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1022-19",
+    "PN1022-28",
+    "PN1022-33",
+    "PN1273-06",
+    "PN1273-09",
+    "PN1273-13",
+    "PN1273-15",
+    "PN1273-16",
+    "PN1273-24",
+    "PN1366-02"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Nick Oberheiden, of Texas, to be Ambassador to the Arab Republic of Egypt, Peter Snyder, of Virginia, to be Ambassador to the Republic of Ecuador, Kimberly Greenwood, of Tennessee, to be Ambassador to Barbados, and to serve concurrently and without additional compensation as Ambassador to the Federation of Saint Kitts and Nevis, Saint Lucia, Antigua and Barbuda, the Commonwealth of Dominica, Grenada, and Saint Vincent and the Grenadines, Paul Kalmbach, of Ohio, to be Ambassador to the Republic of Paraguay, Jane Lynch, of North Carolina, to be Ambassador at Large for International Religious Freedom, Wesley Hunt, of Texas, to be Ambassador to the Kingdom of Saudi Arabia, Dino LaVerghetta, of Virginia, to be Ambassador to the State of Kuwait, Devin Kennington, of California, to be Ambassador to the Federal Republic of Somalia, Junaid Munir, of Michigan, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Djibouti, and Paul Watzlavick, of Texas, a Career Member of the Senior Foreign Service, Class of Counselor, to be Ambassador to the Republic of Suriname, all of the Department of State.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338806",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Nick Oberheiden, of Texas, to be Ambassador to the Arab Republic of Egypt, Peter Snyder, of Virginia, to be Ambassador to the Republic of Ecuador, Kimberly Greenwood, of Tennessee, to be Ambassador to Barbados, and to serve concurrently and without additional compensation as Ambassador to the Federation of Saint Kitts and Nevis, Saint Lucia, Antigua and Barbuda, the Commonwealth of Dominica, Grenada, and Saint Vincent and the Grenadines, Paul Kalmbach, of Ohio, to be Ambassador to the Republic of Paraguay, Jane Lynch, of North Carolina, to be Ambassador at Large for International Religious Freedom, Wesley Hunt, of Texas, to be Ambassador to the Kingdom of Saudi Arabia, Dino LaVerghetta, of Virginia, to be Ambassador to the State of Kuwait, Devin Kennington, of California, to be Ambassador to the Federal Republic of Somalia, Junaid Munir, of Michigan, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Djibouti, and Paul Watzlavick, of Texas, a Career Member of the Senior Foreign Service, Class of Counselor, to be Ambassador to the Republic of Suriname, all of the Department of State.",
+     "url": "https://www.senate.gov/isvp/?comm=foreign&filename=foreign111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338806",
+    "committee": "http://www.foreign.senate.gov",
+    "committeeHearings": "http://www.foreign.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Foreign+Relations+Hearings+to+examine+the+nominations+of+Nick+Oberheiden%2C+of+Texas%2C+to+be+Ambassad"
+   },
+   "updated": "2026-11-09T23:54:17Z"
+  },
+  {
+   "id": "338803",
+   "congress": 119,
+   "start": "2026-11-10T15:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Leslie Becera, of Virginia, to be an Assistant Secretary of Transportation, Danielle Thumann Severs, of North Carolina, to be a Member of the Federal Communications Commission, and Joshua Shoemaker, of Virginia, to be Chief Financial Officer, and Robert Steinau, of Maryland, to be Inspector General, both of the National Aeronautics and Space Administration.",
+   "committees": [
+    {
+     "id": "SSCM",
+     "name": "Senate Committee on Commerce, Science, and Transportation",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Commerce, Science, and Transportation"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "253 Russell Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1255-01",
+    "PN1255-18",
+    "PN1273-20",
+    "PN1367-07"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Leslie Becera, of Virginia, to be an Assistant Secretary of Transportation, Danielle Thumann Severs, of North Carolina, to be a Member of the Federal Communications Commission, and Joshua Shoemaker, of Virginia, to be Chief Financial Officer, and Robert Steinau, of Maryland, to be Inspector General, both of the National Aeronautics and Space Administration.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338803",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Leslie Becera, of Virginia, to be an Assistant Secretary of Transportation, Danielle Thumann Severs, of North Carolina, to be a Member of the Federal Communications Commission, and Joshua Shoemaker, of Virginia, to be Chief Financial Officer, and Robert Steinau, of Maryland, to be Inspector General, both of the National Aeronautics and Space Administration.",
+     "url": "https://www.senate.gov/isvp/?comm=commerce&filename=commerce111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338803",
+    "committee": "http://www.commerce.senate.gov",
+    "committeeHearings": "http://www.commerce.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Commerce%2C+Science%2C+and+Transportation+Hearings+to+examine+the+nominations+of+Leslie+Becera%2C+of+Virginia%2C+to+be+an+Assi"
+   },
+   "updated": "2026-11-09T23:09:15Z"
+  },
+  {
+   "id": "338802",
+   "congress": 119,
+   "start": "2026-11-10T15:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nomination of Justin Schwab, of the District of Columbia, to be an Assistant Administrator of the Environmental Protection Agency.",
+   "committees": [
+    {
+     "id": "SSEV",
+     "name": "Senate Committee on Environment and Public Works",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Environment and Public Works"
+    }
+   ],
+   "sectors": [
+    "energy"
+   ],
+   "location": "406 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1366-05"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nomination of Justin Schwab, of the District of Columbia, to be an Assistant Administrator of the Environmental Protection Agency.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338802",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nomination of Justin Schwab, of the District of Columbia, to be an Assistant Administrator of the Environmental Protection Agency.",
+     "url": "https://www.senate.gov/isvp/?comm=epw&filename=epw111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338802",
+    "committee": "http://www.epw.senate.gov",
+    "committeeHearings": "http://www.epw.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Environment+and+Public+Works+Hearings+to+examine+the+nomination+of+Justin+Schwab%2C+of+the+District+of+Columbia"
+   },
+   "updated": "2026-11-09T23:09:16Z"
+  },
+  {
+   "id": "338801",
+   "congress": 119,
+   "start": "2026-11-10T15:45:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nomination of Catherine Eschbach, of Texas, to be General Counsel of the Equal Employment Opportunity Commission.",
+   "committees": [
+    {
+     "id": "SSHR",
+     "name": "Senate Committee on Health, Education, Labor, and Pensions",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Health, Education, Labor, and Pensions"
+    }
+   ],
+   "sectors": [
+    "healthcare"
+   ],
+   "location": "430 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1273-05"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nomination of Catherine Eschbach, of Texas, to be General Counsel of the Equal Employment Opportunity Commission.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338801",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nomination of Catherine Eschbach, of Texas, to be General Counsel of the Equal Employment Opportunity Commission.",
+     "url": "https://www.senate.gov/isvp/?comm=help&filename=help111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338801",
+    "committee": "http://www.help.senate.gov",
+    "committeeHearings": "http://www.help.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Health%2C+Education%2C+Labor%2C+and+Pensions+Hearings+to+examine+the+nomination+of+Catherine+Eschbach%2C+of+Texas%2C+to+be+Genera"
+   },
+   "updated": "2026-11-10T19:08:24Z"
+  },
+  {
+   "id": "338805",
+   "congress": 119,
+   "start": "2026-11-10T16:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Francis Browne, of the District of Columbia, to be an Under Secretary, and Robert Stebbins, of New York, to be General Counsel, both of the Department of the Treasury, and Christopher Abbott, of Virginia, to be an Assistant Secretary of Commerce.",
+   "committees": [
+    {
+     "id": "SSFI",
+     "name": "Senate Committee on Finance",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Finance"
+    }
+   ],
+   "sectors": [
+    "banking",
+    "energy",
+    "healthcare"
+   ],
+   "location": "215 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1273-01",
+    "PN1273-03",
+    "PN1273-21"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Francis Browne, of the District of Columbia, to be an Under Secretary, and Robert Stebbins, of New York, to be General Counsel, both of the Department\u00a0of the Treasury, and Christopher Abbott, of Virginia, to be an Assistant Secretary of Commerce.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338805",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Francis Browne, of the District of Columbia, to be an Under Secretary, and Robert Stebbins, of New York, to be General Counsel, both of the Department\u00a0of the Treasury, and Christopher Abbott, of Virginia, to be an Assistant Secretary of Commerce.",
+     "url": "https://www.senate.gov/isvp/?comm=finance&filename=finance111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338805",
+    "committee": "http://www.finance.senate.gov",
+    "committeeHearings": "http://www.finance.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Finance+Hearings+to+examine+the+nominations+of+Francis+Browne%2C+of+the+District+of+Columb"
+   },
+   "updated": "2026-11-09T23:09:16Z"
+  },
+  {
+   "id": "338807",
+   "congress": 119,
+   "start": "2026-11-10T16:00:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider S.5289, to protect the right to the free exercise of religion, and the nominations of Lee Philip Rudofsky, of Arkansas, to be United States Circuit Judge for the Eighth Circuit, Daniel Lewis Ballou, to be United States District Judge for the Eastern District of Kentucky, Richard Wesley Bennett, to be United States District Judge for the Southern District of Texas, Courtney Leigh Coker, to be United States District Judge for the Northern District of Texas, Robert E. Long, Jr., to be United States District Judge for the Middle District of Florida, Peter M. Mansfield, to be United States District Judge for the Eastern District of Louisiana, Jesus A. Osete, to be United States District Judge for the Western District of Missouri, Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Kyle Frederick Reardon, to be United States District Judge for the District of Alaska, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, and Stephen Husk, of Virginia, to be a Commissioner of the United States Parole Commission, and Samuel King Lee, to be United States Attorney for the Eastern District of Tennessee, Gretchen C.F. Shappert, of Virginia, to be United States Attorney for the District of Guam and concurrently United States Attorney for the District of the Northern Mariana Islands, Robert Troester, to be United States Attorney for the Western District of Oklahoma, Reid McAlister Creswell, to be United States Marshal for the District of South Carolina, James Christopher Edge, to be United States Marshal for the Western District of North Carolina, Christopher Walter Inabinett, to be United States Marshal for the Middle District of Alabama, and James Richard Jackson, to be United States Marshal for the Eastern District of Texas, all of the Department of Justice; to be immediately followed by an open hearing in SD-562 to examine the nominations of Gregory Todd Butler, of Mississippi, to be United States Circuit Judge for the Fifth Circuit, Samuel D. Adkisson, to be United States District Judge for the Eastern District of Tennessee, Philip Axt, to be United States District Judge for the District of North Dakota, Bradford J. Kelley, to be United States District Judge for the Eastern District of Louisiana, and Arthur Kleinschmidt, of Virginia, to be an Assistant Attorney General, Department of Justice.",
+   "committees": [
+    {
+     "id": "SSJU",
+     "name": "Senate Committee on the Judiciary",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Judiciary"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "562 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [
+    "S 5289"
+   ],
+   "nominations": [
+    "PN1272-03",
+    "PN1272-04",
+    "PN1272-05",
+    "PN1272-11",
+    "PN1272-13",
+    "PN1272-16",
+    "PN1022-37",
+    "PN1201-06",
+    "PN1272-07",
+    "PN1272-08",
+    "PN1272-10",
+    "PN1272-15",
+    "PN1273-10",
+    "PN1273-11",
+    "PN1273-14",
+    "PN1367-01",
+    "PN1367-02",
+    "PN1367-05",
+    "PN1272-01",
+    "PN1272-02",
+    "PN1272-06",
+    "PN1428",
+    "PN1429-02"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider S.5289, to protect the right to the free exercise of religion, and the nominations of Lee Philip Rudofsky, of Arkansas, to be United States Circuit Judge for the Eighth Circuit, Daniel Lewis Ballou, to be United States District Judge for the Eastern District of Kentucky, Richard Wesley Bennett, to be United States District Judge for the Southern District of Texas, Courtney Leigh Coker, to be United States District Judge for the Northern District of Texas, Robert E. Long, Jr., to be United States District Judge for the Middle District of Florida, Peter M. Mansfield, to be United States District Judge for the Eastern District of Louisiana, Jesus A. Osete, to be United States District Judge for the Western District of Missouri, Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Kyle Frederick Reardon, to be United States District Judge for the District of Alaska, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, and Stephen Husk, of Virginia, to be a Commissioner of the United States Parole Commission, and Samuel King Lee, to be United States Attorney for the Eastern District of Tennessee, Gretchen C.F. Shappert, of Virginia, to be United States Attorney for the District of Guam and concurrently United States Attorney for the District of the Northern Mariana Islands, Robert Troester, to be United States Attorney for the Western District of Oklahoma, Reid McAlister Creswell, to be United States Marshal for the District of South Carolina, James Christopher Edge, to be United States Marshal for the Western District of North Carolina, Christopher Walter Inabinett, to be United States Marshal for the Middle District of Alabama, and James Richard Jackson, to be United States Marshal for the Eastern District of Texas, all of the Department of Justice; to be immediately followed by an open hearing in SD-562 to examine the nominations of Gregory Todd Butler, of Mississippi, to be United States Circuit Judge for the Fifth Circuit, Samuel D. Adkisson, to be United States District Judge for the Eastern District of Tennessee, Philip Axt, to be United States District Judge for the District of North Dakota, Bradford J. Kelley, to be United States District Judge for the Eastern District of Louisiana, and Arthur Kleinschmidt, of Virginia, to be an Assistant Attorney General, Department of Justice.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338807",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider S.5289, to protect the right to the free exercise of religion, and the nominations of Lee Philip Rudofsky, of Arkansas, to be United States Circuit Judge for the Eighth Circuit, Daniel Lewis Ballou, to be United States District Judge for the Eastern District of Kentucky, Richard Wesley Bennett, to be United States District Judge for the Southern District of Texas, Courtney Leigh Coker, to be United States District Judge for the Northern District of Texas, Robert E. Long, Jr., to be United States District Judge for the Middle District of Florida, Peter M. Mansfield, to be United States District Judge for the Eastern District of Louisiana, Jesus A. Osete, to be United States District Judge for the Western District of Missouri, Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Kyle Frederick Reardon, to be United States District Judge for the District of Alaska, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, and Stephen Husk, of Virginia, to be a Commissioner of the United States Parole Commission, and Samuel King Lee, to be United States Attorney for the Eastern District of Tennessee, Gretchen C.F. Shappert, of Virginia, to be United States Attorney for the District of Guam and concurrently United States Attorney for the District of the Northern Mariana Islands, Robert Troester, to be United States Attorney for the Western District of Oklahoma, Reid McAlister Creswell, to be United States Marshal for the District of South Carolina, James Christopher Edge, to be United States Marshal for the Western District of North Carolina, Christopher Walter Inabinett, to be United States Marshal for the Middle District of Alabama, and James Richard Jackson, to be United States Marshal for the Eastern District of Texas, all of the Department of Justice; to be immediately followed by an open hearing in SD-562 to examine the nominations of Gregory Todd Butler, of Mississippi, to be United States Circuit Judge for the Fifth Circuit, Samuel D. Adkisson, to be United States District Judge for the Eastern District of Tennessee, Philip Axt, to be United States District Judge for the District of North Dakota, Bradford J. Kelley, to be United States District Judge for the Eastern District of Louisiana, and Arthur Kleinschmidt, of Virginia, to be an Assistant Attorney General, Department of Justice.",
+     "url": "https://www.senate.gov/isvp/?comm=judiciary&filename=judiciary111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338807",
+    "committee": "http://www.judiciary.senate.gov",
+    "committeeHearings": "http://www.judiciary.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+the+Judiciary+Business+meeting+to+consider+S.5289%2C+to+protect+the+right+to+the+free+exercise+o"
+   },
+   "updated": "2026-11-10T19:08:25Z"
+  },
+  {
+   "id": "338804",
+   "congress": 119,
+   "start": "2026-11-10T16:45:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Gregory Ibach, of Nebraska, to be Under Secretary of Agriculture for Trade and Foreign Agricultural Affairs, Department of Agriculture, and Carl Bednarski, of Michigan, John Grunewald II, of Oklahoma, and James Russell Middleton, of Virginia, each to be a Member of the Farm Credit Administration Board, Farm Credit Administration.",
+   "committees": [
+    {
+     "id": "SSAF",
+     "name": "Senate Committee on Agriculture, Nutrition, and Forestry",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Agriculture, Nutrition, and Forestry"
+    }
+   ],
+   "sectors": [
+    "banking"
+   ],
+   "location": "106 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1365-01",
+    "PN1365-02",
+    "PN1365-03",
+    "PN1367-04"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Gregory Ibach, of Nebraska, to be Under Secretary of Agriculture for Trade and Foreign Agricultural Affairs, Department of Agriculture, and Carl Bednarski, of Michigan, John Grunewald II, of Oklahoma, and James Russell Middleton, of Virginia, each to be a Member of the Farm Credit Administration Board, Farm Credit Administration.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338804",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Gregory Ibach, of Nebraska, to be Under Secretary of Agriculture for Trade and Foreign Agricultural Affairs, Department of Agriculture, and Carl Bednarski, of Michigan, John Grunewald II, of Oklahoma, and James Russell Middleton, of Virginia, each to be a Member of the Farm Credit Administration Board, Farm Credit Administration.",
+     "url": "https://www.senate.gov/isvp/?comm=ag&filename=ag111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338804",
+    "committee": "http://www.agriculture.senate.gov",
+    "committeeHearings": "http://www.agriculture.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Agriculture%2C+Nutrition%2C+and+Forestry+Hearings+to+examine+the+nominations+of+Gregory+Ibach%2C+of+Nebraska%2C+to+be+Under+S"
+   },
+   "updated": "2026-11-09T23:54:24Z"
+  },
+  {
+   "id": "338844",
+   "congress": 119,
+   "start": "2026-11-16T05:00:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider the nominations of Gregory Ibach, of Nebraska, to be Under Secretary of Agriculture for Trade and Foreign Agricultural Affairs, and Carl Bednarski, of Michigan, John Grunewald II, of Oklahoma, and James Russell Middleton, of Virginia, each to be a Member of the Farm Credit Administration Board, Farm Credit Administration.",
+   "committees": [
+    {
+     "id": "SSAF",
+     "name": "Senate Committee on Agriculture, Nutrition, and Forestry",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Agriculture, Nutrition, and Forestry"
+    }
+   ],
+   "sectors": [
+    "banking"
+   ],
+   "location": "216 Capitol (Senate side)",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1098-01",
+    "PN1365-01",
+    "PN1365-02",
+    "PN1365-03",
+    "PN1367-04"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider the nominations of Gregory Ibach, of Nebraska, to be Under Secretary of Agriculture for Trade and Foreign Agricultural Affairs, and Carl Bednarski, of Michigan, John Grunewald II, of Oklahoma, and James Russell Middleton, of Virginia, each to be a Member of the Farm Credit Administration Board, Farm Credit Administration.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338844",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider the nominations of Gregory Ibach, of Nebraska, to be Under Secretary of Agriculture for Trade and Foreign Agricultural Affairs, and Carl Bednarski, of Michigan, John Grunewald II, of Oklahoma, and James Russell Middleton, of Virginia, each to be a Member of the Farm Credit Administration Board, Farm Credit Administration.",
+     "url": "https://www.senate.gov/isvp/?comm=ag&filename=ag111626",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338844",
+    "committee": "http://www.agriculture.senate.gov",
+    "committeeHearings": "http://www.agriculture.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Agriculture%2C+Nutrition%2C+and+Forestry+Business+meeting+to+consider+the+nominations+of+Gregory+Ibach%2C+of+Nebraska%2C+to+b"
+   },
+   "updated": "2026-11-17T05:08:39Z"
+  },
+  {
+   "id": "338827",
+   "congress": 119,
+   "start": "2026-11-17T14:00:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider S.5289, to protect the right to the free exercise of religion, and the nominations of Robert E. Long, Jr., to be United States District Judge for the Middle District of Florida, Peter M. Mansfield, to be United States District Judge for the Eastern District of Louisiana, Jesus A. Osete, to be United States District Judge for the Western District of Missouri, Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, Stephen Husk, of Virginia, to be a Commissioner of the United States Parole Commission, and Samuel King Lee, to be United States Attorney for the Eastern District of Tennessee, Gretchen C.F. Shappert, of Virginia, to be United States Attorney for the District of Guam and concurrently United States Attorney for the District of the Northern Mariana Islands, Robert Troester, to be United States Attorney for the Western District of Oklahoma, Reid McAlister Creswell, to be United States Marshal for the District of South Carolina, James Christopher Edge, to be United States Marshal for the Western District of North Carolina, Christopher Walter Inabinett, to be United States Marshal for the Middle District of Alabama, James Richard Jackson, to be United States Marshal for the Eastern District of Texas, and Scott Krueger, to be United States Marshal for the Northern District of Indiana, all of the Department of Justice; to be immediately followed by an hearing to examine how competition and transparency lowers prescription drug costs.",
+   "committees": [
+    {
+     "id": "SSJU",
+     "name": "Senate Committee on the Judiciary",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Judiciary"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "216 Hart Senate Office Building",
+   "witnesses": [],
+   "bills": [
+    "S 5289"
+   ],
+   "nominations": [
+    "PN1367-06",
+    "PN1022-37",
+    "PN1201-06",
+    "PN1272-07",
+    "PN1272-08",
+    "PN1272-10",
+    "PN1272-11",
+    "PN1272-15",
+    "PN1272-16",
+    "PN1273-10",
+    "PN1273-11",
+    "PN1273-14",
+    "PN1367-01",
+    "PN1367-02",
+    "PN1367-05"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider\u00a0S.5289, to protect the right to the free exercise of religion, and\u00a0the nominations of Robert E. Long, Jr., to be United States District Judge for the Middle District of Florida, Peter M. Mansfield, to be United States District Judge for the Eastern District of Louisiana, Jesus A. Osete, to be United States District Judge for the Western District of Missouri, Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, Stephen Husk, of Virginia, to be a Commissioner of the United States Parole Commission, and Samuel King Lee, to be United States Attorney for the Eastern District of Tennessee,\u00a0 Gretchen C.F. Shappert, of Virginia, to be United States Attorney for the District of Guam and concurrently United States Attorney for the District of the Northern Mariana Islands, Robert Troester, to be United States Attorney for the Western District of Oklahoma, Reid McAlister Creswell, to be United States Marshal for the District of South Carolina, James Christopher Edge, to be United States Marshal for the Western District of North Carolina, Christopher Walter Inabinett, to be United States Marshal for the Middle District of Alabama, James Richard Jackson, to be United States Marshal for the Eastern District of Texas, and Scott Krueger, to be United States Marshal for the Northern District of Indiana, all of the Department of Justice; to be immediately followed by an hearing to examine how competition and transparency lowers prescription drug costs.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338827",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider\u00a0S.5289, to protect the right to the free exercise of religion, and\u00a0the nominations of Robert E. Long, Jr., to be United States District Judge for the Middle District of Florida, Peter M. Mansfield, to be United States District Judge for the Eastern District of Louisiana, Jesus A. Osete, to be United States District Judge for the Western District of Missouri, Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, Stephen Husk, of Virginia, to be a Commissioner of the United States Parole Commission, and Samuel King Lee, to be United States Attorney for the Eastern District of Tennessee,\u00a0 Gretchen C.F. Shappert, of Virginia, to be United States Attorney for the District of Guam and concurrently United States Attorney for the District of the Northern Mariana Islands, Robert Troester, to be United States Attorney for the Western District of Oklahoma, Reid McAlister Creswell, to be United States Marshal for the District of South Carolina, James Christopher Edge, to be United States Marshal for the Western District of North Carolina, Christopher Walter Inabinett, to be United States Marshal for the Middle District of Alabama, James Richard Jackson, to be United States Marshal for the Eastern District of Texas, and Scott Krueger, to be United States Marshal for the Northern District of Indiana, all of the Department of Justice; to be immediately followed by an hearing to examine how competition and transparency lowers prescription drug costs.",
+     "url": "https://www.senate.gov/isvp/?comm=judiciary&filename=judiciary111726",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338827",
+    "committee": "http://www.judiciary.senate.gov",
+    "committeeHearings": "http://www.judiciary.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+the+Judiciary+Business+meeting+to+consider+S.5289%2C+to+protect+the+right+to+the+free+exercise+o"
+   },
+   "updated": "2026-11-17T17:08:45Z"
+  },
+  {
+   "id": "338821",
+   "congress": 119,
+   "start": "2026-11-17T14:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nomination of Hung Cao, of Virginia, to be Secretary of the Navy.",
+   "committees": [
+    {
+     "id": "SSAS",
+     "name": "Senate Committee on Armed Services",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Armed Services"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "G50 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1273-04"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nomination of Hung Cao, of Virginia, to be Secretary of the Navy.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338821",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nomination of Hung Cao, of Virginia, to be Secretary of the Navy.",
+     "url": "https://www.senate.gov/isvp/?comm=armed&filename=armedA111726",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338821",
+    "committee": "http://www.armed-services.senate.gov",
+    "committeeHearings": "http://www.armed-services.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Armed+Services+Hearings+to+examine+the+nomination+of+Hung+Cao%2C+of+Virginia%2C+to+be+Secretary+of+"
+   },
+   "updated": "2026-11-17T00:38:38Z"
+  },
+  {
+   "id": "338829",
+   "congress": 119,
+   "start": "2026-11-17T15:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Ashley Stow, of Texas, and Andrew Woodson, of Virginia, both to be a Member of the Federal Election Commission.",
+   "committees": [
+    {
+     "id": "SSRA",
+     "name": "Senate Committee on Rules and Administration",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Rules and Administration"
+    }
+   ],
+   "sectors": [],
+   "location": "301 Russell Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN806-10",
+    "PN806-11"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Ashley Stow, of Texas, and Andrew Woodson, of Virginia, both to be a Member of the Federal Election Commission.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338829",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Ashley Stow, of Texas, and Andrew Woodson, of Virginia, both to be a Member of the Federal Election Commission.",
+     "url": "https://www.senate.gov/isvp/?comm=rules&filename=rules111726",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338829",
+    "committee": "http://www.rules.senate.gov",
+    "committeeHearings": "http://www.rules.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Rules+and+Administration+Hearings+to+examine+the+nominations+of+Ashley+Stow%2C+of+Texas%2C+and+Andrew+Woodson"
+   },
+   "updated": "2026-11-17T00:38:38Z"
+  },
+  {
+   "id": "338826",
+   "congress": 119,
+   "start": "2026-11-17T19:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine Roblox and online gaming, focusing on digital playgrounds endangering America's children.",
+   "committees": [
+    {
+     "id": "SSJU",
+     "name": "Senate Committee on the Judiciary",
+     "sub": "22",
+     "subName": "Crime and Counterterrorism",
+     "apiName": "Senate Judiciary Subcommittee on Crime and Counterterrorism"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "G50 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [],
+   "videos": [
+    {
+     "name": "Hearings to examine Roblox and online gaming, focusing on digital playgrounds endangering America's children.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338826",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine Roblox and online gaming, focusing on digital playgrounds endangering America's children.",
+     "url": "https://www.senate.gov/isvp/?comm=judiciary&filename=judiciary111726",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338826",
+    "committee": "http://www.judiciary.senate.gov",
+    "committeeHearings": "http://www.judiciary.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+the+Judiciary+Hearings+to+examine+Roblox+and+online+gaming%2C+focusing+on+digital+playgrounds+en"
+   },
+   "updated": "2026-11-17T00:38:39Z"
+  },
+  {
+   "id": "338834",
+   "congress": 119,
+   "start": "2026-11-17T20:00:00Z",
+   "status": "Scheduled",
+   "title": "To receive a closed briefing on certain intelligence matters.",
+   "committees": [
+    {
+     "id": "SLIN",
+     "name": "Senate Select Committee on Intelligence",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Intelligence (Select)"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "219 Hart Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [],
+   "videos": [],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338834",
+    "committee": "http://www.intelligence.senate.gov",
+    "committeeHearings": "http://www.intelligence.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Select+Committee+on+Intelligence+To+receive+a+closed+briefing+on+certain+intelligence+matters."
+   },
+   "updated": "2026-11-12T21:08:38Z"
+  },
+  {
+   "id": "338846",
+   "congress": 119,
+   "start": "2026-11-17T20:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Nathan Anonick, of Virginia, and Matthew Rowland, of the District of Columbia, both to be a Commissioner of the Commodity Futures Trading Commission.",
+   "committees": [
+    {
+     "id": "SSAF",
+     "name": "Senate Committee on Agriculture, Nutrition, and Forestry",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Agriculture, Nutrition, and Forestry"
+    }
+   ],
+   "sectors": [
+    "banking"
+   ],
+   "location": "106 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1489-01",
+    "PN1489-04"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Nathan Anonick, of Virginia, and Matthew Rowland, of the District of Columbia, both to be a Commissioner of the Commodity Futures Trading Commission.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338846",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Nathan Anonick, of Virginia, and Matthew Rowland, of the District of Columbia, both to be a Commissioner of the Commodity Futures Trading Commission.",
+     "url": "https://www.senate.gov/isvp/?comm=ag&filename=ag111726",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338846",
+    "committee": "http://www.agriculture.senate.gov",
+    "committeeHearings": "http://www.agriculture.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Agriculture%2C+Nutrition%2C+and+Forestry+Hearings+to+examine+the+nominations+of+Nathan+Anonick%2C+of+Virginia%2C+and+Matthew+"
+   },
+   "updated": "2026-11-17T00:38:39Z"
+  },
+  {
+   "id": "338848",
+   "congress": 119,
+   "start": "2026-11-17T21:00:00Z",
+   "status": "Scheduled",
+   "title": "To receive a closed briefing on U.S.-Saudi Arabia Agreement on civil nuclear cooperation.",
+   "committees": [
+    {
+     "id": "SSFR",
+     "name": "Senate Committee on Foreign Relations",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Foreign Relations"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "217 Capitol Visitor Center (Senate side",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [],
+   "videos": [],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338848",
+    "committee": "http://www.foreign.senate.gov",
+    "committeeHearings": "http://www.foreign.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Foreign+Relations+To+receive+a+closed+briefing+on+U.S.-Saudi+Arabia+Agreement+on+civil+nuclear+coo"
+   },
+   "updated": "2026-11-17T00:38:39Z"
+  },
+  {
+   "id": "338831",
+   "congress": 119,
+   "start": "2026-11-18T14:00:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider the nominations of Justin Bytheway, of Utah, to be Ambassador to the Kingdom of Tonga, William Flens, of the District of Columbia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Chad, Douglas Holder, of Florida, to be Ambassador to the Republic of Bulgaria, Marc Dillard, of Virginia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Madagascar, and to serve concurrently and without additional compensation as Ambassador to the Union of the Comoros, Jessica Long, of Virginia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Islamic Republic of Mauritania, William Grayson, of California, to be Ambassador to the Republic of Indonesia, Mark Abreu, of Florida, to be Ambassador to the Republic of El Salvador, Nicholas Checker, of Wisconsin, to be Ambassador to the Republic of Rwanda, Michael Young, of Utah, to be Ambassador to the Republic of Serbia, Ronald Johnson, of Massachusetts, to be Ambassador to Bosnia and Herzegovina, Julia Nesheiwat, of Florida, to be Ambassador-at-Large for the Arctic (New Position), Peter McCoy, of South Carolina, to be Ambassador to Montenegro, Nathaniel Morris, of Kentucky, to be Ambassador to the Republic of Colombia, Keith Noreika, of Pennsylvania, to be Ambassador to the Republic of Lithuania, and Jennifer Johnson-Carroll, of Florida, to be Ambassador to the Republic of Trinidad and Tobago, all of the Department of State, and Sarah B. Rogers, of New York, to be Chief Executive Officer of the United States Agency for Global Media, and Rebekah Jurata, of California, to be United States Executive Director of the International Monetary Fund, and Nick Oberheiden, of Texas, to be Ambassador to the Arab Republic of Egypt, Peter Snyder, of Virginia, to be Ambassador to the Republic of Ecuador, Kimberly Greenwood, of Tennessee, to be Ambassador to Barbados, and to serve concurrently and without additional compensation as Ambassador to the Federation of Saint Kitts and Nevis, Saint Lucia, Antigua and Barbuda, the Commonwealth of Dominica, Grenada, and Saint Vincent and the Grenadines, Paul Kalmbach, of Ohio, to be Ambassador to the Republic of Paraguay, Jane Lynch, of North Carolina, to be Ambassador at Large for International Religious Freedom, Wesley Hunt, of Texas, to be Ambassador to the Kingdom of Saudi Arabia, Dino LaVerghetta, of Virginia, to be Ambassador to the State of Kuwait, Devin Kennington, of California, to be Ambassador to the Federal Republic of Somalia, Junaid Munir, of Michigan, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Djibouti, and Paul Watzlavick, of Texas, a Career Member of the Senior Foreign Service, Class of Counselor, to be Ambassador to the Republic of Suriname, all of the Department of State, and Scott Bessent, of South Carolina, to be United States Governor of the European Bank for Reconstruction and Development; United States Governor of the Inter-American Development Bank; United States Governor of the International Bank for Reconstruction and Development; and United States Governor of the International Monetary Fund.",
+   "committees": [
+    {
+     "id": "SSFR",
+     "name": "Senate Committee on Foreign Relations",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Foreign Relations"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "116 Capitol (Senate side)",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1022-01",
+    "PN1022-13",
+    "PN1022-14",
+    "PN1022-16",
+    "PN1022-18",
+    "PN1022-23",
+    "PN1022-24",
+    "PN1022-27",
+    "PN1022-40",
+    "PN1098-05",
+    "PN1201-02",
+    "PN1255-02",
+    "PN1255-03",
+    "PN1255-05",
+    "PN1255-11",
+    "PN1255-14",
+    "PN874",
+    "PN1273-24",
+    "PN1366-02",
+    "PN730-07",
+    "PN1022-19",
+    "PN1022-28",
+    "PN1022-33",
+    "PN1273-06",
+    "PN1273-09",
+    "PN1273-13",
+    "PN1273-15",
+    "PN1273-16"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider the nominations of Justin Bytheway, of Utah, to be Ambassador to the Kingdom of Tonga, William Flens, of the District of Columbia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Chad, Douglas Holder, of Florida, to be Ambassador to the Republic of Bulgaria, Marc Dillard, of Virginia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Madagascar, and to serve concurrently and without additional compensation as Ambassador to the Union of the Comoros, Jessica Long, of Virginia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Islamic Republic of Mauritania, William Grayson, of California, to be Ambassador to the Republic of Indonesia, Mark Abreu, of Florida, to be Ambassador to the Republic of El Salvador, Nicholas Checker, of Wisconsin, to be Ambassador to the Republic of Rwanda, Michael Young, of Utah, to be Ambassador to the Republic of Serbia, Ronald Johnson, of Massachusetts, to be Ambassador to Bosnia and Herzegovina, Julia Nesheiwat, of Florida, to be Ambassador-at-Large for the Arctic (New Position), Peter McCoy, of South Carolina, to be Ambassador to Montenegro, Nathaniel Morris, of Kentucky, to be Ambassador to the Republic of Colombia, Keith Noreika, of Pennsylvania, to be Ambassador to the Republic of Lithuania, and Jennifer Johnson-Carroll, of Florida, to be Ambassador to the Republic of Trinidad and Tobago, all of the Department of State, and Sarah B. Rogers, of New York, to be Chief Executive Officer of the United States Agency for Global Media, and Rebekah Jurata, of California, to be United States Executive Director of the International Monetary Fund, and\u00a0Nick Oberheiden, of Texas, to be Ambassador to the Arab Republic of Egypt, Peter Snyder, of Virginia, to be Ambassador to the Republic of Ecuador, Kimberly Greenwood, of Tennessee, to be Ambassador to Barbados, and to serve concurrently and without additional compensation as Ambassador to the Federation of Saint Kitts and Nevis, Saint Lucia, Antigua and Barbuda, the Commonwealth of Dominica, Grenada, and Saint Vincent and the Grenadines, Paul Kalmbach, of Ohio, to be Ambassador to the Republic of Paraguay, Jane Lynch, of North Carolina, to be Ambassador at Large for International Religious Freedom, Wesley Hunt, of Texas, to be Ambassador to the Kingdom of Saudi Arabia, Dino LaVerghetta, of Virginia, to be Ambassador to the State of Kuwait, Devin Kennington, of California, to be Ambassador to the Federal Republic of Somalia, Junaid Munir, of Michigan, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Djibouti, and Paul Watzlavick, of Texas, a Career Member of the Senior Foreign Service, Class of Counselor, to be Ambassador to the Republic of Suriname, all of the Department of State, and Scott Bessent, of South Carolina, to be United States Governor of the European Bank for Reconstruction and Development; United States Governor of the Inter-American Development Bank; United States Governor of the International Bank for Reconstruction and Development; and United States Governor of the International Monetary Fund.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338831",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider the nominations of Justin Bytheway, of Utah, to be Ambassador to the Kingdom of Tonga, William Flens, of the District of Columbia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Chad, Douglas Holder, of Florida, to be Ambassador to the Republic of Bulgaria, Marc Dillard, of Virginia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Madagascar, and to serve concurrently and without additional compensation as Ambassador to the Union of the Comoros, Jessica Long, of Virginia, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Islamic Republic of Mauritania, William Grayson, of California, to be Ambassador to the Republic of Indonesia, Mark Abreu, of Florida, to be Ambassador to the Republic of El Salvador, Nicholas Checker, of Wisconsin, to be Ambassador to the Republic of Rwanda, Michael Young, of Utah, to be Ambassador to the Republic of Serbia, Ronald Johnson, of Massachusetts, to be Ambassador to Bosnia and Herzegovina, Julia Nesheiwat, of Florida, to be Ambassador-at-Large for the Arctic (New Position), Peter McCoy, of South Carolina, to be Ambassador to Montenegro, Nathaniel Morris, of Kentucky, to be Ambassador to the Republic of Colombia, Keith Noreika, of Pennsylvania, to be Ambassador to the Republic of Lithuania, and Jennifer Johnson-Carroll, of Florida, to be Ambassador to the Republic of Trinidad and Tobago, all of the Department of State, and Sarah B. Rogers, of New York, to be Chief Executive Officer of the United States Agency for Global Media, and Rebekah Jurata, of California, to be United States Executive Director of the International Monetary Fund, and\u00a0Nick Oberheiden, of Texas, to be Ambassador to the Arab Republic of Egypt, Peter Snyder, of Virginia, to be Ambassador to the Republic of Ecuador, Kimberly Greenwood, of Tennessee, to be Ambassador to Barbados, and to serve concurrently and without additional compensation as Ambassador to the Federation of Saint Kitts and Nevis, Saint Lucia, Antigua and Barbuda, the Commonwealth of Dominica, Grenada, and Saint Vincent and the Grenadines, Paul Kalmbach, of Ohio, to be Ambassador to the Republic of Paraguay, Jane Lynch, of North Carolina, to be Ambassador at Large for International Religious Freedom, Wesley Hunt, of Texas, to be Ambassador to the Kingdom of Saudi Arabia, Dino LaVerghetta, of Virginia, to be Ambassador to the State of Kuwait, Devin Kennington, of California, to be Ambassador to the Federal Republic of Somalia, Junaid Munir, of Michigan, a Career Member of the Senior Foreign Service, Class of Minister-Counselor, to be Ambassador to the Republic of Djibouti, and Paul Watzlavick, of Texas, a Career Member of the Senior Foreign Service, Class of Counselor, to be Ambassador to the Republic of Suriname, all of the Department of State, and Scott Bessent, of South Carolina, to be United States Governor of the European Bank for Reconstruction and Development; United States Governor of the Inter-American Development Bank; United States Governor of the International Bank for Reconstruction and Development; and United States Governor of the International Monetary Fund.",
+     "url": "https://www.senate.gov/isvp/?comm=foreign&filename=foreign111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338831",
+    "committee": "http://www.foreign.senate.gov",
+    "committeeHearings": "http://www.foreign.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Foreign+Relations+Business+meeting+to+consider+the+nominations+of+Justin+Bytheway%2C+of+Utah%2C+to+be+"
+   },
+   "updated": "2026-11-18T17:08:37Z"
+  },
+  {
+   "id": "338800",
+   "congress": 119,
+   "start": "2026-11-18T14:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior, and Toby Deen, of Colorado, to be an Assistant Secretary of Energy (Hydrocarbons and Geothermal Energy).",
+   "committees": [
+    {
+     "id": "SSEG",
+     "name": "Senate Committee on Energy and Natural Resources",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Energy and Natural Resources"
+    }
+   ],
+   "sectors": [
+    "energy"
+   ],
+   "location": "366 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1256",
+    "PN1430-03"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nomination of Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338800",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nomination of Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior.",
+     "url": "https://www.senate.gov/isvp/?comm=energy&filename=energy111026",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior, and Toby Deen, of Colorado, to be an Assistant Secretary of Energy (Hydrocarbons and Geothermal Energy).",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338800",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior, and Toby Deen, of Colorado, to be an Assistant Secretary of Energy (Hydrocarbons and Geothermal Energy).",
+     "url": "https://www.senate.gov/isvp/?comm=energy&filename=energy111026",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338800",
+    "committee": "http://www.energy.senate.gov",
+    "committeeHearings": "http://www.energy.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Energy+and+Natural+Resources+Hearings+to+examine+the+nominations+of+Dennis+Kirk%2C+of+Virginia%2C+to+be+Inspector"
+   },
+   "updated": "2026-11-12T01:08:40Z"
+  },
+  {
+   "id": "338845",
+   "congress": 119,
+   "start": "2026-11-18T14:30:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider the nomination of Justin Schwab, of the District of Columbia, to be an Assistant Administrator of the Environmental Protection Agency, and resolutions from the General Services Administration.",
+   "committees": [
+    {
+     "id": "SSEV",
+     "name": "Senate Committee on Environment and Public Works",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Environment and Public Works"
+    }
+   ],
+   "sectors": [
+    "energy"
+   ],
+   "location": "406 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1366-05"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider the nomination of Justin Schwab, of the District of Columbia, to be an Assistant Administrator of the Environmental Protection Agency, and resolutions from the General Services Administration.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338845",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider the nomination of Justin Schwab, of the District of Columbia, to be an Assistant Administrator of the Environmental Protection Agency, and resolutions from the General Services Administration.",
+     "url": "https://www.senate.gov/isvp/?comm=epw&filename=epw111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338845",
+    "committee": "http://www.epw.senate.gov",
+    "committeeHearings": "http://www.epw.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Environment+and+Public+Works+Business+meeting+to+consider+the+nomination+of+Justin+Schwab%2C+of+the+District+of"
+   },
+   "updated": "2026-11-18T19:08:43Z"
+  },
+  {
+   "id": "338847",
+   "congress": 119,
+   "start": "2026-11-18T14:30:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider the nominations of Christopher Abbott, of Virginia, to be an Assistant Secretary of Commerce, and Francis Browne, of the District of Columbia, to be an Under Secretary, and Robert Stebbins, of New York, to be General Counsel, both of the Department of the Treasury.",
+   "committees": [
+    {
+     "id": "SSFI",
+     "name": "Senate Committee on Finance",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Finance"
+    }
+   ],
+   "sectors": [
+    "banking",
+    "energy",
+    "healthcare"
+   ],
+   "location": "215 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1273-01",
+    "PN1273-03",
+    "PN1273-21"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider the nominations of Christopher Abbott, of Virginia, to be an Assistant Secretary of Commerce, and\u00a0Francis Browne, of the District of Columbia, to be an Under Secretary, and\u00a0Robert Stebbins, of New York, to be General Counsel, both of the Department of the Treasury.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338847",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider the nominations of Christopher Abbott, of Virginia, to be an Assistant Secretary of Commerce, and\u00a0Francis Browne, of the District of Columbia, to be an Under Secretary, and\u00a0Robert Stebbins, of New York, to be General Counsel, both of the Department of the Treasury.",
+     "url": "https://www.senate.gov/isvp/?comm=finance&filename=finance111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338847",
+    "committee": "http://www.finance.senate.gov",
+    "committeeHearings": "http://www.finance.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Finance+Business+meeting+to+consider+the+nominations+of+Christopher+Abbott%2C+of+Virginia%2C"
+   },
+   "updated": "2026-11-17T23:08:43Z"
+  },
+  {
+   "id": "338830",
+   "congress": 119,
+   "start": "2026-11-18T14:45:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider the nominations of Mark Priebe, of Virginia, to be Inspector General, Department of Education, Michael Doyle, of Pennsylvania, to be a Member of the Occupational Safety and Health Review Commission, and Catherine Eschbach, of Texas, to be General Counsel of the Equal Employment Opportunity Commission.",
+   "committees": [
+    {
+     "id": "SSHR",
+     "name": "Senate Committee on Health, Education, Labor, and Pensions",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Health, Education, Labor, and Pensions"
+    }
+   ],
+   "sectors": [
+    "healthcare"
+   ],
+   "location": "430 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1255-04",
+    "PN1273-05",
+    "PN1273-17",
+    "PN1366-04",
+    "PN852-08"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider the nominations of Mark Priebe, of Virginia, to be Inspector General, Department of Education, Michael Doyle, of Pennsylvania, to be a Member of the Occupational Safety and Health Review Commission, and Catherine Eschbach, of Texas, to be General Counsel of the Equal Employment Opportunity Commission.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338830",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider the nominations of Mark Priebe, of Virginia, to be Inspector General, Department of Education, Michael Doyle, of Pennsylvania, to be a Member of the Occupational Safety and Health Review Commission, and Catherine Eschbach, of Texas, to be General Counsel of the Equal Employment Opportunity Commission.",
+     "url": "https://www.senate.gov/isvp/?comm=help&filename=help111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338830",
+    "committee": "http://www.help.senate.gov",
+    "committeeHearings": "http://www.help.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Health%2C+Education%2C+Labor%2C+and+Pensions+Business+meeting+to+consider+the+nominations+of+Mark+Priebe%2C+of+Virginia%2C+to+be+"
+   },
+   "updated": "2026-11-18T17:08:43Z"
+  },
+  {
+   "id": "338832",
+   "congress": 119,
+   "start": "2026-11-18T15:00:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider S.69, to amend the Communications Act of 1934 to address governmental interference in content moderation decisions by providers of interactive computer services, S.2586, to require the Administrator of the National Oceanic and Atmospheric Administration to establish an assessment program for commercial-scale offshore aquaculture through demonstration projects, to establish Aquaculture Centers of Excellence, to support aquaculture workforce development and working waterfronts, S.2883, to establish an East Coast Bivalve Research Task Force, S.3301, to prohibit purchases of certain semiconductor manufacturing equipment from foreign entities of concern or subsidiaries of foreign entities of concern, S.3741, to require the Secretary of Commerce to promulgate regulations to improve nucleic acid synthesis security, S.3954, to terminate the ability of eligible telecommunications carriers in certain States to use State eligibility determination processes in place of the National Verifier to determine the eligibility of consumers for Lifeline service, S.4256, to amend title 49, United States Code, to establish acceptable formats for presentation of airman certificates to the Federal Aviation Administration, S.5251, to modify the termination of the aviation consumer protection advisory committee, S.5332, to direct the National Oceanic and Atmospheric Administration to maintain the Cooperative Institute Program, S.5508, to establish a public-private working group to develop cybersecurity best practices for telecommunications carriers and related supply chain participants, S.5663, to establish a program at the National Science Foundation to fund research awards to reproduce federally funded research, and an original bill entitled, \"Trucker Bathroom Access Act\", and the nominations of Leslie Becera, of Virginia, to be an Assistant Secretary of Transportation, Danielle Thumann Severs, of North Carolina, to be a Member of the Federal Communications Commission, Joshua Shoemaker, of Virginia, to be Chief Financial Officer, and Robert Steinau, of Maryland, to be Inspector General, both of the National Aeronautics and Space Administration, and a promotion list in the Coast Guard.",
+   "committees": [
+    {
+     "id": "SSCM",
+     "name": "Senate Committee on Commerce, Science, and Transportation",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Commerce, Science, and Transportation"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "253 Russell Senate Office Building",
+   "witnesses": [],
+   "bills": [
+    "S 2586",
+    "S 2883",
+    "S 3301",
+    "S 3741",
+    "S 3954",
+    "S 4256",
+    "S 5251",
+    "S 5332",
+    "S 5508",
+    "S 5663",
+    "S 69"
+   ],
+   "nominations": [
+    "PN1255-01",
+    "PN1255-18",
+    "PN1273-20",
+    "PN1367-07"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider S.69, to amend the Communications Act of 1934 to address governmental interference in content moderation decisions by providers of interactive computer services, S.2586, to require the Administrator of the National Oceanic and Atmospheric Administration to establish an assessment program for commercial-scale offshore aquaculture through demonstration projects, to establish Aquaculture Centers of Excellence, to support aquaculture workforce development and working waterfronts, S.2883, to establish an East Coast Bivalve Research Task Force, S.3301, to prohibit purchases of certain semiconductor manufacturing equipment from foreign entities of concern or subsidiaries of foreign entities of concern, S.3741, to require the Secretary of Commerce to promulgate regulations to improve nucleic acid synthesis security, S.3954, to terminate the ability of eligible telecommunications carriers in certain States to use State eligibility determination processes in place of the National Verifier to determine the eligibility of consumers for Lifeline service, S.4256, to amend title 49, United States Code, to establish acceptable formats for presentation of airman certificates to the Federal Aviation Administration, S.5251, to modify the termination of the aviation consumer protection advisory committee, S.5332, to direct the National Oceanic and Atmospheric Administration to maintain the Cooperative Institute Program, S.5508, to establish a public-private working group to develop cybersecurity best practices for telecommunications carriers and related supply chain participants, S.5663, to establish a program at the National Science Foundation to fund research awards to reproduce federally funded research, and an original bill entitled, \"Trucker Bathroom Access Act\", and the nominations of Leslie Becera, of Virginia, to be an Assistant Secretary of Transportation, Danielle Thumann Severs, of North Carolina, to be a Member of the Federal Communications Commission, Joshua Shoemaker, of Virginia, to be Chief Financial Officer, and Robert Steinau, of Maryland, to be Inspector General, both of the National Aeronautics and Space Administration, and a promotion list in the Coast Guard.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338832",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider S.69, to amend the Communications Act of 1934 to address governmental interference in content moderation decisions by providers of interactive computer services, S.2586, to require the Administrator of the National Oceanic and Atmospheric Administration to establish an assessment program for commercial-scale offshore aquaculture through demonstration projects, to establish Aquaculture Centers of Excellence, to support aquaculture workforce development and working waterfronts, S.2883, to establish an East Coast Bivalve Research Task Force, S.3301, to prohibit purchases of certain semiconductor manufacturing equipment from foreign entities of concern or subsidiaries of foreign entities of concern, S.3741, to require the Secretary of Commerce to promulgate regulations to improve nucleic acid synthesis security, S.3954, to terminate the ability of eligible telecommunications carriers in certain States to use State eligibility determination processes in place of the National Verifier to determine the eligibility of consumers for Lifeline service, S.4256, to amend title 49, United States Code, to establish acceptable formats for presentation of airman certificates to the Federal Aviation Administration, S.5251, to modify the termination of the aviation consumer protection advisory committee, S.5332, to direct the National Oceanic and Atmospheric Administration to maintain the Cooperative Institute Program, S.5508, to establish a public-private working group to develop cybersecurity best practices for telecommunications carriers and related supply chain participants, S.5663, to establish a program at the National Science Foundation to fund research awards to reproduce federally funded research, and an original bill entitled, \"Trucker Bathroom Access Act\", and the nominations of Leslie Becera, of Virginia, to be an Assistant Secretary of Transportation, Danielle Thumann Severs, of North Carolina, to be a Member of the Federal Communications Commission, Joshua Shoemaker, of Virginia, to be Chief Financial Officer, and Robert Steinau, of Maryland, to be Inspector General, both of the National Aeronautics and Space Administration, and a promotion list in the Coast Guard.",
+     "url": "https://www.senate.gov/isvp/?comm=xxxx&filename=xxxx111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338832",
+    "committee": "http://www.commerce.senate.gov",
+    "committeeHearings": "http://www.commerce.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Commerce%2C+Science%2C+and+Transportation+Business+meeting+to+consider+S.69%2C+to+amend+the+Communications+Act+of+1934+to+ad"
+   },
+   "updated": "2026-11-17T23:08:44Z"
+  },
+  {
+   "id": "338824",
+   "congress": 119,
+   "start": "2026-11-18T16:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the reality of Social Security.",
+   "committees": [
+    {
+     "id": "SSBU",
+     "name": "Senate Committee on the Budget",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Budget"
+    }
+   ],
+   "sectors": [],
+   "location": "608 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [],
+   "videos": [
+    {
+     "name": "Hearings to examine the reality of Social Security.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338824",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the reality of Social Security.",
+     "url": "https://www.senate.gov/isvp/?comm=budget&filename=budget111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338824",
+    "committee": "http://www.budget.senate.gov",
+    "committeeHearings": "http://www.budget.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+the+Budget+Hearings+to+examine+the+reality+of+Social+Security."
+   },
+   "updated": "2026-11-17T23:08:47Z"
+  },
+  {
+   "id": "338828",
+   "congress": 119,
+   "start": "2026-11-18T16:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of James Cody Hiland, of Arkansas, to be United States Circuit Judge for the Eighth Circuit, Philip Lawrence Aubart, to be United States District Judge for the Middle District of North Carolina, Brian S. Meyers, to be United States District Judge for the Eastern District of North Carolina, Eric James Hamilton, to be United States District Judge for the District of Nebraska, William Grayson Lambert, to be United States District Judge for the District of South Carolina, Joseph Patrick Falvey, to be United States District Judge for the Northern District of Indiana, and James P. Sullivan, to be United States District Judge for the Western District of Texas.",
+   "committees": [
+    {
+     "id": "SSJU",
+     "name": "Senate Committee on the Judiciary",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Judiciary"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "G50 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1429-01",
+    "PN1429-05",
+    "PN1429-07",
+    "PN1429-08",
+    "PN1478",
+    "PN1505-02",
+    "PN1505-03"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of James Cody Hiland, of Arkansas, to be United States Circuit Judge for the Eighth Circuit, Philip Lawrence Aubart, to be United States District Judge for the Middle District of North Carolina, Brian S. Meyers, to be United States District Judge for the Eastern District of North Carolina, Eric James Hamilton, to be United States District Judge for the District of Nebraska, William Grayson Lambert, to be United States District Judge for the District of South Carolina, Joseph Patrick Falvey, to be United States District Judge for the Northern District of Indiana, and James P. Sullivan, to be United States District Judge for the Western District of Texas.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338828",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of James Cody Hiland, of Arkansas, to be United States Circuit Judge for the Eighth Circuit, Philip Lawrence Aubart, to be United States District Judge for the Middle District of North Carolina, Brian S. Meyers, to be United States District Judge for the Eastern District of North Carolina, Eric James Hamilton, to be United States District Judge for the District of Nebraska, William Grayson Lambert, to be United States District Judge for the District of South Carolina, Joseph Patrick Falvey, to be United States District Judge for the Northern District of Indiana, and James P. Sullivan, to be United States District Judge for the Western District of Texas.",
+     "url": "https://www.senate.gov/isvp/?comm=judiciary&filename=judiciary111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338828",
+    "committee": "http://www.judiciary.senate.gov",
+    "committeeHearings": "http://www.judiciary.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+the+Judiciary+Hearings+to+examine+the+nominations+of+James+Cody+Hiland%2C+of+Arkansas%2C+to+be+Uni"
+   },
+   "updated": "2026-11-18T17:08:49Z"
+  },
+  {
+   "id": "338842",
+   "congress": 119,
+   "start": "2026-11-18T17:10:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider the nominations of Gary Shatswell, of Washington, to be an Assistant Secretary (Information and Technology), Michael Tierney, of Pennsylvania, to be an Assistant Secretary (Office of Accountability and Whistleblower Protection), and Maria Lopez, of Florida, to be Chairman of the Board of Veterans' Appeals, all of the Department of Veterans Affairs, and Robert R. Fleck, of Pennsylvania, David M. Jones, of Virginia, Daniel F. Rendleman, of Illinois, and James Lewis Quinn, of Virginia, each to be a Judge of the United States Court of Appeals for Veterans Claims, and Fiscal Year 2027 Major Medical Facility Lease Authorizations.",
+   "committees": [
+    {
+     "id": "SSVA",
+     "name": "Senate Committee on Veterans' Affairs",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Veterans' Affairs"
+    }
+   ],
+   "sectors": [],
+   "location": "216 Capitol (Senate side)",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1022-21",
+    "PN1181-03",
+    "PN1181-04",
+    "PN1181-06",
+    "PN1272-12",
+    "PN901-09",
+    "PN931-07"
+   ],
+   "videos": [],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338842",
+    "committee": "http://www.veterans.senate.gov",
+    "committeeHearings": "http://www.veterans.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Veterans%27+Affairs+Business+meeting+to+consider+the+nominations+of+Gary+Shatswell%2C+of+Washington%2C+t"
+   },
+   "updated": "2026-11-18T19:08:49Z"
+  },
+  {
+   "id": "338843",
+   "congress": 119,
+   "start": "2026-11-18T19:30:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider S.3475, to authorize, ratify, and confirm the Agreement of Settlement and Compromise to Resolve the Akwesasne Mohawk Land Claim in the State of New York, S.3573, to amend the Aamodt Litigation Settlement Act to modify a provision relating to the extension of certain dates for the completion of the Regional Water System, S.3859, to amend the Catawba Indian Tribe of South Carolina Land Claims Settlement Act of 1993 with respect to future membership in the Catawba Indian Nation, S.4053, to take certain land in the State of California into trust for the benefit of the Pechanga Band of Indians, H.R.226, to take certain Federal lands in Tennessee into trust for the benefit of the Eastern Band of Cherokee Indians, H.R.2916, to authorize, ratify, and confirm the Agreement of Settlement and Compromise to Resolve the Akwesasne Mohawk Land Claim in the State of New York, H.R.4463, to amend the Catawba Indian Tribe of South Carolina Land Claims Settlement Act of 1993, and H.R.5682, to take certain land in the State of California into trust for the benefit of the Pechanga Band of Indians.",
+   "committees": [
+    {
+     "id": "SLIA",
+     "name": "Senate Committee on Indian Affairs",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Indian Affairs"
+    }
+   ],
+   "sectors": [],
+   "location": "628 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [
+    "HR 226",
+    "HR 2916",
+    "HR 4463",
+    "HR 5682",
+    "S 3475",
+    "S 3573",
+    "S 3859",
+    "S 4053"
+   ],
+   "nominations": [],
+   "videos": [
+    {
+     "name": "Business meeting to consider S.3475, to authorize, ratify, and confirm the Agreement of Settlement and Compromise to Resolve the Akwesasne Mohawk Land Claim in the State of New York, S.3573, to amend the Aamodt Litigation Settlement Act to modify a provision relating to the extension of certain dates for the completion of the Regional Water System, S.3859, to amend the Catawba Indian Tribe of South Carolina Land Claims Settlement Act of 1993 with respect to future membership in the Catawba Indian Nation, S.4053, to take certain land in the State of California into trust for the benefit of the Pechanga Band of Indians, H.R.226, to take certain Federal lands in Tennessee into trust for the benefit of the Eastern Band of Cherokee Indians, H.R.2916, to authorize, ratify, and confirm the Agreement of Settlement and Compromise to Resolve the Akwesasne Mohawk Land Claim in the State of New York, H.R.4463, to amend the Catawba Indian Tribe of South Carolina Land Claims Settlement Act of 1993, and H.R.5682, to take certain land in the State of California into trust for the benefit of the Pechanga Band of Indians.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338843",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider S.3475, to authorize, ratify, and confirm the Agreement of Settlement and Compromise to Resolve the Akwesasne Mohawk Land Claim in the State of New York, S.3573, to amend the Aamodt Litigation Settlement Act to modify a provision relating to the extension of certain dates for the completion of the Regional Water System, S.3859, to amend the Catawba Indian Tribe of South Carolina Land Claims Settlement Act of 1993 with respect to future membership in the Catawba Indian Nation, S.4053, to take certain land in the State of California into trust for the benefit of the Pechanga Band of Indians, H.R.226, to take certain Federal lands in Tennessee into trust for the benefit of the Eastern Band of Cherokee Indians, H.R.2916, to authorize, ratify, and confirm the Agreement of Settlement and Compromise to Resolve the Akwesasne Mohawk Land Claim in the State of New York, H.R.4463, to amend the Catawba Indian Tribe of South Carolina Land Claims Settlement Act of 1993, and H.R.5682, to take certain land in the State of California into trust for the benefit of the Pechanga Band of Indians.",
+     "url": "https://www.senate.gov/isvp/?comm=indian&filename=indian111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338843",
+    "committee": "http://www.indian.senate.gov",
+    "committeeHearings": "http://www.indian.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Indian+Affairs+Business+meeting+to+consider+S.3475%2C+to+authorize%2C+ratify%2C+and+confirm+the+Agree"
+   },
+   "updated": "2026-11-17T23:08:47Z"
+  },
+  {
+   "id": "338835",
+   "congress": 119,
+   "start": "2026-11-18T20:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Gary Lawkowski, of Virginia, to be General Counsel, and Joseph Weirsky, of Virginia, to be Director of the National Counterterrorism Center, both of the Office of the Director of National Intelligence.",
+   "committees": [
+    {
+     "id": "SLIN",
+     "name": "Senate Select Committee on Intelligence",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Intelligence (Select)"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "430 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1427",
+    "PN1479-13"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Gary Lawkowski, of Virginia, to be General Counsel, and Joseph Weirsky, of Virginia, to be Director of the National Counterterrorism Center, both of the Office of the Director of National Intelligence.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338835",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Gary Lawkowski, of Virginia, to be General Counsel, and Joseph Weirsky, of Virginia, to be Director of the National Counterterrorism Center, both of the Office of the Director of National Intelligence.",
+     "url": "https://www.senate.gov/isvp/?comm=intel&filename=intel111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338835",
+    "committee": "http://www.intelligence.senate.gov",
+    "committeeHearings": "http://www.intelligence.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Select+Committee+on+Intelligence+Hearings+to+examine+the+nominations+of+Gary+Lawkowski%2C+of+Virginia%2C+to+be+Genera"
+   },
+   "updated": "2026-11-17T23:08:48Z"
+  },
+  {
+   "id": "338823",
+   "congress": 119,
+   "start": "2026-11-18T20:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine a bridge, not a barrier, focusing on reforming the safety net to reward work.",
+   "committees": [
+    {
+     "id": "SPAG",
+     "name": "Senate Special Committee on Aging",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Aging (Special)"
+    }
+   ],
+   "sectors": [],
+   "location": "216 Hart Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [],
+   "videos": [
+    {
+     "name": "Hearings to examine a bridge, not a barrier, focusing on reforming the safety net to reward work.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338823",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine a bridge, not a barrier, focusing on reforming the safety net to reward work.",
+     "url": "https://www.senate.gov/isvp/?comm=aging&filename=aging111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338823",
+    "committee": "http://www.aging.senate.gov",
+    "committeeHearings": "http://www.aging.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Special+Committee+on+Aging+Hearings+to+examine+a+bridge%2C+not+a+barrier%2C+focusing+on+reforming+the+safety+ne"
+   },
+   "updated": "2026-11-17T23:08:48Z"
+  },
+  {
+   "id": "338825",
+   "congress": 119,
+   "start": "2026-11-18T21:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine VA accountability and transparency, focusing on examining the current and future path of VA's electronic health record modernization program.",
+   "committees": [
+    {
+     "id": "SSVA",
+     "name": "Senate Committee on Veterans' Affairs",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Veterans' Affairs"
+    }
+   ],
+   "sectors": [],
+   "location": "106 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [],
+   "videos": [
+    {
+     "name": "Hearings to examine VA accountability and transparency, focusing on examining the current and future path of VA's electronic health record modernization program.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338825",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine VA accountability and transparency, focusing on examining the current and future path of VA's electronic health record modernization program.",
+     "url": "https://www.senate.gov/isvp/?comm=vetaff&filename=vetaff111826",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338825",
+    "committee": "http://www.veterans.senate.gov",
+    "committeeHearings": "http://www.veterans.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Veterans%27+Affairs+Hearings+to+examine+VA+accountability+and+transparency%2C+focusing+on+examining+th"
+   },
+   "updated": "2026-11-17T23:08:48Z"
+  },
+  {
+   "id": "338833",
+   "congress": 119,
+   "start": "2026-11-19T14:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Michael LoSapio, of New Jersey, to be Director of the Cybersecurity and Infrastructure Security Agency, Department of Homeland Security, Eric Matthew Ueland, of Virginia, to be Comptroller General of the United States, Michael Chamberlain, of Virginia, to be Director of the Office of Government Ethics, Robert Steffens, of Texas, to be a Governor of the United States Postal Service, Jeffrey Zisk, of Texas, to be a Commissioner of the Postal Regulatory Commission, Mark Priebe, of Virginia, to be Inspector General, Department of Education, Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior, Maria D' Avanzo, of New York, to be Inspector General, General Services Administration, Robert Steinau, of Maryland, to be Inspector General, National Aeronautics and Space Administration, and Eric Sebastian Glover, Fernando Campoamor-Sanchez, Roman Marian Chaban, and Bernard Michael Desrosiers, all of the District of Columbia, each to be an Associate Judge of the Superior Court of the District of Columbia.",
+   "committees": [
+    {
+     "id": "SSGA",
+     "name": "Senate Committee on Homeland Security and Governmental Affairs",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Homeland Security and Governmental Affairs"
+    }
+   ],
+   "sectors": [],
+   "location": "342 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1097",
+    "PN1180-01",
+    "PN1256",
+    "PN1366-04",
+    "PN1367-07",
+    "PN1367-09",
+    "PN1426",
+    "PN1429-03",
+    "PN1429-04",
+    "PN1429-06",
+    "PN1477",
+    "PN852-10",
+    "PN1504-02"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Michael LoSapio, of New Jersey, to be Director of the Cybersecurity and Infrastructure Security Agency, Department of Homeland Security, Eric Matthew Ueland, of Virginia, to be Comptroller General of the United States, Michael Chamberlain, of Virginia, to be Director of the Office of Government Ethics, Robert Steffens, of Texas, to be a Governor of the United States Postal Service, Jeffrey Zisk, of Texas, to be a Commissioner of the Postal Regulatory Commission, Mark Priebe, of Virginia, to be Inspector General, Department of Education, Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior, Maria D' Avanzo, of New York, to be Inspector General, General Services Administration, Robert Steinau, of Maryland, to be Inspector General, National Aeronautics and Space Administration, and Eric Sebastian Glover, Fernando Campoamor-Sanchez, Roman Marian Chaban, and Bernard Michael Desrosiers, all of the District of Columbia, each to be an Associate Judge of the Superior Court of the District of Columbia.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338833",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Michael LoSapio, of New Jersey, to be Director of the Cybersecurity and Infrastructure Security Agency, Department of Homeland Security, Eric Matthew Ueland, of Virginia, to be Comptroller General of the United States, Michael Chamberlain, of Virginia, to be Director of the Office of Government Ethics, Robert Steffens, of Texas, to be a Governor of the United States Postal Service, Jeffrey Zisk, of Texas, to be a Commissioner of the Postal Regulatory Commission, Mark Priebe, of Virginia, to be Inspector General, Department of Education, Dennis Kirk, of Virginia, to be Inspector General, Department of the Interior, Maria D' Avanzo, of New York, to be Inspector General, General Services Administration, Robert Steinau, of Maryland, to be Inspector General, National Aeronautics and Space Administration, and Eric Sebastian Glover, Fernando Campoamor-Sanchez, Roman Marian Chaban, and Bernard Michael Desrosiers, all of the District of Columbia, each to be an Associate Judge of the Superior Court of the District of Columbia.",
+     "url": "https://www.senate.gov/isvp/?comm=govtaff&filename=govtaff111926",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338833",
+    "committee": "http://www.hsgac.senate.gov",
+    "committeeHearings": "http://www.hsgac.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Homeland+Security+and+Governmental+Affairs+Hearings+to+examine+the+nominations+of+Michael+LoSapio%2C+of+New+Jersey%2C+to+be+Dir"
+   },
+   "updated": "2026-11-17T19:08:46Z"
+  },
+  {
+   "id": "338822",
+   "congress": 119,
+   "start": "2026-11-19T14:45:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of William Toti, of Florida, to be Under Secretary of the Navy, Daniel Zimmerman, of North Carolina, to be an Assistant Secretary, Richard Breckenridge, of New Hampshire, to be an Assistant Secretary of the Navy, and Arthur Miller, of the District of Columbia, to be an Assistant Secretary of the Navy, all of the Department of Defense.",
+   "committees": [
+    {
+     "id": "SSAS",
+     "name": "Senate Committee on Armed Services",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Armed Services"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "G50 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1273-02",
+    "PN1273-22",
+    "PN1479-14",
+    "PN1430-08"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of William Toti, of Florida, to be Under Secretary of the Navy, Daniel Zimmerman, of North Carolina, to be an Assistant Secretary, Richard Breckenridge, of New Hampshire, to be an Assistant Secretary of the Navy, and Arthur Miller, of the District of Columbia, to be an Assistant Secretary of the Navy, all of the Department of Defense.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338822",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of William Toti, of Florida, to be Under Secretary of the Navy, Daniel Zimmerman, of North Carolina, to be an Assistant Secretary, Richard Breckenridge, of New Hampshire, to be an Assistant Secretary of the Navy, and Arthur Miller, of the District of Columbia, to be an Assistant Secretary of the Navy, all of the Department of Defense.",
+     "url": "https://www.senate.gov/isvp/?comm=armed&filename=armedA111926",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338822",
+    "committee": "http://www.armed-services.senate.gov",
+    "committeeHearings": "http://www.armed-services.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Armed+Services+Hearings+to+examine+the+nominations+of+William+Toti%2C+of+Florida%2C+to+be+Under+Sec"
+   },
+   "updated": "2026-11-18T21:08:57Z"
+  },
+  {
+   "id": "338841",
+   "congress": 119,
+   "start": "2026-11-19T15:00:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider the nominations of Jeremy Wiggins, of the District of Columbia, to be an Assistant Secretary of the Treasury, Matthew Jones, of Virginia, to be an Assistant Secretary of Housing and Urban Development, and David Slade, of Florida, to be First Vice President, and Michael Rigas, of Virginia, to be a Member of the Board of Directors, both of the Export-Import Bank of the United States; to be immediately followed by an open hearing to examine the nominations of Mark Aesch, of Florida, to be Federal Transit Administrator, and Hugo Dante, Jr., of Alabama, to be Director, Office of Financial Research, and Rebekah Jurata, of California, to be an Assistant Secretary, both of the Department of the Treasury, and Kristin N. Johnson, of Michigan, and Steven Levine, of Maryland, both to be a Member of the Securities and Exchange Commission.",
+   "committees": [
+    {
+     "id": "SSBK",
+     "name": "Senate Committee on Banking, Housing, and Urban Affairs",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Banking, Housing, and Urban Affairs"
+    }
+   ],
+   "sectors": [
+    "banking"
+   ],
+   "location": "538 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1180-02",
+    "PN1255-17",
+    "PN1273-12",
+    "PN1273-25",
+    "PN1479-01",
+    "PN1479-06",
+    "PN1479-10",
+    "PN1489-02",
+    "PN1489-03"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider the nominations of Jeremy Wiggins, of the District of Columbia, to be an Assistant Secretary of the Treasury, Matthew Jones, of Virginia, to be an Assistant Secretary of Housing and Urban Development, and David Slade, of Florida, to be First Vice President, and Michael Rigas, of Virginia, to be a Member of the Board of Directors, both of the Export-Import Bank of the United States; to be immediately followed by an open hearing to examine the nominations of Mark Aesch, of Florida, to be Federal Transit Administrator, and Hugo Dante, Jr., of Alabama, to be Director, Office of Financial Research, and Rebekah Jurata, of California, to be an Assistant Secretary, both of the Department of the Treasury, and Kristin N. Johnson, of Michigan, and Steven Levine, of Maryland, both to be a Member of the Securities and Exchange Commission.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338841",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider the nominations of Jeremy Wiggins, of the District of Columbia, to be an Assistant Secretary of the Treasury, Matthew Jones, of Virginia, to be an Assistant Secretary of Housing and Urban Development, and David Slade, of Florida, to be First Vice President, and Michael Rigas, of Virginia, to be a Member of the Board of Directors, both of the Export-Import Bank of the United States; to be immediately followed by an open hearing to examine the nominations of Mark Aesch, of Florida, to be Federal Transit Administrator, and Hugo Dante, Jr., of Alabama, to be Director, Office of Financial Research, and Rebekah Jurata, of California, to be an Assistant Secretary, both of the Department of the Treasury, and Kristin N. Johnson, of Michigan, and Steven Levine, of Maryland, both to be a Member of the Securities and Exchange Commission.",
+     "url": "https://www.senate.gov/isvp/?comm=banking&filename=banking111926",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338841",
+    "committee": "http://banking.senate.gov",
+    "committeeHearings": "http://banking.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Banking%2C+Housing%2C+and+Urban+Affairs+Business+meeting+to+consider+the+nominations+of+Jeremy+Wiggins%2C+of+the+District+"
+   },
+   "updated": "2026-11-18T21:08:58Z"
+  },
+  {
+   "id": "338840",
+   "congress": 119,
+   "start": "2026-11-19T15:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Elliott Hulse, of California, to be Chief Executive Officer, Millennium Challenge Corporation, and Austin Holmes, of Florida, to be Ambassador to the Republic of Haiti, and Asa Pitt, of the District of Columbia, to be United States Representative to the Organization for the Prohibition of Chemical Weapons, both of the Department of State.",
+   "committees": [
+    {
+     "id": "SSFR",
+     "name": "Senate Committee on Foreign Relations",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Foreign Relations"
+    }
+   ],
+   "sectors": [
+    "foreign_policy"
+   ],
+   "location": "419 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1273-07",
+    "PN1273-08",
+    "PN1273-18"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Elliott Hulse, of California, to be Chief Executive Officer, Millennium Challenge Corporation, and Austin Holmes, of Florida, to be Ambassador to the Republic of Haiti, and Asa Pitt, of the District of Columbia, to be United States Representative to the Organization for the Prohibition of Chemical Weapons, both of the Department of State.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338840",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Elliott Hulse, of California, to be Chief Executive Officer, Millennium Challenge Corporation, and Austin Holmes, of Florida, to be Ambassador to the Republic of Haiti, and Asa Pitt, of the District of Columbia, to be United States Representative to the Organization for the Prohibition of Chemical Weapons, both of the Department of State.",
+     "url": "https://www.senate.gov/isvp/?comm=foreign&filename=foreign111926",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338840",
+    "committee": "http://www.foreign.senate.gov",
+    "committeeHearings": "http://www.foreign.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Foreign+Relations+Hearings+to+examine+the+nominations+of+Elliott+Hulse%2C+of+California%2C+to+be+Chief"
+   },
+   "updated": "2026-11-19T03:08:53Z"
+  },
+  {
+   "id": "338860",
+   "congress": 119,
+   "start": "2026-11-24T15:00:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine the nominations of Peter A. Feldman, of the District of Columbia, to be a Commissioner of the Consumer Product Safety Commission, Christopher Mufarrige, of Texas, to be a Federal Trade Commissioner, and Loren Smith, Jr., of Virginia, to be an Assistant Secretary of Transportation.",
+   "committees": [
+    {
+     "id": "SSCM",
+     "name": "Senate Committee on Commerce, Science, and Transportation",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Commerce, Science, and Transportation"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "253 Russell Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [
+    "PN1425",
+    "PN1430-09",
+    "PN1479-09"
+   ],
+   "videos": [
+    {
+     "name": "Hearings to examine the nominations of Peter A. Feldman, of the District of Columbia, to be a Commissioner of the Consumer Product Safety Commission, Christopher Mufarrige, of Texas, to be a Federal Trade Commissioner, and Loren Smith, Jr., of Virginia, to be an Assistant Secretary of Transportation.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338860",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine the nominations of Peter A. Feldman, of the District of Columbia, to be a Commissioner of the Consumer Product Safety Commission, Christopher Mufarrige, of Texas, to be a Federal Trade Commissioner, and Loren Smith, Jr., of Virginia, to be an Assistant Secretary of Transportation.",
+     "url": "https://www.senate.gov/isvp/?comm=commerce&filename=commerce112426",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338860",
+    "committee": "http://www.commerce.senate.gov",
+    "committeeHearings": "http://www.commerce.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+Commerce%2C+Science%2C+and+Transportation+Hearings+to+examine+the+nominations+of+Peter+A.+Feldman%2C+of+the+District+of+Colu"
+   },
+   "updated": "2026-11-18T17:08:56Z"
+  },
+  {
+   "id": "338849",
+   "congress": 119,
+   "start": "2026-11-24T15:15:00Z",
+   "status": "Scheduled",
+   "title": "Business meeting to consider S.5289, to protect the right to the free exercise of religion, and the nominations of Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, and Scott Krueger, of Indiana, to be United States Marshal for the Northern District of Indiana.",
+   "committees": [
+    {
+     "id": "SSJU",
+     "name": "Senate Committee on the Judiciary",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Judiciary"
+    }
+   ],
+   "sectors": [
+    "tech"
+   ],
+   "location": "216 Hart Senate Office Building",
+   "witnesses": [],
+   "bills": [
+    "S 5289"
+   ],
+   "nominations": [
+    "PN1272-11",
+    "PN1272-16",
+    "PN1367-06"
+   ],
+   "videos": [
+    {
+     "name": "Business meeting to consider\u00a0S.5289, to protect the right to the free exercise of religion, and the nominations of Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, and Scott Krueger, of Indiana, to be United States Marshal for the Northern District of Indiana.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338849",
+     "embed": null
+    },
+    {
+     "name": "Business meeting to consider\u00a0S.5289, to protect the right to the free exercise of religion, and the nominations of Trevor Scott Pemberton, to be United States District Judge for the Northern District of Oklahoma, Zachary Paul West, to be United States District Judge for the Eastern District of Oklahoma, and Scott Krueger, of Indiana, to be United States Marshal for the Northern District of Indiana.",
+     "url": "https://www.senate.gov/isvp/?comm=judiciary&filename=judiciary112426",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338849",
+    "committee": "http://www.judiciary.senate.gov",
+    "committeeHearings": "http://www.judiciary.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Committee+on+the+Judiciary+Business+meeting+to+consider+S.5289%2C+to+protect+the+right+to+the+free+exercise+o"
+   },
+   "updated": "2026-11-17T23:23:58Z"
+  },
+  {
+   "id": "338880",
+   "congress": 119,
+   "start": "2026-12-02T20:30:00Z",
+   "status": "Scheduled",
+   "title": "Hearings to examine caregivers and AI, focusing on opportunities, challenges, and threats.",
+   "committees": [
+    {
+     "id": "SPAG",
+     "name": "Senate Special Committee on Aging",
+     "sub": null,
+     "subName": null,
+     "apiName": "Senate Aging (Special)"
+    }
+   ],
+   "sectors": [],
+   "location": "G50 Dirksen Senate Office Building",
+   "witnesses": [],
+   "bills": [],
+   "nominations": [],
+   "videos": [
+    {
+     "name": "Hearings to examine caregivers and AI, focusing on opportunities, challenges, and threats.",
+     "url": "https://www.congress.gov/event/119th-Congress/senate-event/338880",
+     "embed": null
+    },
+    {
+     "name": "Hearings to examine caregivers and AI, focusing on opportunities, challenges, and threats.",
+     "url": "https://www.senate.gov/isvp/?comm=aging&filename=aging120226",
+     "embed": null
+    }
+   ],
+   "embed": null,
+   "links": {
+    "congress": "https://www.congress.gov/event/119th-congress/senate-event/338880",
+    "committee": "http://www.aging.senate.gov",
+    "committeeHearings": "http://www.aging.senate.gov/hearings",
+    "cspan": "https://www.c-span.org/search/?searchtype=Videos&query=Special+Committee+on+Aging+Hearings+to+examine+caregivers+and+AI%2C+focusing+on+opportunities%2C+challenges%2C+an"
+   },
+   "updated": "2026-11-19T21:08:40Z"
+  }
+ ]
+}

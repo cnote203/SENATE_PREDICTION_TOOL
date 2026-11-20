@@ -40,7 +40,7 @@ H001046,4,1.0,0.98,0.02,False,False,consumer_finance_regulation,Martin Heinrich
 H001061,4,0.0,0.057,-0.057,False,False,consumer_finance_regulation,John Hoeven
 H001076,4,1.0,0.944,0.056,False,False,consumer_finance_regulation,Margaret Wood Hassan
 H001079,4,0.0,0.04,-0.04,False,False,consumer_finance_regulation,Cindy Hyde-Smith
-H001089,4,1.0,0.072,0.928,False,True,consumer_finance_regulation,Josh Hawley
+H001089,4,1.0,0.986,0.014,True,False,consumer_finance_regulation,Josh Hawley
 H001104,4,0.0,0.01,-0.01,False,False,consumer_finance_regulation,Jon Husted
 J000293,4,0.0,0.007,-0.007,False,False,consumer_finance_regulation,Ron Johnson
 J000312,3,0.0,0.015,-0.015,False,False,consumer_finance_regulation,James C. Justice
@@ -142,7 +142,7 @@ H001046,7,0.714,0.488,0.226,False,False,crypto_support,Martin Heinrich
 H001061,7,1.0,0.963,0.037,False,False,crypto_support,John Hoeven
 H001076,7,0.714,0.545,0.169,False,False,crypto_support,Margaret Wood Hassan
 H001079,7,1.0,0.967,0.033,False,False,crypto_support,Cindy Hyde-Smith
-H001089,6,0.0,0.666,-0.666,False,True,crypto_support,Josh Hawley
+H001089,6,0.0,0.032,-0.032,True,False,crypto_support,Josh Hawley
 H001104,7,1.0,0.988,0.012,False,False,crypto_support,Jon Husted
 J000293,7,1.0,0.977,0.023,False,False,crypto_support,Ron Johnson
 J000312,7,1.0,0.978,0.022,False,False,crypto_support,James C. Justice
@@ -171,7 +171,7 @@ M001244,7,1.0,0.985,0.015,False,False,crypto_support,Ashley Moody
 O000174,5,0.6,0.344,0.256,False,False,crypto_support,Jon Ossoff
 P000145,6,0.667,0.35,0.317,False,False,crypto_support,Alex Padilla
 P000595,7,0.0,0.185,-0.185,False,False,crypto_support,Gary C. Peters
-P000603,7,0.143,0.763,-0.62,False,True,crypto_support,Rand Paul
+P000603,7,0.143,0.243,-0.1,True,False,crypto_support,Rand Paul
 R000122,7,0.0,0.139,-0.139,False,False,crypto_support,Jack Reed
 R000584,7,1.0,0.979,0.021,False,False,crypto_support,James E. Risch
 R000605,7,1.0,0.943,0.057,False,False,crypto_support,Mike Rounds

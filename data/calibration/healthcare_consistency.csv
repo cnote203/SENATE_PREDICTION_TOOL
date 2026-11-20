@@ -69,7 +69,7 @@ M001244,4,0.0,0.01,-0.01,False,False,coverage_expansion,Ashley Moody
 O000174,4,1.0,0.996,0.004,False,False,coverage_expansion,Jon Ossoff
 P000145,4,1.0,0.997,0.003,False,False,coverage_expansion,Alex Padilla
 P000595,4,1.0,0.967,0.033,False,False,coverage_expansion,Gary C. Peters
-P000603,4,0.75,0.06,0.69,False,True,coverage_expansion,Rand Paul
+P000603,4,0.75,0.74,0.01,True,False,coverage_expansion,Rand Paul
 R000122,4,1.0,0.99,0.01,False,False,coverage_expansion,Jack Reed
 R000584,4,0.0,0.027,-0.027,False,False,coverage_expansion,James E. Risch
 R000605,4,0.0,0.116,-0.116,False,False,coverage_expansion,Mike Rounds
