@@ -25,3 +25,4 @@ C001113,Catherine Cortez Masto,arms_sales_oversight,-1.0,0.4,Nay on Qatar/UAE an
 B001277,Richard Blumenthal,arms_sales_oversight,-0.75,0.4,Nay on April 2026 Israel motion,119-2-80,yes
 S000148,Charles E. Schumer,arms_sales_oversight,-0.75,0.4,Nay on April 2026 Israel motion,119-2-80,yes
 F000479,John Fetterman,nato_interventionism,1.5,0.4,Lone Democratic Nay on Iran war powers resolutions; flagged by calibration (+1.35 from fit),119-1-328;119-2-244,yes
+P000603,Rand Paul,defense_budget,-2.0,0.3,Nay on all six FY26 NDAA votes; ideology mapping (d1=+0.88) predicts support and six correlated votes are too few to overcome it,119-1-500;119-1-503;119-1-570;119-1-646;119-1-647;119-1-648,yes
