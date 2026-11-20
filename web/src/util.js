@@ -6,34 +6,34 @@ export function dimensionIndex(meta) {
 }
 
 export const SECTOR_SHORT = {
-  foreign_policy: 'FOREIGN', healthcare: 'HEALTH', energy: 'ENERGY', banking: 'BANKING', tech: 'AI & TECH',
+  foreign_policy: 'Foreign policy', healthcare: 'Health', energy: 'Energy', banking: 'Banking', tech: 'AI & tech',
 }
 
 export const CAUCUS = {
-  D: { label: 'Democratic caucus', color: '#3d8bff' },
-  R: { label: 'Republican conference', color: '#ff4d5e' },
-  I: { label: 'Independent', color: '#b07cff' },
+  D: { label: 'Democratic caucus', color: '#5b8bd9' },
+  R: { label: 'Republican conference', color: '#c2414f' },
+  I: { label: 'Independent', color: '#9a86c9' },
 }
 
 export const SOURCE = {
-  votes: { label: 'VOTES', note: 'Estimated from this senator’s own roll-call votes' },
-  fitted: { label: 'MAPPED', note: 'Ideology mapping from a House record' },
-  'fitted+donors': { label: 'MAPPED+$', note: 'House-record mapping adjusted by PAC donor history' },
-  formula: { label: 'PRIOR', note: 'Starting formula: no usable roll calls on this dimension' },
-  imputed: { label: 'IMPUTED', note: 'No voting record: caucus estimate, adjusted for state' },
-  override: { label: 'OVERRIDE', note: 'Hand-set from cited roll calls' },
+  votes: { label: 'Votes', note: 'Estimated from this senator’s own roll-call votes' },
+  fitted: { label: 'Mapped', note: 'Ideology mapping from a House record' },
+  'fitted+donors': { label: 'Mapped + PACs', note: 'House-record mapping adjusted by PAC donor history' },
+  formula: { label: 'Prior', note: 'Starting formula: no usable roll calls on this dimension' },
+  imputed: { label: 'Imputed', note: 'No voting record: caucus estimate, adjusted for state' },
+  override: { label: 'Override', note: 'Hand-set from cited roll calls' },
 }
 
 const STOPS = [
-  [-2, [25, 211, 255]],
-  [-0.7, [32, 120, 150]],
-  [0, [44, 54, 68]],
-  [0.7, [190, 120, 30]],
-  [2, [255, 176, 32]],
+  [-2, [126, 167, 214]],
+  [-0.7, [72, 103, 140]],
+  [0, [58, 68, 84]],
+  [0.7, [160, 125, 62]],
+  [2, [222, 186, 110]],
 ]
 
 export function scoreColor(v) {
-  if (v == null || Number.isNaN(v)) return '#3a4250'
+  if (v == null || Number.isNaN(v)) return '#3a4454'
   const x = Math.max(-2, Math.min(2, v))
   for (let i = 0; i < STOPS.length - 1; i++) {
     const [a, ca] = STOPS[i]
@@ -44,16 +44,16 @@ export function scoreColor(v) {
       return `rgb(${c[0]},${c[1]},${c[2]})`
     }
   }
-  return 'rgb(255,176,32)'
+  return 'rgb(222,186,110)'
 }
 
 export function probColor(p) {
   // 0 = Nay (red-violet), 0.5 = undecided (slate), 1 = Yea (green)
-  if (p == null) return '#3a4250'
+  if (p == null) return '#3a4454'
   const lerp = (a, b, t) => Math.round(a + (b - a) * t)
-  const nay = [255, 77, 110]
-  const mid = [52, 60, 74]
-  const yea = [61, 255, 160]
+  const nay = [194, 65, 79]
+  const mid = [58, 68, 84]
+  const yea = [110, 176, 132]
   const [a, b, t] = p < 0.5 ? [nay, mid, p / 0.5] : [mid, yea, (p - 0.5) / 0.5]
   return `rgb(${lerp(a[0], b[0], t)},${lerp(a[1], b[1], t)},${lerp(a[2], b[2], t)})`
 }
@@ -74,10 +74,13 @@ export function initials(name) {
 }
 
 export const THRESHOLD_LABEL = {
-  majority: 'SIMPLE MAJORITY',
-  cloture: 'CLOTURE · 60',
-  two_thirds: 'TWO-THIRDS',
+  majority: 'simple majority',
+  cloture: '60 votes for cloture',
+  two_thirds: 'two-thirds',
 }
+
+// Dimension end labels are stored in capitals; show them in sentence case.
+export const tag = (t = '') => t.charAt(0).toUpperCase() + t.slice(1).toLowerCase()
 
 export function thresholdNeed(threshold, voting) {
   if (threshold === 'cloture') return 60

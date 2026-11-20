@@ -1,5 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { Suspense, lazy, useEffect, useMemo, useState } from 'react'
 import Hemicycle from './components/Hemicycle.jsx'
+import { webglAvailable } from './components/webgl.js'
+
+// three.js is large, so the 3D chamber loads after the page is up.
+const Chamber3D = lazy(() => import('./components/Chamber3D.jsx'))
 import { Briefing, Dossier } from './components/Panels.jsx'
 import { RollCallPanel, useRollCall } from './components/RollCall.jsx'
 import Timeline from './components/Timeline.jsx'
@@ -28,6 +32,7 @@ export default function App() {
   const [president, setPresident] = useState('R')
   const [branch, setBranch] = useState('D')
   const [hearings, setHearings] = useState(null)
+  const [view, setView] = useState(() => (webglAvailable() ? '3d' : 'plan'))
   const now = useNow(60000)
 
   useEffect(() => {
@@ -68,11 +73,11 @@ export default function App() {
     return data.senators.slice().sort((a, b) => key(a) - key(b) || a.name.localeCompare(b.name)).map((s) => s.id)
   }, [data, dimension, mode, yeaProb, sector])
 
-  if (error) return <div className="boot err">DATA LINK FAILED · {error}<br />Run scripts/export_web.py and rebuild.</div>
-  if (!data) return <div className="boot">ESTABLISHING DATA LINK<span className="blink">_</span></div>
+  if (error) return <div className="boot err">The model data didn’t load ({error}). Run scripts/export_web.py and rebuild.</div>
+  if (!data) return <div className="boot">Opening the chamber…</div>
 
   const { senators, measures, timeline, meta } = data
-  const liveNow = (hearings?.hearings ?? []).filter((h) => hearingState(h, now) === 'LIVE')
+  const liveNow = (hearings?.hearings ?? []).filter((h) => hearingState(h, now) === 'Live')
   const mod = meta.modules.find((m) => m.id === sector)
   const dim = dims[dimension]
   const sel = senators.find((s) => s.id === selected)
@@ -105,9 +110,9 @@ export default function App() {
 
   const r = measure?.byPresident[president]
   const ticker = measures.flatMap((m) => ['R', 'D'].map((p) =>
-    `${SECTOR_SHORT[m.module] ?? ''} · ${m.name.replace('Joint resolution of disapproval: ', '').toUpperCase()} · ${p === 'R' ? 'GOP' : 'DEM'} WH · SENATE ${pct(m.byPresident[p].pPassSenate)} · LAW ${pct(m.byPresident[p].pEnacted, 1)}${m.byPresident[p].calibrated ? '' : ' · ILLUSTRATIVE'}`))
+    `${m.name.replace('Joint resolution of disapproval: ', 'Disapproving ')}, ${p === 'R' ? 'Republican' : 'Democratic'} president: passes the Senate ${pct(m.byPresident[p].pPassSenate)}, becomes law ${pct(m.byPresident[p].pEnacted, 1)}${m.byPresident[p].calibrated ? '' : ' (illustrative)'}`))
 
-  const ticker2 = [...liveNow.map((h) => `● LIVE · ${h.committees[0].id} · ${h.title.toUpperCase().slice(0, 90)}`), ...ticker]
+  const ticker2 = [...liveNow.map((h) => `Live now in ${h.committees[0].name.replace('Senate Committee on ', '')}: ${h.title.slice(0, 90)}`), ...ticker]
   const tally = Object.values(roll.votes)
   const center = mode === 'rollcall' ? (
     <>
@@ -116,8 +121,8 @@ export default function App() {
         <tspan dx="18" className="c-sep">—</tspan>
         <tspan dx="18" className="c-n">{tally.filter((v) => v === 'N').length}</tspan>
       </text>
-      <text x="450" y="412" className="c-small">{tally.length ? 'YEA — NAY' : `P(PASS SENATE) ${pct(r?.pPassSenate, 1)}`}</text>
-      <text x="450" y="432" className="c-tiny">← NAY · ORDERED BY YEA ODDS · YEA →</text>
+      <text x="450" y="412" className="c-small">{tally.length ? 'Yea to nay' : `${pct(r?.pPassSenate, 1)} chance it passes the Senate`}</text>
+      <text x="450" y="432" className="c-tiny">Seated from likely nay to likely yea</text>
     </>
   ) : (
     <>
@@ -126,24 +131,29 @@ export default function App() {
         <tspan dx="18" className="c-sep">|</tspan>
         <tspan dx="18" className="c-r">{rCount}</tspan>
       </text>
-      <text x="450" y="412" className="c-small">{dim.label.toUpperCase()}</text>
-      <text x="450" y="432" className="c-tiny">← {dim.lowTag} · ORDERED BY SCORE · {dim.highTag} →</text>
+      <text x="450" y="412" className="c-small">{dim.label}</text>
+      <text x="450" y="432" className="c-tiny">Seated from {dim.lowTag.toLowerCase()} to {dim.highTag.toLowerCase()}</text>
     </>
   )
 
   return (
     <div className="app">
-      <div className="scanlines" aria-hidden="true" />
       <header className="top">
         <div className="brand">
-          <div className="sigil" aria-hidden="true"><span /><span /><span /></div>
+          <svg className="mark" viewBox="0 0 40 24" aria-hidden="true">
+            {[8, 13, 18].map((r, i) => Array.from({ length: 5 + i * 2 }, (_, j) => {
+              const a = Math.PI - (Math.PI * (j + 0.5)) / (5 + i * 2)
+              return <circle key={`${i}-${j}`} cx={20 + r * Math.cos(a)} cy={22 - r * Math.sin(a)} r="1.35" />
+            }))}
+            <rect x="16" y="20.5" width="8" height="2.5" rx="0.6" />
+          </svg>
           <div>
-            <h1>SENATE SITUATION BOARD</h1>
-            <div className="sub">120TH CONGRESS PROJECTION · {meta.modules.length} POLICY SECTORS · MODEL OUTPUT {meta.generated}</div>
+            <h1>Senate Situation Board</h1>
+            <div className="sub">The 120th Congress, projected across {meta.modules.length} policy areas. Model run {meta.generated}.</div>
           </div>
         </div>
         <nav className="modes">
-          {[['chamber', 'CHAMBER'], ['rollcall', 'ROLL CALL'], ['timeline', '2027–2032'], ['hearings', 'HEARINGS']].map(([k, l]) => (
+          {[['chamber', 'Chamber'], ['rollcall', 'Roll call'], ['timeline', '2027–2032'], ['hearings', 'Hearings']].map(([k, l]) => (
             <button key={k} className={mode === k ? 'on' : ''} onClick={() => { setMode(k); roll.reset() }}>
               {k === 'hearings' && liveNow.length > 0 && <span className="live-dot" title={`${liveNow.length} live now`} />}{l}
             </button>
@@ -157,7 +167,7 @@ export default function App() {
           return (
             <button key={m.id} className={sector === m.id ? 'on' : ''} onClick={() => switchSector(m.id)}>
               <span className="s-name">{SECTOR_SHORT[m.id] ?? m.label}</span>
-              <span className="s-meta">{fitted}/{m.dimensions.length} CALIBRATED</span>
+              <span className="s-meta">{fitted} of {m.dimensions.length} fitted to votes</span>
             </button>
           )
         })}
@@ -194,19 +204,30 @@ export default function App() {
                   ))}
                 </div>
                 <div className="colormodes">
-                  <span>COLOR</span>
+                  <span>Color by</span>
                   {['score', 'caucus', 'uncertainty', 'evidence'].map((c) => (
-                    <button key={c} className={colorMode === c ? 'on' : ''} onClick={() => setColorMode(c)}>{c.toUpperCase()}</button>
+                    <button key={c} className={colorMode === c ? 'on' : ''} onClick={() => setColorMode(c)}>{c.charAt(0).toUpperCase() + c.slice(1)}</button>
                   ))}
                 </div>
               </div>
             )}
-            <Hemicycle senators={senators} order={order} colorOf={colorOf} selected={selected} onSelect={setSelected} center={center} />
+            <div className="viewswitch" role="group" aria-label="Chamber view">
+              {[['3d', 'Chamber'], ['plan', 'Floor plan']].map(([k, l]) => (
+                <button key={k} className={view === k ? 'on' : ''} aria-pressed={view === k} onClick={() => setView(k)}>{l}</button>
+              ))}
+            </div>
+            {view === '3d'
+              ? (
+                <Suspense fallback={<div className="chamber-loading">Setting out the desks…</div>}>
+                  <Chamber3D senators={senators} order={order} colorOf={colorOf} selected={selected} onSelect={setSelected} center={center} />
+                </Suspense>
+              )
+              : <Hemicycle senators={senators} order={order} colorOf={colorOf} selected={selected} onSelect={setSelected} center={center} />}
             {mode === 'chamber' && colorMode === 'score' && (
               <div className="legend">
-                <span>−2 {dim.lowTag}</span>
+                <span>−2 {dim.lowTag.charAt(0) + dim.lowTag.slice(1).toLowerCase()}</span>
                 <div className="grad" />
-                <span>{dim.highTag} +2</span>
+                <span>{dim.highTag.charAt(0) + dim.highTag.slice(1).toLowerCase()} +2</span>
               </div>
             )}
             {mode === 'chamber' && colorMode === 'evidence' && (
@@ -217,10 +238,10 @@ export default function App() {
               </div>
             )}
             {mode === 'chamber' && colorMode === 'uncertainty' && (
-              <div className="legend"><span>UNCERTAIN</span><div className="grad mono" /><span>CONFIDENT</span></div>
+              <div className="legend"><span>Uncertain</span><div className="grad mono" /><span>Confident</span></div>
             )}
             {mode === 'rollcall' && (
-              <div className="legend"><span>NAY</span><div className="grad prob" /><span>YEA</span></div>
+              <div className="legend"><span>Nay</span><div className="grad prob" /><span>Yea</span></div>
             )}
           </section>
 

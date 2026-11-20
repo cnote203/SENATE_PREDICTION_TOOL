@@ -6,7 +6,7 @@ const LIVE_BEFORE_MS = 10 * 60 * 1000
 const LIVE_AFTER_MS = 3 * 60 * 60 * 1000
 
 const dayKey = (d) => d.toLocaleDateString('en-CA', { timeZone: TZ })
-const dayLabel = (d) => d.toLocaleDateString('en-US', { timeZone: TZ, weekday: 'short', month: 'short', day: 'numeric' }).toUpperCase()
+const dayLabel = (d) => d.toLocaleDateString('en-US', { timeZone: TZ, weekday: 'short', month: 'short', day: 'numeric' })
 const timeLabel = (d) => d.toLocaleTimeString('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' })
 const shortCommittee = (n) => n.replace(/^Senate (Select |Special )?Committee on /, '').replace(/^United States Senate /, '')
 
@@ -15,10 +15,10 @@ const agendaOf = (h) => h.agenda ?? [...(h.bills ?? []), ...(h.nominations ?? []
 
 export function hearingState(h, now) {
   const start = new Date(h.start).getTime()
-  if (h.status === 'Canceled' || h.status === 'Postponed') return h.status.toUpperCase()
-  if (now >= start - LIVE_BEFORE_MS && now <= start + LIVE_AFTER_MS) return 'LIVE'
-  if (now > start) return 'HELD'
-  return dayKey(new Date(start)) === dayKey(new Date(now)) ? 'TODAY' : 'UPCOMING'
+  if (h.status === 'Canceled' || h.status === 'Postponed') return h.status
+  if (now >= start - LIVE_BEFORE_MS && now <= start + LIVE_AFTER_MS) return 'Live'
+  if (now > start) return 'Held'
+  return dayKey(new Date(start)) === dayKey(new Date(now)) ? 'Today' : 'Upcoming'
 }
 
 function countdown(ms) {
@@ -42,21 +42,21 @@ export function useNow(step = 30000) {
 function Monitor({ h, state, now }) {
   const [armed, setArmed] = useState(false)
   useEffect(() => setArmed(false), [h?.id])
-  if (!h) return <div className="monitor idle"><div className="mon-msg">SELECT A HEARING</div></div>
+  if (!h) return <div className="monitor idle"><div className="mon-msg">Choose a hearing from the docket</div></div>
 
   const start = new Date(h.start).getTime()
   const links = [
-    [h.links.committeeHearings ?? h.links.committee, 'COMMITTEE WEBCAST', 'Official stream on the committee website'],
+    [h.links.committeeHearings ?? h.links.committee, 'Committee webcast', 'Official stream on the committee website'],
     [h.links.cspan, 'C-SPAN', 'Find C-SPAN coverage of this hearing'],
-    [h.links.congress, 'CONGRESS.GOV', 'Notice, witnesses and documents'],
+    [h.links.congress, 'Congress.gov', 'Notice, witnesses and documents'],
   ].filter(([u]) => u)
 
   return (
     <div className={`monitor st-${state.toLowerCase()}`}>
       <div className="mon-bar">
-        <span className={`chip st-${state.toLowerCase()}`}>{state === 'LIVE' ? '● LIVE' : state}</span>
-        <span>{shortCommittee(h.committees[0].name).toUpperCase()}{h.committees[0].subName ? ` · ${h.committees[0].subName.toUpperCase()}` : ''}</span>
-        <span className="mon-clock">{state === 'UPCOMING' || state === 'TODAY' ? `T−${countdown(start - now)}` : `${dayLabel(new Date(start))} ${timeLabel(new Date(start))} ET`}</span>
+        <span className={`chip st-${state.toLowerCase()}`}>{state === 'Live' ? '● Live' : state}</span>
+        <span>{shortCommittee(h.committees[0].name)}{h.committees[0].subName ? `, ${h.committees[0].subName}` : ''}</span>
+        <span className="mon-clock">{state === 'Upcoming' || state === 'Today' ? `Gavel in ${countdown(start - now)}` : `${dayLabel(new Date(start))}, ${timeLabel(new Date(start))} ET`}</span>
       </div>
       <div className="mon-screen">
         {h.embed && armed ? (
@@ -71,11 +71,11 @@ function Monitor({ h, state, now }) {
         ) : (
           <div className="mon-msg">
             {h.embed ? (
-              <button className="mon-play" onClick={() => setArmed(true)}>▶ LOAD FEED · {h.embed.label.toUpperCase()}</button>
+              <button className="mon-play" onClick={() => setArmed(true)}>▶ Play {h.embed.label}</button>
             ) : (
               <>
-                <div className="mon-nofeed">NO IN-APP FEED FOR THIS HEARING</div>
-                <div className="mon-sub">{state === 'LIVE' ? 'Open the official webcast below.' : state === 'HELD' ? 'Archived video is on the committee site and C-SPAN.' : 'The committee webcast goes live at the gavel.'}</div>
+                <div className="mon-nofeed">No player for this hearing yet</div>
+                <div className="mon-sub">{state === 'Live' ? 'It’s in session now. Open the official webcast below.' : state === 'Held' ? 'Archived video is on the committee site and C-SPAN.' : 'The committee webcast goes live at the gavel.'}</div>
               </>
             )}
             <div className="mon-links">
@@ -105,7 +105,7 @@ function Dais({ committeeId, senators, sector, dimension, onSelect }) {
     <div className="dais">
       {['D', 'R'].map((k) => (
         <div key={k} className="dais-side">
-          <div className="dais-head" style={{ color: CAUCUS[k].color }}>{k === 'D' ? 'DEMOCRATIC CAUCUS' : 'REPUBLICAN CONFERENCE'} · {side(k).length}</div>
+          <div className="dais-head" style={{ color: CAUCUS[k].color }}>{k === 'D' ? 'Democrats' : 'Republicans'} ({side(k).length})</div>
           {side(k).map(({ s, c }) => {
             const sc = s.scores[sector]?.[dimension]?.score
             return (
@@ -131,8 +131,8 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
   const shown = useMemo(() => list.filter((h) => scope === 'all' || h.sectors.includes(sector)), [list, scope, sector])
   const states = useMemo(() => Object.fromEntries(list.map((h) => [h.id, hearingState(h, now)])), [list, now])
 
-  const auto = shown.find((h) => states[h.id] === 'LIVE')
-    ?? shown.find((h) => states[h.id] === 'TODAY' || states[h.id] === 'UPCOMING')
+  const auto = shown.find((h) => states[h.id] === 'Live')
+    ?? shown.find((h) => states[h.id] === 'Today' || states[h.id] === 'Upcoming')
     ?? shown[shown.length - 1]
   const current = shown.find((h) => h.id === pick) ?? auto
   const mod = meta.modules.find((m) => m.id === sector)
@@ -144,7 +144,7 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
   if (!hearings) {
     return (
       <section className="hearings"><div className="panel">
-        <h3>HEARING SCHEDULE OFFLINE</h3>
+        <h3>No hearing schedule yet</h3>
         <p className="muted">No hearings.json yet. Run <code>python scripts\fetch_hearings.py</code> with CONGRESS_API_KEY set, or add the key as a repository secret so the Pages workflow refreshes it.</p>
       </div></section>
     )
@@ -157,26 +157,26 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
     if (!groups.length || groups[groups.length - 1].k !== k) groups.push({ k, label: dayLabel(d), items: [] })
     groups[groups.length - 1].items.push(h)
   }
-  const liveCount = shown.filter((h) => states[h.id] === 'LIVE').length
+  const liveCount = shown.filter((h) => states[h.id] === 'Live').length
 
   return (
     <section className="hearings">
       <div className="docket panel">
         <div className="dk-head">
           <div>
-            <div className="kicker">COMMITTEE DOCKET · {hearings.window.from} → {hearings.window.to}</div>
-            <h3>{scope === 'all' ? 'ALL SENATE COMMITTEES' : `${mod.label.toUpperCase()} COMMITTEES`}</h3>
+            <div className="kicker">{hearings.window.from} to {hearings.window.to}</div>
+            <h3>{scope === 'all' ? 'Every Senate committee' : `${mod.label} committees`}</h3>
           </div>
           <div className="dk-scope">
-            {[['sector', SECTOR_SHORT[sector] ?? 'SECTOR'], ['all', 'ALL']].map(([k, l]) => (
+            {[['sector', SECTOR_SHORT[sector] ?? 'This area'], ['all', 'All']].map(([k, l]) => (
               <button key={k} className={scope === k ? 'on' : ''} onClick={() => setScope(k)}>{l}</button>
             ))}
           </div>
         </div>
         <div className="dk-stats">
-          <span><b>{shown.length}</b> HEARINGS</span>
-          <span className={liveCount ? 'live' : ''}><b>{liveCount}</b> LIVE</span>
-          <span><b>{shown.filter((h) => ['TODAY', 'UPCOMING'].includes(states[h.id])).length}</b> AHEAD</span>
+          <span><b>{shown.length}</b> hearings</span>
+          <span className={liveCount ? 'live' : ''}><b>{liveCount}</b> live</span>
+          <span><b>{shown.filter((h) => ['Today', 'Upcoming'].includes(states[h.id])).length}</b> ahead</span>
         </div>
         <div className="dk-list">
           {!groups.length && <p className="muted">No hearings for these committees in the window. Try ALL.</p>}
@@ -189,11 +189,11 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
                   <button key={h.id} className={`dk-row st-${st.toLowerCase()} ${current?.id === h.id ? 'sel' : ''}`} onClick={() => setPick(h.id)}>
                     <span className="dk-time">{timeLabel(new Date(h.start))}</span>
                     <span className="dk-body">
-                      <span className="dk-com">{h.committees[0].id} · {shortCommittee(h.committees[0].name)}{h.committees[0].sub ? ' (SUB)' : ''}</span>
+                      <span className="dk-com">{shortCommittee(h.committees[0].name)}{h.committees[0].sub ? ', subcommittee' : ''}</span>
                       <span className="dk-title">{h.title}</span>
                       <span className="dk-tags">
-                        <span className={`chip st-${st.toLowerCase()}`}>{st === 'LIVE' ? '● LIVE' : st}</span>
-                        {h.embed && <span className="chip feed">FEED</span>}
+                        <span className={`chip st-${st.toLowerCase()}`}>{st === 'Live' ? '● Live' : st}</span>
+                        {h.embed && <span className="chip feed">Player</span>}
                         {h.sectors.map((s) => <span key={s} className="chip sec">{SECTOR_SHORT[s] ?? s}</span>)}
                       </span>
                     </span>
@@ -203,7 +203,7 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
             </div>
           ))}
         </div>
-        <div className="dk-foot">Schedule: Congress.gov · refreshed {hearings.generated.replace('T', ' ').replace('Z', ' UTC')} · times ET</div>
+        <div className="dk-foot">Schedule from Congress.gov, refreshed {hearings.generated.replace('T', ' ').replace('Z', ' UTC')}. Times are Eastern.</div>
       </div>
 
       <div className="watch">
@@ -212,23 +212,23 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
           <div className="panel hearing-detail">
             <h2>{current.title}</h2>
             <div className="hd-meta">
-              <span>{dayLabel(new Date(current.start))} · {timeLabel(new Date(current.start))} ET</span>
+              <span>{dayLabel(new Date(current.start))}, {timeLabel(new Date(current.start))} ET</span>
               {current.location && <span>{current.location}</span>}
               {current.committees.map((c) => <span key={c.id + (c.sub ?? '')}>{shortCommittee(c.name)}{c.subName ? ` › ${c.subName}` : ''}</span>)}
             </div>
             <div className="hd-cols">
               <div>
-                <h3>ON THE DAIS <small>projected 120th membership · colored by {daisMod.dimensions.find((d) => d.id === daisDim)?.label ?? 'score'}</small></h3>
+                <h3>On the dais <small>projected 120th membership, colored by {daisMod.dimensions.find((d) => d.id === daisDim)?.label ?? 'score'}</small></h3>
                 <Dais committeeId={current.committees[0].id} senators={senators} sector={daisSector} dimension={daisDim} onSelect={onSelect} />
               </div>
               <div>
-                <h3>WITNESSES</h3>
+                <h3>Witnesses</h3>
                 {current.witnesses.length ? current.witnesses.map((w, i) => (
                   <div key={i} className="witness"><b>{w.name}</b><span>{[w.position, w.organization].filter(Boolean).join(', ')}</span></div>
                 )) : <p className="muted">Not yet posted.</p>}
                 {agendaOf(current).length > 0 && (
                   <>
-                    <h3>ON THE AGENDA <small>bill text via GovInfo</small></h3>
+                    <h3>On the agenda <small>bill text from GovInfo</small></h3>
                     <div className="agenda">{agendaOf(current).map((a) => a.url
                       ? <a key={a.label} className="chip" href={a.url} target="_blank" rel="noopener noreferrer" title={a.kind === 'bill' ? 'Latest bill text (GovInfo)' : 'Nomination (Congress.gov)'}>{a.label} ↗</a>
                       : <span key={a.label} className="chip">{a.label}</span>)}</div>
@@ -236,13 +236,13 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
                 )}
                 {(current.transcripts ?? []).length > 0 && (
                   <>
-                    <h3>TRANSCRIPT</h3>
+                    <h3>Transcript</h3>
                     {current.transcripts.map((t) => <a key={t.jacket} className="vid" href={t.url} target="_blank" rel="noopener noreferrer">Printed hearing {t.jacket} (GovInfo) ↗</a>)}
                   </>
                 )}
                 {current.videos.length > 0 && (
                   <>
-                    <h3>VIDEO</h3>
+                    <h3>Video</h3>
                     {current.videos.map((v) => <a key={v.url} className="vid" href={v.url} target="_blank" rel="noopener noreferrer">{v.name} ↗</a>)}
                   </>
                 )}

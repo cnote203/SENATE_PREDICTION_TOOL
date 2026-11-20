@@ -1,4 +1,4 @@
-import { CAUCUS, SOURCE, fmtScore, money, scoreColor } from '../util.js'
+import { CAUCUS, SOURCE, fmtScore, money, scoreColor, tag } from '../util.js'
 
 export function ScoreBar({ score, sd, source, compact }) {
   const x = (v) => ((Math.max(-2, Math.min(2, v)) + 2) / 4) * 100
@@ -29,14 +29,14 @@ export function ScoreBar({ score, sd, source, compact }) {
 export function Dossier({ s, sector, dimension, onClose, meta, onSector }) {
   const cauc = CAUCUS[s.caucus]
   const tags = []
-  if (s.incoming) tags.push(s.newToSenate ? 'INCOMING · FRESHMAN' : 'INCOMING · RETURNING')
-  if (s.party && s.party.startsWith('Indep')) tags.push('INDEPENDENT')
+  if (s.incoming) tags.push(s.newToSenate ? 'Incoming, new to the Senate' : 'Incoming, returning')
+  if (s.party && s.party.startsWith('Indep')) tags.push('Independent')
   const mod = meta.modules.find((m) => m.id === sector)
   const others = meta.modules.filter((m) => m.id !== sector)
   return (
     <aside className="panel dossier">
       <header>
-        <div className="kicker">SUBJECT FILE · {s.id}</div>
+        <div className="kicker">{s.id}</div>
         <button className="close" onClick={onClose} aria-label="Close">×</button>
       </header>
       <h2>{s.name}</h2>
@@ -46,8 +46,8 @@ export function Dossier({ s, sector, dimension, onClose, meta, onSector }) {
       </div>
       {tags.length > 0 && <div className="tags">{tags.map((t) => <span key={t} className="tag">{t}</span>)}</div>}
       <div className="stats">
-        <div><b>{s.seniority ?? '—'}</b><span>SENIORITY RANK</span></div>
-        <div><b>{s.years?.toFixed(1) ?? '0.0'}</b><span>YEARS SERVED</span></div>
+        <div><b>{s.seniority ?? '—'}</b><span>Seniority rank</span></div>
+        <div><b>{s.years?.toFixed(1) ?? '0.0'}</b><span>Years served</span></div>
         <div><b>{s.ideology.d1 == null ? '—' : s.ideology.d1.toFixed(2)}</b><span>DW-NOMINATE</span></div>
       </div>
 
@@ -59,7 +59,7 @@ export function Dossier({ s, sector, dimension, onClose, meta, onSector }) {
           <div key={d.id} className={`dimrow ${d.id === dimension ? 'active' : ''}`}>
             <div className="dimname">
               {d.label}
-              <span className="ends">{d.lowTag} ↔ {d.highTag}</span>
+              <span className="ends">{tag(d.lowTag)} to {tag(d.highTag).toLowerCase()}</span>
             </div>
             <ScoreBar score={v.score} sd={v.sd} source={v.source} />
           </div>
@@ -106,8 +106,8 @@ export function Dossier({ s, sector, dimension, onClose, meta, onSector }) {
         <>
           <h3>PAC money <small>2022–2026 cycles · FEC</small></h3>
           <div className="donors">
-            <div><b>{money(s.donors.defense_contractor)}</b><span>DEFENSE CONTRACTOR PACS</span></div>
-            <div><b>{money(s.donors.israel_policy)}</b><span>ISRAEL-POLICY PACS</span></div>
+            <div><b>{money(s.donors.defense_contractor)}</b><span>Defense contractor PACs</span></div>
+            <div><b>{money(s.donors.israel_policy)}</b><span>Israel-policy PACs</span></div>
           </div>
         </>
       )}
@@ -132,16 +132,16 @@ export function Briefing({ senators, sector, dimension, meta, onSelect }) {
   const sources = scored.reduce((m, s) => ((m[val(s).source] = (m[val(s).source] ?? 0) + 1), m), {})
   return (
     <aside className="panel briefing">
-      <div className="kicker">{mod.label.toUpperCase()} · DIMENSION BRIEF</div>
+      <div className="kicker">{mod.label}</div>
       <h2>{dimMeta.label}</h2>
       <p className="ends-desc">
         <span style={{ color: scoreColor(-2) }}>−2 · {dimMeta.low}</span>
         <span style={{ color: scoreColor(2) }}>+2 · {dimMeta.high}</span>
       </p>
       <div className="stats">
-        <div><b style={{ color: scoreColor(mean('D')) }}>{fmtScore(mean('D'))}</b><span>DEM CAUCUS MEAN</span></div>
-        <div><b style={{ color: scoreColor(mean('R')) }}>{fmtScore(mean('R'))}</b><span>GOP MEAN</span></div>
-        <div><b>{dimMeta.calibrated ? dimMeta.rollCalls.length : '—'}</b><span>ROLL CALLS FITTED</span></div>
+        <div><b style={{ color: scoreColor(mean('D')) }}>{fmtScore(mean('D'))}</b><span>Democratic average</span></div>
+        <div><b style={{ color: scoreColor(mean('R')) }}>{fmtScore(mean('R'))}</b><span>Republican average</span></div>
+        <div><b>{dimMeta.calibrated ? dimMeta.rollCalls.length : '—'}</b><span>Roll calls fitted</span></div>
       </div>
       {dimMeta.calibrated ? (
         <p className="muted small">
@@ -150,9 +150,9 @@ export function Briefing({ senators, sector, dimension, meta, onSelect }) {
           {dimMeta.cv?.within_party_accuracy && ` Held-out within-party accuracy ${(dimMeta.cv.within_party_accuracy * 100).toFixed(0)}%.`}
         </p>
       ) : dimMeta.plannedRollCalls > 0 ? (
-        <div className="warn">CALIBRATION PENDING · {dimMeta.plannedRollCalls} roll calls queued. Scores use the starting formula until calibrate.py runs.</div>
+        <div className="warn">Not yet fitted: {dimMeta.plannedRollCalls} roll calls are queued. Scores use the starting formula until calibrate.py runs.</div>
       ) : (
-        <div className="warn">ILLUSTRATIVE · No usable roll calls in the 119th Senate. Scores use the starting formula with wide uncertainty.</div>
+        <div className="warn">Illustrative only: no usable roll calls in the 119th Senate. Scores use the starting formula with wide uncertainty.</div>
       )}
 
       <h3>Poles</h3>
@@ -175,7 +175,7 @@ export function Briefing({ senators, sector, dimension, meta, onSelect }) {
         {leaders.map(({ s, c }) => (
           <li key={`${c.id}-${s.id}`} onClick={() => onSelect(s.id)}>
             <span className="gk-c">{c.id}</span>
-            <span className="gk-t">{c.title.toUpperCase()}</span>
+            <span className="gk-t">{c.title}</span>
             <span className="dot" style={{ background: CAUCUS[s.caucus].color }} />
             <span className="pname">{s.name}</span>
           </li>

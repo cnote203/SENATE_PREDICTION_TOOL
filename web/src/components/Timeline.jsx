@@ -1,7 +1,7 @@
 import { CAUCUS, lastName, pct } from '../util.js'
 
 const YEARS = { 120: '2027–28', 121: '2029–30', 122: '2031–32' }
-const EVENT = { 120: 'CURRENT SENATE', 121: 'AFTER 2028 · CLASS 3', 122: 'AFTER 2030 MIDTERM · CLASS 1' }
+const EVENT = { 120: 'The Senate seated in January 2027', 121: 'After the 2028 election (Class 3 seats)', 122: 'After the 2030 midterm (Class 1 seats)' }
 
 const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1)
 
@@ -30,14 +30,14 @@ export default function Timeline({ timeline, measures, branch, setBranch, sector
     <section className="timeline">
       <div className="tl-head">
         <div>
-          <div className="kicker">{mod.label.toUpperCase()} · {t.measures[0]?.runs ?? '—'} SIMULATED ELECTION PATHS PER BRANCH</div>
+          <div className="kicker">{mod.label}, {t.measures[0]?.runs ?? '—'} simulated election paths for each 2028 outcome</div>
           <h2>2027 → 2032</h2>
         </div>
         <div className="wh">
-          <span>2028 WINNER</span>
+          <span>2028 winner</span>
           {['D', 'R'].map((p) => (
             <button key={p} className={`whbtn wh-${p} ${branch === p ? 'on' : ''}`} onClick={() => setBranch(p)}>
-              {p === 'D' ? 'DEMOCRAT' : 'REPUBLICAN'}
+              {p === 'D' ? 'Democrat' : 'Republican'}
             </button>
           ))}
         </div>
@@ -48,13 +48,13 @@ export default function Timeline({ timeline, measures, branch, setBranch, sector
           const pres = n === 120 ? 'R' : branch
           return (
             <div key={n} className="tl-col">
-              <div className="tl-congress">{n}TH CONGRESS</div>
+              <div className="tl-congress">{n}th Congress</div>
               <div className="tl-years">{YEARS[n]}</div>
               <div className="tl-event">{EVENT[n]}</div>
               <div className="tl-big">
-                <div><b style={{ color: CAUCUS.D.color }}>{c.d_seats_mean.toFixed(1)}</b><span>D SEATS (MEAN)</span></div>
-                <div><b>{pct(c.p_d_senate)}</b><span>D CONTROL</span></div>
-                <div><b style={{ color: CAUCUS[pres].color }}>{pres}</b><span>WHITE HOUSE</span></div>
+                <div><b style={{ color: CAUCUS.D.color }}>{c.d_seats_mean.toFixed(1)}</b><span>Democratic seats, average</span></div>
+                <div><b>{pct(c.p_d_senate)}</b><span>Democratic control</span></div>
+                <div><b style={{ color: CAUCUS[pres].color }}>{pres}</b><span>President</span></div>
               </div>
               <SeatStrip mean={c.d_seats_mean} p10={c.d_seats_p10} p90={c.d_seats_p90} />
               <div className="tl-range">10–90% range: {c.d_seats_p10.toFixed(0)}–{c.d_seats_p90.toFixed(0)} D seats{n > 120 ? ` · ${c.new_senators_mean.toFixed(1)} new senators` : ''}</div>

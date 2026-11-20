@@ -79,48 +79,48 @@ export function RollCallPanel({ measures, measureId, setMeasureId, president, se
 
   return (
     <aside className="panel rollcall">
-      <div className="kicker">ROLL CALL SIMULATOR · {sectorLabel.toUpperCase()} · 120TH CONGRESS</div>
+      <div className="kicker">{sectorLabel}, 120th Congress</div>
       <div className="measure-list">
         {measures.map((x) => (
           <button key={x.id} className={`measure ${x.id === measureId ? 'on' : ''}`} onClick={() => { setMeasureId(x.id); roll.reset() }}>
             <span className="mname">{x.name}</span>
-            <span className="mdim">{DIMENSIONS[x.dimension].label} · Yea = {x.plusSide === 'Yea' ? DIMENSIONS[x.dimension].highTag : DIMENSIONS[x.dimension].lowTag}</span>
+            <span className="mdim">{DIMENSIONS[x.dimension].label} , a yea votes to {(x.plusSide === 'Yea' ? DIMENSIONS[x.dimension].highTag : DIMENSIONS[x.dimension].lowTag).toLowerCase()}</span>
           </button>
         ))}
       </div>
 
       <div className="wh">
-        <span>WHITE HOUSE</span>
+        <span>President</span>
         {['R', 'D'].map((p) => (
           <button key={p} className={`whbtn wh-${p} ${president === p ? 'on' : ''}`} onClick={() => { setPresident(p); roll.reset() }}>
-            {p === 'R' ? 'REPUBLICAN' : 'DEMOCRATIC'}
+            {p === 'R' ? 'Republican' : 'Democratic'}
           </button>
         ))}
       </div>
 
-      {!r.calibrated && <div className="warn">ILLUSTRATIVE · No fitted roll calls behind this measure yet: default cutpoint and slope.</div>}
+      {!r.calibrated && <div className="warn">Illustrative only: no fitted roll calls sit behind this measure yet.</div>}
       <div className="odds">
         {m.stages.map((s) => (
           <div key={s.name}>
             <b>{pct(r.stages[s.name].p_pass_cumulative, 1)}</b>
-            <span>{s.name.toUpperCase()} · {THRESHOLD_LABEL[s.threshold]}</span>
+            <span>{s.name.charAt(0).toUpperCase() + s.name.slice(1)}, {THRESHOLD_LABEL[s.threshold]}</span>
           </div>
         ))}
         <div>
           <b>{pct(r.pEnacted, r.pEnacted < 0.01 ? 2 : 1)}</b>
-          <span>BECOMES LAW{m.vetoPossible ? ' · AFTER VETO' : ''}</span>
+          <span>Becomes law{m.vetoPossible ? ', after any veto' : ''}</span>
         </div>
       </div>
 
       <button className="run" onClick={roll.run} disabled={roll.running}>
-        {roll.running ? 'CALLING THE ROLL…' : done ? 'CALL THE ROLL AGAIN' : 'CALL THE ROLL'}
+        {roll.running ? 'Calling the roll…' : done ? 'Call the roll again' : 'Call the roll'}
       </button>
 
       <div className={`tally ${done ? (passed ? 'passed' : 'failed') : ''}`}>
-        <div className="t-y"><b>{yeas}</b><span>YEA</span></div>
-        <div className="t-n"><b>{nays}</b><span>NAY</span></div>
-        <div className="t-v"><b>{tally.filter((v) => v === 'NV').length}</b><span>NOT VOTING</span></div>
-        <div className="verdict">{done ? (passed ? 'AGREED TO' : 'REJECTED') : roll.running ? `${tally.length}/100` : 'STANDING BY'}</div>
+        <div className="t-y"><b>{yeas}</b><span>Yea</span></div>
+        <div className="t-n"><b>{nays}</b><span>Nay</span></div>
+        <div className="t-v"><b>{tally.filter((v) => v === 'NV').length}</b><span>Not voting</span></div>
+        <div className="verdict">{done ? (passed ? 'Agreed to' : 'Rejected') : roll.running ? `${tally.length}/100` : 'The clerk is ready'}</div>
       </div>
 
       <h3>Model distribution <small>{final.name} · Yea counts across simulations</small></h3>
