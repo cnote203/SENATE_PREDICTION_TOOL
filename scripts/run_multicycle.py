@@ -19,7 +19,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 import pandas as pd  # noqa: E402
 
-from senate_sim import config, elections, multicycle  # noqa: E402
+from senate_sim import config, donors, elections, multicycle  # noqa: E402
 from senate_sim.ingest import legislators  # noqa: E402
 from senate_sim.ingest.http import cached_get  # noqa: E402
 from senate_sim.policy import calibration, foreign_policy  # noqa: E402
@@ -50,7 +50,10 @@ def main() -> int:
 
     scenario = multicycle.Scenario(args.president_2028, args.env_2028, args.runs, args.inner_runs, args.seed)
     print(f"Running {args.runs} simulations (2028 President: {args.president_2028})...")
-    result = multicycle.run(baseline, birth_years, lean, assignments, foreign_policy.MODULE, cal, PRESETS, scenario)
+    adj = donors.load_adjustment(P, config.ROSTER_CONGRESS)
+    print(f"Donor adjustment for House-only scores: {'on' if adj is not None else 'off'}")
+    result = multicycle.run(baseline, birth_years, lean, assignments, foreign_policy.MODULE, cal, PRESETS,
+                            scenario, donor_adjustment=adj)
     s = multicycle.summarize(result)
 
     e = result["environment_2026"]

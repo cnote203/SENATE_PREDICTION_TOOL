@@ -124,6 +124,7 @@ def load_overrides(module: PolicyModule, valid_ids: set[str], strict: bool = Tru
 def score(
     baseline: pd.DataFrame, module: PolicyModule, calibration: dict | None = None,
     strict_overrides: bool = True,
+    donor_adjustment: tuple[pd.DataFrame, pd.DataFrame] | None = None,
 ) -> pd.DataFrame:
     """Return one row per senator: <dim>, <dim>_sd and <dim>_source for each dimension.
 
@@ -169,6 +170,10 @@ def score(
         out[dim.name] = np.clip(raw, SCALE_MIN, SCALE_MAX).round(2)
         out[f"{dim.name}_sd"] = np.round(sd, 3)
         out[f"{dim.name}_source"] = label
+
+    if donor_adjustment is not None:
+        from senate_sim.donors import adjust_scores
+        out = adjust_scores(out, *donor_adjustment)
 
     overrides = load_overrides(module, set(out["bioguide_id"]), strict=strict_overrides)
     pos = {bid: i for i, bid in enumerate(out["bioguide_id"])}

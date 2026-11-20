@@ -263,6 +263,14 @@ senators who already agree with them.
 
 The same api.data.gov key works for Congress.gov and OpenFEC.
 
+**Donor adjustment.** Where a donor effect passes the test, `score_senators.py` and
+`run_multicycle.py` use it to adjust scores that come only from a House record (source
+`fitted`, becoming `fitted+donors`): shift = slope x (log PAC dollars - mean of other
+House-only senators in the same caucus), capped at +-0.75. Senators with their own Senate
+votes are not adjusted (their votes already reflect it), and neither are new senators
+with no record (challenger PAC receipts mostly reflect incumbency and corporate-PAC
+pledges). SDs are left unchanged. Delete `data/processed/donor_effects.csv` to turn it off.
+
 ## Multi-cycle simulation (2027-2032)
 
 ```powershell

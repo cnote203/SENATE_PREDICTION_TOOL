@@ -18,7 +18,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 import pandas as pd  # noqa: E402
 
-from senate_sim import config  # noqa: E402
+from senate_sim import config, donors  # noqa: E402
 from senate_sim.policy import calibration  # noqa: E402
 from senate_sim.policy.base import score  # noqa: E402
 
@@ -40,7 +40,14 @@ def main() -> int:
     cal = calibration.load(module.calibration_path) if module.calibration_path else None
     fitted = sorted(cal) if cal else []
     print(f"Calibrated dimensions: {', '.join(fitted) if fitted else 'none (using prior formulas)'}")
-    scores = score(baseline, module, cal)
+    adj = donors.load_adjustment(config.PROCESSED_DIR, N)
+    if adj is not None:
+        used = adj[1][adj[1]["supports_hypothesis"].astype(bool)]
+        print("Donor adjustment for House-only scores: "
+              + (", ".join(f"{r.category} -> {r.dimension}" for r in used.itertuples()) or "no supported effects"))
+    else:
+        print("Donor adjustment: off (run scripts\\fetch_donors.py to enable)")
+    scores = score(baseline, module, cal, donor_adjustment=adj)
     out = config.PROCESSED_DIR / f"scores_{module.name}_{N}.csv"
     scores.to_csv(out, index=False)
 
@@ -48,6 +55,12 @@ def main() -> int:
     print(f"Scored {len(scores)} senators on {len(dims)} {module.name} dimensions -> {out}")
     print("\nCaucus means:")
     print(scores.groupby("caucus")[dims].mean().round(2).to_string())
+    adj_cols = [c for c in scores.columns if c.endswith("_donor_adj")]
+    for c in adj_cols:
+        moved = scores[scores[c].fillna(0).abs() > 0.005].sort_values(c)
+        if not moved.empty:
+            print(f"\n{c[:-10]} donor adjustments ({len(moved)} senators): "
+                  + ", ".join(f"{n} {v:+.2f}" for n, v in zip(moved["name"], moved[c])))
     sources = pd.concat([scores[f"{d}_source"] for d in dims]).value_counts()
     print("\nScore sources across all dimensions:", sources.to_dict())
     for d in dims:

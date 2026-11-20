@@ -146,7 +146,7 @@ def leadership_of(assignments: pd.DataFrame, committee_ids: list[str]) -> dict:
 
 def run(baseline: pd.DataFrame, birth_years: dict, lean: dict, assignments_120: pd.DataFrame,
         module: base.PolicyModule, calibration: dict | None, measures: dict[str, Measure],
-        scenario: Scenario) -> dict:
+        scenario: Scenario, donor_adjustment=None) -> dict:
     rng = np.random.default_rng(scenario.seed)
     env26, env26_se, n26 = environment_2026(baseline, lean)
     env28_mean = scenario.env_2028_mean if scenario.env_2028_mean is not None else elections.ENV_RETENTION * env26
@@ -175,7 +175,8 @@ def run(baseline: pd.DataFrame, birth_years: dict, lean: dict, assignments_120: 
             roster, president = rosters[n], presidents[n]
             majority = control(roster, president)
             scores = base.score(roster.assign(name=roster["name"].fillna(roster["bioguide_id"])),
-                                module, calibration, strict_overrides=False)
+                                module, calibration, strict_overrides=False,
+                                donor_adjustment=donor_adjustment)
             scores = scores.merge(roster[["bioguide_id"]], on="bioguide_id")
 
             assign, _ = committees.project(membership, roster[["bioguide_id", "caucus"]], new_majority=majority)

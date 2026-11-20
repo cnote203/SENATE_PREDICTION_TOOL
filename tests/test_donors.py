@@ -122,3 +122,45 @@ class Effects(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Adjustment(unittest.TestCase):
+    def setUp(self):
+        self.scores = pd.DataFrame({
+            "bioguide_id": ["H1", "H2", "H3", "V1", "N1", "H4"],
+            "name": ["House D low", "House D high", "House D mid", "Voter", "New", "House R"],
+            "caucus": ["D", "D", "D", "D", "D", "R"],
+            "arms_sales_oversight": [0.5, 0.5, 0.5, 0.5, 0.5, -0.8],
+            "arms_sales_oversight_source": ["fitted", "fitted", "fitted", "votes", "imputed", "fitted"],
+        })
+        self.donors = pd.DataFrame({
+            "bioguide_id": ["H1", "H2", "H3", "V1", "N1", "H4"],
+            "fec_israel_policy": [0.0, 50000.0, 1000.0, 90000.0, 0.0, 20000.0],
+        })
+        self.effects = pd.DataFrame([
+            {"category": "israel_policy", "dimension": "arms_sales_oversight",
+             "slope_per_log_dollar": -0.06, "supports_hypothesis": True},
+            {"category": "defense_contractor", "dimension": "nato_interventionism",
+             "slope_per_log_dollar": 0.03, "supports_hypothesis": False},
+        ])
+
+    def test_only_house_only_scores_move_in_the_right_direction(self):
+        out = donors.adjust_scores(self.scores, self.donors, self.effects).set_index("bioguide_id")
+        self.assertEqual(out.loc["V1", "arms_sales_oversight"], 0.5)   # own votes: untouched
+        self.assertEqual(out.loc["N1", "arms_sales_oversight"], 0.5)   # no record: untouched
+        self.assertLess(out.loc["H2", "arms_sales_oversight"], 0.5)    # more pro-Israel PAC money
+        self.assertGreater(out.loc["H1", "arms_sales_oversight"], 0.5)
+        self.assertEqual(out.loc["H2", "arms_sales_oversight_source"], "fitted+donors")
+        # A caucus with a single eligible senator is centred on itself: no shift.
+        self.assertAlmostEqual(out.loc["H4", "arms_sales_oversight_donor_adj"], 0.0)
+
+    def test_shift_is_capped_and_centred_within_caucus(self):
+        eff = self.effects.copy()
+        eff.loc[0, "slope_per_log_dollar"] = -5.0
+        out = donors.adjust_scores(self.scores, self.donors, eff).set_index("bioguide_id")
+        adj = out["arms_sales_oversight_donor_adj"]
+        self.assertLessEqual(adj.abs().max(), donors.MAX_DONOR_ADJUSTMENT + 1e-9)
+
+    def test_no_effects_means_no_change(self):
+        out = donors.adjust_scores(self.scores, self.donors, self.effects.assign(supports_hypothesis=False))
+        pd.testing.assert_series_equal(out["arms_sales_oversight"], self.scores["arms_sales_oversight"])
