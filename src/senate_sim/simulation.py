@@ -228,6 +228,7 @@ def simulate(
             "p_pass_if_reached": float(ok.mean()),
             "yeas_median": float(np.median(yeas)),
             "yeas_p10_p90": [float(np.percentile(yeas, 10)), float(np.percentile(yeas, 90))],
+            "yeas_hist": np.bincount(yeas, minlength=n + 1).tolist(),
         }
         yea_record = (yea, present, latent)
 
@@ -270,6 +271,10 @@ def simulate(
         })
     else:
         out["p_enacted"] = p_senate * measure.house_pass_prob
+
+    # Each senator's probability of voting Yea on the final stage, when present.
+    present_n = np.maximum(present.sum(0), 1)
+    out["senator_yea_prob"] = ((yea & present).sum(0) / present_n).round(4).tolist()
 
     share = pivot_counts / runs
     top = np.argsort(-share)[:5]

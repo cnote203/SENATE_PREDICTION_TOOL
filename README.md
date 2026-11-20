@@ -31,6 +31,8 @@ scripts/verify_overrides.py  prints each override senator's vote on the cited ro
 scripts/simulate_measure.py  Monte Carlo for one measure under R and D White Houses
 scripts/fetch_donors.py  OpenFEC PAC contributions per senator, and a test of whether they explain votes
 scripts/run_multicycle.py  2027-2032 simulation: elections, committees, measures per Congress
+scripts/export_web.py    exports results as JSON for the web app
+web/                     Senate Situation Board (React + Vite)
 tests/test_roster.py     offline unit tests (no network or keys)
 data/raw/                cached API and bulk responses
 data/processed/          validated outputs
@@ -304,6 +306,33 @@ Congress, measure pass and enactment probabilities (overall and by White House),
 the most likely chair and ranking member of each foreign policy committee.
 
 All election constants are in `elections.py`, marked AUDIT.
+
+## Web app: Senate Situation Board
+
+An interactive front end in `web/` (React + Vite), deployed to GitHub Pages.
+
+- **Chamber:** the 100 seats as a hemicycle, ordered left to right by score on the chosen
+  dimension. Colour by score, caucus, uncertainty, or evidence source. Click a seat for
+  the senator's file: four scores with uncertainty bands and sources, projected
+  committees and titles, and PAC money.
+- **Roll call:** pick a measure and a White House; seats show each senator's Yea
+  probability, then "Call the roll" draws one vote and reveals it alphabetically, with
+  the model's pass odds, Yea-count distribution, and most often pivotal senators.
+- **2027-2032:** the multi-cycle projection for a Democratic or Republican 2028 winner:
+  seats, control, measure odds and likely chairs per Congress.
+
+Refresh the data after rerunning the pipeline, then commit `web/public/data`:
+
+```powershell
+python scripts\export_web.py
+cd web
+npm install
+npm run dev        # local preview at http://localhost:5173/SENATE_PREDICTION_TOOL/
+```
+
+Deploying: in the GitHub repository, Settings -> Pages -> Source: **GitHub Actions**.
+Every push to `main` that touches `web/` then rebuilds and publishes the site at
+`https://cnote203.github.io/SENATE_PREDICTION_TOOL/`.
 
 ## Status
 
