@@ -63,8 +63,10 @@ class Parsing(unittest.TestCase):
         self.assertIn("foreign_policy", r["sectors"])
         self.assertEqual(r["title"], "Hearings to examine U.S. policy toward Iran.")
         self.assertEqual(r["location"], "419 Dirksen Senate Office Building")
-        self.assertEqual(r["bills"], ["S 1582"])
-        self.assertEqual(r["nominations"], ["PN512"])
+        self.assertEqual([a["label"] for a in r["agenda"]], ["S 1582", "PN512"])
+        self.assertEqual(r["agenda"][0]["url"], "https://www.govinfo.gov/link/bills/119/s/1582?link-type=html")
+        self.assertEqual(r["agenda"][1]["url"], "https://www.congress.gov/nomination/119th-congress/512")
+        self.assertEqual(r["transcripts"], [])
         self.assertEqual(r["links"]["committeeHearings"], "http://www.foreign.senate.gov/hearings")
         self.assertIn("119th-congress/senate-event/338149", r["links"]["congress"])
         self.assertIsNone(r["embed"])
@@ -92,6 +94,14 @@ class Parsing(unittest.TestCase):
         self.assertIsNone(h.normalize(payload(), COMMITTEES, SECTORS, plain)["embed"])
         vid = payload(videos={"item": [{"name": "Feed", "url": "https://youtu.be/abcdefghijk"}]})
         self.assertEqual(h.normalize(vid, COMMITTEES, SECTORS, {})["embed"]["source"], "congress.gov")
+
+    def test_transcripts_list_or_single(self):
+        one = h.normalize(payload(hearingTranscript={"jacketNumber": "61234"}), COMMITTEES, SECTORS, {})
+        self.assertEqual(one["transcripts"][0]["url"], "https://www.govinfo.gov/link/chrg/119/61-234")
+        many = h.normalize(payload(hearingTranscript=[{"jacketNumber": "61-234"}, {"jacketNumber": ""}]), COMMITTEES, SECTORS, {})
+        self.assertEqual(len(many["transcripts"]), 1)
+        self.assertEqual(h.bill_link(119, "S.J.Res.", 18), "https://www.govinfo.gov/link/bills/119/sjres/18?link-type=html")
+        self.assertIsNone(h.bill_link(None, "S", 1))
 
     def test_window(self):
         r = h.normalize(payload(), COMMITTEES, SECTORS, {})

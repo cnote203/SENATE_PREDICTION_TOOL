@@ -24,6 +24,7 @@ VOTEVIEW_ALL_MEMBERS_URL = "https://voteview.com/static/data/out/members/HSall_m
 # API keys come from the environment and are never written to disk or logged.
 CONGRESS_API_KEY_ENV = "CONGRESS_API_KEY"
 OPENFEC_API_KEY_ENV = "OPENFEC_API_KEY"
+GOVINFO_API_KEY_ENV = "GOVINFO_API_KEY"  # reserved: the GovInfo Link Service needs no key
 
 # unitedstates/congress-legislators (public domain), JSON files on the gh-pages branch.
 LEGISLATORS_BASE = "https://raw.githubusercontent.com/unitedstates/congress-legislators/gh-pages"

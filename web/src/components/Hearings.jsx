@@ -10,6 +10,9 @@ const dayLabel = (d) => d.toLocaleDateString('en-US', { timeZone: TZ, weekday: '
 const timeLabel = (d) => d.toLocaleTimeString('en-US', { timeZone: TZ, hour: 'numeric', minute: '2-digit' })
 const shortCommittee = (n) => n.replace(/^Senate (Select |Special )?Committee on /, '').replace(/^United States Senate /, '')
 
+// Newer files carry `agenda` with links; older ones only `bills` and `nominations`.
+const agendaOf = (h) => h.agenda ?? [...(h.bills ?? []), ...(h.nominations ?? [])].map((label) => ({ label, url: null }))
+
 export function hearingState(h, now) {
   const start = new Date(h.start).getTime()
   if (h.status === 'Canceled' || h.status === 'Postponed') return h.status.toUpperCase()
@@ -223,10 +226,18 @@ export default function Hearings({ hearings, senators, sector, dimension, meta, 
                 {current.witnesses.length ? current.witnesses.map((w, i) => (
                   <div key={i} className="witness"><b>{w.name}</b><span>{[w.position, w.organization].filter(Boolean).join(', ')}</span></div>
                 )) : <p className="muted">Not yet posted.</p>}
-                {(current.bills.length > 0 || current.nominations.length > 0) && (
+                {agendaOf(current).length > 0 && (
                   <>
-                    <h3>ON THE AGENDA</h3>
-                    <div className="agenda">{[...current.bills, ...current.nominations].map((b) => <span key={b} className="chip">{b}</span>)}</div>
+                    <h3>ON THE AGENDA <small>bill text via GovInfo</small></h3>
+                    <div className="agenda">{agendaOf(current).map((a) => a.url
+                      ? <a key={a.label} className="chip" href={a.url} target="_blank" rel="noopener noreferrer" title={a.kind === 'bill' ? 'Latest bill text (GovInfo)' : 'Nomination (Congress.gov)'}>{a.label} ↗</a>
+                      : <span key={a.label} className="chip">{a.label}</span>)}</div>
+                  </>
+                )}
+                {(current.transcripts ?? []).length > 0 && (
+                  <>
+                    <h3>TRANSCRIPT</h3>
+                    {current.transcripts.map((t) => <a key={t.jacket} className="vid" href={t.url} target="_blank" rel="noopener noreferrer">Printed hearing {t.jacket} (GovInfo) ↗</a>)}
                   </>
                 )}
                 {current.videos.length > 0 && (

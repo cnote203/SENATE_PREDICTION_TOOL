@@ -45,6 +45,34 @@ CSPAN_SEARCH = "https://www.c-span.org/search/?searchtype=Videos&query={q}"
 CONGRESS_MEETING = "https://www.congress.gov/event/{congress}-congress/senate-event/{event_id}"
 
 
+# GovInfo Link Service: stable links to official text, no API key needed.
+GOVINFO_BILL = "https://www.govinfo.gov/link/bills/{congress}/{type}/{number}?link-type=html"
+GOVINFO_HEARING = "https://www.govinfo.gov/link/chrg/{congress}/{jacket}"
+CONGRESS_NOMINATION = "https://www.congress.gov/nomination/{congress}-congress/{number}"
+
+
+def bill_link(congress, bill_type: str, number) -> str | None:
+    t = re.sub(r"[^a-z]", "", str(bill_type).lower())
+    if not (congress and t and str(number).strip()):
+        return None
+    return GOVINFO_BILL.format(congress=int(congress), type=t, number=str(number).strip())
+
+
+def transcripts(meeting: dict) -> list[dict]:
+    """Printed hearing transcripts (GPO jacket numbers) linked through GovInfo."""
+    raw = meeting.get("hearingTranscript")
+    found = _items(raw) if not (isinstance(raw, dict) and "jacketNumber" in raw) else [raw]
+    out = []
+    for t in found:
+        jacket = str(t.get("jacketNumber") or "").strip()
+        if not jacket:
+            continue
+        if re.fullmatch(r"\d{5}", jacket):  # GovInfo writes jackets as 12-345
+            jacket = f"{jacket[:2]}-{jacket[2:]}"
+        out.append({"jacket": jacket, "url": GOVINFO_HEARING.format(congress=meeting.get("congress"), jacket=jacket)})
+    return out
+
+
 def ordinal(n: int) -> str:
     n = int(n)
     suffix = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
@@ -179,10 +207,19 @@ def normalize(item: dict, committees: dict, sectors: dict, streams: dict) -> dic
             videos.append({"name": v.get("name") or "Video", "url": url, "embed": youtube_embed(url)})
 
     related = meeting.get("relatedItems") or {}
-    bills = [f"{b.get('type', '')} {b.get('number', '')}".strip()
-             for b in _items(related.get("bills"))]
-    nominations = [f"PN{n.get('number', '')}" + (f"-{n['part']}" if n.get("part") not in (None, "", "00") else "")
-                   for n in _items(related.get("nominations"))]
+    agenda = []
+    for b in _items(related.get("bills")):
+        label = f"{b.get('type', '')} {b.get('number', '')}".strip()
+        if label:
+            agenda.append({"label": label, "kind": "bill",
+                           "url": bill_link(b.get("congress") or meeting.get("congress"), b.get("type", ""), b.get("number", ""))})
+    for n in _items(related.get("nominations")):
+        if not n.get("number"):
+            continue
+        part = f"-{n['part']}" if n.get("part") not in (None, "", "00") else ""
+        agenda.append({"label": f"PN{n['number']}{part}", "kind": "nomination",
+                       "url": CONGRESS_NOMINATION.format(congress=ordinal(n.get("congress") or meeting.get("congress")),
+                                                         number=f"{n['number']}{part}")})
 
     lead = held_by[0]
     title = re.sub(r"\s+", " ", meeting.get("title") or "").strip() or "Committee meeting"
@@ -219,8 +256,8 @@ def normalize(item: dict, committees: dict, sectors: dict, streams: dict) -> dic
         "location": location or None,
         "witnesses": [{"name": w.get("name"), "position": w.get("position"), "organization": w.get("organization")}
                       for w in _items(meeting.get("witnesses")) if w.get("name")],
-        "bills": [b for b in bills if b],
-        "nominations": nominations,
+        "agenda": agenda,
+        "transcripts": transcripts(meeting),
         "videos": videos,
         "embed": embed,
         "links": links,

@@ -411,3 +411,5 @@ h1 {
 .watch { max-height: calc(100vh - 210px); overflow-y: auto; padding-right: 4px; }
 .mon-screen { max-height: 50vh; }
 @media (max-width: 1000px) { .watch { max-height: none; } }
+a.chip { text-decoration: none; cursor: pointer; }
+a.chip:hover { background: rgba(255, 176, 32, 0.12); }
