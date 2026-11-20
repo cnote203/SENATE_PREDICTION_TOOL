@@ -1,1 +1,4 @@
 bioguide_id,name,dimension,score,sd,evidence,roll_calls,verified
+H001089,Josh Hawley,consumer_finance_regulation,0.9,0.5,"Populist break from the party: voted against both 2025 CRA resolutions repealing CFPB rules (overdraft fees; digital payment apps), all four roll calls.",119-1-103;119-1-106;119-1-152;119-1-153,yes
+H001089,Josh Hawley,crypto_support,-1.6,0.5,Opposed the GENIUS stablecoin bill at every stage and the 2026 market-structure cloture; objects to Big Tech and bank-issued stablecoins.,119-1-240;119-1-263;119-1-305;119-1-312;119-1-318;119-2-234,yes
+P000603,Rand Paul,crypto_support,-0.9,0.6,"Voted against the GENIUS Act and the 2026 market-structure cloture as federal regulation of crypto, not as hostility to crypto itself; one Yea in seven. Read as opposition to these bills.",119-1-240;119-1-262;119-1-263;119-1-305;119-1-312;119-1-318;119-2-234,partial
