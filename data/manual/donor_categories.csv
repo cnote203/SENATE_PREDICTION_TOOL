@@ -1,6 +1,7 @@
 category,search,pattern,note
 defense_contractor,lockheed martin,LOCKHEED MARTIN,
 defense_contractor,raytheon,RAYTHEON|\bRTX\b,RTX (formerly Raytheon Technologies)
+defense_contractor,rtx,\bRTX\b,The renamed PAC does not come up when searching for raytheon
 defense_contractor,northrop grumman,NORTHROP GRUMMAN,
 defense_contractor,general dynamics,GENERAL DYNAMICS,
 defense_contractor,boeing,BOEING,Commercial and defense; kept because defense is a large share
@@ -18,10 +19,10 @@ defense_contractor,palantir,PALANTIR,
 defense_contractor,oshkosh,OSHKOSH,
 defense_contractor,parsons,PARSONS CORP,
 israel_policy,american israel public affairs,AMERICAN ISRAEL PUBLIC AFFAIRS|\bAIPAC\b,AIPAC PAC (since 2021)
-israel_policy,j street,J STREET,
 israel_policy,norpac,NORPAC,
 israel_policy,pro-israel america,PRO-ISRAEL AMERICA,
 israel_policy,democratic majority for israel,DEMOCRATIC MAJORITY FOR ISRAEL,
+israel_policy,dmfi,\bDMFI\b,Democratic Majority for Israel's PAC files as DMFI PAC
 pharma,pfizer,PFIZER,
 pharma,merck,\bMERCK\b,
 pharma,johnson & johnson,JOHNSON & JOHNSON|JOHNSON AND JOHNSON,
@@ -55,6 +56,7 @@ oil_gas,marathon petroleum,MARATHON PETROLEUM,
 oil_gas,valero,VALERO,
 oil_gas,occidental petroleum,OCCIDENTAL PETROLEUM,
 oil_gas,koch industries,KOCH INDUSTRIES|KOCHPAC,
+oil_gas,kochpac,"KOCHPAC|\bKOCH,?\s*INC\b",Koch Industries became Koch Inc.; the search for the old name finds only a 1986 committee
 oil_gas,phillips 66,PHILLIPS 66,
 oil_gas,devon energy,DEVON ENERGY,
 oil_gas,eog resources,EOG RESOURCES,
@@ -78,7 +80,7 @@ banks,american bankers association,AMERICAN BANKERS ASSOCIATION|\bBANKPAC\b,
 banks,independent community bankers,INDEPENDENT COMMUNITY BANKERS,
 banks,credit union,CREDIT UNION NATIONAL ASSOCIATION|AMERICA'?S CREDIT UNIONS,
 crypto,coinbase,COINBASE,
-crypto,ripple,RIPPLE LABS|\bRIPPLE\b,
+crypto,ripple labs,RIPPLE LABS,
 crypto,blockchain association,BLOCKCHAIN ASSOCIATION,
 crypto,andreessen horowitz,ANDREESSEN HOROWITZ|\bA16Z\b,Venture firm with a large crypto fund
 big_tech,google,GOOGLE|ALPHABET,Google NetPAC
@@ -88,4 +90,4 @@ big_tech,meta platforms,META PLATFORMS|FACEBOOK,
 big_tech,oracle,\bORACLE\b,
 big_tech,intel,INTEL CORP,
 big_tech,qualcomm,QUALCOMM,
-big_tech,cisco,CISCO,
+big_tech,cisco,CISCO SYSTEMS,
