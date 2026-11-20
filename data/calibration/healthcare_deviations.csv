@@ -1,0 +1,101 @@
+bioguide_id,n_votes,u_latent,se_latent,u_raw_latent,se_raw_latent,u_score,se_score,u_raw_score,se_raw_score,suggest_override,dimension,name
+A000382,4,0.008,0.545,0.155,2.496,0.003,0.226,0.064,1.035,False,coverage_expansion,Angela D. Alsobrooks
+B001230,4,0.005,0.547,0.103,2.621,0.002,0.227,0.043,1.087,False,coverage_expansion,Tammy Baldwin
+B001236,4,-0.121,0.504,-0.862,1.753,-0.05,0.209,-0.358,0.727,False,coverage_expansion,John Boozman
+B001243,4,-0.035,0.531,-0.418,2.095,-0.014,0.22,-0.173,0.869,False,coverage_expansion,Marsha Blackburn
+B001261,4,-0.065,0.52,-0.605,1.921,-0.027,0.216,-0.251,0.797,False,coverage_expansion,John Barrasso
+B001267,4,0.067,0.519,0.619,1.911,0.028,0.215,0.256,0.792,False,coverage_expansion,Michael F. Bennet
+B001277,4,0.009,0.544,0.174,2.455,0.004,0.226,0.072,1.018,False,coverage_expansion,Richard Blumenthal
+B001288,4,0.001,0.55,0.035,2.84,0.001,0.228,0.014,1.178,False,coverage_expansion,Cory A. Booker
+B001299,4,-0.032,0.532,-0.402,2.112,-0.013,0.221,-0.167,0.876,False,coverage_expansion,Jim Banks
+B001303,4,0.015,0.541,0.245,2.325,0.006,0.224,0.102,0.964,False,coverage_expansion,Lisa Blunt Rochester
+B001305,4,-0.038,0.53,-0.445,2.065,-0.016,0.22,-0.185,0.856,False,coverage_expansion,Ted Budd
+B001319,4,-0.039,0.53,-0.447,2.064,-0.016,0.22,-0.185,0.856,False,coverage_expansion,Katie Boyd Britt
+C000127,4,0.034,0.531,0.416,2.096,0.014,0.22,0.173,0.869,False,coverage_expansion,Maria Cantwell
+C000880,4,-0.078,0.516,-0.672,1.871,-0.032,0.214,-0.279,0.776,False,coverage_expansion,Mike Crapo
+C001035,4,-0.046,0.447,-0.126,0.739,-0.019,0.185,-0.052,0.307,False,coverage_expansion,Susan M. Collins
+C001047,4,-0.251,0.48,-1.31,1.559,-0.104,0.199,-0.543,0.646,False,coverage_expansion,Shelley Moore Capito
+C001056,4,-0.11,0.507,-0.818,1.778,-0.046,0.21,-0.339,0.737,False,coverage_expansion,John Cornyn
+C001075,4,-0.115,0.505,-0.839,1.766,-0.048,0.21,-0.348,0.732,False,coverage_expansion,Bill Cassidy
+C001088,4,0.07,0.518,0.634,1.899,0.029,0.215,0.263,0.787,False,coverage_expansion,Christopher A. Coons
+C001095,4,-0.05,0.525,-0.522,1.991,-0.021,0.218,-0.216,0.826,False,coverage_expansion,Tom Cotton
+C001096,4,-0.137,0.5,-0.928,1.718,-0.057,0.207,-0.385,0.713,False,coverage_expansion,Kevin Cramer
+C001098,4,-0.012,0.542,-0.212,2.383,-0.005,0.225,-0.088,0.988,False,coverage_expansion,Ted Cruz
+C001113,4,0.036,0.531,0.426,2.085,0.015,0.22,0.177,0.865,False,coverage_expansion,Catherine Cortez Masto
+C001114,4,-0.113,0.506,-0.83,1.771,-0.047,0.21,-0.344,0.735,False,coverage_expansion,John R. Curtis
+D000563,4,0.026,0.535,0.354,2.169,0.011,0.222,0.147,0.899,False,coverage_expansion,Richard J. Durbin
+D000618,2,-0.026,0.537,-0.368,2.203,-0.011,0.223,-0.153,0.913,False,coverage_expansion,Steve Daines
+D000622,4,0.03,0.533,0.381,2.135,0.012,0.221,0.158,0.886,False,coverage_expansion,Tammy Duckworth
+E000295,4,-0.074,0.517,-0.651,1.886,-0.03,0.214,-0.27,0.782,False,coverage_expansion,Joni Ernst
+F000463,4,-0.1,0.509,-0.775,1.804,-0.041,0.211,-0.321,0.748,False,coverage_expansion,Deb Fischer
+F000479,4,0.133,0.501,0.91,1.727,0.055,0.208,0.378,0.716,False,coverage_expansion,John Fetterman
+G000359,4,-0.199,0.488,-1.144,1.621,-0.082,0.202,-0.474,0.672,False,coverage_expansion,Lindsey Graham
+G000386,4,-0.189,0.49,-1.111,1.634,-0.078,0.203,-0.461,0.678,False,coverage_expansion,Chuck Grassley
+G000555,4,0.007,0.546,0.144,2.521,0.003,0.226,0.06,1.045,False,coverage_expansion,Kirsten E. Gillibrand
+G000574,4,0.029,0.534,0.373,2.145,0.012,0.221,0.155,0.89,False,coverage_expansion,Ruben Gallego
+H000273,4,0.047,0.526,0.501,2.01,0.019,0.218,0.208,0.834,False,coverage_expansion,John W. Hickenlooper
+H000601,4,-0.029,0.534,-0.371,2.148,-0.012,0.221,-0.154,0.891,False,coverage_expansion,Bill Hagerty
+H001042,4,0.003,0.548,0.077,2.697,0.001,0.227,0.032,1.118,False,coverage_expansion,Mazie K. Hirono
+H001046,4,0.034,0.532,0.415,2.098,0.014,0.22,0.172,0.87,False,coverage_expansion,Martin Heinrich
+H001061,4,-0.132,0.501,-0.907,1.729,-0.055,0.208,-0.376,0.717,False,coverage_expansion,John Hoeven
+H001076,4,0.086,0.513,0.713,1.843,0.036,0.213,0.296,0.764,False,coverage_expansion,Margaret Wood Hassan
+H001079,4,-0.106,0.508,-0.8,1.788,-0.044,0.211,-0.332,0.742,False,coverage_expansion,Cindy Hyde-Smith
+H001089,4,0.49,0.496,1.845,0.822,0.203,0.206,0.765,0.341,True,coverage_expansion,Josh Hawley
+H001104,4,-0.034,0.532,-0.413,2.099,-0.014,0.22,-0.171,0.871,False,coverage_expansion,Jon Husted
+J000293,4,-0.036,0.531,-0.43,2.082,-0.015,0.22,-0.178,0.863,False,coverage_expansion,Ron Johnson
+J000312,4,-0.053,0.524,-0.539,1.976,-0.022,0.217,-0.224,0.819,False,coverage_expansion,James C. Justice
+K000367,4,0.048,0.526,0.507,2.004,0.02,0.218,0.21,0.831,False,coverage_expansion,Amy Klobuchar
+K000377,4,0.066,0.52,0.611,1.917,0.027,0.215,0.253,0.795,False,coverage_expansion,Mark Kelly
+K000383,4,0.118,0.505,0.852,1.759,0.049,0.209,0.353,0.729,False,coverage_expansion,"Angus S. King, Jr."
+K000384,4,0.076,0.516,0.663,1.878,0.031,0.214,0.275,0.779,False,coverage_expansion,Tim Kaine
+K000393,4,-0.067,0.519,-0.619,1.911,-0.028,0.215,-0.256,0.792,False,coverage_expansion,John Kennedy
+K000394,4,0.013,0.542,0.225,2.36,0.005,0.225,0.093,0.979,False,coverage_expansion,Andy Kim
+L000570,4,0.02,0.538,0.298,2.243,0.008,0.223,0.124,0.93,False,coverage_expansion,Ben Ray Luján
+L000571,4,-0.03,0.533,-0.386,2.131,-0.013,0.221,-0.16,0.884,False,coverage_expansion,Cynthia M. Lummis
+L000575,4,-0.047,0.526,-0.504,2.008,-0.02,0.218,-0.209,0.833,False,coverage_expansion,James Lankford
+L000577,4,-0.005,0.547,-0.114,2.592,-0.002,0.227,-0.047,1.075,False,coverage_expansion,Mike Lee
+M000133,4,0.002,0.549,0.052,2.777,0.001,0.228,0.022,1.152,False,coverage_expansion,Edward J. Markey
+M000355,4,-0.154,0.496,-0.99,1.688,-0.064,0.206,-0.411,0.7,False,coverage_expansion,Mitch McConnell
+M000934,4,-0.136,0.5,-0.922,1.722,-0.056,0.207,-0.382,0.714,False,coverage_expansion,Jerry Moran
+M001111,4,0.021,0.537,0.31,2.227,0.009,0.223,0.129,0.923,False,coverage_expansion,Patty Murray
+M001153,4,-0.136,0.453,-0.402,0.798,-0.057,0.188,-0.167,0.331,False,coverage_expansion,Lisa Murkowski
+M001169,4,0.044,0.527,0.484,2.026,0.018,0.219,0.201,0.84,False,coverage_expansion,Christopher Murphy
+M001176,4,0.005,0.547,0.103,2.622,0.002,0.227,0.043,1.087,False,coverage_expansion,Jeff Merkley
+M001190,4,-0.067,0.519,-0.617,1.912,-0.028,0.215,-0.256,0.793,False,coverage_expansion,Markwayne Mullin
+M001198,4,-0.042,0.528,-0.472,2.039,-0.018,0.219,-0.196,0.845,False,coverage_expansion,Roger Marshall
+M001242,4,-0.016,0.541,-0.252,2.314,-0.007,0.224,-0.105,0.96,False,coverage_expansion,Bernie Moreno
+M001243,4,-0.034,0.532,-0.414,2.099,-0.014,0.22,-0.172,0.87,False,coverage_expansion,David McCormick
+M001244,4,-0.023,0.537,-0.327,2.204,-0.01,0.223,-0.136,0.914,False,coverage_expansion,Ashley Moody
+O000174,4,0.01,0.544,0.183,2.437,0.004,0.226,0.076,1.011,False,coverage_expansion,Jon Ossoff
+P000145,4,0.008,0.545,0.15,2.507,0.003,0.226,0.062,1.04,False,coverage_expansion,Alex Padilla
+P000595,4,0.064,0.52,0.604,1.922,0.027,0.216,0.25,0.797,False,coverage_expansion,Gary C. Peters
+P000603,4,1.288,0.434,3.286,0.743,0.534,0.18,1.362,0.308,True,coverage_expansion,Rand Paul
+R000122,4,0.023,0.537,0.323,2.209,0.01,0.223,0.134,0.916,False,coverage_expansion,Jack Reed
+R000584,4,-0.055,0.523,-0.551,1.966,-0.023,0.217,-0.228,0.815,False,coverage_expansion,James E. Risch
+R000605,4,-0.189,0.49,-1.113,1.633,-0.079,0.203,-0.462,0.677,False,coverage_expansion,Mike Rounds
+R000608,4,0.062,0.521,0.589,1.934,0.026,0.216,0.244,0.802,False,coverage_expansion,Jacky Rosen
+R000618,4,-0.102,0.509,-0.786,1.797,-0.042,0.211,-0.326,0.745,False,coverage_expansion,Pete Ricketts
+S000033,4,0.001,0.55,0.035,2.838,0.001,0.228,0.015,1.177,False,coverage_expansion,Bernard Sanders
+S000148,4,0.021,0.538,0.303,2.237,0.009,0.223,0.126,0.928,False,coverage_expansion,Charles E. Schumer
+S001150,4,0.025,0.536,0.344,2.182,0.01,0.222,0.143,0.905,False,coverage_expansion,Adam B. Schiff
+S001181,4,0.086,0.513,0.714,1.842,0.036,0.213,0.296,0.764,False,coverage_expansion,Jeanne Shaheen
+S001184,4,-0.038,0.53,-0.444,2.067,-0.016,0.22,-0.184,0.857,False,coverage_expansion,Tim Scott
+S001194,4,0.009,0.545,0.166,2.472,0.004,0.226,0.069,1.025,False,coverage_expansion,Brian Schatz
+S001198,4,0.22,0.474,0.722,0.809,0.091,0.197,0.3,0.336,False,coverage_expansion,Dan Sullivan
+S001203,4,0.013,0.542,0.225,2.36,0.005,0.225,0.093,0.979,False,coverage_expansion,Tina Smith
+S001208,4,0.036,0.531,0.428,2.083,0.015,0.22,0.178,0.864,False,coverage_expansion,Elissa Slotkin
+S001217,4,-0.017,0.54,-0.262,2.299,-0.007,0.224,-0.109,0.953,False,coverage_expansion,Rick Scott
+S001227,4,-0.004,0.548,-0.088,2.664,-0.002,0.227,-0.036,1.105,False,coverage_expansion,Eric Schmitt
+S001232,4,-0.024,0.536,-0.331,2.199,-0.01,0.222,-0.137,0.912,False,coverage_expansion,Tim Sheehy
+T000250,4,-0.123,0.503,-0.871,1.748,-0.051,0.209,-0.361,0.725,False,coverage_expansion,John Thune
+T000278,4,-0.003,0.548,-0.074,2.705,-0.001,0.227,-0.031,1.122,False,coverage_expansion,Tommy Tuberville
+T000476,4,0.384,0.446,1.032,0.723,0.159,0.185,0.428,0.3,False,coverage_expansion,Thom Tillis
+V000128,4,0.014,0.542,0.231,2.349,0.006,0.225,0.096,0.974,False,coverage_expansion,Chris Van Hollen
+W000437,4,-0.156,0.496,-0.997,1.685,-0.065,0.206,-0.413,0.699,False,coverage_expansion,Roger F. Wicker
+W000779,4,0.025,0.536,0.339,2.188,0.01,0.222,0.141,0.907,False,coverage_expansion,Ron Wyden
+W000790,4,0.013,0.542,0.219,2.37,0.005,0.225,0.091,0.983,False,coverage_expansion,Raphael G. Warnock
+W000800,4,0.012,0.542,0.212,2.382,0.005,0.225,0.088,0.988,False,coverage_expansion,Peter Welch
+W000802,4,0.029,0.534,0.374,2.144,0.012,0.221,0.155,0.889,False,coverage_expansion,Sheldon Whitehouse
+W000805,4,0.091,0.512,0.735,1.828,0.038,0.212,0.305,0.758,False,coverage_expansion,Mark R. Warner
+W000817,4,0.0,0.551,0.001,2.995,0.0,0.228,0.0,1.242,False,coverage_expansion,Elizabeth Warren
+Y000064,4,-0.127,0.502,-0.886,1.74,-0.053,0.208,-0.367,0.722,False,coverage_expansion,Todd Young

@@ -1,0 +1,203 @@
+bioguide_id,n_votes,observed,predicted,gap,has_override,contradiction,dimension,name
+A000382,4,1.0,0.996,0.004,False,False,consumer_finance_regulation,Angela D. Alsobrooks
+B001230,4,1.0,0.997,0.003,False,False,consumer_finance_regulation,Tammy Baldwin
+B001236,4,0.0,0.048,-0.048,False,False,consumer_finance_regulation,John Boozman
+B001243,4,0.0,0.007,-0.007,False,False,consumer_finance_regulation,Marsha Blackburn
+B001261,4,0.0,0.019,-0.019,False,False,consumer_finance_regulation,John Barrasso
+B001267,4,1.0,0.955,0.045,False,False,consumer_finance_regulation,Michael F. Bennet
+B001277,4,1.0,0.995,0.005,False,False,consumer_finance_regulation,Richard Blumenthal
+B001288,4,1.0,0.999,0.001,False,False,consumer_finance_regulation,Cory A. Booker
+B001299,4,0.0,0.006,-0.006,False,False,consumer_finance_regulation,Jim Banks
+B001303,4,1.0,0.991,0.009,False,False,consumer_finance_regulation,Lisa Blunt Rochester
+B001305,4,0.0,0.008,-0.008,False,False,consumer_finance_regulation,Ted Budd
+B001319,4,0.0,0.011,-0.011,False,False,consumer_finance_regulation,Katie Boyd Britt
+C000127,4,1.0,0.977,0.023,False,False,consumer_finance_regulation,Maria Cantwell
+C000880,4,0.0,0.025,-0.025,False,False,consumer_finance_regulation,Mike Crapo
+C001035,4,0.0,0.293,-0.293,False,False,consumer_finance_regulation,Susan M. Collins
+C001047,4,0.0,0.129,-0.129,False,False,consumer_finance_regulation,Shelley Moore Capito
+C001056,4,0.0,0.037,-0.037,False,False,consumer_finance_regulation,John Cornyn
+C001075,4,0.0,0.039,-0.039,False,False,consumer_finance_regulation,Bill Cassidy
+C001088,4,1.0,0.953,0.047,False,False,consumer_finance_regulation,Christopher A. Coons
+C001095,4,0.0,0.013,-0.013,False,False,consumer_finance_regulation,Tom Cotton
+C001096,4,0.0,0.058,-0.058,False,False,consumer_finance_regulation,Kevin Cramer
+C001098,4,0.0,0.001,-0.001,False,False,consumer_finance_regulation,Ted Cruz
+C001113,4,1.0,0.981,0.019,False,False,consumer_finance_regulation,Catherine Cortez Masto
+C001114,4,0.0,0.041,-0.041,False,False,consumer_finance_regulation,John R. Curtis
+D000563,4,1.0,0.983,0.017,False,False,consumer_finance_regulation,Richard J. Durbin
+D000618,4,0.0,0.012,-0.012,False,False,consumer_finance_regulation,Steve Daines
+D000622,4,1.0,0.983,0.017,False,False,consumer_finance_regulation,Tammy Duckworth
+E000295,4,0.0,0.021,-0.021,False,False,consumer_finance_regulation,Joni Ernst
+F000463,4,0.0,0.037,-0.037,False,False,consumer_finance_regulation,Deb Fischer
+F000479,4,1.0,0.915,0.085,False,False,consumer_finance_regulation,John Fetterman
+G000359,4,0.0,0.083,-0.083,False,False,consumer_finance_regulation,Lindsey Graham
+G000386,4,0.0,0.082,-0.082,False,False,consumer_finance_regulation,Chuck Grassley
+G000555,4,1.0,0.996,0.004,False,False,consumer_finance_regulation,Kirsten E. Gillibrand
+G000574,4,1.0,0.984,0.016,False,False,consumer_finance_regulation,Ruben Gallego
+H000273,4,1.0,0.972,0.028,False,False,consumer_finance_regulation,John W. Hickenlooper
+H000601,4,0.0,0.005,-0.005,False,False,consumer_finance_regulation,Bill Hagerty
+H001042,4,1.0,0.998,0.002,False,False,consumer_finance_regulation,Mazie K. Hirono
+H001046,4,1.0,0.98,0.02,False,False,consumer_finance_regulation,Martin Heinrich
+H001061,4,0.0,0.057,-0.057,False,False,consumer_finance_regulation,John Hoeven
+H001076,4,1.0,0.944,0.056,False,False,consumer_finance_regulation,Margaret Wood Hassan
+H001079,4,0.0,0.04,-0.04,False,False,consumer_finance_regulation,Cindy Hyde-Smith
+H001089,4,1.0,0.072,0.928,False,True,consumer_finance_regulation,Josh Hawley
+H001104,4,0.0,0.01,-0.01,False,False,consumer_finance_regulation,Jon Husted
+J000293,4,0.0,0.007,-0.007,False,False,consumer_finance_regulation,Ron Johnson
+J000312,3,0.0,0.015,-0.015,False,False,consumer_finance_regulation,James C. Justice
+K000367,4,1.0,0.968,0.032,False,False,consumer_finance_regulation,Amy Klobuchar
+K000377,3,1.0,0.961,0.039,False,False,consumer_finance_regulation,Mark Kelly
+K000383,4,1.0,0.917,0.083,False,False,consumer_finance_regulation,"Angus S. King, Jr."
+K000384,4,1.0,0.949,0.051,False,False,consumer_finance_regulation,Tim Kaine
+K000393,4,0.0,0.017,-0.017,False,False,consumer_finance_regulation,John Kennedy
+K000394,4,1.0,0.993,0.007,False,False,consumer_finance_regulation,Andy Kim
+L000570,4,1.0,0.989,0.011,False,False,consumer_finance_regulation,Ben Ray Luján
+L000571,2,0.0,0.005,-0.005,False,False,consumer_finance_regulation,Cynthia M. Lummis
+L000575,4,0.0,0.012,-0.012,False,False,consumer_finance_regulation,James Lankford
+L000577,4,0.0,0.0,-0.0,False,False,consumer_finance_regulation,Mike Lee
+M000133,4,1.0,0.999,0.001,False,False,consumer_finance_regulation,Edward J. Markey
+M000355,4,0.0,0.062,-0.062,False,False,consumer_finance_regulation,Mitch McConnell
+M000934,4,0.0,0.055,-0.055,False,False,consumer_finance_regulation,Jerry Moran
+M001111,4,1.0,0.986,0.014,False,False,consumer_finance_regulation,Patty Murray
+M001153,4,0.0,0.206,-0.206,False,False,consumer_finance_regulation,Lisa Murkowski
+M001169,4,1.0,0.971,0.029,False,False,consumer_finance_regulation,Christopher Murphy
+M001176,4,1.0,0.997,0.003,False,False,consumer_finance_regulation,Jeff Merkley
+M001190,4,0.0,0.02,-0.02,False,False,consumer_finance_regulation,Markwayne Mullin
+M001198,4,0.0,0.01,-0.01,False,False,consumer_finance_regulation,Roger Marshall
+M001242,4,0.0,0.003,-0.003,False,False,consumer_finance_regulation,Bernie Moreno
+M001243,4,0.0,0.009,-0.009,False,False,consumer_finance_regulation,David McCormick
+M001244,4,0.0,0.004,-0.004,False,False,consumer_finance_regulation,Ashley Moody
+O000174,4,1.0,0.996,0.004,False,False,consumer_finance_regulation,Jon Ossoff
+P000145,4,1.0,0.996,0.004,False,False,consumer_finance_regulation,Alex Padilla
+P000595,4,1.0,0.957,0.043,False,False,consumer_finance_regulation,Gary C. Peters
+P000603,4,0.0,0.0,-0.0,False,False,consumer_finance_regulation,Rand Paul
+R000122,4,1.0,0.986,0.014,False,False,consumer_finance_regulation,Jack Reed
+R000584,4,0.0,0.016,-0.016,False,False,consumer_finance_regulation,James E. Risch
+R000605,4,0.0,0.085,-0.085,False,False,consumer_finance_regulation,Mike Rounds
+R000608,4,1.0,0.965,0.035,False,False,consumer_finance_regulation,Jacky Rosen
+R000618,4,0.0,0.04,-0.04,False,False,consumer_finance_regulation,Pete Ricketts
+S000033,4,1.0,0.999,0.001,False,False,consumer_finance_regulation,Bernard Sanders
+S000148,4,1.0,0.986,0.014,False,False,consumer_finance_regulation,Charles E. Schumer
+S001150,4,1.0,0.985,0.015,False,False,consumer_finance_regulation,Adam B. Schiff
+S001181,4,1.0,0.941,0.059,False,False,consumer_finance_regulation,Jeanne Shaheen
+S001184,4,0.0,0.008,-0.008,False,False,consumer_finance_regulation,Tim Scott
+S001194,3,1.0,0.995,0.005,False,False,consumer_finance_regulation,Brian Schatz
+S001198,4,0.0,0.038,-0.038,False,False,consumer_finance_regulation,Dan Sullivan
+S001203,4,1.0,0.992,0.008,False,False,consumer_finance_regulation,Tina Smith
+S001208,3,1.0,0.983,0.017,False,False,consumer_finance_regulation,Elissa Slotkin
+S001217,4,0.0,0.002,-0.002,False,False,consumer_finance_regulation,Rick Scott
+S001227,4,0.0,0.0,-0.0,False,False,consumer_finance_regulation,Eric Schmitt
+S001232,4,0.0,0.006,-0.006,False,False,consumer_finance_regulation,Tim Sheehy
+T000250,4,0.0,0.048,-0.048,False,False,consumer_finance_regulation,John Thune
+T000278,4,0.0,0.0,-0.0,False,False,consumer_finance_regulation,Tommy Tuberville
+T000476,4,0.0,0.07,-0.07,False,False,consumer_finance_regulation,Thom Tillis
+V000128,4,1.0,0.992,0.008,False,False,consumer_finance_regulation,Chris Van Hollen
+W000437,4,0.0,0.069,-0.069,False,False,consumer_finance_regulation,Roger F. Wicker
+W000779,4,1.0,0.983,0.017,False,False,consumer_finance_regulation,Ron Wyden
+W000790,4,1.0,0.994,0.006,False,False,consumer_finance_regulation,Raphael G. Warnock
+W000800,4,1.0,0.992,0.008,False,False,consumer_finance_regulation,Peter Welch
+W000802,4,1.0,0.982,0.018,False,False,consumer_finance_regulation,Sheldon Whitehouse
+W000805,4,1.0,0.94,0.06,False,False,consumer_finance_regulation,Mark R. Warner
+W000817,4,1.0,1.0,0.0,False,False,consumer_finance_regulation,Elizabeth Warren
+Y000064,4,0.0,0.046,-0.046,False,False,consumer_finance_regulation,Todd Young
+A000382,7,0.714,0.422,0.292,False,False,crypto_support,Angela D. Alsobrooks
+A000383,1,1.0,0.916,0.084,False,False,crypto_support,Alan Armstrong
+B001230,7,0.0,0.092,-0.092,False,False,crypto_support,Tammy Baldwin
+B001236,7,1.0,0.964,0.036,False,False,crypto_support,John Boozman
+B001243,6,1.0,0.979,0.021,False,False,crypto_support,Marsha Blackburn
+B001261,7,1.0,0.974,0.026,False,False,crypto_support,John Barrasso
+B001267,7,0.0,0.187,-0.187,False,False,crypto_support,Michael F. Bennet
+B001277,7,0.0,0.109,-0.109,False,False,crypto_support,Richard Blumenthal
+B001288,7,0.714,0.342,0.373,False,False,crypto_support,Cory A. Booker
+B001299,7,1.0,0.981,0.019,False,False,crypto_support,Jim Banks
+B001303,7,0.286,0.246,0.04,False,False,crypto_support,Lisa Blunt Rochester
+B001305,7,1.0,0.978,0.022,False,False,crypto_support,Ted Budd
+B001319,7,1.0,0.986,0.014,False,False,crypto_support,Katie Boyd Britt
+C000127,7,0.0,0.143,-0.143,False,False,crypto_support,Maria Cantwell
+C000880,7,1.0,0.972,0.028,False,False,crypto_support,Mike Crapo
+C001035,7,0.857,0.733,0.124,False,False,crypto_support,Susan M. Collins
+C001047,7,1.0,0.932,0.068,False,False,crypto_support,Shelley Moore Capito
+C001056,7,1.0,0.958,0.042,False,False,crypto_support,John Cornyn
+C001075,7,1.0,0.957,0.043,False,False,crypto_support,Bill Cassidy
+C001088,6,0.0,0.223,-0.223,False,False,crypto_support,Christopher A. Coons
+C001095,6,1.0,0.975,0.025,False,False,crypto_support,Tom Cotton
+C001096,7,1.0,0.961,0.039,False,False,crypto_support,Kevin Cramer
+C001098,7,1.0,0.987,0.013,False,False,crypto_support,Ted Cruz
+C001113,7,0.714,0.511,0.203,False,False,crypto_support,Catherine Cortez Masto
+C001114,7,1.0,0.961,0.039,False,False,crypto_support,John R. Curtis
+D000563,6,0.0,0.14,-0.14,False,False,crypto_support,Richard J. Durbin
+D000618,7,1.0,0.974,0.026,False,False,crypto_support,Steve Daines
+D000622,7,0.0,0.16,-0.16,False,False,crypto_support,Tammy Duckworth
+E000295,7,1.0,0.968,0.032,False,False,crypto_support,Joni Ernst
+F000463,7,1.0,0.968,0.032,False,False,crypto_support,Deb Fischer
+F000479,7,0.714,0.594,0.12,False,False,crypto_support,John Fetterman
+G000359,6,1.0,0.938,0.062,False,False,crypto_support,Lindsey Graham
+G000386,7,1.0,0.941,0.059,False,False,crypto_support,Chuck Grassley
+G000555,7,0.714,0.398,0.317,False,False,crypto_support,Kirsten E. Gillibrand
+G000574,6,0.667,0.437,0.229,False,False,crypto_support,Ruben Gallego
+G000608,1,1.0,0.92,0.08,False,False,crypto_support,Darline Graham
+H000273,7,0.429,0.37,0.058,False,False,crypto_support,John W. Hickenlooper
+H000601,7,1.0,0.982,0.018,False,False,crypto_support,Bill Hagerty
+H001042,7,0.0,0.086,-0.086,False,False,crypto_support,Mazie K. Hirono
+H001046,7,0.714,0.488,0.226,False,False,crypto_support,Martin Heinrich
+H001061,7,1.0,0.963,0.037,False,False,crypto_support,John Hoeven
+H001076,7,0.714,0.545,0.169,False,False,crypto_support,Margaret Wood Hassan
+H001079,7,1.0,0.967,0.033,False,False,crypto_support,Cindy Hyde-Smith
+H001089,6,0.0,0.666,-0.666,False,True,crypto_support,Josh Hawley
+H001104,7,1.0,0.988,0.012,False,False,crypto_support,Jon Husted
+J000293,7,1.0,0.977,0.023,False,False,crypto_support,Ron Johnson
+J000312,7,1.0,0.978,0.022,False,False,crypto_support,James C. Justice
+K000367,7,0.0,0.162,-0.162,False,False,crypto_support,Amy Klobuchar
+K000377,5,0.6,0.443,0.157,False,False,crypto_support,Mark Kelly
+K000383,6,0.0,0.231,-0.231,False,False,crypto_support,"Angus S. King, Jr."
+K000384,7,0.0,0.196,-0.196,False,False,crypto_support,Tim Kaine
+K000393,7,1.0,0.968,0.032,False,False,crypto_support,John Kennedy
+K000394,7,0.429,0.324,0.104,False,False,crypto_support,Andy Kim
+L000570,7,0.714,0.463,0.251,False,False,crypto_support,Ben Ray Luján
+L000571,7,1.0,0.978,0.022,False,False,crypto_support,Cynthia M. Lummis
+L000575,7,1.0,0.978,0.022,False,False,crypto_support,James Lankford
+L000577,7,1.0,0.99,0.01,False,False,crypto_support,Mike Lee
+M000133,7,0.0,0.063,-0.063,False,False,crypto_support,Edward J. Markey
+M000355,7,1.0,0.95,0.05,False,False,crypto_support,Mitch McConnell
+M000934,6,0.667,0.846,-0.18,False,False,crypto_support,Jerry Moran
+M001111,7,0.0,0.129,-0.129,False,False,crypto_support,Patty Murray
+M001153,7,1.0,0.892,0.108,False,False,crypto_support,Lisa Murkowski
+M001169,7,0.0,0.162,-0.162,False,False,crypto_support,Christopher Murphy
+M001176,7,0.0,0.071,-0.071,False,False,crypto_support,Jeff Merkley
+M001190,6,1.0,0.98,0.02,False,False,crypto_support,Markwayne Mullin
+M001198,7,1.0,0.979,0.021,False,False,crypto_support,Roger Marshall
+M001242,7,1.0,0.99,0.01,False,False,crypto_support,Bernie Moreno
+M001243,7,1.0,0.986,0.014,False,False,crypto_support,David McCormick
+M001244,7,1.0,0.985,0.015,False,False,crypto_support,Ashley Moody
+O000174,5,0.6,0.344,0.256,False,False,crypto_support,Jon Ossoff
+P000145,6,0.667,0.35,0.317,False,False,crypto_support,Alex Padilla
+P000595,7,0.0,0.185,-0.185,False,False,crypto_support,Gary C. Peters
+P000603,7,0.143,0.763,-0.62,False,True,crypto_support,Rand Paul
+R000122,7,0.0,0.139,-0.139,False,False,crypto_support,Jack Reed
+R000584,7,1.0,0.979,0.021,False,False,crypto_support,James E. Risch
+R000605,7,1.0,0.943,0.057,False,False,crypto_support,Mike Rounds
+R000608,7,0.714,0.542,0.173,False,False,crypto_support,Jacky Rosen
+R000618,7,1.0,0.97,0.03,False,False,crypto_support,Pete Ricketts
+S000033,6,0.0,0.057,-0.057,False,False,crypto_support,Bernard Sanders
+S000148,7,0.0,0.124,-0.124,False,False,crypto_support,Charles E. Schumer
+S001150,7,0.714,0.465,0.249,False,False,crypto_support,Adam B. Schiff
+S001181,7,0.0,0.204,-0.204,False,False,crypto_support,Jeanne Shaheen
+S001184,7,1.0,0.979,0.021,False,False,crypto_support,Tim Scott
+S001194,7,0.0,0.108,-0.108,False,False,crypto_support,Brian Schatz
+S001198,7,1.0,0.964,0.036,False,False,crypto_support,Dan Sullivan
+S001203,6,0.0,0.141,-0.141,False,False,crypto_support,Tina Smith
+S001208,7,0.714,0.537,0.177,False,False,crypto_support,Elissa Slotkin
+S001217,7,1.0,0.986,0.014,False,False,crypto_support,Rick Scott
+S001227,7,1.0,0.995,0.005,False,False,crypto_support,Eric Schmitt
+S001232,7,1.0,0.99,0.01,False,False,crypto_support,Tim Sheehy
+T000250,7,0.857,0.932,-0.075,False,False,crypto_support,John Thune
+T000278,7,1.0,0.993,0.007,False,False,crypto_support,Tommy Tuberville
+T000476,7,0.857,0.851,0.006,False,False,crypto_support,Thom Tillis
+V000128,7,0.0,0.118,-0.118,False,False,crypto_support,Chris Van Hollen
+W000437,6,1.0,0.967,0.033,False,False,crypto_support,Roger F. Wicker
+W000779,7,0.0,0.127,-0.127,False,False,crypto_support,Ron Wyden
+W000790,7,0.571,0.399,0.173,False,False,crypto_support,Raphael G. Warnock
+W000800,7,0.0,0.107,-0.107,False,False,crypto_support,Peter Welch
+W000802,7,0.0,0.15,-0.15,False,False,crypto_support,Sheldon Whitehouse
+W000805,7,0.714,0.548,0.167,False,False,crypto_support,Mark R. Warner
+W000817,7,0.0,0.019,-0.019,False,False,crypto_support,Elizabeth Warren
+Y000064,7,1.0,0.955,0.045,False,False,crypto_support,Todd Young

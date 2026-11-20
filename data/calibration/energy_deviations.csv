@@ -1,0 +1,101 @@
+bioguide_id,n_votes,u_latent,se_latent,u_raw_latent,se_raw_latent,u_score,se_score,u_raw_score,se_raw_score,suggest_override,dimension,name
+A000382,6,0.002,0.508,0.056,2.763,0.001,0.143,0.016,0.78,False,clean_energy,Angela D. Alsobrooks
+B001230,7,0.001,0.508,0.036,2.836,0.0,0.144,0.01,0.801,False,clean_energy,Tammy Baldwin
+B001236,7,-0.012,0.502,-0.227,2.342,-0.003,0.142,-0.064,0.661,False,clean_energy,John Boozman
+B001243,1,-0.0,0.509,-0.002,2.99,-0.0,0.144,-0.0,0.844,False,clean_energy,Marsha Blackburn
+B001261,7,-0.001,0.508,-0.04,2.816,-0.0,0.144,-0.011,0.795,False,clean_energy,John Barrasso
+B001267,7,0.061,0.482,0.62,1.895,0.017,0.136,0.175,0.535,False,clean_energy,Michael F. Bennet
+B001277,7,0.003,0.507,0.087,2.663,0.001,0.143,0.025,0.752,False,clean_energy,Richard Blumenthal
+B001288,7,0.0,0.509,0.007,2.96,0.0,0.144,0.002,0.836,False,clean_energy,Cory A. Booker
+B001299,7,-0.0,0.509,-0.003,2.981,-0.0,0.144,-0.001,0.842,False,clean_energy,Jim Banks
+B001303,7,0.006,0.505,0.149,2.504,0.002,0.143,0.042,0.707,False,clean_energy,Lisa Blunt Rochester
+B001305,1,-0.0,0.509,-0.002,2.99,-0.0,0.144,-0.0,0.844,False,clean_energy,Ted Budd
+B001319,6,-0.0,0.509,-0.014,2.928,-0.0,0.144,-0.004,0.827,False,clean_energy,Katie Boyd Britt
+C000127,7,0.027,0.494,0.389,2.116,0.008,0.14,0.11,0.597,False,clean_energy,Maria Cantwell
+C000880,7,-0.003,0.507,-0.076,2.693,-0.001,0.143,-0.021,0.76,False,clean_energy,Mike Crapo
+C001035,7,-0.299,0.437,-1.494,1.475,-0.085,0.123,-0.422,0.416,False,clean_energy,Susan M. Collins
+C001047,7,-0.082,0.475,-0.729,1.812,-0.023,0.134,-0.206,0.512,False,clean_energy,Shelley Moore Capito
+C001056,7,-0.006,0.505,-0.132,2.539,-0.002,0.143,-0.037,0.717,False,clean_energy,John Cornyn
+C001075,7,-0.006,0.505,-0.148,2.502,-0.002,0.143,-0.042,0.707,False,clean_energy,Bill Cassidy
+C001088,7,0.065,0.481,0.644,1.877,0.018,0.136,0.182,0.53,False,clean_energy,Christopher A. Coons
+C001095,7,-0.001,0.509,-0.018,2.906,-0.0,0.144,-0.005,0.82,False,clean_energy,Tom Cotton
+C001096,6,-0.012,0.502,-0.237,2.347,-0.003,0.142,-0.067,0.663,False,clean_energy,Kevin Cramer
+C001098,7,-0.0,0.509,-0.0,3.0,-0.0,0.144,-0.0,0.847,False,clean_energy,Ted Cruz
+C001113,7,0.016,0.5,0.283,2.257,0.005,0.141,0.08,0.637,False,clean_energy,Catherine Cortez Masto
+C001114,7,-0.007,0.504,-0.165,2.464,-0.002,0.142,-0.047,0.696,False,clean_energy,John R. Curtis
+D000563,7,0.017,0.499,0.296,2.238,0.005,0.141,0.084,0.632,False,clean_energy,Richard J. Durbin
+D000618,7,-0.0,0.509,-0.015,2.923,-0.0,0.144,-0.004,0.825,False,clean_energy,Steve Daines
+D000622,7,0.015,0.5,0.274,2.271,0.004,0.141,0.077,0.641,False,clean_energy,Tammy Duckworth
+E000295,7,-0.001,0.508,-0.044,2.801,-0.0,0.143,-0.012,0.791,False,clean_energy,Joni Ernst
+F000463,7,-0.006,0.505,-0.149,2.5,-0.002,0.143,-0.042,0.706,False,clean_energy,Deb Fischer
+F000479,7,0.124,0.465,0.92,1.705,0.035,0.131,0.26,0.481,False,clean_energy,John Fetterman
+G000359,7,-0.031,0.493,-0.417,2.077,-0.009,0.139,-0.118,0.586,False,clean_energy,Lindsey Graham
+G000386,7,-0.032,0.492,-0.428,2.065,-0.009,0.139,-0.121,0.583,False,clean_energy,Chuck Grassley
+G000555,7,0.003,0.507,0.072,2.709,0.001,0.143,0.02,0.765,False,clean_energy,Kirsten E. Gillibrand
+G000574,7,0.014,0.501,0.253,2.305,0.004,0.141,0.071,0.651,False,clean_energy,Ruben Gallego
+H000273,7,0.031,0.493,0.425,2.075,0.009,0.139,0.12,0.586,False,clean_energy,John W. Hickenlooper
+H000601,7,-0.0,0.509,-0.002,2.989,-0.0,0.144,-0.0,0.844,False,clean_energy,Bill Hagerty
+H001042,7,0.001,0.509,0.021,2.896,0.0,0.144,0.006,0.818,False,clean_energy,Mazie K. Hirono
+H001046,1,0.005,0.506,0.12,2.617,0.001,0.143,0.034,0.739,False,clean_energy,Martin Heinrich
+H001061,7,-0.017,0.499,-0.293,2.236,-0.005,0.141,-0.083,0.631,False,clean_energy,John Hoeven
+H001076,7,0.077,0.477,0.708,1.831,0.022,0.135,0.2,0.517,False,clean_energy,Margaret Wood Hassan
+H001079,7,-0.008,0.504,-0.17,2.453,-0.002,0.142,-0.048,0.693,False,clean_energy,Cindy Hyde-Smith
+H001089,7,-0.0,0.509,-0.0,3.0,-0.0,0.144,-0.0,0.847,False,clean_energy,Josh Hawley
+H001104,7,-0.0,0.509,-0.014,2.925,-0.0,0.144,-0.004,0.826,False,clean_energy,Jon Husted
+J000293,7,-0.0,0.509,-0.003,2.98,-0.0,0.144,-0.001,0.841,False,clean_energy,Ron Johnson
+J000312,7,-0.001,0.509,-0.025,2.875,-0.0,0.144,-0.007,0.812,False,clean_energy,James C. Justice
+K000367,7,0.041,0.489,0.495,2.003,0.012,0.138,0.14,0.565,False,clean_energy,Amy Klobuchar
+K000377,7,0.044,0.488,0.515,1.984,0.012,0.138,0.145,0.56,False,clean_energy,Mark Kelly
+K000383,7,0.13,0.463,0.944,1.693,0.037,0.131,0.267,0.478,False,clean_energy,"Angus S. King, Jr."
+K000384,7,0.07,0.479,0.673,1.856,0.02,0.135,0.19,0.524,False,clean_energy,Tim Kaine
+K000393,7,-0.001,0.509,-0.029,2.862,-0.0,0.144,-0.008,0.808,False,clean_energy,John Kennedy
+K000394,7,0.004,0.507,0.097,2.635,0.001,0.143,0.027,0.744,False,clean_energy,Andy Kim
+L000570,7,0.009,0.504,0.187,2.424,0.002,0.142,0.053,0.684,False,clean_energy,Ben Ray Luján
+L000571,7,-0.0,0.509,-0.001,2.992,-0.0,0.144,-0.0,0.845,False,clean_energy,Cynthia M. Lummis
+L000575,7,-0.0,0.509,-0.014,2.926,-0.0,0.144,-0.004,0.826,False,clean_energy,James Lankford
+L000577,7,-0.0,0.509,-0.0,3.0,-0.0,0.144,-0.0,0.847,False,clean_energy,Mike Lee
+M000133,7,0.001,0.509,0.017,2.913,0.0,0.144,0.005,0.823,False,clean_energy,Edward J. Markey
+M000355,7,-0.018,0.499,-0.301,2.225,-0.005,0.141,-0.085,0.628,False,clean_energy,Mitch McConnell
+M000934,6,-0.013,0.501,-0.246,2.318,-0.004,0.142,-0.069,0.654,False,clean_energy,Jerry Moran
+M001111,7,0.013,0.501,0.243,2.321,0.004,0.142,0.069,0.655,False,clean_energy,Patty Murray
+M001153,7,-0.173,0.455,-1.1,1.616,-0.049,0.128,-0.31,0.456,False,clean_energy,Lisa Murkowski
+M001169,7,0.035,0.491,0.453,2.045,0.01,0.139,0.128,0.577,False,clean_energy,Christopher Murphy
+M001176,6,0.001,0.508,0.042,2.81,0.0,0.144,0.012,0.794,False,clean_energy,Jeff Merkley
+M001190,7,-0.002,0.508,-0.048,2.788,-0.0,0.143,-0.013,0.787,False,clean_energy,Markwayne Mullin
+M001198,7,-0.0,0.509,-0.01,2.947,-0.0,0.144,-0.003,0.832,False,clean_energy,Roger Marshall
+M001242,7,-0.0,0.509,-0.0,2.997,-0.0,0.144,-0.0,0.846,False,clean_energy,Bernie Moreno
+M001243,7,-0.0,0.509,-0.01,2.947,-0.0,0.144,-0.003,0.832,False,clean_energy,David McCormick
+M001244,7,-0.0,0.509,-0.001,2.993,-0.0,0.144,-0.0,0.845,False,clean_energy,Ashley Moody
+O000174,7,0.002,0.508,0.055,2.763,0.001,0.143,0.016,0.78,False,clean_energy,Jon Ossoff
+P000145,7,0.003,0.507,0.074,2.704,0.001,0.143,0.021,0.763,False,clean_energy,Alex Padilla
+P000595,7,0.056,0.483,0.596,1.914,0.016,0.136,0.168,0.54,False,clean_energy,Gary C. Peters
+P000603,7,-0.0,0.509,-0.0,3.0,-0.0,0.144,-0.0,0.847,False,clean_energy,Rand Paul
+R000122,7,0.012,0.502,0.237,2.332,0.004,0.142,0.067,0.658,False,clean_energy,Jack Reed
+R000584,7,-0.001,0.509,-0.032,2.849,-0.0,0.144,-0.009,0.804,False,clean_energy,James E. Risch
+R000605,7,-0.036,0.491,-0.455,2.037,-0.01,0.139,-0.128,0.575,False,clean_energy,Mike Rounds
+R000608,7,0.039,0.49,0.482,2.016,0.011,0.138,0.136,0.569,False,clean_energy,Jacky Rosen
+R000618,7,-0.008,0.504,-0.18,2.433,-0.002,0.142,-0.051,0.687,False,clean_energy,Pete Ricketts
+S000033,7,0.0,0.509,0.009,2.951,0.0,0.144,0.003,0.833,False,clean_energy,Bernard Sanders
+S000148,7,0.013,0.501,0.247,2.314,0.004,0.141,0.07,0.653,False,clean_energy,Charles E. Schumer
+S001150,7,0.014,0.501,0.256,2.3,0.004,0.141,0.072,0.649,False,clean_energy,Adam B. Schiff
+S001181,7,0.084,0.475,0.744,1.808,0.024,0.134,0.21,0.51,False,clean_energy,Jeanne Shaheen
+S001184,7,-0.0,0.509,-0.006,2.968,-0.0,0.144,-0.002,0.838,False,clean_energy,Tim Scott
+S001194,7,0.003,0.507,0.079,2.686,0.001,0.143,0.022,0.759,False,clean_energy,Brian Schatz
+S001198,7,-0.006,0.505,-0.148,2.502,-0.002,0.143,-0.042,0.706,False,clean_energy,Dan Sullivan
+S001203,7,0.005,0.506,0.13,2.55,0.002,0.143,0.037,0.72,False,clean_energy,Tina Smith
+S001208,7,-0.236,0.479,-1.26,0.918,-0.067,0.135,-0.356,0.259,False,clean_energy,Elissa Slotkin
+S001217,7,-0.0,0.509,-0.0,2.998,-0.0,0.144,-0.0,0.847,False,clean_energy,Rick Scott
+S001227,7,-0.0,0.509,-0.0,3.0,-0.0,0.144,-0.0,0.847,False,clean_energy,Eric Schmitt
+S001232,7,-0.0,0.509,-0.004,2.975,-0.0,0.144,-0.001,0.84,False,clean_energy,Tim Sheehy
+T000250,7,-0.011,0.502,-0.218,2.359,-0.003,0.142,-0.062,0.666,False,clean_energy,John Thune
+T000278,7,-0.0,0.509,-0.0,3.0,-0.0,0.144,-0.0,0.847,False,clean_energy,Tommy Tuberville
+T000476,6,-0.022,0.497,-0.339,2.177,-0.006,0.14,-0.096,0.615,False,clean_energy,Thom Tillis
+V000128,7,0.006,0.505,0.146,2.511,0.002,0.143,0.041,0.709,False,clean_energy,Chris Van Hollen
+W000437,7,-0.025,0.495,-0.372,2.13,-0.007,0.14,-0.105,0.601,False,clean_energy,Roger F. Wicker
+W000779,7,0.018,0.499,0.303,2.228,0.005,0.141,0.086,0.629,False,clean_energy,Ron Wyden
+W000790,7,0.003,0.507,0.081,2.682,0.001,0.143,0.023,0.757,False,clean_energy,Raphael G. Warnock
+W000800,7,0.006,0.505,0.145,2.514,0.002,0.143,0.041,0.71,False,clean_energy,Peter Welch
+W000802,7,0.017,0.499,0.292,2.243,0.005,0.141,0.083,0.633,False,clean_energy,Sheldon Whitehouse
+W000805,7,0.085,0.475,0.746,1.806,0.024,0.134,0.211,0.51,False,clean_energy,Mark R. Warner
+W000817,7,0.0,0.509,0.0,3.0,0.0,0.144,0.0,0.847,False,clean_energy,Elizabeth Warren
+Y000064,7,-0.009,0.503,-0.189,2.414,-0.003,0.142,-0.053,0.682,False,clean_energy,Todd Young
