@@ -139,15 +139,12 @@ def main() -> int:
                   f"predicted {r['predicted']:.2f} ({int(r['n_votes'])} votes, {tag})")
     else:
         print("\nNo sitting senator's score contradicts their votes by 0.4 or more.")
-    have = set(zip(existing["bioguide_id"], existing["dimension"]))
-    sitting = set(baseline["bioguide_id"])
-    flags = dev[dev["suggest_override"] & dev["bioguide_id"].isin(sitting)]
-    flags = flags[[(b, d) not in have for b, d in zip(flags["bioguide_id"], flags["dimension"])]]
-    if not flags.empty:
-        print("\nSenators who sit far from the fitted mapping and have no override yet:")
-        for _, r in flags.sort_values(["dimension", "u_raw_score"]).iterrows():
-            print(f"  {r['dimension']:<22} {r['name']:<28} {r['u_raw_score']:+.2f} "
-                  f"(+-{r['se_raw_score']:.2f}, {int(r['n_votes'])} votes)")
+    redundant = checks[checks["has_override"] & (checks["n_votes"] >= 5) & ~checks["contradiction"]]
+    if not redundant.empty:
+        print("\nOverrides on senators with 5+ votes on that dimension (their own votes already set "
+              "the score; the override is optional):")
+        for _, r in redundant.sort_values(["dimension", "name"]).iterrows():
+            print(f"  {r['dimension']:<22} {r['name']}")
     return 0
 
 

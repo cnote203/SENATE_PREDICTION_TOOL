@@ -1,6 +1,5 @@
 bioguide_id,name,dimension,score,sd,evidence,roll_calls,verified
 P000603,Rand Paul,nato_interventionism,-2.0,0.2,Present on Finland/Sweden accession; Yea on Iran war powers; Nay on 2026 Russia sanctions,117-2-282;119-1-328;119-2-244;119-2-224,yes
-P000603,Rand Paul,defense_budget,-1.5,0.3,Nay on FY26 NDAA passage and final conference vote,119-1-570;119-1-648,yes
 P000603,Rand Paul,arms_sales_oversight,1.0,0.6,Led 2017-2020 Gulf disapproval efforts but Nay on 2025-26 Israel motions and Present on Qatar/UAE; target-specific,119-1-166;119-1-306;119-1-307;119-2-80,partial
 P000603,Rand Paul,china_decoupling,-0.5,0.5,Voted to end tariff emergencies; struck secondary tariffs; untested on export controls,119-1-225;119-1-594;119-1-598;119-1-600;119-2-223,partial
 L000577,Mike Lee,nato_interventionism,-1.0,0.4,Nay on 2024 Ukraine supplemental; Yea on 2026 Russia sanctions; not a 2025-26 war powers crossover,118-2-154;119-2-224;119-2-244,partial
@@ -13,7 +12,6 @@ C001095,Tom Cotton,china_decoupling,2.0,0.4,Sponsor of China export-control and 
 W000437,Roger Wicker,defense_budget,2.0,0.2,SASC chair; Senate bill about $32B above the President's request,119-1-570;119-1-648,yes
 S000033,Bernie Sanders,defense_budget,-2.0,0.2,Nay on FY26 NDAA passage and final conference vote,119-1-570;119-1-648,yes
 S000033,Bernie Sanders,arms_sales_oversight,2.0,0.2,Sponsor and Yea on every Israel disapproval motion 2024-26,118-2-292;119-1-165;119-1-166;119-1-454;119-1-455;119-2-80,yes
-W000817,Elizabeth Warren,defense_budget,-1.5,0.3,Nay on FY26 NDAA votes; lone SASC nay at markup,119-1-570;119-1-648,yes
 W000817,Elizabeth Warren,arms_sales_oversight,1.5,0.3,Yea on Israel disapproval motions 2024-26,118-2-292;119-1-166;119-2-80,yes
 M001169,Chris Murphy,arms_sales_oversight,1.5,0.3,Led 2025 Qatar/UAE resolutions; Yea on Israel motions,119-1-306;119-1-307;119-1-166;118-2-292;119-2-80,yes
 W000800,Peter Welch,arms_sales_oversight,1.5,0.3,Yea on Israel disapproval motions 2024-26,118-2-292;119-1-166;119-2-80,yes

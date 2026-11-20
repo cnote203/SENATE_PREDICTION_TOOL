@@ -192,8 +192,10 @@ def run(baseline: pd.DataFrame, birth_years: dict, lean: dict, assignments_120: 
             for key, m in measures.items():
                 res = simulate(scores, replace(m, as_of=c["as_of"]), president, calibration,
                                runs=scenario.inner_runs, seed=int(rng.integers(1 << 31)))
+                last = list(res["stages"].values())[-1]
                 measure_rows.append({"run": r, "congress": n, "measure": key,
-                                     "p_passes_senate": res["p_passes_senate"], "p_enacted": res["p_enacted"]})
+                                     "p_passes_senate": res["p_passes_senate"], "p_enacted": res["p_enacted"],
+                                     "yeas_median": last["yeas_median"]})
 
     return {
         "environment_2026": {"estimate": env26, "se": env26_se, "seats": n26, "env_2028_mean": env28_mean},
@@ -215,10 +217,11 @@ def summarize(result: dict) -> dict[str, pd.DataFrame]:
     ).reset_index()
     by_wh = m.merge(c[["run", "congress", "president"]], on=["run", "congress"])
     measures = by_wh.groupby(["measure", "congress"]).agg(
-        p_passes_senate=("p_passes_senate", "mean"), p_enacted=("p_enacted", "mean")).reset_index()
+        p_passes_senate=("p_passes_senate", "mean"), p_enacted=("p_enacted", "mean"),
+        yeas_median=("yeas_median", "median")).reset_index()
     measures_wh = by_wh.groupby(["measure", "congress", "president"]).agg(
         p_passes_senate=("p_passes_senate", "mean"), p_enacted=("p_enacted", "mean"),
-        runs=("run", "nunique")).reset_index()
+        yeas_median=("yeas_median", "median"), runs=("run", "nunique")).reset_index()
     leaders = []
     for col in [x for x in l.columns if x not in ("run", "congress")]:
         top = l.groupby("congress")[col].agg(lambda s: s.value_counts(normalize=True).head(3).round(2).to_dict())

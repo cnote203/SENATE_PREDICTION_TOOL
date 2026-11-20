@@ -95,6 +95,18 @@ class Effects(unittest.TestCase):
         self.assertTrue(row["supports_hypothesis"])
         self.assertAlmostEqual(row["slope_per_log_dollar"], 0.3, delta=0.1)
 
+    def test_net_refunds_do_not_produce_nan(self):
+        ids = [f"S{i}" for i in range(30)]
+        rng = np.random.default_rng(2)
+        dollars = rng.lognormal(9, 1, 30)
+        dollars[:3] = [-500.0, -2000.0, -10.0]
+        out = donors.test_donor_effects(
+            pd.DataFrame({"bioguide_id": ids, "fec_israel_policy": dollars}),
+            pd.DataFrame({"bioguide_id": ids, "dimension": "arms_sales_oversight",
+                          "u_raw_score": rng.normal(0, 1, 30)}),
+            pd.DataFrame({"bioguide_id": ids, "caucus": ["D"] * 15 + ["R"] * 15}))
+        self.assertFalse(out[["slope_per_log_dollar", "p_value"]].isna().any().any())
+
     def test_caucus_gap_alone_is_not_an_effect(self):
         ids = [f"S{i}" for i in range(40)]
         caucus = ["D"] * 20 + ["R"] * 20

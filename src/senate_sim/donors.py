@@ -34,7 +34,8 @@ def test_donor_effects(donors: pd.DataFrame, deviations: pd.DataFrame, caucus: p
         d = (deviations[deviations["dimension"] == dimension][["bioguide_id", "u_raw_score"]]
              .merge(donors[["bioguide_id", col]], on="bioguide_id", how="left")
              .merge(caucus, on="bioguide_id"))
-        d[col] = d[col].fillna(0.0)
+        # Net refunds can make a total negative; treat them as no support.
+        d[col] = d[col].fillna(0.0).clip(lower=0.0)
         if len(d) < MIN_N:
             continue
         d["x"] = np.log1p(d[col])
