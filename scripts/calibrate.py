@@ -175,7 +175,12 @@ def _run(args) -> int:
                       f"\"TODO: why their votes break from the curve\",{';'.join(items)},no")
     else:
         print("\nNo sitting senator's score contradicts their votes by 0.4 or more.")
-    redundant = checks[checks["has_override"] & (checks["n_votes"] >= 5) & ~checks["contradiction"]]
+    # An override is optional only if the senator's own votes, without it, already fit.
+    bare = pd.concat([calibration.consistency(data, fit, {}) for fit in fits])
+    needed = set(zip(bare.loc[bare["contradiction"], "bioguide_id"], bare.loc[bare["contradiction"], "dimension"]))
+    keys = list(zip(checks["bioguide_id"], checks["dimension"]))
+    redundant = checks[checks["has_override"] & (checks["n_votes"] >= 5) & ~checks["contradiction"]
+                       & [k not in needed for k in keys]]
     if not redundant.empty:
         print("\nOverrides on senators with 5+ votes on that dimension (their own votes already set "
               "the score; the override is optional):")
