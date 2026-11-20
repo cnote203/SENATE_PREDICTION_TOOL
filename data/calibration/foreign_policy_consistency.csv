@@ -185,7 +185,7 @@ M001244,5,1.0,0.978,0.022,False,False,defense_budget,Ashley Moody
 O000174,6,1.0,0.828,0.172,False,False,defense_budget,Jon Ossoff
 P000145,6,0.0,0.332,-0.332,False,False,defense_budget,Alex Padilla
 P000595,6,1.0,0.849,0.151,False,False,defense_budget,Gary C. Peters
-P000603,6,0.0,0.424,-0.424,True,True,defense_budget,Rand Paul
+P000603,6,0.0,0.642,-0.642,False,True,defense_budget,Rand Paul
 R000122,6,1.0,0.814,0.186,False,False,defense_budget,Jack Reed
 R000584,6,1.0,0.979,0.021,False,False,defense_budget,James E. Risch
 R000605,6,1.0,0.962,0.038,False,False,defense_budget,Mike Rounds
@@ -213,7 +213,7 @@ W000790,5,1.0,0.825,0.175,False,False,defense_budget,Raphael G. Warnock
 W000800,6,0.0,0.337,-0.337,False,False,defense_budget,Peter Welch
 W000802,6,1.0,0.824,0.176,False,False,defense_budget,Sheldon Whitehouse
 W000805,6,1.0,0.87,0.13,False,False,defense_budget,Mark R. Warner
-W000817,6,0.0,0.424,-0.424,True,True,defense_budget,Elizabeth Warren
+W000817,6,0.0,0.176,-0.176,False,False,defense_budget,Elizabeth Warren
 Y000064,6,1.0,0.964,0.036,False,False,defense_budget,Todd Young
 A000382,7,0.714,0.701,0.013,False,False,arms_sales_oversight,Angela D. Alsobrooks
 A000383,1,0.0,0.001,-0.001,False,False,arms_sales_oversight,Alan Armstrong
