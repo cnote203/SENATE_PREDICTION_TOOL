@@ -16,6 +16,8 @@ votes columns: bioguide_id, party (D/R/I), vote_cast, yea (1.0 / 0.0 / NaN)
 """
 from __future__ import annotations
 
+import warnings
+
 import io
 import re
 from pathlib import Path
@@ -45,7 +47,9 @@ def find_voteview(rollcalls: pd.DataFrame, bill: str, question: str | None) -> l
     rc["_bill"] = rc["bill_number"].map(normalize_bill)
     hit = rc[rc["_bill"] == normalize_bill(bill)]
     if question:
-        hit = hit[hit["vote_question"].fillna("").str.contains(question, case=False, regex=True)]
+        with warnings.catch_warnings():  # groups like (Motion|Bill) are for matching only
+            warnings.simplefilter("ignore", UserWarning)
+            hit = hit[hit["vote_question"].fillna("").str.contains(question, case=False, regex=True)]
     return [{"session": int(r["session"]), "roll": int(r["clerk_rollnumber"]),
              "date": str(r.get("date", ""))[:10], "question": str(r.get("vote_question", ""))}
             for _, r in hit.sort_values(["session", "clerk_rollnumber"]).iterrows()]

@@ -3,6 +3,7 @@ import Hemicycle from './components/Hemicycle.jsx'
 import { Briefing, Dossier } from './components/Panels.jsx'
 import { RollCallPanel, useRollCall } from './components/RollCall.jsx'
 import Timeline from './components/Timeline.jsx'
+import Hearings, { hearingState, useNow } from './components/Hearings.jsx'
 import { CAUCUS, SECTOR_SHORT, SOURCE, dimensionIndex, pct, probColor, scoreColor } from './util.js'
 
 const BASE = import.meta.env.BASE_URL
@@ -26,11 +27,14 @@ export default function App() {
   const [measureId, setMeasureId] = useState('foreign_policy:israel_arms_disapproval')
   const [president, setPresident] = useState('R')
   const [branch, setBranch] = useState('D')
+  const [hearings, setHearings] = useState(null)
+  const now = useNow(60000)
 
   useEffect(() => {
     Promise.all(['senators.json', 'measures.json', 'timeline.json', 'meta.json'].map(load))
       .then(([senators, measures, timeline, meta]) => setData({ senators, measures, timeline, meta }))
       .catch((e) => setError(String(e)))
+    load('hearings.json').then(setHearings).catch(() => setHearings(null))
   }, [])
 
   const dims = useMemo(() => (data ? dimensionIndex(data.meta) : {}), [data])
@@ -68,6 +72,7 @@ export default function App() {
   if (!data) return <div className="boot">ESTABLISHING DATA LINK<span className="blink">_</span></div>
 
   const { senators, measures, timeline, meta } = data
+  const liveNow = (hearings?.hearings ?? []).filter((h) => hearingState(h, now) === 'LIVE')
   const mod = meta.modules.find((m) => m.id === sector)
   const dim = dims[dimension]
   const sel = senators.find((s) => s.id === selected)
@@ -102,6 +107,7 @@ export default function App() {
   const ticker = measures.flatMap((m) => ['R', 'D'].map((p) =>
     `${SECTOR_SHORT[m.module] ?? ''} · ${m.name.replace('Joint resolution of disapproval: ', '').toUpperCase()} · ${p === 'R' ? 'GOP' : 'DEM'} WH · SENATE ${pct(m.byPresident[p].pPassSenate)} · LAW ${pct(m.byPresident[p].pEnacted, 1)}${m.byPresident[p].calibrated ? '' : ' · ILLUSTRATIVE'}`))
 
+  const ticker2 = [...liveNow.map((h) => `● LIVE · ${h.committees[0].id} · ${h.title.toUpperCase().slice(0, 90)}`), ...ticker]
   const tally = Object.values(roll.votes)
   const center = mode === 'rollcall' ? (
     <>
@@ -137,8 +143,10 @@ export default function App() {
           </div>
         </div>
         <nav className="modes">
-          {[['chamber', 'CHAMBER'], ['rollcall', 'ROLL CALL'], ['timeline', '2027–2032']].map(([k, l]) => (
-            <button key={k} className={mode === k ? 'on' : ''} onClick={() => { setMode(k); roll.reset() }}>{l}</button>
+          {[['chamber', 'CHAMBER'], ['rollcall', 'ROLL CALL'], ['timeline', '2027–2032'], ['hearings', 'HEARINGS']].map(([k, l]) => (
+            <button key={k} className={mode === k ? 'on' : ''} onClick={() => { setMode(k); roll.reset() }}>
+              {k === 'hearings' && liveNow.length > 0 && <span className="live-dot" title={`${liveNow.length} live now`} />}{l}
+            </button>
           ))}
         </nav>
       </header>
@@ -156,10 +164,21 @@ export default function App() {
       </nav>
 
       <div className="ticker" aria-hidden="true">
-        <div className="ticker-track">{[...ticker, ...ticker].map((t, i) => <span key={i}>{t}</span>)}</div>
+        <div className="ticker-track">{[...ticker2, ...ticker2].map((t, i) => <span key={i}>{t}</span>)}</div>
       </div>
 
-      {mode === 'timeline' ? (
+      {mode === 'hearings' ? (
+        <>
+          <Hearings hearings={hearings} senators={senators} sector={sector} dimension={dimension} meta={meta} onSelect={setSelected} />
+          {sel && (
+            <div className="drawer" onClick={() => setSelected(null)}>
+              <div onClick={(e) => e.stopPropagation()}>
+                <Dossier s={sel} sector={sector} dimension={dimension} onClose={() => setSelected(null)} meta={meta} onSector={switchSector} />
+              </div>
+            </div>
+          )}
+        </>
+      ) : mode === 'timeline' ? (
         <Timeline timeline={timeline} measures={measures} branch={branch} setBranch={setBranch} sector={sector} meta={meta} />
       ) : (
         <main className="grid">
@@ -219,7 +238,7 @@ export default function App() {
 
       <footer className="foot">
         <span>Model projection, not a forecast of record. Scores −2…+2 from Senate roll calls (Voteview), DW-NOMINATE, OpenFEC PAC data and hand-checked overrides.</span>
-        <span>{meta.sources.map((s) => s.name).join(' · ')}</span>
+        <span>{meta.sources.map((s) => s.name).join(' · ')}{mode === 'hearings' ? ' · Congress.gov committee meetings · Video © C-SPAN / U.S. Senate' : ''}</span>
       </footer>
     </div>
   )

@@ -32,6 +32,7 @@ scripts/simulate_measure.py  Monte Carlo for one measure under R and D White Hou
 scripts/fetch_donors.py  OpenFEC PAC contributions per senator, and a test of whether they explain votes
 scripts/run_multicycle.py  2027-2032 simulation: elections, committees, measures per Congress
 scripts/export_web.py    exports results as JSON for the web app
+scripts/fetch_hearings.py  Senate committee hearing schedule for the HEARINGS mode
 web/                     Senate Situation Board (React + Vite)
 tests/test_roster.py     offline unit tests (no network or keys)
 data/raw/                cached API and bulk responses
@@ -333,6 +334,33 @@ npm run dev        # local preview at http://localhost:5173/SENATE_PREDICTION_TO
 Deploying: in the GitHub repository, Settings -> Pages -> Source: **GitHub Actions**.
 Every push to `main` that touches `web/` then rebuilds and publishes the site at
 `https://cnote203.github.io/SENATE_PREDICTION_TOOL/`.
+
+## Hearings: schedule and live viewing
+
+The board's HEARINGS mode lists Senate committee hearings from two weeks back to
+four weeks ahead. Each hearing is tagged with every sector whose committees hold
+it, shows the projected members on the dais (coloured on that sector's scores),
+witnesses and agenda items, and marks hearings LIVE from 10 minutes before the
+gavel until 3 hours after.
+
+```
+$env:CONGRESS_API_KEY = "<your key>"
+python scripts\fetch_hearings.py        # writes web/public/data/hearings.json
+```
+
+To refresh it automatically, add the key as a repository secret named
+`CONGRESS_API_KEY` (Settings > Secrets and variables > Actions). The Pages
+workflow then fetches the schedule before every build and runs hourly on
+weekdays. Without the secret the site uses the last committed hearings.json.
+
+Watching: Senate committees stream their own hearings, and C-SPAN covers many.
+C-SPAN permits non-commercial use of its federal-event coverage with
+attribution, but its cable-channel streams require pay-TV sign-in, so the board
+links out to the committee webcast, C-SPAN and Congress.gov rather than pulling
+streams. For an in-app player, put the hearing's event ID and an embeddable URL
+(the `src` of C-SPAN's embed code, a YouTube link, or a senate.gov player) in
+`data/manual/hearing_streams.csv`. Other hosts are shown as links only. Keep
+the site non-commercial if you embed C-SPAN video.
 
 ## Sectors
 

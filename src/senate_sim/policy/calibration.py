@@ -330,6 +330,28 @@ def consistency(data: pd.DataFrame, fit: "DimensionFit", override_scores: dict[s
     return g.reset_index().assign(dimension=fit.dimension)
 
 
+def vote_matched_score(data: pd.DataFrame, fit: "DimensionFit", bioguide_id: str) -> tuple[float, list[str]]:
+    """Score (-2..+2) that best explains one senator's own votes on a dimension, unshrunk.
+
+    Used to draft an override when the shrunk deviation still contradicts how a
+    cross-pressured senator voted. Returns the score and the roll calls used.
+    """
+    df = data[(data["dimension"] == fit.dimension) & data["item_id"].isin(fit.items["item_id"])
+              & (data["bioguide_id"] == bioguide_id)]
+    if df.empty:
+        return float("nan"), []
+    alpha = df["item_id"].map(fit.items.set_index("item_id")["alpha"]).to_numpy()
+    cp = fit.gamma * df["cp"].to_numpy()
+    y = df["y"].to_numpy()
+    grid = np.linspace(-2, 2, 81)
+    ll = []
+    for sc in grid:
+        eta = alpha + sc * fit.scale_sd / SCORE_K + fit.scale_mean + cp
+        # Weak N(0, 1.5) prior on the score keeps all-one-way records off the bounds.
+        ll.append(float(np.sum(np.where(y == 1, log_ndtr(eta), log_ndtr(-eta)))) - 0.5 * (sc / 1.5) ** 2)
+    return float(grid[int(np.argmax(ll))]), sorted(df["item_id"].astype(str).unique())
+
+
 def latent_to_score(d1, d2, fit: dict) -> np.ndarray:
     """Apply a stored fit to ideology points: the replacement for a hand formula."""
     b = fit["beta"]

@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths: ["web/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
+  schedule:
+    # Refresh the hearing schedule hourly, 8am-8pm Eastern on weekdays (UTC times).
+    - cron: "17 12-23,0 * * 1-5"
 
 permissions:
   contents: read
@@ -18,11 +21,25 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CONGRESS_API_KEY: ${{ secrets.CONGRESS_API_KEY }}
+      SENATE_SIM_CONTACT: ${{ github.repository }}
     defaults:
       run:
         working-directory: web
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        if: ${{ env.CONGRESS_API_KEY != '' }}
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Refresh hearing schedule
+        if: ${{ env.CONGRESS_API_KEY != '' }}
+        working-directory: .
+        run: |
+          pip install -r requirements.txt
+          python scripts/fetch_hearings.py || echo "::warning::Hearing fetch failed; deploying the last committed schedule"
       - uses: actions/setup-node@v4
         with:
           node-version: 22

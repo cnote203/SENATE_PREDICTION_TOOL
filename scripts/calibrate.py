@@ -164,6 +164,15 @@ def _run(args) -> int:
             tag = "override" if r["has_override"] else "fitted"
             print(f"  {r['dimension']:<22} {r['name']:<28} observed {r['observed']:.2f} vs "
                   f"predicted {r['predicted']:.2f} ({int(r['n_votes'])} votes, {tag})")
+        fresh = bad[~bad["has_override"]]
+        if not fresh.empty:
+            by_dim = {f.dimension: f for f in fits}
+            print("\nDraft override rows (vote-matched, unshrunk). Check the roll calls, write the "
+                  f"evidence, set verified, then paste into {module.override_path.name}:")
+            for _, r in fresh.sort_values(["dimension", "name"]).iterrows():
+                sc, items = calibration.vote_matched_score(data, by_dim[r["dimension"]], r["bioguide_id"])
+                print(f"{r['bioguide_id']},{r['name']},{r['dimension']},{sc:+.1f},0.5,"
+                      f"\"TODO: why their votes break from the curve\",{';'.join(items)},no")
     else:
         print("\nNo sitting senator's score contradicts their votes by 0.4 or more.")
     redundant = checks[checks["has_override"] & (checks["n_votes"] >= 5) & ~checks["contradiction"]]
