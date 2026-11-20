@@ -1,6 +1,7 @@
 """Offline tests for OpenFEC parsing and the donor-effect analysis (mocked API)."""
 from __future__ import annotations
 
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -164,3 +165,36 @@ class Adjustment(unittest.TestCase):
     def test_no_effects_means_no_change(self):
         out = donors.adjust_scores(self.scores, self.donors, self.effects.assign(supports_hypothesis=False))
         pd.testing.assert_series_equal(out["arms_sales_oversight"], self.scores["arms_sales_oversight"])
+
+
+class Categories(unittest.TestCase):
+    def test_every_category_is_labelled_and_every_hypothesis_is_real(self):
+        from senate_sim import policy
+        cats = pd.read_csv(Path(__file__).resolve().parents[1] / "data" / "manual" / "donor_categories.csv")
+        self.assertEqual(set(cats["category"]) - set(donors.CATEGORIES), set())
+        sectors = {m.name for m in policy.all_modules()}
+        calibrated = {d.name for m in policy.all_modules() for d in m.dimensions if d.calibrate}
+        for cid, (_, secs) in donors.CATEGORIES.items():
+            self.assertTrue(set(secs) <= sectors, cid)
+        for cat, dim, sign in donors.HYPOTHESES:
+            self.assertIn(cat, donors.CATEGORIES)
+            self.assertIn(dim, calibrated, f"{dim} has no deviations to test against")
+            self.assertIn(sign, (-1, 1))
+        for p in cats["pattern"]:
+            re.compile(p)
+
+    def test_holm(self):
+        adj = donors.holm(pd.Series([0.01, 0.04, 0.03]))
+        self.assertAlmostEqual(adj[0], 0.03)
+        self.assertAlmostEqual(adj[2], 0.06)
+        self.assertAlmostEqual(adj[1], 0.06)  # step-down keeps adjusted p monotone
+
+    def test_merge_keeps_reviewed_rows(self):
+        cols = ["category", "pattern", "committee_id", "name", "committee_type", "designation", "last_cycle", "include"]
+        old = pd.DataFrame([["banks", "X", "C1", "A PAC", "Q", "B", "2026", "no"]], columns=cols)
+        found = pd.DataFrame([["banks", "X", "C1", "A PAC", "Q", "B", 2026, "yes"],
+                              ["banks", "Y", "C2", "B PAC", "Q", "B", 2026, "yes"]], columns=cols)
+        out = donors.merge_pacs(old, found).set_index("committee_id")
+        self.assertEqual(out.loc["C1", "include"], "no")
+        self.assertEqual(out.loc["C2", "include"], "yes")
+        self.assertEqual(len(out), 2)

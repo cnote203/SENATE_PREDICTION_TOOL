@@ -411,3 +411,7 @@ a.chip:hover { background: var(--brass-soft); }
   .seat, .seat-in, .ticker-track, .live-dot { transition: none; animation: none; }
 }
 .chamber-loading { min-height: 420px; display: grid; place-items: center; font: italic 400 18px var(--serif); color: var(--dim); }
+.donors { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+.pac-other { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 3px; font-size: 13px; color: var(--muted); }
+.pac-other li { display: flex; justify-content: space-between; gap: 10px; }
+.pac-other b { font-weight: 500; color: var(--ink); }

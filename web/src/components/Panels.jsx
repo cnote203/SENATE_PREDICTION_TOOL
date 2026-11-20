@@ -26,6 +26,42 @@ export function ScoreBar({ score, sd, source, compact }) {
   )
 }
 
+// Older exports carry no category list; fall back to the two original categories.
+const LEGACY_CATEGORIES = [
+  { id: 'defense_contractor', label: 'Defense contractor PACs', sectors: ['foreign_policy'], tests: [] },
+  { id: 'israel_policy', label: 'Israel-policy PACs', sectors: ['foreign_policy'], tests: [] },
+]
+
+function PacMoney({ donors, sector, meta }) {
+  const cats = (meta.donorCategories ?? LEGACY_CATEGORIES).filter((c) => c.id in donors)
+  const here = cats.filter((c) => c.sectors.includes(sector))
+  const elsewhere = cats.filter((c) => !c.sectors.includes(sector) && donors[c.id] > 0)
+  const dims = Object.fromEntries(meta.modules.flatMap((m) => m.dimensions.map((d) => [d.id, d.label])))
+  const findings = here.flatMap((c) => c.tests.filter((t) => t.supported).map((t) => ({ c, t })))
+  return (
+    <>
+      <h3>PAC money <small>2022–2026 cycles, from the FEC</small></h3>
+      {here.length > 0 ? (
+        <div className="donors">
+          {here.map((c) => <div key={c.id}><b>{money(donors[c.id])}</b><span>{c.label}</span></div>)}
+        </div>
+      ) : (
+        <p className="muted small">No PAC categories are tracked for this policy area yet.</p>
+      )}
+      {findings.length > 0 && (
+        <p className="muted small">
+          {findings.map(({ c, t }) => `${c.label.replace(' PACs', '')} money tracks ${(dims[t.dimension] ?? t.dimension).toLowerCase()} votes beyond ideology (r = ${t.r?.toFixed(2)}).`).join(' ')}
+        </p>
+      )}
+      {elsewhere.length > 0 && (
+        <ul className="pac-other">
+          {elsewhere.map((c) => <li key={c.id}><span>{c.label}</span><b>{money(donors[c.id])}</b></li>)}
+        </ul>
+      )}
+    </>
+  )
+}
+
 export function Dossier({ s, sector, dimension, onClose, meta, onSector }) {
   const cauc = CAUCUS[s.caucus]
   const tags = []
@@ -102,15 +138,7 @@ export function Dossier({ s, sector, dimension, onClose, meta, onSector }) {
         </ul>
       )}
 
-      {s.donors && (
-        <>
-          <h3>PAC money <small>2022–2026 cycles · FEC</small></h3>
-          <div className="donors">
-            <div><b>{money(s.donors.defense_contractor)}</b><span>Defense contractor PACs</span></div>
-            <div><b>{money(s.donors.israel_policy)}</b><span>Israel-policy PACs</span></div>
-          </div>
-        </>
-      )}
+      {s.donors && <PacMoney donors={s.donors} sector={sector} meta={meta} />}
     </aside>
   )
 }

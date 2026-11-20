@@ -29,7 +29,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 import pandas as pd  # noqa: E402
 
-from senate_sim import config, policy  # noqa: E402
+from senate_sim import config, donors as donor_model, policy  # noqa: E402
 from senate_sim.policy import calibration  # noqa: E402
 from senate_sim.simulation import position_for, required_defectors, simulate  # noqa: E402
 
@@ -164,10 +164,20 @@ def meta(committee_names: dict) -> dict:
             })
         modules.append({"id": module.name, "label": module.label, "dimensions": dims,
                         "committees": [{"id": c, "name": committee_names.get(c, c)} for c in module.committees]})
+    effects_path = P / "donor_effects.csv"
+    effects = pd.read_csv(effects_path) if effects_path.exists() else pd.DataFrame(columns=["category"])
+    donor_categories = [
+        {"id": cid, "label": label, "sectors": sectors,
+         "tests": [{"dimension": e["dimension"], "supported": bool(e["supports_hypothesis"]),
+                    "r": clean(e["r"]), "p": clean(e.get("p_holm", e["p_value"]))}
+                   for _, e in effects[effects["category"] == cid].iterrows()]}
+        for cid, (label, sectors) in donor_model.CATEGORIES.items()
+    ]
     return {
         "generated": date.today().isoformat(),
         "congress": N,
         "modules": modules,
+        "donorCategories": donor_categories,
         "sources": [
             {"name": "unitedstates/congress-legislators", "use": "roster, IDs, committees, service"},
             {"name": "Voteview", "use": "DW-NOMINATE and roll-call votes"},

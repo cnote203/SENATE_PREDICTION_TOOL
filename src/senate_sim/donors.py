@@ -16,13 +16,58 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
+# Donor categories: display label and the policy sectors they bear on.
+CATEGORIES = {
+    "defense_contractor": ("Defense contractor PACs", ["foreign_policy"]),
+    "israel_policy": ("Israel-policy PACs", ["foreign_policy"]),
+    "pharma": ("Drugmaker PACs", ["healthcare"]),
+    "health_insurers": ("Health insurer PACs", ["healthcare"]),
+    "health_providers": ("Hospital and doctor PACs", ["healthcare"]),
+    "oil_gas": ("Oil, gas and coal PACs", ["energy"]),
+    "clean_energy": ("Clean energy PACs", ["energy"]),
+    "banks": ("Bank and credit union PACs", ["banking"]),
+    "crypto": ("Crypto industry PACs", ["banking", "tech"]),
+    "big_tech": ("Big tech PACs", ["tech"]),
+}
+
 # Which deviations each donor category is tested against, and the expected sign.
+# Only calibrated dimensions have deviations, so uncalibrated ones (drug prices,
+# all of tech) are shown in the app but not tested. AUDIT: the expected signs
+# are judgment calls written before seeing the data.
 HYPOTHESES = [
     ("defense_contractor", "defense_budget", +1),
     ("defense_contractor", "nato_interventionism", +1),
     ("israel_policy", "arms_sales_oversight", -1),
+    ("health_insurers", "coverage_expansion", +1),   # insurers gain from subsidized enrollment
+    ("health_providers", "coverage_expansion", +1),  # hospitals gain from Medicaid coverage
+    ("pharma", "coverage_expansion", +1),
+    ("oil_gas", "clean_energy", -1),
+    ("clean_energy", "clean_energy", +1),
+    ("banks", "consumer_finance_regulation", -1),
+    ("crypto", "crypto_support", +1),
+    ("banks", "crypto_support", -1),
 ]
 MIN_N = 15
+ALPHA = 0.05
+
+
+def _dimension_sector(dimension: str) -> str:
+    from senate_sim import policy
+    for m in policy.all_modules():
+        if any(d.name == dimension for d in m.dimensions):
+            return m.name
+    return "other"
+
+
+def holm(p: pd.Series) -> pd.Series:
+    """Holm step-down adjusted p-values (controls the chance of any false positive)."""
+    order = p.sort_values().index
+    m = len(p)
+    adj, running = pd.Series(index=p.index, dtype=float), 0.0
+    for rank, i in enumerate(order):
+        running = max(running, min(1.0, (m - rank) * p[i]))
+        adj[i] = running
+    return adj
 
 
 def test_donor_effects(donors: pd.DataFrame, deviations: pd.DataFrame, caucus: pd.DataFrame) -> pd.DataFrame:
@@ -48,9 +93,16 @@ def test_donor_effects(donors: pd.DataFrame, deviations: pd.DataFrame, caucus: p
             "category": category, "dimension": dimension, "n": len(d),
             "slope_per_log_dollar": fit.slope, "p_value": fit.pvalue, "r": fit.rvalue,
             "expected_sign": expected,
-            "supports_hypothesis": bool(np.sign(fit.slope) == expected and fit.pvalue < 0.05),
         })
-    return pd.DataFrame(rows)
+    out = pd.DataFrame(rows, columns=["category", "dimension", "n", "slope_per_log_dollar", "p_value", "r",
+                                      "expected_sign"])
+    if out.empty:
+        return out.assign(sector=[], p_holm=[], supports_hypothesis=[])
+    # Each sector's tests are one family: more hypotheses must not mean more chance hits.
+    out["sector"] = out["dimension"].map(_dimension_sector)
+    out["p_holm"] = out.groupby("sector", group_keys=False)["p_value"].apply(holm)
+    out["supports_hypothesis"] = (np.sign(out["slope_per_log_dollar"]) == out["expected_sign"]) & (out["p_holm"] < ALPHA)
+    return out
 
 
 # Largest shift donor history may apply to one score (score units). AUDIT.
@@ -95,6 +147,14 @@ def adjust_scores(scores: pd.DataFrame, donors_df: pd.DataFrame, effects: pd.Dat
         out.loc[eligible, dim] = (out.loc[eligible, dim] + shift).clip(-2, 2).round(2)
         out.loc[eligible, src] = "fitted+donors"
     return out
+
+
+def merge_pacs(existing: pd.DataFrame | None, found: pd.DataFrame) -> pd.DataFrame:
+    """Add newly found PACs to the reviewed list without touching reviewed rows."""
+    if existing is None or existing.empty:
+        return found.reset_index(drop=True)
+    new = found[~found["committee_id"].isin(set(existing["committee_id"]))]
+    return pd.concat([existing, new.astype(str)], ignore_index=True).sort_values(["category", "name"]).reset_index(drop=True)
 
 
 def load_adjustment(processed_dir, congress: int):
